@@ -3,6 +3,6 @@
 
 int main() {
     //std::cout << "Hello, World!" << std::endl;
-    TileParseFile("Media/UnitTest1Media/map1_Kachelebene 1.csv");
+    ReadTextMap("Media/UnitTest1Media/map1_Kachelebene 1.csv");
     return 0;
 }

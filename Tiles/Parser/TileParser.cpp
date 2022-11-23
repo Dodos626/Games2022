@@ -9,7 +9,7 @@ using namespace std;
 
 vector<int> stringSplitToInt(string s, char del);
 
-int TileParseFile(string filename) {
+int ReadTextMap(string filename) {
     fstream file;
     file.open(filename, ios::in);
 

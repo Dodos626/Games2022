@@ -9,7 +9,7 @@
 
 
 
-int TileParseFile(std::string filename);
+int ReadTextMap(std::string filename);
 void PrintTileMap(std::vector<std::vector<int>> tileMap);
 
 #endif
