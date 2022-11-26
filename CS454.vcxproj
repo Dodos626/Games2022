@@ -87,12 +87,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <NMakeBuildCommandLine>make all</NMakeBuildCommandLine>
+    <NMakeBuildCommandLine>nmake all</NMakeBuildCommandLine>
     <NMakeOutput>CS454.exe</NMakeOutput>
-    <NMakeCleanCommandLine>make clean</NMakeCleanCommandLine>
-    <NMakeReBuildCommandLine>make</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake clean</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>nmake</NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <NMakeIncludeSearchPath>C:\Users\georg\Desktop\7th-Semester\454_Smart_Interfaces_and_Games\CS454\CS454\Engine\Src\Headers;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath>$(SolutionDir)/CS454/Engine/Src/Headers</NMakeIncludeSearchPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <NMakeBuildCommandLine>make all</NMakeBuildCommandLine>
@@ -116,20 +116,20 @@
     <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <NMakeBuildCommandLine>make all</NMakeBuildCommandLine>
+    <NMakeBuildCommandLine>nmake all</NMakeBuildCommandLine>
     <NMakeOutput>CS454.exe</NMakeOutput>
-    <NMakeCleanCommandLine>make clean</NMakeCleanCommandLine>
-    <NMakeReBuildCommandLine>make</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake clean</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>nmake</NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <NMakeIncludeSearchPath>C:\Users\georg\Desktop\7th-Semester\454_Smart_Interfaces_and_Games\CS454\CS454\Engine\Src\Headers;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath>$(SolutionDir)/CS454/Engine/Src/Headers</NMakeIncludeSearchPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='testbuild|x64'">
     <NMakeBuildCommandLine>nmake all</NMakeBuildCommandLine>
     <NMakeOutput>CS454.exe</NMakeOutput>
-    <NMakeCleanCommandLine>make clean</NMakeCleanCommandLine>
-    <NMakeReBuildCommandLine>make</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake clean</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>nmake</NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <NMakeIncludeSearchPath>C:\Users\georg\Desktop\7th-Semester\454_Smart_Interfaces_and_Games\CS454\CS454\Engine\Src\Headers;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath>$(SolutionDir)/CS454/Engine/Src/Headers</NMakeIncludeSearchPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
   </ItemDefinitionGroup>

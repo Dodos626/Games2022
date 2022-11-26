@@ -6,3 +6,10 @@ build
 .vscode/launch.json
 .vscode/c_cpp_properties.json
 x64
+.vs/CS454/v17/Browse.VC.opendb
+.vs/CS454/v17/Browse.VC.db-wal
+.vs/CS454/v17/Browse.VC.db-shm
+.vs/CS454/v17/Browse.VC.db
+.vs/CS454/v17/.suo
+.vs/CS454/FileContentIndex/read.lock
+.vs/CS454/FileContentIndex/17e9e7f8-f438-4e6c-ac60-53c020a23815.vsidx
