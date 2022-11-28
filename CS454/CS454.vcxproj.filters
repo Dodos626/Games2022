@@ -24,6 +24,9 @@
     <ClCompile Include="UnitTests\UnitTest1Media\UnitTest1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Src\Misc\Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -33,6 +36,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UnitTests\UnitTest1Media\UnitTest1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Src\Misc\WhereAmI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

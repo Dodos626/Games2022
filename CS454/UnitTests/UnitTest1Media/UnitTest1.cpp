@@ -1,8 +1,10 @@
 
 #include "UnitTest1.h"
-
+#include "../../Engine/Src/Misc/WhereAmI.h"
 int UnitTest1() {
-    
-    ReadTextMap("CS454/UnitTests/UnitTest1Media/media/map1_Kachelebene 1.csv");
+    GetPath();
+
+	
+    ReadTextMap("vUnitTests/UnitTest1Media/media/map1_Kachelebene 1.csv");
     return 0;
 }

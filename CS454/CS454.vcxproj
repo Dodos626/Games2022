@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CS454.cpp" />
+    <ClCompile Include="Engine\Src\Misc\Source.cpp" />
     <ClCompile Include="Engine\Src\Tiles\Parser\TileParser.cpp" />
     <ClCompile Include="UnitTests\UnitTest1Media\UnitTest1.cpp" />
   </ItemGroup>
@@ -139,6 +140,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Src\Misc\WhereAmI.h" />
     <ClInclude Include="Engine\Src\Tiles\Parser\TileParser.h" />
     <ClInclude Include="UnitTests\UnitTest1Media\UnitTest1.h" />
   </ItemGroup>

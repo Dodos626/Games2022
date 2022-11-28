@@ -10,8 +10,14 @@ using namespace std;
 vector<int> stringSplitToInt(string s, char del);
 
 int ReadTextMap(string filename) {
+
     fstream file;
     file.open(filename, ios::in);
+
+	if (!file.is_open()) {
+		cout << "File not found\n";
+		return 1;
+	}
 
     vector<vector<int>> tileMap;
 
