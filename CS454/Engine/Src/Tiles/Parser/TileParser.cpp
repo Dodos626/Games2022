@@ -9,29 +9,28 @@ using namespace std;
 
 vector<int> stringSplitToInt(string s, char del);
 
-int ReadTextMap(string filename) {
+std::vector<int> ReadTextMap(std::string filename, int width, int height){
 
     fstream file;
     file.open(filename, ios::in);
 
 	if (!file.is_open()) {
-		cout << "File not found\n";
-		return 1;
+		throw "File "+filename+" not found";
 	}
 
-    vector<vector<int>> tileMap;
+    vector<int> tileMap;
 
     string temp;
 
     while (file >> temp) {
-        tileMap.push_back(stringSplitToInt(temp, ','));
+
+		vector<int> tempVec = stringSplitToInt(temp, ',');
+		tileMap.insert(tileMap.end(), tempVec.begin(), tempVec.end());
     }
 
     file.close();
 
-    PrintTileMap(tileMap);
-
-    return 0;
+    return tileMap;
 }
 
 // splits a string into a vector of ints
@@ -48,11 +47,13 @@ vector<int> stringSplitToInt(string s, char del)
 }
 
 // prints a 2d vector
-void PrintTileMap(vector<vector<int>> tileMap) {
-    for (int i = 0; i < tileMap.size(); i++) {
-        for (int j = 0; j < tileMap[i].size(); j++) {
-            cout << tileMap[i][j] << " ";
-        }
-        cout << endl;
-    }
+void PrintTileMap(std::vector<int> tileMap, int width, int height) {
+	{
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				cout << tileMap[i * width + j] << " ";
+			}
+			cout << endl;
+		}
+	}
 }

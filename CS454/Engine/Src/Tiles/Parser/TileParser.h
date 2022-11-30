@@ -9,8 +9,9 @@
 #include <sstream>
 
 
+/*Throw exception if file not found*/
+std::vector<int> ReadTextMap(std::string filename,int width, int height);
 
-int ReadTextMap(std::string filename);
-void PrintTileMap(std::vector<std::vector<int>> tileMap);
+void PrintTileMap(std::vector<int> tileMap, int width, int height);
 
 #endif
