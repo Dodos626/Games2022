@@ -1,5 +1,9 @@
 #include "TileMap.h"
 
+#define MAX_WIDTH 1024
+#define MAX_HEIGHT 256
+typedef unsigned short Dim;
+//typedef Index TileMap[MAX_WIDTH][MAX_HEIGHT];
 		
 int TileMap::setMap(std::string path) {
 	try {
