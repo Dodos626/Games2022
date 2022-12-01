@@ -7,7 +7,25 @@ int main()
 	init_all();
 	//UnitTest1();
 	Map* map;
+	
+	//al_set_new_bitmap_flags(ALLEGRO_NO_PRESERVE_TEXTURE); // faster bitmaps
+	
+	
+	
 
+	al_install_keyboard(); // install keyboard
+	al_install_mouse(); // install mouse
+	
+	ALLEGRO_TIMER* timer = al_create_timer(1.0 / 60.0); //60fps timer
+	
+	ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue(); //event queue
+
+	
+	ALLEGRO_DISPLAY* display = al_create_display(SCREEN_W, SCREEN_H); //init display 
+	
+	
+	//META TO INIT TU DISPLAY I ALLEGRO MPOREI NA BALEI BITMAP STIN GPU
+	al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP); // faster bitmaps
 	try {
 		//bitmap tileset 12x21
 		map = new Map(
@@ -26,18 +44,8 @@ int main()
 		std::cout << "UnitTest1 has failed\n";
 		return -1;
 	}
+	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP); // reset to default
 	
-
-	al_install_keyboard(); // install keyboard
-	al_install_mouse(); // install mouse
-	
-	ALLEGRO_TIMER* timer = al_create_timer(1.0 / 60.0); //30fps timer
-	
-	ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue(); //event queue
-
-	
-	ALLEGRO_DISPLAY* display = al_create_display(SCREEN_W, SCREEN_H); //init display 
-
 	al_register_event_source(queue, al_get_keyboard_event_source()); //register keyboard events at queue
 	al_register_event_source(queue, al_get_display_event_source(display)); //register display events at queue
 	al_register_event_source(queue, al_get_timer_event_source(timer)); //register timer events at queue
@@ -49,7 +57,21 @@ int main()
 	al_start_timer(timer);
 
 	int y = 0;
+	int x = 0;
+
+	int max_x = map->getTileMap()->getTilemapWidth()*16*2 - SCREEN_W;
+	int max_y = map->getTileMap()->getTilemapHeight()*16*2 - SCREEN_H;
+
+	if (max_x < 0) max_x = 0;
+	if (max_y < 0) max_y = 0;
+	
+	std::cout << "max_x: " << max_x << std::endl;
+	std::cout << "max_y: " << max_y << std::endl;
+	
+	double old_time = al_get_time();
+	
 	while (true) {
+
 		
 		al_wait_for_event(queue, &event);
 		al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -61,6 +83,34 @@ int main()
 			break;
 
 		case ALLEGRO_EVENT_KEY_DOWN:
+			redraw = true;
+			switch (event.keyboard.keycode)
+			{
+			case ALLEGRO_KEY_UP:
+				if (y == 0) {
+					break;
+				}
+				y -= 1;
+				break;
+			
+			case ALLEGRO_KEY_DOWN:
+				if (y == max_y)
+					break;
+				y += 1;
+				break;
+			case ALLEGRO_KEY_LEFT:
+				if (x == 0)
+					break;
+				x -= 1;
+				break;
+			case ALLEGRO_KEY_RIGHT:
+				if (x == max_x)
+					break;
+				x += 1;
+				break;
+			}
+			break;
+			
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
 			done = true;
 			break;
@@ -71,13 +121,18 @@ int main()
 
 		if (redraw && al_is_event_queue_empty(queue))
 		{
-			y++;
 			
-			map->BlitSelf(0, 0);
+			//std::cout << "x: " << x << " y: " << y << std::endl;
+			map->BlitSelf(x, y,2,SCREEN_W,SCREEN_H);
 			al_flip_display();
+			
 
 			redraw = false;
 		}
+
+		
+		//old_time = fps(old_time);
+		
 	}
 	
 
@@ -98,5 +153,21 @@ int init_all() {
 		printf("couldn't initialize image addon\n");
 		return -1;
 	}
+	
 	return 1;
+}
+
+double fps(double old_time) {
+	double new_time = al_get_time();
+	double delta = new_time - old_time;
+	double fps = 1 / (delta);
+	fps_timer += delta;
+	avg_fps = (fps + avg_fps) / 2;
+
+	if (fps_timer > 0.5) {
+		fps_timer = 0;
+		std::cout << avg_fps << std::endl;
+		avg_fps = 0;
+	}
+	return new_time;
 }

@@ -5,22 +5,71 @@ Map::Map(std::string tilemapPath, int tilemapWidth , int tilemapHeight, const ch
 	this->tilemap = new TileMap(tilemapWidth, tilemapHeight, tilemapPath);
 }
 
-void Map::BlitSelf(int x, int y) {
+void Map::BlitSelf(int x, int y, int scaling_factor, int screen_width, int screen_height) {
+	
 	int tile = 0;
 	int max_height = this->tilemap->getTilemapHeight();
 	int max_width = this->tilemap->getTilemapWidth();
 
-	for (int height = 0; height < max_height; height++) {
-		for (int width = 0 ; width < max_width; width++) {
-			tile = this->tilemap->getTile(width, height);
-			this->bitmap->BlitTile(tile, x + width * 16, y + height * 16);
+
+	if (MUL_16(max_height)*scaling_factor > screen_height) { //if tilemap * scale factor > screen height
+		max_height = screen_height /MUL_16(scaling_factor);
+	}
+
+	if (MUL_16(max_width)* scaling_factor > screen_width) { //if tilemap * scale factor > screen width
+		max_width = screen_width / MUL_16(scaling_factor);
+	}
+
+	int tilesetWidth = this->bitmap->getTilesetWidth();
+	
+	
+	std::vector<int> tilemap = this->tilemap->getMap();
+
+	ALLEGRO_BITMAP* tileBitmap = this->bitmap->getBitMap();
+	
+	int size = tilemap.size();
+	
+	al_lock_bitmap(tileBitmap, ALLEGRO_PIXEL_FORMAT_ANY, ALLEGRO_LOCK_READONLY);
+	
+	
+	al_hold_bitmap_drawing(true);
+	
+	for (int height = 0; height <= max_height ; height++) {
+		for (int width = 0; width <= max_width; width++) {
+			tile = tilemap[width + x + (height+y)*max_width];
+			/*al_draw_bitmap_region(
+				tileBitmap,
+				MUL_16((tile % tilesetWidth)) ,
+				MUL_16((tile / tilesetWidth)) ,
+				16,
+				16,
+				x + MUL_16(width),
+				y + MUL_16(height),
+				0);*/
+
+			al_draw_tinted_scaled_rotated_bitmap_region(
+				tileBitmap,
+				MUL_16((tile % tilesetWidth)),
+				MUL_16((tile / tilesetWidth)),
+				16,
+				16,
+				al_map_rgb(255, 255, 255), // color, just use white if you don't want a tint
+				0, 0,					// center of rotation/scaling
+				(MUL_16(width)*scaling_factor),
+				(MUL_16(height)* scaling_factor),  // destination
+				scaling_factor, scaling_factor,      // scale
+				0, 0);  // angle and flags
+			
 		}
 	}
+	al_hold_bitmap_drawing(false);
+	al_unlock_bitmap(tileBitmap);
+	
+	
+	
+
 	
 	
 }
 
-void Map::BlitBitMap(int x, int y) {
-	al_draw_bitmap(this->bitmap->getBitMap(), x, y, 0);
-}
 

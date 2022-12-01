@@ -16,11 +16,16 @@
 #include "Engine/Src/Map/Map.h"
 
 
-#define SCREEN_W 640
-#define SCREEN_H 480
+#define SCREEN_W 800
+#define SCREEN_H 600
 
 int init_all();
 
+
+double fps(double old_time);
+double avg_fps = 0;
+double fps_timer = 0;
+double delta = 0;
 
 #endif // !MAINFILEINCLUDE
 
