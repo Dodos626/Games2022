@@ -12,4 +12,4 @@ void Game::MainLoopIteration(void) {
 	CollisionChecking();
 	UserCode(); // hook for custom code at end
 	CommitDestructions();
-}
+}

@@ -12,7 +12,7 @@ private:
 	BitMap *bitmap;
 	TileMap *tilemap;
 public:
-	Map(std::string tilemapPath, int tilemapWidth, int tilemapHeight, const char* bitmapPath, int tilesetWidth, int tilesetHeight);	void BlitSelf(int x, int y);
+	Map(std::string tilemapPath, int tilemapWidth, int tilemapHeight, const char* bitmapPath, int bitmapWidth, int bitmapHeight);	void BlitSelf(int x, int y);
 	void BlitSelf(int x, int y, int scaling_factor, int screen_width, int screen_height);
 	BitMap* getBitMap() { return this->bitmap; };
 	TileMap* getTileMap() { return this->tilemap; };

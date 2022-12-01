@@ -72,7 +72,6 @@ int main()
 	
 	while (true) {
 
-		
 		al_wait_for_event(queue, &event);
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 		switch (event.type)
@@ -131,7 +130,7 @@ int main()
 		}
 
 		
-		//old_time = fps(old_time);
+		old_time = fps(old_time);
 		
 	}
 	

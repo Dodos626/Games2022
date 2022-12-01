@@ -20,7 +20,7 @@ public:
 	ALLEGRO_BITMAP* getBitMap();
 	void BitMapDestoy();
 	ALLEGRO_BITMAP* getTile(int id);
-	void BlitTile(int id, int x, int y);
+	void BlitTile(int id, int x, int y); // TODO delete this
 	int getTilesetWidth(){return this->tilesetWidth;}
 	int getTilesetHeight(){return this->tilesetHeight;}
 };
