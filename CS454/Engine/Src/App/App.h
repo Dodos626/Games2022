@@ -10,9 +10,12 @@
 #include "../Game/Game.h"
 #include "../BitMap/BitMap.h"
 #include <stdio.h>
+#include <string>
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_image.h>
+#include "../Screen/Screen.h"
+#include "../Misc/Timer/Timer.h"
 
 
 namespace app {
@@ -20,22 +23,27 @@ namespace app {
 	protected:
 		Game game;
 	public:
-		virtual void Initialise(void) = 0;
-		virtual void Load(void) = 0;
-		virtual void Run(void) { game.MainLoop(); }
-		virtual void RunIteration(void)
+		App();
+		virtual void Initialise(void) ; // init 
+		virtual void Register(void) ; //to register
+		virtual void Load(void) ; // load components and stuff
+		virtual void Run(void) { game.MainLoop(); } // start the game
+		virtual void Destroy(void) ; // destroy components and stuff
+		virtual void RunIteration(void) // pass one iteration
 		{
 			game.MainLoopIteration();
 		}
 		Game& GetGame(void) { return game; }
 		const Game& GetGame(void) const { return game; }
-		virtual void Clear(void) = 0;
+		virtual void Clear(void) { ; };
 		void Main(void) {
 			Initialise();
+			Register();
 			Load();
 			Run();
 			Clear();
 		}
+
 	};
 }
 
