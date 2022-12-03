@@ -20,7 +20,7 @@ void Game::Initialise(void) {
 
 	this->timer = new Timer(60.0); // pros to parwn hardcoded
 	this->timer->setPrintFPS(true);
-	this->screen = new Screen(1400, 800); // pros to parwn hardcoded
+	this->screen = new Screen(1200, 800); // pros to parwn hardcoded
 	this->screen->SetScalingFactor(16); // pros to parwn hardcoded
 
 	this->queue = al_create_event_queue();
@@ -55,6 +55,9 @@ void Game::MainLoop(void) {
 	while(!this->doneFlag)
 		MainLoopIteration();
 }
+int y = 0;
+int x = 0;
+
 void Game::MainLoopIteration(void) {
 	//Render();
 	//Input();
@@ -67,6 +70,8 @@ void Game::MainLoopIteration(void) {
 	
 	al_wait_for_event(this->queue, &this->event);
 	al_clear_to_color(al_map_rgb(0, 0, 0));
+	
+	
 	switch (this->event.type)
 	{
 	case ALLEGRO_EVENT_TIMER:
@@ -75,6 +80,22 @@ void Game::MainLoopIteration(void) {
 		break;
 	case ALLEGRO_EVENT_DISPLAY_CLOSE:
 		this->doneFlag = true;
+		break;
+	case ALLEGRO_EVENT_KEY_DOWN:
+		this->redraw = true;
+		if (event.keyboard.keycode == ALLEGRO_KEY_UP && y!=0) {
+			y--;	
+		}
+		if (event.keyboard.keycode == ALLEGRO_KEY_DOWN) {
+			y++;
+		}
+		if (event.keyboard.keycode == ALLEGRO_KEY_LEFT && x!=0) {
+			x--;
+		}
+		if (event.keyboard.keycode == ALLEGRO_KEY_RIGHT)
+			x++;
+		if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+			this->doneFlag = true;
 		break;
 	default:
 		break;
@@ -85,7 +106,7 @@ void Game::MainLoopIteration(void) {
 
 	if (this->redraw && al_is_event_queue_empty(this->queue))
 	{
-		this->background_map->BlitSelf(0, 0, this->screen->GetScalingFactor(), this->screen->GetWidth(), this->screen->GetHeight());
+		this->background_map->BlitSelf(x, y, this->screen->GetScalingFactor(), this->screen->GetWidth(), this->screen->GetHeight()); // pros to parwn hardcoded
 		al_flip_display();
 		this->redraw = false;
 	}

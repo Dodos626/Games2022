@@ -8,17 +8,17 @@
 
 class TileMap {
 private:
-	std::vector<int> map;
+	std::vector<std::vector<int>> map;
 	int width;
 	int height;
 	int setMap(std::string path);
 public:
 	TileMap(int width, int height, std::string path);
 	void PrintSelf();
-	std::vector<int> getMap() { return this->map; }
+	std::vector<std::vector<int>> getMap() { return this->map; }
 	int getTilemapWidth() { return this->width; }
 	int getTilemapHeight() { return this->height; }
-	int getTile(int x, int y) { return this->map[y * this->width + x]; }
+	int getTile(int x, int y) { return this->map[y][x]; }
 	
 	
 };

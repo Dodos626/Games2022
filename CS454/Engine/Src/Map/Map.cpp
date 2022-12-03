@@ -7,25 +7,44 @@ Map::Map(std::string tilemapPath, int tilemapWidth , int tilemapHeight, const ch
 
 void Map::BlitSelf(int x, int y, int scaling_factor, int screen_width, int screen_height) {
 	
+
+	
+	
+	std::vector<std::vector<int>> tilemap = this->tilemap->getMap();
+
+	ALLEGRO_BITMAP* tileBitmap = this->bitmap->getBitMap();
+	
 	int tile = 0;
+	
 	int max_height = this->tilemap->getTilemapHeight();
 	int max_width = this->tilemap->getTilemapWidth();
 
 
 	if (MUL_16(max_height)*scaling_factor > screen_height) { //if tilemap * scale factor > screen height
-		max_height = screen_height /MUL_16(scaling_factor);
+		max_height = screen_height /MUL_16(scaling_factor) + 1;
 	}
 
 	if (MUL_16(max_width)* scaling_factor > screen_width) { //if tilemap * scale factor > screen width
-		max_width = screen_width / MUL_16(scaling_factor);
+		max_width = screen_width / MUL_16(scaling_factor) + 1;
+		
 	}
+	int tmp = this->tilemap->getTilemapWidth();
+	if ((max_width + x) > tmp) {
+		x = tmp - max_width;
+	}
+	
+	tmp = this->tilemap->getTilemapHeight();
 
+	
+	if ((max_height + y) > tmp - 2) {
+		
+		y = tmp - max_height - 2;
+	}
+	
 	int tilesetWidth = this->bitmap->getTilesetWidth();
 	
 	
-	std::vector<int> tilemap = this->tilemap->getMap();
-
-	ALLEGRO_BITMAP* tileBitmap = this->bitmap->getBitMap();
+	
 	
 	int size = tilemap.size();
 	
@@ -33,10 +52,13 @@ void Map::BlitSelf(int x, int y, int scaling_factor, int screen_width, int scree
 	
 	
 	al_hold_bitmap_drawing(true);
-	
-	for (int height = 0; height <= max_height ; height++) {
-		for (int width = 0; width <= max_width; width++) {
-			tile = tilemap[width + x + (height+y)*max_width];
+
+
+	std::cout << max_height << " " << max_width << std::endl;
+	for (int height = 0; height < max_height ; height++) {
+		for (int width = 0; width < max_width; width++) {
+			tile = this->tilemap->getTile(x + width, y + height);
+			
 			/*al_draw_bitmap_region(
 				tileBitmap,
 				MUL_16((tile % tilesetWidth)) ,
@@ -46,7 +68,7 @@ void Map::BlitSelf(int x, int y, int scaling_factor, int screen_width, int scree
 				x + MUL_16(width),
 				y + MUL_16(height),
 				0);*/
-
+			
 			al_draw_tinted_scaled_rotated_bitmap_region(
 				tileBitmap,
 				MUL_16((tile % tilesetWidth)),

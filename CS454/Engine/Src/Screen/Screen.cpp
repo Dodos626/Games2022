@@ -28,7 +28,9 @@ void Screen::SetScalingFactor(int tilesize) {
 	}
 	
 	
+	this->scalingFactor = scaling % 2 ? scaling + 1 : scaling ;
 	
-	this->scalingFactor = scaling + 1;
 	
+	std::cout << "Scaling factor: " << this->scalingFactor << std::endl;
+
 }
