@@ -12,6 +12,10 @@
 #include "../Misc/Timer/Timer.h"
 #include "../Screen/Screen.h"
 
+#define KEY_SEEN     1
+#define KEY_RELEASED 2
+
+
 class Game { // app::Game namespace, the mother application
 public:
 	using Action = std::function<void(void)>;
@@ -37,6 +41,9 @@ private:
 	//EVENTS
 	ALLEGRO_EVENT_QUEUE* queue; //event queue
 	ALLEGRO_EVENT event; //event
+
+	//input key capture
+	unsigned char key[ALLEGRO_KEY_MAX];
 	
 public:
 	//constructor

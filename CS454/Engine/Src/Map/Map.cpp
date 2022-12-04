@@ -54,7 +54,7 @@ void Map::BlitSelf(int x, int y, int scaling_factor, int screen_width, int scree
 	al_hold_bitmap_drawing(true);
 
 
-	std::cout << max_height << " " << max_width << std::endl;
+	
 	for (int height = 0; height < max_height ; height++) {
 		for (int width = 0; width < max_width; width++) {
 			tile = this->tilemap->getTile(x + width, y + height);

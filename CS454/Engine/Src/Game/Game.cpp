@@ -19,8 +19,8 @@ void Game::Initialise(void) {
 	assert(al_init_image_addon());
 
 	this->timer = new Timer(60.0); // pros to parwn hardcoded
-	this->timer->setPrintFPS(true);
-	this->screen = new Screen(1200, 800); // pros to parwn hardcoded
+	this->timer->setPrintFPS(true); //  pros to parwn hardcoded
+	this->screen = new Screen(1600, 1200); // pros to parwn hardcoded
 	this->screen->SetScalingFactor(16); // pros to parwn hardcoded
 
 	this->queue = al_create_event_queue();
@@ -41,12 +41,12 @@ void Game::Initialise(void) {
 
 	}
 	catch (std::string e) {
-		std::cout << e << std::endl;
 		throw( "Init of game failed, abort!\n");
 		
 	}
 
 	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
+	memset(this->key, 0, sizeof(this->key)); // initiate input key buffer
 	
 }
 
@@ -55,8 +55,8 @@ void Game::MainLoop(void) {
 	while(!this->doneFlag)
 		MainLoopIteration();
 }
-int y = 0;
-int x = 0;
+int y = 0; //tmp
+int x = 0; //tmp for scrolling
 
 void Game::MainLoopIteration(void) {
 	//Render();
@@ -75,27 +75,31 @@ void Game::MainLoopIteration(void) {
 	switch (this->event.type)
 	{
 	case ALLEGRO_EVENT_TIMER:
-		// game logic goes here.
+		if (key[ALLEGRO_KEY_UP] && y != 0) {
+			y--;
+		}
+		if (key[ALLEGRO_KEY_DOWN]) {
+			y++;
+		}
+		if (key[ALLEGRO_KEY_LEFT] && x != 0) {
+			x--;
+		}
+		if (key[ALLEGRO_KEY_RIGHT])
+			x++;
+		if (key[ALLEGRO_KEY_ESCAPE])
+			this->doneFlag = true;
+		for (int i = 0; i < ALLEGRO_KEY_MAX; i++)
+			key[i] &= KEY_SEEN;
 		this->redraw = true;
 		break;
 	case ALLEGRO_EVENT_DISPLAY_CLOSE:
 		this->doneFlag = true;
 		break;
 	case ALLEGRO_EVENT_KEY_DOWN:
-		this->redraw = true;
-		if (event.keyboard.keycode == ALLEGRO_KEY_UP && y!=0) {
-			y--;	
-		}
-		if (event.keyboard.keycode == ALLEGRO_KEY_DOWN) {
-			y++;
-		}
-		if (event.keyboard.keycode == ALLEGRO_KEY_LEFT && x!=0) {
-			x--;
-		}
-		if (event.keyboard.keycode == ALLEGRO_KEY_RIGHT)
-			x++;
-		if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
-			this->doneFlag = true;
+		key[event.keyboard.keycode] = KEY_SEEN | KEY_RELEASED;
+		break;
+	case ALLEGRO_EVENT_KEY_UP:
+		key[event.keyboard.keycode] &= KEY_RELEASED;
 		break;
 	default:
 		break;
