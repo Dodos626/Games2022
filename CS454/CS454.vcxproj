@@ -74,7 +74,7 @@
     <Allegro_AddonTTF>true</Allegro_AddonTTF>
     <Allegro_AddonFont>true</Allegro_AddonFont>
     <Allegro_AddonImage>true</Allegro_AddonImage>
-    <Allegro_LibraryType>DynamicDebug</Allegro_LibraryType>
+    <Allegro_LibraryType>StaticMonolithRelease</Allegro_LibraryType>
     <Allegro_AddonColor>true</Allegro_AddonColor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -149,7 +149,7 @@
     <ClCompile Include="Engine\Src\Map\Map.cpp" />
     <ClCompile Include="Engine\Src\Misc\Source.cpp" />
     <ClCompile Include="Engine\Src\Misc\Timer\Timer.cpp" />
-    <ClCompile Include="Engine\Src\Screen\Screen.cpp" />
+    <ClCompile Include="Engine\Src\Misc\Screen\Screen.cpp" />
     <ClCompile Include="Engine\Src\Tiles\Parser\TileParser.cpp" />
     <ClCompile Include="Engine\Src\Tiles\Map\TileMap.cpp" />
     <ClCompile Include="UnitTests\UnitTest1Media\UnitTest1.cpp" />
@@ -165,7 +165,7 @@
     <ClInclude Include="Engine\Src\Misc\Timer\Timer.h" />
     <ClInclude Include="Engine\Src\Misc\WhereAmI.h" />
     <ClInclude Include="CS454.h" />
-    <ClInclude Include="Engine\Src\Screen\Screen.h" />
+    <ClInclude Include="Engine\Src\Misc\Screen\Screen.h" />
     <ClInclude Include="Engine\Src\Tiles\Parser\TileParser.h" />
     <ClInclude Include="Engine\Src\Tiles\Map\TileMap.h" />
     <ClInclude Include="UnitTests\UnitTest1Media\UnitTest1.h" />
@@ -174,6 +174,8 @@
   <ImportGroup Label="ExtensionTargets">
     <Import Project="packages\AllegroDeps.1.13.0\build\native\AllegroDeps.targets" Condition="Exists('packages\AllegroDeps.1.13.0\build\native\AllegroDeps.targets')" />
     <Import Project="packages\Allegro.5.2.8\build\native\Allegro.targets" Condition="Exists('packages\Allegro.5.2.8\build\native\Allegro.targets')" />
+    <Import Project="packages\jsoncpp.redist.0.6.0.1\build\native\jsoncpp.redist.targets" Condition="Exists('packages\jsoncpp.redist.0.6.0.1\build\native\jsoncpp.redist.targets')" />
+    <Import Project="packages\jsoncpp.0.6.0.1\build\native\jsoncpp.targets" Condition="Exists('packages\jsoncpp.0.6.0.1\build\native\jsoncpp.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -181,5 +183,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('packages\AllegroDeps.1.13.0\build\native\AllegroDeps.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\AllegroDeps.1.13.0\build\native\AllegroDeps.targets'))" />
     <Error Condition="!Exists('packages\Allegro.5.2.8\build\native\Allegro.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Allegro.5.2.8\build\native\Allegro.targets'))" />
+    <Error Condition="!Exists('packages\jsoncpp.redist.0.6.0.1\build\native\jsoncpp.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\jsoncpp.redist.0.6.0.1\build\native\jsoncpp.redist.targets'))" />
+    <Error Condition="!Exists('packages\jsoncpp.0.6.0.1\build\native\jsoncpp.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\jsoncpp.0.6.0.1\build\native\jsoncpp.targets'))" />
   </Target>
 </Project>

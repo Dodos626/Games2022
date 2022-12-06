@@ -10,7 +10,7 @@
 #include <allegro5/allegro_image.h>
 #include "../Map/Map.h"
 #include "../Misc/Timer/Timer.h"
-#include "../Screen/Screen.h"
+#include "../Misc/Screen/Screen.h"
 
 #define KEY_SEEN     1
 #define KEY_RELEASED 2

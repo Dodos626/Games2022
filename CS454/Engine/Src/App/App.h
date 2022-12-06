@@ -14,7 +14,7 @@
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_image.h>
-#include "../Screen/Screen.h"
+#include "../Misc/Screen/Screen.h"
 #include "../Misc/Timer/Timer.h"
 
 
@@ -24,12 +24,12 @@ namespace app {
 		Game game;
 	public:
 		App();
-		virtual void Initialise(void) ; // init 
-		virtual void Register(void) ; //to register
-		virtual void Load(void) ; // load components and stuff
-		virtual void Run(void) { game.MainLoop(); } // start the game
-		virtual void Destroy(void) ; // destroy components and stuff
-		virtual void RunIteration(void) // pass one iteration
+		virtual void Initialise(void) ; // Init Allegro, then Game
+		virtual void Register(void) ; // Register Mouse/Keyboard based on config
+		virtual void Load(void) ; // For now, wrapper of game load
+		virtual void Run(void) { game.MainLoop(); } // Wrapper of game run
+		virtual void Destroy(void) ; // Free memory
+		virtual void RunIteration(void) // pass one iteration (?)
 		{
 			game.MainLoopIteration();
 		}
