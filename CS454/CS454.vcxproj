@@ -76,6 +76,8 @@
     <Allegro_AddonImage>true</Allegro_AddonImage>
     <Allegro_LibraryType>StaticMonolithRelease</Allegro_LibraryType>
     <Allegro_AddonColor>true</Allegro_AddonColor>
+    <Linkage-jsoncpp>
+    </Linkage-jsoncpp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Allegro_AddonImage>true</Allegro_AddonImage>
@@ -83,6 +85,8 @@
     <Allegro_AddonFont>true</Allegro_AddonFont>
     <Allegro_AddonColor>true</Allegro_AddonColor>
     <Allegro_LibraryType>DynamicDebug</Allegro_LibraryType>
+    <Linkage-jsoncpp>
+    </Linkage-jsoncpp>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -118,6 +122,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,6 +138,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="packages\Allegro.5.2.8\build\native\include\allegro5\inline\fmaths.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Src\App\App.h" />
@@ -168,14 +177,194 @@
     <ClInclude Include="Engine\Src\Misc\Screen\Screen.h" />
     <ClInclude Include="Engine\Src\Tiles\Parser\TileParser.h" />
     <ClInclude Include="Engine\Src\Tiles\Map\TileMap.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\alcompat.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro5.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_acodec.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_audio.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_color.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_direct3d.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_font.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_image.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_memfile.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_native_dialog.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_opengl.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_physfs.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_primitives.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_ttf.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_video.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_windows.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\altime.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\base.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\bitmap.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\bitmap_draw.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\bitmap_io.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\bitmap_lock.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\blender.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\clipboard.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\color.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\config.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\cpu.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\debug.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\display.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\drawing.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\error.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\events.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\file.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\fixed.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\fmaths.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\fshook.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\fullscreen_mode.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\haptic.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\internal\alconfig.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\joystick.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\keyboard.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\keycodes.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\memory.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\monitor.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\mouse.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\mouse_cursor.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\glx_ext_alias.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\glx_ext_api.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\glx_ext_defs.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\glx_ext_list.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\gl_ext_alias.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\gl_ext_api.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\gl_ext_defs.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\gl_ext_list.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\wgl_ext_alias.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\wgl_ext_api.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\wgl_ext_defs.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\wgl_ext_list.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\gl_ext.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\path.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alandroid.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alandroidcfg.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\albcc32.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\aliphone.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\aliphonecfg.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\allegro_sdl_config.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\almngw32.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\almsvc.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alosx.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alosxcfg.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alplatf.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alraspberrypi.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alraspberrypicfg.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alucfg.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alunix.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alwatcom.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alwin.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\astdbool.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\astdint.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\render_state.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\shader.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\system.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\threads.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\timer.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\tls.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\touch_input.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\transformations.h" />
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\utf8.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\dumb.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\all.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\assert.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\callback.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\export.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\format.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\metadata.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\ordinals.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\stream_decoder.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\stream_encoder.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\config\ftconfig.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\config\ftheader.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\config\ftmodule.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\config\ftoption.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\config\ftstdlib.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\freetype.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftadvanc.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftbbox.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftbdf.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftbitmap.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftbzip2.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftcache.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftchapters.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftcid.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftdriver.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\fterrdef.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\fterrors.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftfntfmt.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftgasp.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftglyph.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftgxval.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftgzip.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftimage.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftincrem.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftlcdfil.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftlist.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftlzw.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftmac.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftmm.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftmodapi.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftmoderr.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftotval.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftoutln.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftparams.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftpfr.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftrender.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftsizes.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftsnames.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftstroke.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftsynth.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftsystem.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\fttrigon.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\fttypes.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftwinfnt.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\t1tables.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ttnameid.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\tttables.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\tttags.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\ft2build.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\jconfig.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\jerror.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\jmorecfg.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\jpeglib.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\libpng16\png.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\libpng16\pngconf.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\libpng16\pnglibconf.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\minimp3.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\minimp3_ex.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\ogg\ogg.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\ogg\os_types.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\opus\opus.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\opus\opusfile.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\opus\opus_defines.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\opus\opus_multistream.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\opus\opus_types.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\physfs.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\png.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\pngconf.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\pnglibconf.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\theora\codec.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\theora\theora.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\theora\theoradec.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\vorbis\codec.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\vorbis\vorbisenc.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\vorbis\vorbisfile.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\webp\decode.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\webp\demux.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\webp\encode.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\webp\mux_types.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\webp\types.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\zconf.h" />
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\zlib.h" />
     <ClInclude Include="UnitTests\UnitTest1Media\UnitTest1.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="packages\AllegroDeps.1.13.0\build\native\AllegroDeps.targets" Condition="Exists('packages\AllegroDeps.1.13.0\build\native\AllegroDeps.targets')" />
     <Import Project="packages\Allegro.5.2.8\build\native\Allegro.targets" Condition="Exists('packages\Allegro.5.2.8\build\native\Allegro.targets')" />
-    <Import Project="packages\jsoncpp.redist.0.6.0.1\build\native\jsoncpp.redist.targets" Condition="Exists('packages\jsoncpp.redist.0.6.0.1\build\native\jsoncpp.redist.targets')" />
-    <Import Project="packages\jsoncpp.0.6.0.1\build\native\jsoncpp.targets" Condition="Exists('packages\jsoncpp.0.6.0.1\build\native\jsoncpp.targets')" />
+    <Import Project="packages\nlohmann.json.3.11.2\build\native\nlohmann.json.targets" Condition="Exists('packages\nlohmann.json.3.11.2\build\native\nlohmann.json.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -183,7 +372,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('packages\AllegroDeps.1.13.0\build\native\AllegroDeps.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\AllegroDeps.1.13.0\build\native\AllegroDeps.targets'))" />
     <Error Condition="!Exists('packages\Allegro.5.2.8\build\native\Allegro.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Allegro.5.2.8\build\native\Allegro.targets'))" />
-    <Error Condition="!Exists('packages\jsoncpp.redist.0.6.0.1\build\native\jsoncpp.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\jsoncpp.redist.0.6.0.1\build\native\jsoncpp.redist.targets'))" />
-    <Error Condition="!Exists('packages\jsoncpp.0.6.0.1\build\native\jsoncpp.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\jsoncpp.0.6.0.1\build\native\jsoncpp.targets'))" />
+    <Error Condition="!Exists('packages\nlohmann.json.3.11.2\build\native\nlohmann.json.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\nlohmann.json.3.11.2\build\native\nlohmann.json.targets'))" />
   </Target>
 </Project>

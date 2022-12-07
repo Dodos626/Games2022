@@ -42,15 +42,18 @@
     <ClCompile Include="Engine\Src\Map\Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Src\Screen\Screen.cpp">
+    <ClCompile Include="Engine\Src\Misc\Timer\Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Src\Misc\Timer\Timer.cpp">
+    <ClCompile Include="Engine\Src\Misc\Screen\Screen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="packages\Allegro.5.2.8\build\native\include\allegro5\inline\fmaths.inl">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Src\Tiles\Parser\TileParser.h">
@@ -80,10 +83,553 @@
     <ClInclude Include="Engine\Src\Map\Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Src\Screen\Screen.h">
+    <ClInclude Include="Engine\Src\Misc\Timer\Timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Src\Misc\Timer\Timer.h">
+    <ClInclude Include="Engine\Src\Misc\Screen\Screen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\internal\alconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\gl_ext_alias.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\gl_ext_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\gl_ext_defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\gl_ext_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\glx_ext_alias.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\glx_ext_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\glx_ext_defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\glx_ext_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\wgl_ext_alias.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\wgl_ext_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\wgl_ext_defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\GLext\wgl_ext_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\opengl\gl_ext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alandroid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alandroidcfg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\albcc32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\aliphone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\aliphonecfg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\allegro_sdl_config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\almngw32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\almsvc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alosx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alosxcfg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alplatf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alraspberrypi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alraspberrypicfg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alucfg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alunix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alwatcom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\alwin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\astdbool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\platform\astdint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\alcompat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_acodec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_audio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_direct3d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_memfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_native_dialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_opengl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_physfs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_primitives.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_ttf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_video.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro_windows.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\altime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\bitmap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\bitmap_draw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\bitmap_io.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\bitmap_lock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\blender.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\clipboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\cpu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\display.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\drawing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\fixed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\fmaths.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\fshook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\fullscreen_mode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\haptic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\joystick.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\keyboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\keycodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\memory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\monitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\mouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\mouse_cursor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\path.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\render_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\threads.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\tls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\touch_input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\transformations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\utf8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\all.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\assert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\callback.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\export.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\format.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\metadata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\ordinals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\stream_decoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\FLAC\stream_encoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\config\ftconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\config\ftheader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\config\ftmodule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\config\ftoption.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\config\ftstdlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\freetype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftadvanc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftbbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftbdf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftbitmap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftbzip2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftcache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftchapters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftcid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftdriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\fterrdef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\fterrors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftfntfmt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftgasp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftglyph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftgxval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftgzip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftimage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftincrem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftlcdfil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftlzw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftmac.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftmm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftmodapi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftmoderr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftotval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftoutln.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftparams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftpfr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftrender.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftsizes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftsnames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftstroke.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftsynth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftsystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\fttrigon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\fttypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ftwinfnt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\t1tables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\ttnameid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\tttables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\freetype\tttags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\freetype2\ft2build.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\libpng16\png.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\libpng16\pngconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\libpng16\pnglibconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\ogg\ogg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\ogg\os_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\opus\opus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\opus\opus_defines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\opus\opus_multistream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\opus\opus_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\opus\opusfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\theora\codec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\theora\theora.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\theora\theoradec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\vorbis\codec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\vorbis\vorbisenc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\vorbis\vorbisfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\webp\decode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\webp\demux.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\webp\encode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\webp\mux_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\webp\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\dumb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\jconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\jerror.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\jmorecfg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\jpeglib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\minimp3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\minimp3_ex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\physfs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\png.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\pngconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\pnglibconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\zconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\zlib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
