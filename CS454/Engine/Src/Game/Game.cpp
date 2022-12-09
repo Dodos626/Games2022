@@ -1,4 +1,11 @@
 #include "Game.h"
+
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
+//https://github.com/nlohmann/json#read-json-from-a-file
+//gia to manual tu json
+
 Game::Game() {
 	
 
@@ -18,9 +25,14 @@ void Game::Initialise(void) {
 	assert(al_init());
 	assert(al_init_image_addon());
 
+	std::ifstream f("Engine/Configs/MainConfig.json");
+	json data = json::parse(f);
+	std::cout << data << std::endl;
+	
+
 	this->timer = new Timer(60.0); // pros to parwn hardcoded
 	this->timer->setPrintFPS(true); //  pros to parwn hardcoded
-	this->screen = new Screen(1600, 1200); // pros to parwn hardcoded
+	this->screen = new Screen(data["screen"]["width"], data["screen"]["height"]); // pros to parwn hardcoded
 	this->screen->SetScalingFactor(16); // pros to parwn hardcoded
 
 	this->queue = al_create_event_queue();
