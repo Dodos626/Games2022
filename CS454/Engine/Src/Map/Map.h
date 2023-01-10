@@ -9,10 +9,11 @@
 #define MUL_16(x) (x << 4)
 class Map {
 private:
-	BitMap *bitmap;
-	TileMap *tilemap;
+	BitMap *bitmap;   //png
+	TileMap *tilemap; //csv
 public:
-	Map(std::string tilemapPath, int tilemapWidth, int tilemapHeight, const char* bitmapPath, int bitmapWidth, int bitmapHeight);	void BlitSelf(int x, int y);
+	Map(std::string tilemapPath, int tilemapWidth, int tilemapHeight, const char* bitmapPath, int bitmapWidth, int bitmapHeight);	
+	void BlitSelf(int x, int y);
 	void BlitSelf(int x, int y, int scaling_factor, int screen_width, int screen_height);
 	BitMap* getBitMap() { return this->bitmap; };
 	TileMap* getTileMap() { return this->tilemap; };

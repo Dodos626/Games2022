@@ -6,7 +6,7 @@ Map::Map(std::string tilemapPath, int tilemapWidth , int tilemapHeight, const ch
 }
 
 void Map::BlitSelf(int x, int y, int scaling_factor, int screen_width, int screen_height) {
-	
+	//FIXME gia scaling factor = 1 vector skaei out of bounds 
 
 	
 	

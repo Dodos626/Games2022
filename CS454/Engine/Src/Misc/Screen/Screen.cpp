@@ -8,7 +8,7 @@ Screen::Screen(int width, int height) {
 
 void Screen::SetScalingFactor(int tilesize) {
 
-	
+	/**
 	int scaling = 1;
 	int w = this->width;
 	int h = this->height;
@@ -32,5 +32,6 @@ void Screen::SetScalingFactor(int tilesize) {
 	
 	
 	std::cout << "Scaling factor: " << this->scalingFactor << std::endl;
-
+	*/
+	this->scalingFactor = 2;
 }
