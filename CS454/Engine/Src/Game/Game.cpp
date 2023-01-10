@@ -25,14 +25,14 @@ void Game::Initialise(void) {
 	assert(al_init());
 	assert(al_init_image_addon());
 
-	std::ifstream f("Engine/Configs/MainConfig.json");
+	std::ifstream f("Engine/Configs/GameConfig.json");
 	json data = json::parse(f);
 	std::cout << data << std::endl;
 	
 
-	this->timer = new Timer(60.0); // pros to parwn hardcoded
-	this->timer->setPrintFPS(true); //  pros to parwn hardcoded
-	this->screen = new Screen(data["screen"]["width"], data["screen"]["height"]); // pros to parwn hardcoded
+	this->timer = new Timer(data["ticker"]["rate"]); 
+	this->timer->setPrintFPS(data["ticker"]["showfps"]); 
+	this->screen = new Screen(data["screen"]["width"], data["screen"]["height"]);
 	this->screen->SetScalingFactor(16); // pros to parwn hardcoded
 
 	this->queue = al_create_event_queue();
@@ -40,14 +40,14 @@ void Game::Initialise(void) {
 	
 	al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP); // faster bitmaps display must be initialised
 	try {
-		//bitmap tileset 12x21
+		auto background_json = data["bitmaps"]["background"];
 		this->background_map = new Map(
-			"UnitTests/UnitTest1Media/media/map1_Kachelebene 1.csv",
-			21,
-			42,
-			"UnitTests/UnitTest1Media/media/overworld_tileset_grass.png",
-			12,
-			21
+			background_json["CSVsource"],
+			background_json["CSVwidth"],
+			background_json["CSVheight"],
+			background_json["PNGsource"].get<std::string>().c_str(),
+			background_json["PNGwidth"],
+			background_json["PNGheight"]
 		);
 		//bitmap = new BitMap("UnitTests/UnitTest1Media/media/overworld_tileset_grass.png");
 

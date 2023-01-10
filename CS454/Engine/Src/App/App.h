@@ -6,7 +6,6 @@
 #include <iostream>
 
 #include "../Tiles/Parser/TileParser.h"
-#include "../../UnitTests/UnitTest1Media/UnitTest1.h"
 #include "../Game/Game.h"
 #include "../BitMap/BitMap.h"
 #include <stdio.h>

@@ -1,0 +1,29 @@
+{
+  "screen": {
+    "width": 1600,
+    "height": 1200
+  },
+  
+
+  
+  "ticker": {
+    "showfps": true,
+    "rate": 60
+  },
+  
+
+
+  
+  "bitmaps": {
+    "tilesize": 16,
+
+    "background": {
+      "CSVsource": "TestingMedia/media/map1_Kachelebene 1.csv",
+      "CSVwidth": 21,
+      "CSVheight": 42,
+      "PNGsource": "TestingMedia/media/overworld_tileset_grass.png",
+      "PNGwidth": 12,
+      "PNGheight": 21
+    }
+  }
+}

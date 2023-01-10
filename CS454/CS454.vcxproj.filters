@@ -21,9 +21,6 @@
     <ClCompile Include="Engine\Src\Tiles\Parser\TileParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UnitTests\UnitTest1Media\UnitTest1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Src\Misc\Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -630,6 +627,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\zlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestingMedia\UnitTest1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

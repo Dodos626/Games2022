@@ -160,7 +160,6 @@
     <ClCompile Include="Engine\Src\Misc\Screen\Screen.cpp" />
     <ClCompile Include="Engine\Src\Tiles\Parser\TileParser.cpp" />
     <ClCompile Include="Engine\Src\Tiles\Map\TileMap.cpp" />
-    <ClCompile Include="UnitTests\UnitTest1Media\UnitTest1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -358,6 +357,7 @@
     <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\webp\types.h" />
     <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\zconf.h" />
     <ClInclude Include="packages\AllegroDeps.1.13.0\build\native\include\zlib.h" />
+    <ClInclude Include="TestingMedia\UnitTest1.h" />
     <ClInclude Include="UnitTests\UnitTest1Media\UnitTest1.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
