@@ -122,7 +122,7 @@ void Game::MainLoopIteration(void) {
 
 	if (this->redraw && al_is_event_queue_empty(this->queue))
 	{
-		this->background_map->BlitSelf(x, y, this->screen->GetScalingFactor(), this->screen->GetWidth(), this->screen->GetHeight()); // pros to parwn hardcoded
+		this->background_map->BlitSelf(x, y, 1, this->screen->GetWidth(), this->screen->GetHeight()); // pros to parwn hardcoded
 		al_flip_display();
 		this->redraw = false;
 	}

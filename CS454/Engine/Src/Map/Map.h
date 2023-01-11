@@ -11,10 +11,12 @@ class Map {
 private:
 	BitMap *bitmap;   //png
 	TileMap *tilemap; //csv
+	ALLEGRO_BITMAP *map_buffer; // whole map buffer
 public:
 	Map(std::string tilemapPath, int tilemapWidth, int tilemapHeight, const char* bitmapPath, int bitmapWidth, int bitmapHeight);	
 	void BlitSelf(int x, int y);
 	void BlitSelf(int x, int y, int scaling_factor, int screen_width, int screen_height);
+	void PrecomputeMap(int scaling_factor);
 	BitMap* getBitMap() { return this->bitmap; };
 	TileMap* getTileMap() { return this->tilemap; };
 

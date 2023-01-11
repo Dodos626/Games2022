@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "../Parser/TileParser.h"
+#include <assert.h>
 
 
 class TileMap {
@@ -18,7 +19,7 @@ public:
 	std::vector<std::vector<int>> getMap() { return this->map; }
 	int getTilemapWidth() { return this->width; }
 	int getTilemapHeight() { return this->height; }
-	int getTile(int x, int y) { return this->map[y][x]; }
+	int getTile(int x, int y) { assert(x >= 0 && x < this->height && y >= 0 && y < this->width); return this->map[y][x]; }
 	
 	
 };
