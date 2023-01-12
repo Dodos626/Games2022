@@ -3,16 +3,25 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "background palace map.tmx",
+    "activeFile": "background palace 1st floor map.tmx",
     "expandedProjectPaths": [
+        "."
     ],
     "fileStates": {
-        "background palace map.tmx": {
-            "scale": 1.5,
+        "background palace 1st floor map.tmx": {
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 208.66666666666669,
-                "y": -217.33333333333331
+                "x": 411,
+                "y": 57
+            }
+        },
+        "background palace map.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 508.5,
+                "y": 543
             }
         },
         "palace tileset.tsx": {
@@ -29,12 +38,14 @@
     "map.tileWidth": 16,
     "openFiles": [
         "background palace map.tmx",
-        "palace tileset.tsx"
+        "palace tileset.tsx",
+        "background palace 1st floor map.tmx"
     ],
     "project": "map.tiled-project",
     "recentFiles": [
+        "background palace map.tmx",
         "palace tileset.tsx",
-        "background palace map.tmx"
+        "background palace 1st floor map.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
