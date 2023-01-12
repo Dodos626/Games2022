@@ -59,6 +59,8 @@ void Game::Initialise(void) {
 
 	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 	memset(this->key, 0, sizeof(this->key)); // initiate input key buffer
+	this->background_map->PrecomputeMap();
+	al_set_target_bitmap(al_get_backbuffer(this->screen->GetDisplay()));
 	
 }
 
@@ -122,7 +124,16 @@ void Game::MainLoopIteration(void) {
 
 	if (this->redraw && al_is_event_queue_empty(this->queue))
 	{
-		this->background_map->BlitSelf(x, y, 1, this->screen->GetWidth(), this->screen->GetHeight()); // pros to parwn hardcoded
+
+		//this->background_map->BlitSelf(x, y, 1, this->screen->GetWidth(), this->screen->GetHeight()); // pros to parwn hardcoded
+		//al_set_target_backbuffer(this->screen->GetDisplay());
+		
+		//al_draw_bitmap(this->background_map->getMapBuffer(), 0, 0, 0);
+		//al_draw_text(al_create_builtin_font(), al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_CENTER, "TEST");
+		al_set_target_backbuffer(this->screen->GetDisplay());
+		al_hold_bitmap_drawing(1);
+		this->background_map->Render(x, x + this->screen->GetWidth());
+		al_hold_bitmap_drawing(0);
 		al_flip_display();
 		this->redraw = false;
 	}
