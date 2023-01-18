@@ -3,8 +3,9 @@
 Map::Map(std::string tilemapPath, int tilemapWidth , int tilemapHeight, const char* bitmapPath, int tilesetWidth, int tilesetHeight, std::vector<int> SolidBlockIds) {
 	this->bitmap = new BitMap(bitmapPath, tilesetWidth, tilesetHeight);
 	this->tilemap = new TileMap(tilemapWidth, tilemapHeight, tilemapPath);
-	this->map_buffer = al_create_bitmap(MUL_16(tilemapWidth+10), MUL_16(tilemapHeight+10));
+	this->map_buffer = al_create_bitmap(MUL_16(tilemapWidth), MUL_16(tilemapHeight));
 	this->SolidBlockIds = SolidBlockIds;
+	this->player_dx = MUL_16(2);
 }
 
 void Map::Render(int left_x, int max_x, int y, int max_y) {
@@ -18,7 +19,6 @@ void Map::Render(int left_x, int max_x, int y, int max_y) {
 		max_x = MUL_16(this->tilemap->getTilemapWidth());
 		
 	}
-		
 
 	
 	al_lock_bitmap(this->map_buffer, ALLEGRO_PIXEL_FORMAT_ANY, ALLEGRO_LOCK_READONLY);

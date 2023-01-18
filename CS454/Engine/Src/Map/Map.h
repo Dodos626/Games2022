@@ -15,6 +15,7 @@ private:
 	ALLEGRO_BITMAP *map_buffer; // whole map buffer
 	std::vector<int> SolidBlockIds;
 	std::vector<std::vector<bool>> grid;
+	int player_dx;
 public:
 	Map(std::string tilemapPath, int tilemapWidth, int tilemapHeight, const char* bitmapPath, int bitmapWidth, int bitmapHeight , std::vector<int> SolidBlockIds);
 	void PrecomputeMap();

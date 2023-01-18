@@ -31,22 +31,22 @@ private:
 	Action render, anim, input, ai, physics, destruct, collisions, user;
 	Pred done;
 	void Invoke(const Action& f) { if (f) f(); }
-	
+
 	//PLAYER
 	Player* player1;
 
 	//BUFFER
 	ALLEGRO_BITMAP* buffer;
-	
+
 	//MAP
 	Map* background_map;
-	
+
 	//Ticker
 	Timer* timer;
-	
+
 	//SCREEN
 	Screen* screen;
-	
+
 	//LOOP FLAGS
 	bool redraw = true;
 	bool doneFlag = false;
@@ -57,7 +57,11 @@ private:
 
 	//input key capture
 	unsigned char key[ALLEGRO_KEY_MAX];
-	
+
+	// bounds for x,y coordinates
+	int y_bound;
+	int x_bound;
+
 public:
 	//constructor
 	Game();
@@ -67,7 +71,7 @@ public:
 
 	//config files
 	void LoadSetting(void);
-	
+
 	//setters
 	void SetRender(const Action& f) { render = f; }
 	void SetAnim(const Action& f) { anim = f; }
@@ -77,11 +81,11 @@ public:
 	void SetDestruct(const Action& f) { destruct = f; }
 	void SetCollisions(const Action& f) { collisions = f; }
 	void SetUser(const Action& f) { user = f; }
-	
+
 	//REGISTER
 	void Register();
-	
-	
+
+
 	void ProgressAnimations(void) { Invoke(anim); }
 	void Input(void) { Invoke(input); }
 	void AI(void) { Invoke(ai); }
@@ -105,7 +109,9 @@ public:
 	void DrawBufferToScreen(void);
 
 	//Collision Detector
-	bool CheckPlayerCollision(int x, int y);
+	bool TryMoveDown(int x, int y);
+	bool TryMoveUp(int x, int y);
+	bool TryMoveLeft(int x, int y);
+	bool TryMoveRight(int x, int y);
 };
-
 #endif

@@ -56,11 +56,14 @@ void Game::Initialise(void) {
 	}
 	memset(this->key, 0, sizeof(this->key)); // initiate input key buffer
 	
-	this->player1 = new Player();
+	this->player1 = new Player(this->screen->GetWidth()/2, MUL_16(this->background_map->getTileMap()->getTilemapWidth()), data["screen"]["relative_location"]);
 	
 	this->background_map->PrecomputeMap();
 	
 	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
+	
+	this->y_bound = MUL_16(this->background_map->getTileMap()->getTilemapHeight());
+	this->x_bound = MUL_16(this->background_map->getTileMap()->getTilemapWidth());
 	
 	
 }
@@ -86,24 +89,25 @@ void Game::MainLoopIteration(void) {
 	al_wait_for_event(this->queue, &this->event);
 	int y = this->player1->GetY();
 	int x = this->player1->GetX();
+	int step = this->player1->GetSpeed();
 	
-	
+	assert(x >= 0 && y >= 0);
 	switch (this->event.type)
 	{
 	case ALLEGRO_EVENT_TIMER:
 		
 		
-		if (key[ALLEGRO_KEY_UP] && y != 0 && !CheckPlayerCollision(x, y-16)) {
-			this->player1->Move(p_direction::UP);
+		if (key[ALLEGRO_KEY_UP] && y > 0 && this->TryMoveUp(x, y)) {
+			this->player1->MoveUp();
 		}
-		if (key[ALLEGRO_KEY_DOWN] && !CheckPlayerCollision(x, y + 16)) {
-			this->player1->Move(p_direction::DOWN);
+		if (key[ALLEGRO_KEY_DOWN] && y + 16 <  this->y_bound && this->TryMoveDown(x, y)) {
+			this->player1->MoveDown();
 		}
-		if (key[ALLEGRO_KEY_LEFT] && x != 0 && !CheckPlayerCollision(x-16, y)) {
-			this->player1->Move(p_direction::LEFT);
+		if (key[ALLEGRO_KEY_LEFT] && x > 0 && this->TryMoveLeft(x, y)) {
+			this->player1->MoveLeft();
 		}
-		if (key[ALLEGRO_KEY_RIGHT] && !CheckPlayerCollision(x + 17, y)) {
-			this->player1->Move(p_direction::RIGHT);
+		if (key[ALLEGRO_KEY_RIGHT] && x + 16 < this->x_bound && this->TryMoveRight(x, y)) {
+			this->player1->MoveRight();
 		}
 			
 			
@@ -142,7 +146,7 @@ void Game::Render(void) {
 	this->StartRender();
 	al_hold_bitmap_drawing(1);
 	
-	this->background_map->Render(this->player1->GetX(), this->screen->GetWidth() / 2, 0, this->screen->GetHeight() / 2);
+	this->background_map->Render(this->player1->GetCameraX(), this->screen->GetWidth() / 2, 0, this->screen->GetHeight() / 2);
 	this->player1->Render();
 	
 	al_hold_bitmap_drawing(0);
@@ -188,28 +192,39 @@ void Game::Register() {
 
 }
 
-bool Game::CheckPlayerCollision(int x, int y) {
-	//checkarei an ta x,y einai solid block i exun kapoio enemy
-	//se periptwsi block apla den allazun x,y
-	//se periptwsi enemy trwei attack
-	
 
-	return this->background_map->IsSolid(x/16, y/16) or this->background_map->IsSolid(x / 16, (y-16) / 16);
+bool Game::TryMoveDown(int x, int y) {
+	int ldx = x / 16;
+	int ldy = (y + 16) / 16;
+	int rdx = (x + 15) / 16;
+	int rdy = (y + 16) / 16;
+	return !(this->background_map->IsSolid(ldx, ldy) || this->background_map->IsSolid(rdx, rdy));
 }
 
+bool Game::TryMoveUp(int x, int y){
+	int lux = x / 16;
+	int luy = (y - 1) / 16;
+	int rux = (x + 15) / 16;
+	int ruy = (y - 1) / 16;
 
-bool check_right_bottom_corner_collision() {
-	//checkarei to katw deksia tu paikti me basi tu kuti
+	return !(this->background_map->IsSolid(lux, luy) || this->background_map->IsSolid(rux, ruy));
 }
 
-bool check_left_bottom_corner_collision(){
-//checkarei to katw aristera tu paikti me basi tu kuti{
+bool Game::TryMoveLeft(int x, int y){
+	int lux = (x - 1) / 16;
+	int luy = (y) / 16;
+	int ldx = (x - 1) / 16;
+	int ldy = (y + 15) / 16;
+
+	return !(this->background_map->IsSolid(lux, luy) || this->background_map->IsSolid(ldx, ldy));
 }
 
-bool check_right_top_corner_collision(){
-	//checkarei to panw deksia tu paikti me basi tu kuti{
-}
+bool Game::TryMoveRight(int x, int y) {
+	int rux = (x + 16) / 16;
+	int ruy = (y) / 16;
+	int rdx = (x + 16) / 16;
+	int rdy = (y + 15) / 16;
 
-bool check_left_top_corner_collision() {
+	return !(this->background_map->IsSolid(rux, ruy) || this->background_map->IsSolid(rdx, rdy));
 	
 }

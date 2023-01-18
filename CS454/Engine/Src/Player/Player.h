@@ -20,15 +20,19 @@ enum class p_direction {
 class Player {
 private :
 	int x, y;
+	int camera_dx;
+	int actual_x;
 	int health;			//health points
  	int attack_power;	//attack damage
 	int armor;			//armor is x where x is the damage it will prevent before health is affected
 	int speed;
+	int max_moving_x;
 public:
-	Player();
+	Player(int screen_width, int map_width, int screen_dx);
 	
 	//GETTERS
 	int GetX(void) const { return x; }
+	int GetCameraX(void);
 	int GetY(void) const { return y; }
 	int GetHealth(void) const { return health; }
 	int GetAttackPower(void) const { return attack_power; }
@@ -36,7 +40,10 @@ public:
 	int GetSpeed(void) const { return speed; }
 
 	//Move
-	void Move(p_direction direction);
+	void MoveLeft() { this->x -= this->speed; }
+	void MoveRight() { this->x += this->speed; }
+	void MoveUp() { this->y -= this->speed; }
+	void MoveDown() { this->y += this->speed; }
 
 	//Attack - Damage functions
 	void TakeDamage(int damage);

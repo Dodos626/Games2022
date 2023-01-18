@@ -2,7 +2,7 @@
 
 using json = nlohmann::json;
 
-Player::Player() {
+Player::Player(int screen_width, int map_width, int screen_dx) {
 	
 	std::ifstream fin("Engine/Configs/PlayerConfig.json");
 	json data = json::parse(fin);
@@ -14,8 +14,8 @@ Player::Player() {
 	this->attack_power = data["attack_power"];
 	this->armor = data["armor"];
 	this->speed = data["speed"];
-	
-	
+	this->max_moving_x = map_width - screen_width + screen_dx;
+	this->camera_dx = screen_dx;
 }
 
 //MISC
@@ -29,24 +29,18 @@ void Player::TakeDamage(int damage) {
 	}
 }
 
-void Player::Move(p_direction direction) {
-	switch (direction)
-	{
-		case p_direction::LEFT:
-			this->x -= this->speed;
-			break;
-		case p_direction::RIGHT:
-			this->x += this->speed;
-			break;
-		case p_direction::UP:
-			this->y -= this->speed;
-			break;
-		case p_direction::DOWN:
-			this->y += this->speed;
-			break;
-	}
+void Player::Render() {
+	int x = this->x - this->GetCameraX();
+	if (this->x > this->max_moving_x)
+		x += this->x - this->max_moving_x;
+	std::cout << "rendering " << this->y << ","<< this->x << std::endl;
+	al_draw_filled_rectangle(x, this->y, x + 16, this->y + 16, al_map_rgb(255, 32, 65));
 }
 
-void Player::Render() {
-	al_draw_filled_rectangle(0, this->y, 0 + 16, this->y + 16, al_map_rgb(255, 32, 65));
+int Player::GetCameraX(){
+	if (this->x < this->camera_dx)
+		return 0;
+	else
+		return this->x - this->camera_dx;
+	
 }

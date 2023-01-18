@@ -1,7 +1,8 @@
 {
   "screen": {
     "width": 700,
-    "height": 512
+    "height": 512,
+    "relative_location": 32
   },
   "ticker": {
     "showfps": false,
