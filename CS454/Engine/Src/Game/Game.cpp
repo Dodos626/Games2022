@@ -1,11 +1,5 @@
 #include "Game.h"
 
-#include <nlohmann/json.hpp>
-using json = nlohmann::json;
-
-//https://github.com/nlohmann/json#read-json-from-a-file
-//gia to manual tu json
-
 Game::Game() {
 	
 
@@ -24,6 +18,7 @@ Game::Game() {
 void Game::Initialise(void) {
 	assert(al_init());
 	assert(al_init_image_addon());
+	assert(al_init_primitives_addon());
 
 	std::ifstream f("Engine/Configs/GameConfig.json");
 	json data = json::parse(f);
@@ -61,6 +56,7 @@ void Game::Initialise(void) {
 	}
 	memset(this->key, 0, sizeof(this->key)); // initiate input key buffer
 	
+	this->player1 = new Player();
 	
 	this->background_map->PrecomputeMap();
 	
@@ -75,8 +71,7 @@ void Game::MainLoop(void) {
 		MainLoopIteration();
 }
 
-int y = 0; //tmp
-int x = 0; //tmp for scrolling
+
 
 void Game::MainLoopIteration(void) {
 	//Render();
@@ -89,23 +84,29 @@ void Game::MainLoopIteration(void) {
 	//CommitDestructions();
 	
 	al_wait_for_event(this->queue, &this->event);
-	
+	int y = this->player1->GetY();
+	int x = this->player1->GetX();
 	
 	
 	switch (this->event.type)
 	{
 	case ALLEGRO_EVENT_TIMER:
+		
+		
 		if (key[ALLEGRO_KEY_UP] && y != 0 && !CheckPlayerCollision(x, y-16)) {
-			y--;
+			this->player1->Move(p_direction::UP);
 		}
 		if (key[ALLEGRO_KEY_DOWN] && !CheckPlayerCollision(x, y + 16)) {
-			y++;
+			this->player1->Move(p_direction::DOWN);
 		}
 		if (key[ALLEGRO_KEY_LEFT] && x != 0 && !CheckPlayerCollision(x-16, y)) {
-			x--;
+			this->player1->Move(p_direction::LEFT);
 		}
-		if (key[ALLEGRO_KEY_RIGHT] && !CheckPlayerCollision(x + 16, y))
-			x++;
+		if (key[ALLEGRO_KEY_RIGHT] && !CheckPlayerCollision(x + 17, y)) {
+			this->player1->Move(p_direction::RIGHT);
+		}
+			
+			
 		if (key[ALLEGRO_KEY_ESCAPE])
 			this->doneFlag = true;
 		for (int i = 0; i < ALLEGRO_KEY_MAX; i++)
@@ -141,8 +142,8 @@ void Game::Render(void) {
 	this->StartRender();
 	al_hold_bitmap_drawing(1);
 	
-	this->background_map->Render(x, this->screen->GetWidth() / 2, 0, this->screen->GetHeight() / 2);
-	
+	this->background_map->Render(this->player1->GetX(), this->screen->GetWidth() / 2, 0, this->screen->GetHeight() / 2);
+	this->player1->Render();
 	
 	al_hold_bitmap_drawing(0);
 	this->DrawBufferToScreen();
@@ -191,6 +192,24 @@ bool Game::CheckPlayerCollision(int x, int y) {
 	//checkarei an ta x,y einai solid block i exun kapoio enemy
 	//se periptwsi block apla den allazun x,y
 	//se periptwsi enemy trwei attack
+	
 
-	return this->background_map->IsSolid(x/16, y/16);
+	return this->background_map->IsSolid(x/16, y/16) or this->background_map->IsSolid(x / 16, (y-16) / 16);
+}
+
+
+bool check_right_bottom_corner_collision() {
+	//checkarei to katw deksia tu paikti me basi tu kuti
+}
+
+bool check_left_bottom_corner_collision(){
+//checkarei to katw aristera tu paikti me basi tu kuti{
+}
+
+bool check_right_top_corner_collision(){
+	//checkarei to panw deksia tu paikti me basi tu kuti{
+}
+
+bool check_left_top_corner_collision() {
+	
 }

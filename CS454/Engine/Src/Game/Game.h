@@ -11,6 +11,13 @@
 #include "../Map/Map.h"
 #include "../Misc/Timer/Timer.h"
 #include "../Misc/Screen/Screen.h"
+#include "../Player/Player.h"
+
+
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+//https://github.com/nlohmann/json#read-json-from-a-file
+//gia to manual tu json
 
 #define KEY_SEEN     1
 #define KEY_RELEASED 2
@@ -24,6 +31,9 @@ private:
 	Action render, anim, input, ai, physics, destruct, collisions, user;
 	Pred done;
 	void Invoke(const Action& f) { if (f) f(); }
+	
+	//PLAYER
+	Player* player1;
 
 	//BUFFER
 	ALLEGRO_BITMAP* buffer;

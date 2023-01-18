@@ -45,6 +45,9 @@
     <ClCompile Include="Engine\Src\Misc\Screen\Screen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Src\Player\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -630,6 +633,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestingMedia\UnitTest1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Src\Player\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
