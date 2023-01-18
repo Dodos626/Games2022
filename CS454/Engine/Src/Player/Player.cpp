@@ -2,14 +2,14 @@
 
 using json = nlohmann::json;
 
-Player::Player(int screen_width, int map_width, int screen_dx) {
+Player::Player(int x, int y, int screen_width, int map_width, int screen_dx) {
 	
 	std::ifstream fin("Engine/Configs/PlayerConfig.json");
 	json data = json::parse(fin);
 	std::cout << data << std::endl;
 
-	this->x = data["x"];
-	this->y = data["y"];
+	this->x = x;
+	this->y = y;
 	this->health = data["health"];
 	this->attack_power = data["attack_power"];
 	this->armor = data["armor"];

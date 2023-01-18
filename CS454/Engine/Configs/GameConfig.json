@@ -2,7 +2,7 @@
   "screen": {
     "width": 700,
     "height": 512,
-    "relative_location": 32
+    "relative_location": 96
   },
   "ticker": {
     "showfps": false,
@@ -18,7 +18,9 @@
       "SolidIds": [ 14, 24, 25, 26, 27, 28, 30, 31, 35, 36, 37, 38, 40, 41 ],
       "PNGsource": "Media/background_map/Zelda-II-Parapa-Palace-Tileset.png",
       "PNGwidth": 10,
-      "PNGheight": 10
+      "PNGheight": 10,
+      "spawn_x": 3,
+      "spawn_y": 208
     }
   }
 }

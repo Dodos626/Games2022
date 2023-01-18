@@ -28,7 +28,7 @@ private :
 	int speed;
 	int max_moving_x;
 public:
-	Player(int screen_width, int map_width, int screen_dx);
+	Player(int x, int y, int screen_width, int map_width, int screen_dx);
 	
 	//GETTERS
 	int GetX(void) const { return x; }

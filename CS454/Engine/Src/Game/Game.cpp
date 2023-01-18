@@ -36,7 +36,7 @@ void Game::Initialise(void) {
 	al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP); // faster bitmaps display must be initialised
 	
 	this->buffer = al_create_bitmap(data["screen"]["width"]/2, data["screen"]["height"]/2);
-	
+	int player_x = 0, player_y = 0;
 	try {
 		auto background_json = data["bitmaps"]["background"];
 		this->background_map = new Map(
@@ -48,7 +48,8 @@ void Game::Initialise(void) {
 			background_json["PNGheight"],
 			background_json["SolidIds"]
 		);
-
+		player_x = background_json["spawn_x"];
+		player_y = background_json["spawn_y"];
 	}
 	catch (std::string e) {
 		throw( "Init of game failed, abort!\n");
@@ -56,7 +57,12 @@ void Game::Initialise(void) {
 	}
 	memset(this->key, 0, sizeof(this->key)); // initiate input key buffer
 	
-	this->player1 = new Player(this->screen->GetWidth()/2, MUL_16(this->background_map->getTileMap()->getTilemapWidth()), data["screen"]["relative_location"]);
+	this->player1 = new Player(player_x,
+							   player_y,
+							   this->screen->GetWidth() / 2,
+							   MUL_16(this->background_map->getTileMap()->getTilemapWidth()),
+							   data["screen"]["relative_location"]
+							   );
 	
 	this->background_map->PrecomputeMap();
 	
@@ -194,36 +200,36 @@ void Game::Register() {
 
 
 bool Game::TryMoveDown(int x, int y) {
-	int ldx = x / 16;
-	int ldy = (y + 16) / 16;
-	int rdx = (x + 15) / 16;
-	int rdy = (y + 16) / 16;
+	int ldx = x / 16;			// left down x
+	int ldy = (y + 16) / 16;	// left down y + 1
+	int rdx = (x + 15) / 16;	// right down x
+	int rdy = (y + 16) / 16;	// right down y + 1
 	return !(this->background_map->IsSolid(ldx, ldy) || this->background_map->IsSolid(rdx, rdy));
 }
 
 bool Game::TryMoveUp(int x, int y){
-	int lux = x / 16;
-	int luy = (y - 1) / 16;
-	int rux = (x + 15) / 16;
-	int ruy = (y - 1) / 16;
+	int lux = x / 16;			// left upper x
+	int luy = (y - 1) / 16;		// left upper y - 1
+	int rux = (x + 15) / 16;	// right upper x
+	int ruy = (y - 1) / 16;		// right upper y - 1
 
 	return !(this->background_map->IsSolid(lux, luy) || this->background_map->IsSolid(rux, ruy));
 }
 
 bool Game::TryMoveLeft(int x, int y){
-	int lux = (x - 1) / 16;
-	int luy = (y) / 16;
-	int ldx = (x - 1) / 16;
-	int ldy = (y + 15) / 16;
+	int lux = (x - 1) / 16;		// left upper x - 1
+	int luy = (y) / 16;			// left upper y
+	int ldx = (x - 1) / 16;		// left down x - 1
+	int ldy = (y + 15) / 16;	// left down y
 
 	return !(this->background_map->IsSolid(lux, luy) || this->background_map->IsSolid(ldx, ldy));
 }
 
 bool Game::TryMoveRight(int x, int y) {
-	int rux = (x + 16) / 16;
-	int ruy = (y) / 16;
-	int rdx = (x + 16) / 16;
-	int rdy = (y + 15) / 16;
+	int rux = (x + 16) / 16;	// right upper x + 1
+	int ruy = (y) / 16;			// right upper y
+	int rdx = (x + 16) / 16;	// right down x + 1
+	int rdy = (y + 15) / 16;	// right down y
 
 	return !(this->background_map->IsSolid(rux, ruy) || this->background_map->IsSolid(rdx, rdy));
 	
