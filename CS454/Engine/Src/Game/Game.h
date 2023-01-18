@@ -24,6 +24,9 @@ private:
 	Action render, anim, input, ai, physics, destruct, collisions, user;
 	Pred done;
 	void Invoke(const Action& f) { if (f) f(); }
+
+	//BUFFER
+	ALLEGRO_BITMAP* buffer;
 	
 	//MAP
 	Map* background_map;
@@ -68,7 +71,7 @@ public:
 	//REGISTER
 	void Register();
 	
-	void Render(void) { Invoke(render); }
+	
 	void ProgressAnimations(void) { Invoke(anim); }
 	void Input(void) { Invoke(input); }
 	void AI(void) { Invoke(ai); }
@@ -85,6 +88,14 @@ public:
 	//loops
 	void MainLoop(void);
 	void MainLoopIteration(void);
+
+	//Renderer's
+	void Render(void);
+	void StartRender(void);
+	void DrawBufferToScreen(void);
+
+	//Collision Detector
+	bool CheckPlayerCollision(int x, int y);
 };
 
 #endif

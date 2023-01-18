@@ -39,6 +39,9 @@ void Game::Initialise(void) {
 	Register();
 	
 	al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP); // faster bitmaps display must be initialised
+	
+	this->buffer = al_create_bitmap(data["screen"]["width"]/2, data["screen"]["height"]/2);
+	
 	try {
 		auto background_json = data["bitmaps"]["background"];
 		this->background_map = new Map(
@@ -47,20 +50,22 @@ void Game::Initialise(void) {
 			background_json["CSVheight"],
 			background_json["PNGsource"].get<std::string>().c_str(),
 			background_json["PNGwidth"],
-			background_json["PNGheight"]
+			background_json["PNGheight"],
+			background_json["SolidIds"]
 		);
-		//bitmap = new BitMap("UnitTests/UnitTest1Media/media/overworld_tileset_grass.png");
 
 	}
 	catch (std::string e) {
 		throw( "Init of game failed, abort!\n");
 		
 	}
-
-	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 	memset(this->key, 0, sizeof(this->key)); // initiate input key buffer
+	
+	
 	this->background_map->PrecomputeMap();
-	al_set_target_bitmap(al_get_backbuffer(this->screen->GetDisplay()));
+	
+	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
+	
 	
 }
 
@@ -69,6 +74,7 @@ void Game::MainLoop(void) {
 	while(!this->doneFlag)
 		MainLoopIteration();
 }
+
 int y = 0; //tmp
 int x = 0; //tmp for scrolling
 
@@ -83,22 +89,22 @@ void Game::MainLoopIteration(void) {
 	//CommitDestructions();
 	
 	al_wait_for_event(this->queue, &this->event);
-	al_clear_to_color(al_map_rgb(0, 0, 0));
+	
 	
 	
 	switch (this->event.type)
 	{
 	case ALLEGRO_EVENT_TIMER:
-		if (key[ALLEGRO_KEY_UP] && y != 0) {
+		if (key[ALLEGRO_KEY_UP] && y != 0 && !CheckPlayerCollision(x, y-16)) {
 			y--;
 		}
-		if (key[ALLEGRO_KEY_DOWN]) {
+		if (key[ALLEGRO_KEY_DOWN] && !CheckPlayerCollision(x, y + 16)) {
 			y++;
 		}
-		if (key[ALLEGRO_KEY_LEFT] && x != 0) {
+		if (key[ALLEGRO_KEY_LEFT] && x != 0 && !CheckPlayerCollision(x-16, y)) {
 			x--;
 		}
-		if (key[ALLEGRO_KEY_RIGHT])
+		if (key[ALLEGRO_KEY_RIGHT] && !CheckPlayerCollision(x + 16, y))
 			x++;
 		if (key[ALLEGRO_KEY_ESCAPE])
 			this->doneFlag = true;
@@ -124,21 +130,39 @@ void Game::MainLoopIteration(void) {
 
 	if (this->redraw && al_is_event_queue_empty(this->queue))
 	{
-
-		//this->background_map->BlitSelf(x, y, 1, this->screen->GetWidth(), this->screen->GetHeight()); // pros to parwn hardcoded
-		//al_set_target_backbuffer(this->screen->GetDisplay());
-		
-		//al_draw_bitmap(this->background_map->getMapBuffer(), 0, 0, 0);
-		//al_draw_text(al_create_builtin_font(), al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_CENTER, "TEST");
-		al_set_target_backbuffer(this->screen->GetDisplay());
-		al_hold_bitmap_drawing(1);
-		this->background_map->Render(x, x + this->screen->GetWidth());
-		al_hold_bitmap_drawing(0);
-		al_flip_display();
+		this->Render();
 		this->redraw = false;
 	}
-
+	
 	this->timer->fps();
+}
+
+void Game::Render(void) {
+	this->StartRender();
+	al_hold_bitmap_drawing(1);
+	
+	this->background_map->Render(x, this->screen->GetWidth() / 2, 0, this->screen->GetHeight() / 2);
+	
+	
+	al_hold_bitmap_drawing(0);
+	this->DrawBufferToScreen();
+}
+
+void Game::StartRender(void) {
+	al_set_target_bitmap(this->buffer);
+	al_clear_to_color(al_map_rgb(0, 0, 0));
+}
+
+void Game::DrawBufferToScreen(void) {
+	al_set_target_backbuffer(this->screen->GetDisplay());
+
+	int const max_x = this->screen->GetWidth();
+	int const max_y = this->screen->GetHeight();
+	
+	al_hold_bitmap_drawing(1);
+	al_draw_scaled_bitmap(this->buffer, 0, 0, max_x / 2, max_y / 2, 0, 0, max_x, max_y, 0);
+	al_hold_bitmap_drawing(0);
+	al_flip_display();
 }
 
 void Game::LoadSetting(void) {
@@ -161,4 +185,12 @@ void Game::Register() {
 	//after registring time we start it
 	al_start_timer(this->timer->getTimer());
 
+}
+
+bool Game::CheckPlayerCollision(int x, int y) {
+	//checkarei an ta x,y einai solid block i exun kapoio enemy
+	//se periptwsi block apla den allazun x,y
+	//se periptwsi enemy trwei attack
+
+	return this->background_map->IsSolid(x/16, y/16);
 }
