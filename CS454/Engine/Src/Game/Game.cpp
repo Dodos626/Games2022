@@ -12,6 +12,7 @@ Game::Game() {
 		throw("terminating error in game\n");
 	}
 	this->music_player->Play(0); // plays the first song
+	this->game_state = game_state::playing;
 	MainLoop();
 	
 }
@@ -70,8 +71,8 @@ void Game::Initialise(void) {
 	
 	this->y_bound = MUL_16(this->background_map->getTileMap()->getTilemapHeight());
 	this->x_bound = MUL_16(this->background_map->getTileMap()->getTilemapWidth());
-	
-	
+	Action handle_input = [this]() {this->HandleInput(); };
+	SetInput(handle_input);
 }
 
 void Game::MainLoop(void) {
@@ -103,43 +104,9 @@ void Game::MainLoopIteration(void) {
 	case ALLEGRO_EVENT_TIMER:
 		
 		
-		if (key[ALLEGRO_KEY_UP] && y > 0 && this->TryMoveUp(x, y)) {
-			this->player1->MoveUp();
-		}
-		if (key[ALLEGRO_KEY_DOWN] && y + 16 <  this->y_bound && this->TryMoveDown(x, y)) {
-			this->player1->MoveDown();
-		}
-		if (key[ALLEGRO_KEY_LEFT] && x > 0 && this->TryMoveLeft(x, y)) {
-			this->player1->MoveLeft();
-		}
-		if (key[ALLEGRO_KEY_RIGHT] && x + 16 < this->x_bound && this->TryMoveRight(x, y)) {
-			this->player1->MoveRight();
-		}
-
-		if (key[ALLEGRO_KEY_0]) {
-			this->music_player->Stop();
-		}
-
-		//TO CHECK IF MAPS CHANGE 
-		if (key[ALLEGRO_KEY_1]) {
-			this->background_map->ChangeMap(map_state::main_screen);
-		}
 		
-		if (key[ALLEGRO_KEY_2]) {
-			this->background_map->ChangeMap(map_state::playing);
-		}
-		if (key[ALLEGRO_KEY_3]) {
-			this->background_map->ChangeMap(map_state::first_floor);
-		}
-		if (key[ALLEGRO_KEY_4]) {
-			this->background_map->ChangeMap(map_state::loading);
-		}
-			
-		if (key[ALLEGRO_KEY_ESCAPE])
-			this->doneFlag = true;
-		for (int i = 0; i < ALLEGRO_KEY_MAX; i++)
-			key[i] &= KEY_SEEN;
-		this->redraw = true;
+		Input();
+		
 		break;
 	case ALLEGRO_EVENT_DISPLAY_CLOSE:
 		this->doneFlag = true;
@@ -159,11 +126,60 @@ void Game::MainLoopIteration(void) {
 
 	if (this->redraw && al_is_event_queue_empty(this->queue))
 	{
+		
 		this->Render();
 		this->redraw = false;
 	}
 	
 	this->timer->fps();
+}
+
+void Game::HandleInput(void) {
+	int y = this->player1->GetY();
+	int x = this->player1->GetX();
+	
+	if (key[ALLEGRO_KEY_UP] && y > 0 && this->TryMoveUp(x, y)) {
+		this->player1->MoveUp();
+	}
+	if (key[ALLEGRO_KEY_DOWN] && y + 16 < this->y_bound && this->TryMoveDown(x, y)) {
+		this->player1->MoveDown();
+	}
+	if (key[ALLEGRO_KEY_LEFT] && x > 0 && this->TryMoveLeft(x, y)) {
+		this->player1->MoveLeft();
+	}
+	if (key[ALLEGRO_KEY_RIGHT] && x + 16 < this->x_bound && this->TryMoveRight(x, y)) {
+		this->player1->MoveRight();
+	}
+
+	if (key[ALLEGRO_KEY_0]) {
+		this->music_player->Stop();
+	}
+
+	//TO CHECK IF MAPS CHANGE 
+	if (key[ALLEGRO_KEY_1]) {
+		this->background_map->ChangeMap(map_state::main_screen);
+	}
+
+	if (key[ALLEGRO_KEY_2]) {
+		this->background_map->ChangeMap(map_state::playing);
+	}
+	if (key[ALLEGRO_KEY_3]) {
+		this->background_map->ChangeMap(map_state::first_floor);
+	}
+	if (key[ALLEGRO_KEY_4]) {
+		this->background_map->ChangeMap(map_state::loading);
+	}
+	if (key[ALLEGRO_KEY_P]) {
+		PauseGame();
+		this->redraw = true;
+		return;
+	}
+
+	if (key[ALLEGRO_KEY_ESCAPE])
+		this->doneFlag = true;
+	for (int i = 0; i < ALLEGRO_KEY_MAX; i++)
+		key[i] &= KEY_SEEN;
+	this->redraw = true;
 }
 
 void Game::Render(void) {
@@ -188,9 +204,26 @@ void Game::DrawBufferToScreen(void) {
 	int const max_x = this->screen->GetWidth();
 	int const max_y = this->screen->GetHeight();
 	
-	al_hold_bitmap_drawing(1);
-	al_draw_scaled_bitmap(this->buffer, 0, 0, max_x / 2, max_y / 2, 0, 0, max_x, max_y, 0);
-	al_hold_bitmap_drawing(0);
+	
+	if (this->game_state == game_state::paused) {
+		
+		al_draw_tinted_scaled_bitmap(this->buffer,
+			al_map_rgb(80, 80, 80),
+			0, 0,
+			max_x/2, max_y/2,
+			0, 0,
+			max_x, max_y,
+			0);
+		
+		al_draw_text(al_create_builtin_font(), al_map_rgb(255, 255, 255), 0, 0, 0, "Game Paused");
+	}
+	else {
+		al_hold_bitmap_drawing(1);
+		al_draw_scaled_bitmap(this->buffer, 0, 0, max_x / 2, max_y / 2, 0, 0, max_x, max_y, 0);
+		al_hold_bitmap_drawing(0);
+	}
+	
+	
 	al_flip_display();
 }
 
@@ -251,4 +284,36 @@ bool Game::TryMoveRight(int x, int y) {
 
 	return !(this->background_map->IsSolid(rux, ruy) || this->background_map->IsSolid(rdx, rdy));
 	
+}
+
+void Game::PauseGame() {
+	this->game_state = game_state::paused;
+	Action action = [this]() {this->HandlePauseInput(); };
+	SetInput(action);
+	memset(key, 0, sizeof(key));
+};
+
+void Game::ResumeGame() {
+	Action handle_input = [this]() {this->HandleInput(); };
+	SetInput(handle_input);
+	game_state = game_state::playing;
+	memset(key, 0, sizeof(key));
+};
+
+void Game::RenderPauseScreen(void) {
+	
+	DrawBufferToScreen();
+};
+
+void Game::HandlePauseInput(void) {
+
+	if (key[ALLEGRO_KEY_P]) {
+		ResumeGame();
+	}
+
+	if (key[ALLEGRO_KEY_ESCAPE])
+		this->doneFlag = true;
+	for (int i = 0; i < ALLEGRO_KEY_MAX; i++)
+		key[i] &= KEY_SEEN;
+	this->redraw = true;
 }

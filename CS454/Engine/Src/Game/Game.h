@@ -23,6 +23,10 @@ using json = nlohmann::json;
 #define KEY_SEEN     1
 #define KEY_RELEASED 2
 
+enum class game_state {
+	paused = 0,
+	playing = 1
+};
 
 class Game { // app::Game namespace, the mother application
 public:
@@ -65,6 +69,17 @@ private:
 
 	//MUSIC PLAYER
 	MusicPlayer* music_player;
+
+	//GAME STATE
+	game_state game_state;
+	
+	//handles in game input
+	void HandleInput();
+	void HandlePauseInput();
+	
+	void PauseGame();
+	void ResumeGame();
+	void RenderPauseScreen();
 public:
 	//constructor
 	Game();

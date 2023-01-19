@@ -7,7 +7,7 @@ Map::Map(std::string path) {
 	this->data = json::parse(f);
 	std::cout << this->data << std::endl;
 
-	this->state = map_state::loading;
+	this->state = map_state::main_screen;
 	
 	//the bitmap is the same for all the maps
 	std::string bitmapPath = this->data["png"]["PNGsource"].get<std::string>();
@@ -20,12 +20,10 @@ Map::Map(std::string path) {
 	//starting the maps
 
 	
-	setTileMap(this->data["loading_screen"]);
-	setSolidBlocks(this->data["loading_screen"]["SolidIds"]);
-	setSpawn(this->data["loading_screen"]);
 	
 	
 	this->map_buffer = al_create_bitmap(MUL_16(this->data["loading_screen"]["CSVwidth"]), MUL_16(this->data["loading_screen"]["CSVheight"]));
+	this->ChangeMap(this->state);
 	this->player_dx = MUL_16(2);
 	
 }
@@ -145,10 +143,11 @@ void Map::PrecomputeMap() {
 	al_unlock_bitmap(tileBitmap);
 	al_unlock_bitmap(this->map_buffer);
 	al_hold_bitmap_drawing(false);
-
+	
 	if (this->getState() == map_state::main_screen) {
 		mainScreenRender();
 	}
+	
 	
 	
 }
@@ -156,8 +155,9 @@ void Map::PrecomputeMap() {
 void Map::mainScreenRender() {
 	//al_lock_bitmap(this->map_buffer, ALLEGRO_PIXEL_FORMAT_ANY, ALLEGRO_LOCK_WRITEONLY);
 	//al_hold_bitmap_drawing(true);
-	std::cout << "test" << std::endl;
-	const ALLEGRO_FONT* font = al_create_builtin_font();
+	
+	ALLEGRO_FONT* font = al_create_builtin_font();
+
 	al_draw_filled_rectangle(16, 16, 288, 104, al_map_rgb(255, 32, 65));
 	al_draw_text(font, al_map_rgb(0, 0, 0), 70, 30, 0, "Press Enter to start");
 	al_draw_text(font, al_map_rgb(255, 255, 255), 60, 40, 0, "A game by Giwrgos Manos");
@@ -167,7 +167,7 @@ void Map::mainScreenRender() {
 	al_draw_text(font, al_map_rgb(255, 255, 255), 120, 80, 0, "CS-454");
 	al_draw_text(font, al_map_rgb(255, 255, 255), 110, 90, 0, "2022-2023");
 
-	
+	al_destroy_font(font);
 	//al_hold_bitmap_drawing(false);
 	//al_unlock_bitmap(this->map_buffer);
 	

@@ -18,8 +18,8 @@
     "CSVwidth": 48,
     "CSVheight": 16,
     "SolidIds": [ 14, 24, 25, 26, 27, 28, 30, 31, 35, 36, 37, 38, 40, 41 ],
-    "spawn_x": 0,
-    "spawn_y": 0
+    "spawn_x": 19,
+    "spawn_y": 224
   },
   "playing": {
     "CSVsource": "Media/background_map/background_palace_map.csv",
