@@ -12,6 +12,7 @@
 #include "../Misc/Timer/Timer.h"
 #include "../Misc/Screen/Screen.h"
 #include "../Player/Player.h"
+#include "../Misc/MusicPlayer/MusicPlayer.h"
 
 
 #include <nlohmann/json.hpp>
@@ -62,6 +63,8 @@ private:
 	int y_bound;
 	int x_bound;
 
+	//MUSIC PLAYER
+	MusicPlayer* music_player;
 public:
 	//constructor
 	Game();

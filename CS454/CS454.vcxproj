@@ -89,6 +89,11 @@
     </Linkage-jsoncpp>
     <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
     <Allegro_AddonAudio>true</Allegro_AddonAudio>
+    <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
+    <Allegro_AddonPhysfs>true</Allegro_AddonPhysfs>
+    <Allegro_AddonDialog>true</Allegro_AddonDialog>
+    <Allegro_AddonMemfile>true</Allegro_AddonMemfile>
+    <Allegro_AddonVideo>true</Allegro_AddonVideo>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -157,6 +162,7 @@
     <ClCompile Include="Engine\Src\BitMap\BitMap.cpp" />
     <ClCompile Include="Engine\Src\Game\Game.cpp" />
     <ClCompile Include="Engine\Src\Map\Map.cpp" />
+    <ClCompile Include="Engine\Src\Misc\MusicPlayer\MusicPlayer.cpp" />
     <ClCompile Include="Engine\Src\Misc\Source.cpp" />
     <ClCompile Include="Engine\Src\Misc\Timer\Timer.cpp" />
     <ClCompile Include="Engine\Src\Misc\Screen\Screen.cpp" />
@@ -173,6 +179,7 @@
     <ClInclude Include="Engine\Src\BitMap\BitMap.h" />
     <ClInclude Include="Engine\Src\Game\Game.h" />
     <ClInclude Include="Engine\Src\Map\Map.h" />
+    <ClInclude Include="Engine\Src\Misc\MusicPlayer\MusicPlayer.h" />
     <ClInclude Include="Engine\Src\Misc\Timer\Timer.h" />
     <ClInclude Include="Engine\Src\Misc\WhereAmI.h" />
     <ClInclude Include="CS454.h" />

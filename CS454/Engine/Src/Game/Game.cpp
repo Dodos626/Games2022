@@ -11,6 +11,7 @@ Game::Game() {
 		std::cout << e << std::endl;
 		throw("terminating error in game\n");
 	}
+	this->music_player->Play(0); // plays the first song
 	MainLoop();
 	
 }
@@ -19,6 +20,11 @@ void Game::Initialise(void) {
 	assert(al_init());
 	assert(al_init_image_addon());
 	assert(al_init_primitives_addon());
+
+	//audio stuff
+	assert(al_install_audio());
+	assert(al_init_acodec_addon());
+	al_reserve_samples(10);
 
 	std::ifstream f("Engine/Configs/GameConfig.json");
 	json data = json::parse(f);
@@ -63,6 +69,8 @@ void Game::Initialise(void) {
 							   MUL_16(this->background_map->getTileMap()->getTilemapWidth()),
 							   data["screen"]["relative_location"]
 							   );
+
+	this->music_player = new MusicPlayer();
 	
 	this->background_map->PrecomputeMap();
 	
@@ -114,6 +122,10 @@ void Game::MainLoopIteration(void) {
 		}
 		if (key[ALLEGRO_KEY_RIGHT] && x + 16 < this->x_bound && this->TryMoveRight(x, y)) {
 			this->player1->MoveRight();
+		}
+
+		if (key[ALLEGRO_KEY_0]) {
+			this->music_player->Stop();
 		}
 			
 			
