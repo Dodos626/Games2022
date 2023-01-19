@@ -33,7 +33,7 @@ void Player::Render() {
 	int x = this->x - this->GetCameraX();
 	if (this->x > this->max_moving_x)
 		x += this->x - this->max_moving_x;
-	std::cout << "rendering " << this->y << ","<< this->x << std::endl;
+	//std::cout << "rendering " << this->y << ","<< this->x << std::endl;
 	al_draw_filled_rectangle(x, this->y, x + 16, this->y + 16, al_map_rgb(255, 32, 65));
 }
 

@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <allegro5/allegro_primitives.h>
 #include <nlohmann/json.hpp>
 #include <fstream>
 using json = nlohmann::json;
@@ -41,6 +42,9 @@ private:
 	void setTileMap(json data);
 	void setSpawn(json data);
 	std::string stateToString(map_state state);
+
+	//gia to main screen ta grammata
+	void mainScreenRender();
 public:
 	Map(std::string Path);
 	void PrecomputeMap();
