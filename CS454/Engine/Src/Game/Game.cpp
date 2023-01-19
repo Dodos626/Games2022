@@ -65,7 +65,7 @@ void Game::Initialise(void) {
 
 	this->music_player = new MusicPlayer();
 	
-	this->background_map->PrecomputeMap();
+	
 	
 	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 	
@@ -102,9 +102,7 @@ void Game::MainLoopIteration(void) {
 	switch (this->event.type)
 	{
 	case ALLEGRO_EVENT_TIMER:
-		
-		
-		
+
 		Input();
 		
 		break;
