@@ -1,11 +1,77 @@
 #include "Map.h"
 
-Map::Map(std::string tilemapPath, int tilemapWidth , int tilemapHeight, const char* bitmapPath, int tilesetWidth, int tilesetHeight, std::vector<int> SolidBlockIds) {
-	this->bitmap = new BitMap(bitmapPath, tilesetWidth, tilesetHeight);
-	this->tilemap = new TileMap(tilemapWidth, tilemapHeight, tilemapPath);
-	this->map_buffer = al_create_bitmap(MUL_16(tilemapWidth), MUL_16(tilemapHeight));
-	this->SolidBlockIds = SolidBlockIds;
+
+Map::Map(std::string path) {
+
+	std::ifstream f(path);
+	this->data = json::parse(f);
+	std::cout << this->data << std::endl;
+
+	this->state = map_state::main_screen;
+	
+	//the bitmap is the same for all the maps
+	std::string bitmapPath = this->data["png"]["PNGsource"].get<std::string>();
+	int tilesetWidth = this->data["png"]["PNGwidth"];
+	int tilesetHeight = this->data["png"]["PNGheight"];
+	this->bitmap = new BitMap(bitmapPath.c_str(), tilesetWidth, tilesetHeight);
+
+	
+	
+	//starting the maps
+
+	
+	setTileMap(this->data["loading_screen"]);
+	setSolidBlocks(this->data["loading_screen"]["SolidIds"]);
+	setSpawn(this->data["loading_screen"]);
+	
+	
+	this->map_buffer = al_create_bitmap(MUL_16(this->data["loading_screen"]["CSVwidth"]), MUL_16(this->data["loading_screen"]["CSVheight"]));
 	this->player_dx = MUL_16(2);
+	
+}
+
+//change map
+
+void Map::ChangeMap(map_state state) {
+	std::string map = stateToString(state);
+
+	setTileMap(this->data[map]);
+	setSolidBlocks(this->data[map]["SolidIds"]);
+	this->grid.clear();
+	setSpawn(this->data[map]);
+
+	PrecomputeMap();
+}
+
+//HELPERS  TO LOAD OTHER MAPS
+
+std::string Map::stateToString(map_state state) {
+	switch (state)
+	{
+	case map_state::loading:
+		return "loading_screen";
+	case map_state::main_screen:
+		return "main_screen";
+	case map_state::playing:
+		return "playing";
+	case map_state::first_floor:
+		return "first_floor";
+	default:
+		exit(EXIT_FAILURE);
+	}
+}
+
+void Map::setSolidBlocks(std::vector<int> SolidBlockIds) {
+	this->SolidBlockIds = SolidBlockIds;
+}
+void Map::setTileMap(json data) {
+	if (this->tilemap != nullptr)
+		delete this->tilemap;
+	this->tilemap = new TileMap(data["CSVwidth"], data["CSVheight"], data["CSVsource"]);
+}
+void Map::setSpawn(json data) {
+	this->spawn.x = data["spawn_x"];
+	this->spawn.y = data["spawn_y"];
 }
 
 void Map::Render(int left_x, int max_x, int y, int max_y) {
