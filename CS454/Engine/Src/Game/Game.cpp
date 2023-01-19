@@ -45,17 +45,9 @@ void Game::Initialise(void) {
 	int player_x = 0, player_y = 0;
 	try {
 		auto background_json = data["bitmaps"]["background"];
-		this->background_map = new Map(
-			background_json["CSVsource"],
-			background_json["CSVwidth"],
-			background_json["CSVheight"],
-			background_json["PNGsource"].get<std::string>().c_str(),
-			background_json["PNGwidth"],
-			background_json["PNGheight"],
-			background_json["SolidIds"]
-		);
-		player_x = background_json["spawn_x"];
-		player_y = background_json["spawn_y"];
+		this->background_map = new Map("Engine/Configs/MapConfig.json");
+		player_x = this->background_map->getSpawn().x;
+		player_y = this->background_map->getSpawn().y;
 	}
 	catch (std::string e) {
 		throw( "Init of game failed, abort!\n");
@@ -127,7 +119,21 @@ void Game::MainLoopIteration(void) {
 		if (key[ALLEGRO_KEY_0]) {
 			this->music_player->Stop();
 		}
-			
+
+		//TO CHECK IF MAPS CHANGE 
+		if (key[ALLEGRO_KEY_1]) {
+			this->background_map->ChangeMap(map_state::main_screen);
+		}
+		
+		if (key[ALLEGRO_KEY_2]) {
+			this->background_map->ChangeMap(map_state::playing);
+		}
+		if (key[ALLEGRO_KEY_3]) {
+			this->background_map->ChangeMap(map_state::first_floor);
+		}
+		if (key[ALLEGRO_KEY_4]) {
+			this->background_map->ChangeMap(map_state::loading);
+		}
 			
 		if (key[ALLEGRO_KEY_ESCAPE])
 			this->doneFlag = true;
