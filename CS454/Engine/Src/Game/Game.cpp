@@ -44,6 +44,7 @@ void Game::Initialise(void) {
 	
 	this->buffer = al_create_bitmap(data["screen"]["width"]/2, data["screen"]["height"]/2);
 	Point* spawn_location;
+	std::cout << "creating map\n";
 	try {
 		auto background_json = data["bitmaps"]["background"];
 		this->background_map = new Map("Engine/Configs/MapConfig.json");
@@ -75,8 +76,10 @@ void Game::Initialise(void) {
 	this->fall_speed = data["physics"]["fall_speed"];
 	Action handle_input = [this]() {this->HandleInput(); };
 	Action gravity_pull = [this]() {this->GravityPull(); };
+	Action check_exit = [this]() {this->CheckExit(); };
 	this->SetInput(handle_input);
 	this->SetPhysics(gravity_pull);
+	this->SetUser(check_exit);
 	
 }
 
@@ -110,6 +113,7 @@ void Game::MainLoopIteration(void) {
 
 		this->Input();
 		this->Physics();
+		this->UserCode();
 		
 		break;
 	case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -161,21 +165,21 @@ void Game::HandleInput(void) {
 
 	//TO CHECK IF MAPS CHANGE 
 	if (key[ALLEGRO_KEY_1]) {
-		this->ChangeMap(map_state::main_screen);
+		this->ChangeMap(MapLocations::main_screen);
 		this->redraw = true;
 		
 	}
 
 	if (key[ALLEGRO_KEY_2]) {
-		this->ChangeMap(map_state::palace);
+		this->ChangeMap(MapLocations::palace);
 		this->redraw = true;
 	}
 	if (key[ALLEGRO_KEY_3]) {
-		this->ChangeMap(map_state::first_floor);
+		this->ChangeMap(MapLocations::first_floor);
 		this->redraw = true;
 	}
 	if (key[ALLEGRO_KEY_4]) {
-		this->ChangeMap(map_state::loading);
+		this->ChangeMap(MapLocations::loading);
 		this->redraw = true;
 	}
 	if (key[ALLEGRO_KEY_P]) {
@@ -192,7 +196,7 @@ void Game::HandleInput(void) {
 	return;
 }
 
-void Game::ChangeMap(map_state new_map) {
+void Game::ChangeMap(MapLocations new_map) {
 	this->background_map->ChangeMap(new_map);
 	this->player1->Respawn(this->background_map->GetSpawn());
 	return;
@@ -366,4 +370,14 @@ void Game::GravityPull() {
 			y = this->player1->GetY();
 		}
 
+}
+
+void Game::CheckExit() {
+	int lx = (this->player1->GetX()) / 16;
+	int rx = (this->player1->GetX() + 15) / 16;
+	int uy = (this->player1->GetY()) / 16;
+	int dy = (this->player1->GetY() + this->player1->GetHeight() - 1) / 16;
+	std::cout << "lx: " << lx << " rx: " << rx << " uy: " << uy << " dy: " << dy << std::endl;
+	if (this->background_map->IsExit(Point(lx, uy)) || this->background_map->IsExit(Point(lx, dy)) || this->background_map->IsExit(Point(rx, uy)) || this->background_map->IsExit(Point(rx, dy)))
+		this->ChangeMap(MapLocations::first_floor);
 }

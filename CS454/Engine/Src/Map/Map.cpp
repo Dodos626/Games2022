@@ -7,14 +7,15 @@ Map::Map(std::string path) {
 	this->data = json::parse(f);
 	std::cout << this->data << std::endl;
 
-	this->state = map_state::main_screen;
+	this->state = MapLocations::main_screen;
 	
 	//the bitmap is the same for all the maps
 	std::string bitmapPath = this->data["png"]["PNGsource"].get<std::string>();
 	int tilesetWidth = this->data["png"]["PNGwidth"];
 	int tilesetHeight = this->data["png"]["PNGheight"];
 	this->bitmap = new BitMap(bitmapPath.c_str(), tilesetWidth, tilesetHeight);
-
+	this->spawn = new Point(0, 0);
+	this->player_dx = MUL_16(2);
 	
 	
 	//starting the maps
@@ -25,14 +26,12 @@ Map::Map(std::string path) {
 	this->map_buffer = al_create_bitmap(MUL_16(this->data["loading_screen"]["CSVwidth"]), MUL_16(this->data["loading_screen"]["CSVheight"]));
 	this->mapBG_buffer = al_create_bitmap(MUL_16(this->data["loading_screen"]["background"]["CSVwidth"]), MUL_16(this->data["loading_screen"]["background"]["CSVheight"]));
 	this->ChangeMap(this->state);
-	this->spawn = new Point(0, 0);
-	this->player_dx = MUL_16(2);
 	
 }
 
 //change map
 
-void Map::ChangeMap(map_state state) {
+void Map::ChangeMap(MapLocations state) {
 	//al_destroy_bitmap(this->map_buffer);
     //al_destroy_bitmap(this->mapBG_buffer);
 
@@ -44,6 +43,7 @@ void Map::ChangeMap(map_state state) {
 	this->cleanBuffer(this->mapBG_buffer);
 	this->setTileMap(this->data[map]);
 	this->setSolidBlocks(this->data[map]["SolidIds"]);
+	this->setExitPoints(this->data[map]["exit_points"]);
 	this->grid.clear();
 	this->setSpawn(this->data[map]);
 	this->state = state;
@@ -69,16 +69,16 @@ void Map::cleanBuffer(ALLEGRO_BITMAP* buffer) { //TODO veltiwsh epidoshs
 
 
 //HELPERS  TO LOAD OTHER MAPS
-std::string Map::stateToString(map_state state) {
+std::string Map::stateToString(MapLocations state) {
 	switch (state)
 	{
-	case map_state::loading:
+	case MapLocations::loading:
 		return "loading_screen";
-	case map_state::main_screen:
+	case MapLocations::main_screen:
 		return "main_screen";
-	case map_state::palace:
+	case MapLocations::palace:
 		return "palace";
-	case map_state::first_floor:
+	case MapLocations::first_floor:
 		return "first_floor";
 	default:
 		exit(EXIT_FAILURE);
@@ -180,13 +180,7 @@ void Map::PrecomputeMap() {
 		for (int width = 0; width < this->tilemap->getTilemapWidth(); width++) {
 			
 			const int tile = this->tilemap->getTile(width, height);
-			if (tile == 22) {
-				sub_grid.push_back(false);
-				
-			}
-			else {
-				sub_grid.push_back(std::find(this->SolidBlockIds.begin(), this->SolidBlockIds.end(), tile) != this->SolidBlockIds.end());
-			}
+			sub_grid.push_back(std::find(this->SolidBlockIds.begin(), this->SolidBlockIds.end(), tile) != this->SolidBlockIds.end());
 			
 			
 			
@@ -210,7 +204,7 @@ void Map::PrecomputeMap() {
 	al_unlock_bitmap(this->map_buffer);
 	al_hold_bitmap_drawing(false);
 	
-	if (this->getState() == map_state::main_screen) {
+	if (this->getState() == MapLocations::main_screen) {
 		mainScreenRender();
 	}
 	
@@ -267,3 +261,19 @@ void Map::mainScreenRender() {
 bool Map::IsSolid(int x, int y) {
 	return this->grid[y][x];
 }
+
+bool Map::IsExit(Point location) {
+	return std::find(this->ExitPointBlocks.begin(), this->ExitPointBlocks.end(), location) != this->ExitPointBlocks.end();
+}
+
+void Map::setExitPoints(json data) {
+	this->ExitPointBlocks.clear();
+	for (auto pair : data.items()){
+		std::string map_name = pair.key();
+		auto points = pair.value();
+		for (auto point : points) {
+			this->ExitPointBlocks.push_back(Point(point["x"], point["y"], map_name));
+		}
+	}
+}
+

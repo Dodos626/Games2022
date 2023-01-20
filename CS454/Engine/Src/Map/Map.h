@@ -13,7 +13,7 @@
 using json = nlohmann::json;
 #define MUL_16(x) (x << 4)
 
-enum class map_state {
+enum class MapLocations {
 	loading, // loading screen
 	main_screen, //the main screen
 	palace, // the first map
@@ -29,9 +29,10 @@ private:
 	ALLEGRO_BITMAP *map_buffer; // whole map buffer
 	ALLEGRO_BITMAP *mapBG_buffer; //whole map bg buffer
 	std::vector<int> SolidBlockIds;
+	std::vector<Point> ExitPointBlocks;
 	std::vector<std::vector<bool>> grid;
 	int player_dx;
-	map_state state;
+	MapLocations state;
 	Point *spawn;
 	json data;
 
@@ -39,7 +40,8 @@ private:
 	void setSolidBlocks(std::vector<int> SolidBlockIds);
 	void setTileMap(json data);
 	void setSpawn(json data);
-	std::string stateToString(map_state state);
+	void setExitPoints(json data);
+	std::string stateToString(MapLocations state);
 
 	//gia to main screen ta grammata
 	void mainScreenRender();
@@ -56,14 +58,15 @@ public:
 	TileMap* getTileMap() { return this->tilemap; };
 	ALLEGRO_BITMAP* getMapBuffer() { return this->map_buffer; };
 	bool IsSolid(int x, int y);
+	bool IsExit(Point location);
 	
 	
-	void setState(map_state state) { this->state = state; };
-	map_state getState() { return this->state; }; 
+	void setState(MapLocations state) { this->state = state; };
+	MapLocations getState() { return this->state; }; 
 
 	Point *GetSpawn() { return this->spawn; }
 
-	void ChangeMap(map_state state);
+	void ChangeMap(MapLocations state);
 
 };
 

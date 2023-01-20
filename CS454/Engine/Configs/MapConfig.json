@@ -17,7 +17,7 @@
       "CSVwidth": 48,
       "CSVheight": 16
     },
-    "exit_points": []
+    "exit_points": {}
   },
   "main_screen": {
     "CSVsource": "Media/background_map/main_screen.csv",
@@ -31,7 +31,7 @@
       "CSVwidth": 48,
       "CSVheight": 16
     },
-    "exit_points": []
+    "exit_points": {}
   },
   "palace": {
     "CSVsource": "Media/background_map/background_palace_map.csv",
@@ -48,12 +48,16 @@
     "exit_points": {
       "first_floor": [
         {
-          "x": 0,
-          "y": 40
+          "x": 39,
+          "y": 15,
+          "spawn_x": 640,
+          "spawn_y": 20
         },
         {
-          "x": 0,
-          "y": 41
+          "x": 40,
+          "y": 15,
+          "spawn_x": 640,
+          "spawn_y": 20
         }
       ]
     }
@@ -64,8 +68,8 @@
     "CSVwidth": 48,
     "CSVheight": 16,
     "SolidIds": [ 28 ],
-    "spawn_x": 3,
-    "spawn_y": 208,
+    "spawn_x": 640,
+    "spawn_y": 20,
     "background": {
       "CSVsource": "Media/background_map/1st_floor_bg.csv",
       "CSVwidth": 48,
@@ -74,12 +78,16 @@
     "exit_points": {
       "palace": [
         {
-          "x": 0,
-          "y": 40
+          "x": 40,
+          "y": 0,
+          "spawn_x": 40,
+          "spawn_y": 13
         },
         {
-          "x": 0,
-          "y": 41
+          "x": 41,
+          "y": 0,
+          "spawn_x": 40,
+          "spawn_y": 13
         }
       ]
     }

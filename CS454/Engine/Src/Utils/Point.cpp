@@ -7,4 +7,16 @@ Point *Point::operator+(Point *p2) {
 Point::Point(int x, int y) {
 	this->x = x;
 	this->y = y;
+	this->info = "";
+}
+
+Point::Point(int x, int y, std::string info) {
+	this->x = x;
+	this->y = y;
+	this->info = info;
+}
+
+std::ostream &operator<<(std::ostream &os, const Point &p) {
+	std::cout << p.x << ", " << p.y;
+	return std::cout;
 }

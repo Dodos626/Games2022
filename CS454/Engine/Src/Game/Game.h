@@ -120,7 +120,8 @@ public:
 	void UserCode(void) { Invoke(user); }
 	bool IsFinished(void) const { return !done(); }
 	
-	void ChangeMap(map_state new_map);
+	void CheckExit();
+	void ChangeMap(MapLocations new_map);
 
 	//getters
 	Map* GetMap(void) { return background_map; }
