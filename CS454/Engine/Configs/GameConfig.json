@@ -22,5 +22,10 @@
       "spawn_x": 3,
       "spawn_y": 208
     }
+  },
+  "physics": {
+    "jump_height": 32,
+    "jump_speed": 4,
+    "fall_speed": 2
   }
 }

@@ -157,16 +157,9 @@ void Map::mainScreenRender() {
 	//al_hold_bitmap_drawing(true);
 	
 	ALLEGRO_FONT* font = al_create_builtin_font();
-
+	const char* msg = "Press Enter to Start\n A game by Theodoros Chalkidis,\n George Manos and Minos\n UNIVERSITY OF CRETE\n COMPUTER SCIENCE DEPARTMENT\n CS454\n 2022-2023";
 	al_draw_filled_rectangle(16, 16, 288, 104, al_map_rgb(255, 32, 65));
-	al_draw_text(font, al_map_rgb(0, 0, 0), 70, 30, 0, "Press Enter to start");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 60, 40, 0, "A game by Giwrgos Manos");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 55, 50, 0, "Minos , Theodoros chalkidis");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 80, 60, 0, "UNIVERSITY OF CRETE");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 55, 70, 0, "COMPUTER SCIENCE DEPARTMENT");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 120, 80, 0, "CS-454");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 110, 90, 0, "2022-2023");
-
+	al_draw_multiline_text(font, al_map_rgb(255, 255, 255), 150, 25, 288, 10, ALLEGRO_ALIGN_CENTRE, msg);
 	al_destroy_font(font);
 	//al_hold_bitmap_drawing(false);
 	//al_unlock_bitmap(this->map_buffer);

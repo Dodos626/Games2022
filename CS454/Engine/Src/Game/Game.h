@@ -67,6 +67,12 @@ private:
 	int y_bound;
 	int x_bound;
 
+	// Physics
+	int jump_y;
+	int jump_height;
+	int jump_speed;
+	int fall_speed;
+
 	//MUSIC PLAYER
 	MusicPlayer* music_player;
 
@@ -121,7 +127,7 @@ public:
 	void MainLoop(void);
 	void MainLoopIteration(void);
 
-	//Renderer's
+	//Renderers
 	void Render(void);
 	void StartRender(void);
 	void DrawBufferToScreen(void);
@@ -131,5 +137,7 @@ public:
 	bool TryMoveUp(int x, int y);
 	bool TryMoveLeft(int x, int y);
 	bool TryMoveRight(int x, int y);
+
+	void GravityPull();
 };
 #endif

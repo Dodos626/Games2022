@@ -71,14 +71,21 @@ void Game::Initialise(void) {
 	
 	this->y_bound = MUL_16(this->background_map->getTileMap()->getTilemapHeight());
 	this->x_bound = MUL_16(this->background_map->getTileMap()->getTilemapWidth());
+	this->jump_y = 0;
+	this->jump_height = data["physics"]["jump_height"];
+	this->jump_speed = data["physics"]["jump_speed"];
+	this->fall_speed = data["physics"]["fall_speed"];
 	Action handle_input = [this]() {this->HandleInput(); };
-	SetInput(handle_input);
+	Action gravity_pull = [this]() {this->GravityPull(); };
+	this->SetInput(handle_input);
+	this->SetPhysics(gravity_pull);
+	
 }
 
 void Game::MainLoop(void) {
 	//while (!IsFinished())
 	while(!this->doneFlag)
-		MainLoopIteration();
+		this->MainLoopIteration();
 }
 
 
@@ -103,7 +110,8 @@ void Game::MainLoopIteration(void) {
 	{
 	case ALLEGRO_EVENT_TIMER:
 
-		Input();
+		this->Input();
+		this->Physics();
 		
 		break;
 	case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -136,11 +144,11 @@ void Game::HandleInput(void) {
 	int y = this->player1->GetY();
 	int x = this->player1->GetX();
 	
-	if (key[ALLEGRO_KEY_UP] && y > 0 && this->TryMoveUp(x, y)) {
-		this->player1->MoveUp();
+	if (key[ALLEGRO_KEY_UP] && y > 0 && this->TryMoveUp(x, y) && !this->TryMoveDown(x, y)) {
+		this->jump_y = this->jump_height;
 	}
 	if (key[ALLEGRO_KEY_DOWN] && y + 16 < this->y_bound && this->TryMoveDown(x, y)) {
-		this->player1->MoveDown();
+		//this->player1->MoveDown();
 	}
 	if (key[ALLEGRO_KEY_LEFT] && x > 0 && this->TryMoveLeft(x, y)) {
 		this->player1->MoveLeft();
@@ -314,4 +322,26 @@ void Game::HandlePauseInput(void) {
 	for (int i = 0; i < ALLEGRO_KEY_MAX; i++)
 		key[i] &= KEY_SEEN;
 	this->redraw = true;
+}
+
+void Game::GravityPull() {
+	int x = this->player1->GetX();
+	int y = this->player1->GetY();
+	if (this->jump_y > 0)
+		for (int i = 0; i < this->jump_speed; i++)
+			if (this->TryMoveUp(x, y)) {
+				this->player1->MoveUp();
+				this->jump_y--;
+			}
+			else
+				this->jump_y = 0;
+	else if (this->TryMoveDown(x, y))
+		for (int i = 0; i < this->fall_speed; i++)
+			if (this->TryMoveDown(x, y)) {
+				this->player1->MoveDown();
+				this->jump_y--;
+			}
+			else
+				this->jump_y = 0;
+
 }
