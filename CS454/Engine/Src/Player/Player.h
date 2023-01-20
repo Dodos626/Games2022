@@ -21,7 +21,6 @@ class Player {
 private :
 	int x, y;
 	int camera_dx;
-	int actual_x;
 	int health;			//health points
  	int attack_power;	//attack damage
 	int armor;			//armor is x where x is the damage it will prevent before health is affected
