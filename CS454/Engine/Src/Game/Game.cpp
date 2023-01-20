@@ -164,16 +164,21 @@ void Game::HandleInput(void) {
 	//TO CHECK IF MAPS CHANGE 
 	if (key[ALLEGRO_KEY_1]) {
 		this->background_map->ChangeMap(map_state::main_screen);
+		this->redraw = true;
+		
 	}
 
 	if (key[ALLEGRO_KEY_2]) {
 		this->background_map->ChangeMap(map_state::playing);
+		this->redraw = true;
 	}
 	if (key[ALLEGRO_KEY_3]) {
 		this->background_map->ChangeMap(map_state::first_floor);
+		this->redraw = true;
 	}
 	if (key[ALLEGRO_KEY_4]) {
 		this->background_map->ChangeMap(map_state::loading);
+		this->redraw = true;
 	}
 	if (key[ALLEGRO_KEY_P]) {
 		PauseGame();
@@ -192,6 +197,7 @@ void Game::Render(void) {
 	this->StartRender();
 	al_hold_bitmap_drawing(1);
 	
+	this->background_map->RenderBg(this->player1->GetCameraX(), this->screen->GetWidth() / 2, 0, this->screen->GetHeight() / 2);
 	this->background_map->Render(this->player1->GetCameraX(), this->screen->GetWidth() / 2, 0, this->screen->GetHeight() / 2);
 	this->player1->Render();
 	
@@ -206,6 +212,7 @@ void Game::StartRender(void) {
 
 void Game::DrawBufferToScreen(void) {
 	al_set_target_backbuffer(this->screen->GetDisplay());
+	
 
 	int const max_x = this->screen->GetWidth();
 	int const max_y = this->screen->GetHeight();

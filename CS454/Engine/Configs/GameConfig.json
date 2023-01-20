@@ -24,8 +24,8 @@
     }
   },
   "physics": {
-    "jump_height": 32,
-    "jump_speed": 4,
+    "jump_height": 40,
+    "jump_speed": 3,
     "fall_speed": 2
   }
 }
