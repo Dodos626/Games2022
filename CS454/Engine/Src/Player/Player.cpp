@@ -44,3 +44,8 @@ int Player::GetCameraX(){
 		return this->x - this->camera_dx;
 	
 }
+
+void Player::Respawn(int x, int y) {
+	this->x = x;
+	this->y = y;
+}

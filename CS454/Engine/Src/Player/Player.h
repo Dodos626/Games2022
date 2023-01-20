@@ -44,6 +44,7 @@ public:
 	void MoveUp() { this->y -= this->speed; }
 	void MoveDown() { this->y += this->speed; }
 
+	void Respawn(int x, int y);
 	//Attack - Damage functions
 	void TakeDamage(int damage);
 

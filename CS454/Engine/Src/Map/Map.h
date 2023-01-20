@@ -65,7 +65,8 @@ public:
 	void setState(map_state state) { this->state = state; };
 	map_state getState() { return this->state; }; 
 
-	Spawn getSpawn() { return this->spawn; };
+	int GetSpawnX() { return this->spawn.x; };
+	int GetSpawnY() { return this->spawn.y; };
 
 	void ChangeMap(map_state state);
 

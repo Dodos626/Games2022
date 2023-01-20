@@ -47,8 +47,8 @@ void Game::Initialise(void) {
 	try {
 		auto background_json = data["bitmaps"]["background"];
 		this->background_map = new Map("Engine/Configs/MapConfig.json");
-		player_x = this->background_map->getSpawn().x;
-		player_y = this->background_map->getSpawn().y;
+		player_x = this->background_map->GetSpawnX();
+		player_y = this->background_map->GetSpawnY();
 	}
 	catch (std::string e) {
 		throw( "Init of game failed, abort!\n");
@@ -163,21 +163,21 @@ void Game::HandleInput(void) {
 
 	//TO CHECK IF MAPS CHANGE 
 	if (key[ALLEGRO_KEY_1]) {
-		this->background_map->ChangeMap(map_state::main_screen);
+		this->ChangeMap(map_state::main_screen);
 		this->redraw = true;
 		
 	}
 
 	if (key[ALLEGRO_KEY_2]) {
-		this->background_map->ChangeMap(map_state::playing);
+		this->ChangeMap(map_state::playing);
 		this->redraw = true;
 	}
 	if (key[ALLEGRO_KEY_3]) {
-		this->background_map->ChangeMap(map_state::first_floor);
+		this->ChangeMap(map_state::first_floor);
 		this->redraw = true;
 	}
 	if (key[ALLEGRO_KEY_4]) {
-		this->background_map->ChangeMap(map_state::loading);
+		this->ChangeMap(map_state::loading);
 		this->redraw = true;
 	}
 	if (key[ALLEGRO_KEY_P]) {
@@ -191,6 +191,13 @@ void Game::HandleInput(void) {
 	for (int i = 0; i < ALLEGRO_KEY_MAX; i++)
 		key[i] &= KEY_SEEN;
 	this->redraw = true;
+	return;
+}
+
+void Game::ChangeMap(map_state new_map) {
+	this->background_map->ChangeMap(new_map);
+	this->player1->Respawn(this->background_map->GetSpawnX(), this->background_map->GetSpawnY());
+	return;
 }
 
 void Game::Render(void) {
