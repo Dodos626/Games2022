@@ -144,16 +144,16 @@ void Game::HandleInput(void) {
 	int y = this->player1->GetY();
 	int x = this->player1->GetX();
 	
-	if (key[ALLEGRO_KEY_UP] && y > 0 && this->TryMoveUp(x, y) && !this->TryMoveDown(x, y)) {
+	if (key[ALLEGRO_KEY_UP] && this->TryMoveUp(x, y) && !this->TryMoveDown(x, y)) {
 		this->jump_y = this->jump_height;
 	}
-	if (key[ALLEGRO_KEY_DOWN] && y + 16 < this->y_bound && this->TryMoveDown(x, y)) {
-		//this->player1->MoveDown();
+	if (key[ALLEGRO_KEY_DOWN] && this->TryMoveDown(x, y)) {
+		//this->player1->MoveDown(); TO DELETE
 	}
-	if (key[ALLEGRO_KEY_LEFT] && x > 0 && this->TryMoveLeft(x, y)) {
+	if (key[ALLEGRO_KEY_LEFT] && this->TryMoveLeft(x, y)) {
 		this->player1->MoveLeft();
 	}
-	if (key[ALLEGRO_KEY_RIGHT] && x + 16 < this->x_bound && this->TryMoveRight(x, y)) {
+	if (key[ALLEGRO_KEY_RIGHT] && this->TryMoveRight(x, y)) {
 		this->player1->MoveRight();
 	}
 
@@ -257,38 +257,43 @@ void Game::Register() {
 
 
 bool Game::TryMoveDown(int x, int y) {
-	int ldx = x / 16;			// left down x
-	int ldy = (y + 16) / 16;	// left down y + 1
-	int rdx = (x + 15) / 16;	// right down x
-	int rdy = (y + 16) / 16;	// right down y + 1
-	return !(this->background_map->IsSolid(ldx, ldy) || this->background_map->IsSolid(rdx, rdy));
+	if (y + 32 >= this->y_bound)
+		return false;
+	int lx = x / 16;			// left x
+	int dy = (y + 32) / 16;		// left down y + 2 (tiles)
+	int rx = (x + 15) / 16;		// right x
+	return !(this->background_map->IsSolid(lx, dy) || this->background_map->IsSolid(rx, dy));
 }
 
 bool Game::TryMoveUp(int x, int y){
-	int lux = x / 16;			// left upper x
-	int luy = (y - 1) / 16;		// left upper y - 1
-	int rux = (x + 15) / 16;	// right upper x
-	int ruy = (y - 1) / 16;		// right upper y - 1
-
-	return !(this->background_map->IsSolid(lux, luy) || this->background_map->IsSolid(rux, ruy));
+	if (y <= 0)
+		return false;
+	int lx = x / 16;			// left x
+	int uy = (y - 1) / 16;		// left upper y - 1
+	int rx = (x + 15) / 16;		// right x
+	return !(this->background_map->IsSolid(lx, uy) || this->background_map->IsSolid(rx, uy));
 }
 
 bool Game::TryMoveLeft(int x, int y){
-	int lux = (x - 1) / 16;		// left upper x - 1
-	int luy = (y) / 16;			// left upper y
-	int ldx = (x - 1) / 16;		// left down x - 1
-	int ldy = (y + 15) / 16;	// left down y
+	if (x <= 0)
+		return false;
+	int lx = (x - 1) / 16;		// left x - 1
+	int uy = (y) / 16;			// upper y
+	int my = (y + 15) / 16;		// middle y
+	int dy = (y + 31) / 16;		// down y
 
-	return !(this->background_map->IsSolid(lux, luy) || this->background_map->IsSolid(ldx, ldy));
+	return !(this->background_map->IsSolid(lx, uy) || this->background_map->IsSolid(lx, my) || this->background_map->IsSolid(lx, dy));
 }
 
 bool Game::TryMoveRight(int x, int y) {
-	int rux = (x + 16) / 16;	// right upper x + 1
-	int ruy = (y) / 16;			// right upper y
-	int rdx = (x + 16) / 16;	// right down x + 1
-	int rdy = (y + 15) / 16;	// right down y
+	if (x + 16 >= this->x_bound)
+		return false;
+	int rx = (x + 16) / 16;		// right x + 1
+	int uy = (y) / 16;			// upper y
+	int my = (y + 15) / 16;		// middle y
+	int dy = (y + 31) / 16;		// down y
 
-	return !(this->background_map->IsSolid(rux, ruy) || this->background_map->IsSolid(rdx, rdy));
+	return !(this->background_map->IsSolid(rx, uy) || this->background_map->IsSolid(rx, my) || this->background_map->IsSolid(rx, dy));
 	
 }
 
@@ -327,21 +332,23 @@ void Game::HandlePauseInput(void) {
 void Game::GravityPull() {
 	int x = this->player1->GetX();
 	int y = this->player1->GetY();
+	int max_y = this->y_bound - 32;
 	if (this->jump_y > 0)
-		for (int i = 0; i < this->jump_speed; i++)
+		for (int i = 0; i < this->jump_speed; i++) {
 			if (this->TryMoveUp(x, y)) {
 				this->player1->MoveUp();
 				this->jump_y--;
 			}
 			else
 				this->jump_y = 0;
+			y = this->player1->GetY();
+		}
 	else if (this->TryMoveDown(x, y))
-		for (int i = 0; i < this->fall_speed; i++)
+		for (int i = 0; i < this->fall_speed; i++) {
 			if (this->TryMoveDown(x, y)) {
 				this->player1->MoveDown();
-				this->jump_y--;
 			}
-			else
-				this->jump_y = 0;
+			y = this->player1->GetY();
+		}
 
 }
