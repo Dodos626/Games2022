@@ -2,14 +2,14 @@
 
 using json = nlohmann::json;
 
-Player::Player(int x, int y, int screen_width, int map_width, int screen_dx) {
+Player::Player(Point *spawn, int screen_width, int map_width, int screen_dx) {
 	
 	std::ifstream fin("Engine/Configs/PlayerConfig.json");
 	json data = json::parse(fin);
 	std::cout << data << std::endl;
 
-	this->x = x;
-	this->y = y;
+	this->x = spawn->GetX();
+	this->y = spawn->GetY();
 	this->health = data["health"];
 	this->attack_power = data["attack_power"];
 	this->armor = data["armor"];
@@ -47,9 +47,9 @@ int Player::GetCameraX(){
 	
 }
 
-void Player::Respawn(int x, int y) {
-	this->x = x;
-	this->y = y;
+void Player::Respawn(Point *p) {
+	this->x = p->GetX();
+	this->y = p->GetY();
 }
 
 void Player::Stand() {

@@ -1,22 +1,16 @@
 Must:
-* Na katalavw ti kanei to app kai to game - ton kwdika 
+* Extract apo ta png tis theseis twn animations gia ton animator
+* Milestone: Animators/Sprites
+* Na ftiaksw to floor 1 part 2
+* Ftiakse Stats UI
+* Sto MapConfig na exw return previous to opoio krataei apo poia eisodo mphkame
 Secondary:
-* Oti exei sxesi me grafika na ginete sto init pre-computed (scaling factor , max range gia blit ktl)
-	oles oi klaseis pu tha exun grafika na exoun ena init pre-computed
-	PX :
-	Init ola ta sprites kai ta maps ktl
-	Precompute oti xreiazete gia ta blit
-	META RENDER
-	
-* Oti einai hard-coded kai exei sxesh me grafika na allaksei (tilewidth, tilemapwidth klp)
-* Na arxisoume na ftiaxnoume config arxeio gia ta settings
-* H init tha prepei na diavazei to config kai meta na ksekinaei to initialization
-* Optimization tou scaling
-* Na ftiaksw to scrolling function
-* Ta render prepei na kalountai apo renderer anti gia thn main
+* Ta render prepei na ginetai dynamically bind (render playing, render pause, opws to input)
+* To MapConfig gia kathe Map entrance locations (mapname, tilex, tiley)
+* To AI na ginetai dynamic bind (render playing, render pause, opws to input)
 Later on:
-* To FPS na to kanoume ksexwristo module
-* Ksexwristo arxeio gia to event allegro event key (user action se klash ksexwristh)
+* Ftiakse enemies, attacks, spells klp
+* Map Transitions + Transitions positions ulopoihsh
 
 
 

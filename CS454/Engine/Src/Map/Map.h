@@ -3,6 +3,7 @@
 #define MAP_INCLUDE
 #include "../BitMap/BitMap.h"
 #include "../Tiles/Map/TileMap.h"
+#include "../Utils/Point.h"
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -15,13 +16,8 @@ using json = nlohmann::json;
 enum class map_state {
 	loading, // loading screen
 	main_screen, //the main screen
-	playing, // the first map
+	palace, // the first map
 	first_floor // the first floor
-};
-
-struct Spawn{
-	int x;
-	int y;
 };
 
 
@@ -29,14 +25,14 @@ class Map {
 private:
 	BitMap *bitmap;   //png
 	TileMap *tilemap; //csv
-	TileMap* bgtilemap; //background csv
+	TileMap *bgtilemap; //background csv
 	ALLEGRO_BITMAP *map_buffer; // whole map buffer
-	ALLEGRO_BITMAP* mapBG_buffer; //whole map bg buffer
+	ALLEGRO_BITMAP *mapBG_buffer; //whole map bg buffer
 	std::vector<int> SolidBlockIds;
 	std::vector<std::vector<bool>> grid;
 	int player_dx;
 	map_state state;
-	Spawn spawn;
+	Point *spawn;
 	json data;
 
 	//helpers to load the map
@@ -65,8 +61,7 @@ public:
 	void setState(map_state state) { this->state = state; };
 	map_state getState() { return this->state; }; 
 
-	int GetSpawnX() { return this->spawn.x; };
-	int GetSpawnY() { return this->spawn.y; };
+	Point *GetSpawn() { return this->spawn; }
 
 	void ChangeMap(map_state state);
 

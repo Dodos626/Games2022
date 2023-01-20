@@ -25,6 +25,7 @@ Map::Map(std::string path) {
 	this->map_buffer = al_create_bitmap(MUL_16(this->data["loading_screen"]["CSVwidth"]), MUL_16(this->data["loading_screen"]["CSVheight"]));
 	this->mapBG_buffer = al_create_bitmap(MUL_16(this->data["loading_screen"]["background"]["CSVwidth"]), MUL_16(this->data["loading_screen"]["background"]["CSVheight"]));
 	this->ChangeMap(this->state);
+	this->spawn = new Point(0, 0);
 	this->player_dx = MUL_16(2);
 	
 }
@@ -75,8 +76,8 @@ std::string Map::stateToString(map_state state) {
 		return "loading_screen";
 	case map_state::main_screen:
 		return "main_screen";
-	case map_state::playing:
-		return "playing";
+	case map_state::palace:
+		return "palace";
 	case map_state::first_floor:
 		return "first_floor";
 	default:
@@ -99,8 +100,8 @@ void Map::setTileMap(json data) {
 }
 
 void Map::setSpawn(json data) {
-	this->spawn.x = data["spawn_x"];
-	this->spawn.y = data["spawn_y"];
+	this->spawn->SetX(data["spawn_x"]);
+	this->spawn->SetY(data["spawn_y"]);
 }
 
 void Map::Render(int left_x, int max_x, int y, int max_y) {

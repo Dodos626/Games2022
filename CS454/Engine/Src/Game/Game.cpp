@@ -43,12 +43,11 @@ void Game::Initialise(void) {
 	al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP); // faster bitmaps display must be initialised
 	
 	this->buffer = al_create_bitmap(data["screen"]["width"]/2, data["screen"]["height"]/2);
-	int player_x = 0, player_y = 0;
+	Point* spawn_location;
 	try {
 		auto background_json = data["bitmaps"]["background"];
 		this->background_map = new Map("Engine/Configs/MapConfig.json");
-		player_x = this->background_map->GetSpawnX();
-		player_y = this->background_map->GetSpawnY();
+		spawn_location = this->background_map->GetSpawn();
 	}
 	catch (std::string e) {
 		throw( "Init of game failed, abort!\n");
@@ -56,8 +55,7 @@ void Game::Initialise(void) {
 	}
 	memset(this->key, 0, sizeof(this->key)); // initiate input key buffer
 	
-	this->player1 = new Player(player_x,
-							   player_y,
+	this->player1 = new Player(spawn_location,
 							   this->screen->GetWidth() / 2,
 							   MUL_16(this->background_map->getTileMap()->getTilemapWidth()),
 							   data["screen"]["relative_location"]
@@ -169,7 +167,7 @@ void Game::HandleInput(void) {
 	}
 
 	if (key[ALLEGRO_KEY_2]) {
-		this->ChangeMap(map_state::playing);
+		this->ChangeMap(map_state::palace);
 		this->redraw = true;
 	}
 	if (key[ALLEGRO_KEY_3]) {
@@ -196,7 +194,7 @@ void Game::HandleInput(void) {
 
 void Game::ChangeMap(map_state new_map) {
 	this->background_map->ChangeMap(new_map);
-	this->player1->Respawn(this->background_map->GetSpawnX(), this->background_map->GetSpawnY());
+	this->player1->Respawn(this->background_map->GetSpawn());
 	return;
 }
 

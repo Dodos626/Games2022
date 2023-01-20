@@ -7,6 +7,7 @@
 #include <iostream>
 #include <nlohmann/json.hpp>
 #include <fstream>
+#include "../Utils/Point.h"
 
 
 
@@ -29,7 +30,7 @@ private :
 	bool duck;
 	int height;
 public:
-	Player(int x, int y, int screen_width, int map_width, int screen_dx);
+	Player(Point *spawn, int screen_width, int map_width, int screen_dx);
 	
 	//GETTERS
 	int GetX(void) const { return x; }
@@ -49,7 +50,7 @@ public:
 	void Stand();
 	void Duck();
 	void ChangeStance();
-	void Respawn(int x, int y);
+	void Respawn(Point *p);
 	//Attack - Damage functions
 	void TakeDamage(int damage);
 

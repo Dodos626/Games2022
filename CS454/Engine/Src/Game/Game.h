@@ -13,6 +13,7 @@
 #include "../Misc/Screen/Screen.h"
 #include "../Player/Player.h"
 #include "../Misc/MusicPlayer/MusicPlayer.h"
+#include "../Utils/Point.h"
 
 
 #include <nlohmann/json.hpp>
