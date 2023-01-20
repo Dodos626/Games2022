@@ -26,7 +26,7 @@
     "spawn_x": 19,
     "spawn_y": 208,
     "background": {
-      "CSVsource": "Media/background_map/sky.csv",
+      "CSVsource": "Media/background_map/main_screenbg.csv",
       "CSVwidth": 48,
       "CSVheight": 16
     }
@@ -53,7 +53,7 @@
     "spawn_x": 3,
     "spawn_y": 208,
     "background": {
-      "CSVsource": "Media/background_map/sky.csv",
+      "CSVsource": "Media/background_map/1st_floor_bg.csv",
       "CSVwidth": 48,
       "CSVheight": 16
     }
