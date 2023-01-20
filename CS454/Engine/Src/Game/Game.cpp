@@ -300,13 +300,16 @@ bool Game::TryMoveRight(int x, int y) {
 void Game::PauseGame() {
 	this->game_state = game_state::paused;
 	Action action = [this]() {this->HandlePauseInput(); };
-	SetInput(action);
+	this->SetInput(action);
+	this->SetPhysics(NULL);
 	memset(key, 0, sizeof(key));
 };
 
 void Game::ResumeGame() {
 	Action handle_input = [this]() {this->HandleInput(); };
+	Action gravity_pull = [this]() {this->GravityPull(); };
 	SetInput(handle_input);
+	this->SetPhysics(gravity_pull);
 	game_state = game_state::playing;
 	memset(key, 0, sizeof(key));
 };
