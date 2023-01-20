@@ -221,7 +221,7 @@ void Game::DrawBufferToScreen(void) {
 			max_x, max_y,
 			0);
 		
-		al_draw_text(al_create_builtin_font(), al_map_rgb(255, 255, 255), 0, 0, 0, "Game Paused");
+		al_draw_text(al_create_builtin_font(), al_map_rgb(255, 255, 255), max_x / 2, max_y / 2.2, ALLEGRO_ALIGN_CENTRE, "Game Paused");
 	}
 	else {
 		al_hold_bitmap_drawing(1);
@@ -308,7 +308,7 @@ void Game::PauseGame() {
 void Game::ResumeGame() {
 	Action handle_input = [this]() {this->HandleInput(); };
 	Action gravity_pull = [this]() {this->GravityPull(); };
-	SetInput(handle_input);
+	this->SetInput(handle_input);
 	this->SetPhysics(gravity_pull);
 	game_state = game_state::playing;
 	memset(key, 0, sizeof(key));
@@ -316,13 +316,13 @@ void Game::ResumeGame() {
 
 void Game::RenderPauseScreen(void) {
 	
-	DrawBufferToScreen();
+	this->DrawBufferToScreen();
 };
 
 void Game::HandlePauseInput(void) {
 
 	if (key[ALLEGRO_KEY_P]) {
-		ResumeGame();
+		this->ResumeGame();
 	}
 
 	if (key[ALLEGRO_KEY_ESCAPE])
