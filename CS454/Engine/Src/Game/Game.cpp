@@ -147,8 +147,8 @@ void Game::HandleInput(void) {
 	if (key[ALLEGRO_KEY_UP] && this->TryMoveUp(x, y) && !this->TryMoveDown(x, y)) {
 		this->jump_y = this->jump_height;
 	}
-	if (key[ALLEGRO_KEY_DOWN] && this->TryMoveDown(x, y)) {
-		//this->player1->MoveDown(); TO DELETE
+	if (key[ALLEGRO_KEY_DOWN] && !this->TryMoveDown(x, y)) {
+		this->player1->ChangeStance();
 	}
 	if (key[ALLEGRO_KEY_LEFT] && this->TryMoveLeft(x, y)) {
 		this->player1->MoveLeft();
@@ -273,9 +273,9 @@ void Game::Register() {
 bool Game::TryMoveDown(int x, int y) {
 	if (y + 32 >= this->y_bound)
 		return false;
-	int lx = x / 16;			// left x
-	int dy = (y + 32) / 16;		// left down y + 2 (tiles)
-	int rx = (x + 15) / 16;		// right x
+	int lx = x / 16;									// left x
+	int dy = (y + this->player1->GetHeight()) / 16;		// left down y + height (tiles)
+	int rx = (x + 15) / 16;								// right x
 	return !(this->background_map->IsSolid(lx, dy) || this->background_map->IsSolid(rx, dy));
 }
 

@@ -26,6 +26,8 @@ private :
 	int armor;			//armor is x where x is the damage it will prevent before health is affected
 	int speed;
 	int max_moving_x;
+	bool duck;
+	int height;
 public:
 	Player(int x, int y, int screen_width, int map_width, int screen_dx);
 	
@@ -37,13 +39,16 @@ public:
 	int GetAttackPower(void) const { return attack_power; }
 	int GetArmor(void) const { return armor; }
 	int GetSpeed(void) const { return speed; }
+	int GetHeight(void) const { return height; }
 
 	//Move
-	void MoveLeft() { this->x -= this->speed; }
-	void MoveRight() { this->x += this->speed; }
-	void MoveUp() { this->y -= this->speed; }
+	void MoveLeft();
+	void MoveRight();
+	void MoveUp();
 	void MoveDown() { this->y += this->speed; }
-
+	void Stand();
+	void Duck();
+	void ChangeStance();
 	void Respawn(int x, int y);
 	//Attack - Damage functions
 	void TakeDamage(int damage);
