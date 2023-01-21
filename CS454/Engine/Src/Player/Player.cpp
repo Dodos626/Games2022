@@ -3,6 +3,8 @@
 using json = nlohmann::json;
 
 Player::Player(Point *spawn, int screen_width, int map_width, int screen_dx) {
+
+	this->animator = new PlayerAnimator("Engine/Configs/PlayerAnimatorConfig.json", static_cast<int>(this->state));
 	
 	std::ifstream fin("Engine/Configs/PlayerConfig.json");
 	json data = json::parse(fin);
@@ -31,12 +33,14 @@ void Player::TakeDamage(int damage) {
 	}
 }
 
-void Player::Render() {
+void Player::Render(double curr_time) {
 	int x = this->x - this->GetCameraX();
 	if (this->x > this->max_moving_x)
 		x += this->x - this->max_moving_x;
 	
-	al_draw_filled_rectangle(x, this->y, x + 16, this->y + this->height, al_map_rgb(255, 32, 65));
+	this->animator->render(x, this->y, curr_time, static_cast<int>(this->state));
+	
+	
 }
 
 int Player::GetCameraX(){

@@ -158,6 +158,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CS454.cpp" />
+    <ClCompile Include="Engine\Src\Animators\PlayerAnimator\PlayerAnimator.cpp" />
+    <ClCompile Include="Engine\Src\Animators\SingleAnimation\SingleAnimation.cpp" />
     <ClCompile Include="Engine\Src\App\App.cpp" />
     <ClCompile Include="Engine\Src\BitMap\BitMap.cpp" />
     <ClCompile Include="Engine\Src\Game\Game.cpp" />
@@ -170,6 +172,7 @@
     <ClCompile Include="Engine\Src\Tiles\Parser\TileParser.cpp" />
     <ClCompile Include="Engine\Src\Tiles\Map\TileMap.cpp" />
     <ClCompile Include="Engine\Src\Utils\ExitPoint.cpp" />
+    <ClCompile Include="Engine\Src\Utils\player_state.cpp" />
     <ClCompile Include="Engine\Src\Utils\Point.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +180,9 @@
     <None Include="packages\Allegro.5.2.8\build\native\include\allegro5\inline\fmaths.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Src\Animators\PlayerAnimator\PlayerAnimator.h" />
+    <ClInclude Include="Engine\Src\Animators\SingleAnimation\SingleAnimation.h" />
+    <ClInclude Include="Engine\Src\Animators\Animator.h" />
     <ClInclude Include="Engine\Src\App\App.h" />
     <ClInclude Include="Engine\Src\BitMap\BitMap.h" />
     <ClInclude Include="Engine\Src\Game\Game.h" />
@@ -190,6 +196,7 @@
     <ClInclude Include="Engine\Src\Tiles\Parser\TileParser.h" />
     <ClInclude Include="Engine\Src\Tiles\Map\TileMap.h" />
     <ClInclude Include="Engine\Src\Utils\ExitPoint.h" />
+    <ClInclude Include="Engine\Src\Utils\player_state.h" />
     <ClInclude Include="Engine\Src\Utils\Point.h" />
     <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\alcompat.h" />
     <ClInclude Include="packages\Allegro.5.2.8\build\native\include\allegro5\allegro.h" />

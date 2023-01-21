@@ -7,6 +7,7 @@ class Point {
 protected:
 	int x, y;
 public:
+	Point(void) { this->x = -1; this->y = -1; };
 	Point(int x, int y);
 	
 	int GetX() { return this->x; };

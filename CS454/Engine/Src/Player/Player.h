@@ -8,15 +8,13 @@
 #include <nlohmann/json.hpp>
 #include <fstream>
 #include "../Utils/Point.h"
+#include "../Animators/PlayerAnimator/PlayerAnimator.h"
+#include "../Utils/player_state.h"
 
 
 
 
 
-
-enum class p_direction {
-	LEFT, RIGHT, UP, DOWN
-};
 
 class Player {
 private :
@@ -29,6 +27,8 @@ private :
 	int max_moving_x;
 	bool duck;
 	int height;
+	p_state state = p_state::idle_right;
+	PlayerAnimator* animator; //players animator
 public:
 	Player(Point *spawn, int screen_width, int map_width, int screen_dx);
 	
@@ -41,10 +41,14 @@ public:
 	int GetArmor(void) const { return armor; }
 	int GetSpeed(void) const { return speed; }
 	int GetHeight(void) const { return height; }
+	p_state GetState(void) const { return state; }
+
+	//SETTERS
+	void setState(p_state state_) { this->state = state_; };
 
 	//Move
 	void MoveLeft();
-	void MoveRight();
+	void MoveRight(); //oso kounieme deksia kanw progress to move_right ama stamatisw na kounieme reset all animation
 	void MoveUp();
 	void MoveDown() { this->y += this->speed; }
 	void Stand();
@@ -56,7 +60,7 @@ public:
 	void TakeDamage(int damage);
 
 	//Render
-	void Render();
+	void Render(double curr_time);
 	
 	
 };

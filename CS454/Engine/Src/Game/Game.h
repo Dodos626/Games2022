@@ -15,7 +15,7 @@
 #include "../Misc/MusicPlayer/MusicPlayer.h"
 #include "../Utils/Point.h"
 #include "../Utils/ExitPoint.h"
-
+#include "../Utils/player_state.h"
 
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;

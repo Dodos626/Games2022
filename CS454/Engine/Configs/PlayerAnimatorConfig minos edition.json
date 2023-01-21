@@ -1,0 +1,208 @@
+
+  "idle_left": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [4],
+    "mappings": [{ "x": 128, "y": 0, "width": 16, "height": 32 }]
+  },
+  "move_left_1": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [3],
+    "mappings": [{ "x": 88, "y": 0, "width": 16, "height": 32 }]
+  },
+  "move_left_2": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [2],
+    "mappings": [{ "x": 48, "y": 0, "width": 16, "height": 32 }]
+  },
+  "move_left_3": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [1],
+    "mappings": [{ "x": 8, "y": 0, "width": 16, "height": 32 }]
+  },
+  "move_left_4": {
+    "animation_time": 1.0,
+    "number_of_frames": 3,
+    "ref": [1, 2, 3],
+    "mappings": [
+      { "x": 8, "y": 0, "width": 16, "height": 32 },
+      { "x": 48, "y": 0, "width": 16, "height": 32 },
+      { "x": 88, "y": 0, "width": 16, "height": 32 }
+    ],
+    "comments": "Alliws kanete enalaks ta move 1,2,3 , to game etsi ta kanei"
+  },
+  "crouch_left": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [10],
+    "mappings": [{ "x": 48, "y": 40, "width": 16, "height": 32 }]
+  },
+  "jump_left": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [10],
+    "mappings": [{ "x": 48, "y": 40, "width": 16, "height": 32 }],
+    "comments": "Same as crouch but in midair"
+  },
+  "land_left": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [2],
+    "mappings": [{ "x": 48, "y": 0, "width": 16, "height": 32 }],
+    "comments": "Same as move2 but in midair"
+  },
+  "atck_left": {
+    "animation_time": 1.0,
+    "number_of_frames": 3,
+    "ref": [12, 11, 12],
+    "mappings": [
+      { "x": 124, "y": 40, "width": 32, "height": 32 },
+      { "x": 72, "y": 40, "width": 32, "height": 32 },
+      { "x": 124, "y": 40, "width": 32, "height": 32 }
+    ]
+  },
+  "crouch_atck_left": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [9],
+    "mappings": [{ "x": 0, "y": 40, "width": 32, "height": 32 }]
+  },
+  "take_dmg_left": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [17],
+    "mappings": [{ "x": 8, "y": 80, "width": 16, "height": 32 }],
+    "comments": "You need gravity to emulate this, as small jump backwards"
+  },
+  "pull_exclbr_left": {
+    "animation_time": 1.0,
+    "number_of_frames": 2,
+    "ref": [18, 19],
+    "mappings": [
+      { "x": 48, "y": 79, "width": 16, "height": 32 },
+      { "x": 88, "y": 80, "width": 16, "height": 32 }
+    ],
+    "comments": "Better break it to 2 and use the follwing 2"
+  },
+  "grab_exclbr_left": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [18],
+    "mappings": [{ "x": 48, "y": 79, "width": 16, "height": 32 }]
+  },
+  "raise_exclbr_left": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [19],
+    "mappings": [{ "x": 88, "y": 80, "width": 16, "height": 32 }]
+  },
+  "victory_pose": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [20],
+    "mappings": [{ "x": 128, "y": 80, "width": 16, "height": 32 }]
+  },
+  "idle_right": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [5],
+    "mappings": [{ "x": 168, "y": 0, "width": 16, "height": 32 }]
+  },
+  "move_right_1": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [6],
+    "mappings": [{ "x": 208, "y": 0, "width": 16, "height": 32 }]
+  },
+  "move_right_2": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [7],
+    "mappings": [{ "x": 248, "y": 0, "width": 16, "height": 32 }]
+  },
+  "move_right_3": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [8],
+    "mappings": [{ "x": 288, "y": 0, "width": 16, "height": 32 }]
+  },
+  "move_right_4": {
+    "animation_time": 1.0,
+    "number_of_frames": 3,
+    "ref": [8, 7, 6],
+    "mappings": [
+      { "x": 288, "y": 0, "width": 16, "height": 32 },
+      { "x": 248, "y": 0, "width": 16, "height": 32 },
+      { "x": 208, "y": 0, "width": 16, "height": 32 }
+    ],
+    "comments": "Alliws kanete enalaks ta move 1,2,3 , to game etsi ta kanei"
+  },
+  "crouch_right": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [15],
+    "mappings": [{ "x": 248, "y": 45, "width": 16, "height": 27 }]
+  },
+  "jump_right": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [15],
+    "mappings": [{ "x": 248, "y": 45, "width": 16, "height": 27 }],
+    "comments": "Same as crouch but in midair"
+  },
+  "land_right": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [7],
+    "mappings": [{ "x": 248, "y": 0, "width": 16, "height": 32 }],
+    "comments": "Same as move2 but in midair"
+  },
+  "atck_right": {
+    "animation_time": 1.0,
+    "number_of_frames": 3,
+    "ref": [13, 14, 13],
+    "mappings": [
+      { "x": 156, "y": 40, "width": 32, "height": 32 },
+      { "x": 208, "y": 40, "width": 32, "height": 32 },
+      { "x": 156, "y": 40, "width": 32, "height": 32 }
+    ]
+  },
+  "crouch_atck_right": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [16],
+    "mappings": [{ "x": 280, "y": 40, "width": 32, "height": 32 }]
+  },
+  "take_dmg_right": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [24],
+    "mappings": [{ "x": 288, "y": 80, "width": 16, "height": 32 }],
+    "comments": "You need gravity to emulate this, as small jump backwards"
+  },
+  "pull_exclbr_right": {
+    "animation_time": 1.0,
+    "number_of_frames": 2,
+    "ref": [23, 22],
+    "mappings": [
+      { "x": 248, "y": 79, "width": 16, "height": 32 },
+      { "x": 208, "y": 80, "width": 16, "height": 32 }
+    ],
+    "comments": "Better break it to 2 and use the follwing 2"
+  },
+  "grab_exclbr_right": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [23],
+    "mappings": [{ "x": 248, "y": 79, "width": 16, "height": 32 }]
+  },
+  "raise_exclbr_right": {
+    "animation_time": 1.0,
+    "number_of_frames": 1,
+    "ref": [22],
+    "mappings": [{ "x": 208, "y": 80, "width": 16, "height": 32 }]
+  }
+}

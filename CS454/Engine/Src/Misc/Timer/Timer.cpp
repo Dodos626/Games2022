@@ -2,7 +2,7 @@
 
 Timer::Timer(double fps_ticker) {
 
-	this->timer = al_create_timer(1.0 / 60.0);
+	this->timer = al_create_timer(1.0 /fps_ticker);
 	this->old_time = al_get_time();
 }
 

@@ -156,9 +156,11 @@ void Game::HandleInput(void) {
 		this->player1->ChangeStance();
 	}
 	if (key[ALLEGRO_KEY_LEFT] && this->TryMoveLeft(x, y)) {
+		this->player1->setState(p_state::move_left);
 		this->player1->MoveLeft();
 	}
 	if (key[ALLEGRO_KEY_RIGHT] && this->TryMoveRight(x, y)) {
+		this->player1->setState(p_state::move_right);
 		this->player1->MoveRight();
 	}
 
@@ -221,7 +223,7 @@ void Game::Render(void) {
 	
 	this->background_map->RenderBg(this->player1->GetCameraX(), this->screen->GetScaledWidth(), 0, this->screen->GetScaledHeight());
 	this->background_map->Render(this->player1->GetCameraX(), this->screen->GetScaledWidth(), 0, this->screen->GetScaledHeight());
-	this->player1->Render();
+	this->player1->Render(this->timer->getDelta());
 	
 	al_hold_bitmap_drawing(0);
 	this->DrawBufferToScreen();
