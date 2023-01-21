@@ -197,10 +197,8 @@ void Game::HandleInput(void) {
 
 	if (key[ALLEGRO_KEY_ESCAPE])
 		this->doneFlag = true;
-	//bool key_down = key[ALLEGRO_KEY_DOWN];
 	for (int i = 0; i < ALLEGRO_KEY_MAX; i++)
 		key[i] &= KEY_SEEN;
-	//key[ALLEGRO_KEY_DOWN] = key_down;
 	this->redraw = true;
 	return;
 }
