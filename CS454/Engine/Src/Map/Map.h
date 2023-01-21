@@ -4,6 +4,7 @@
 #include "../BitMap/BitMap.h"
 #include "../Tiles/Map/TileMap.h"
 #include "../Utils/Point.h"
+#include "../Utils/ExitPoint.h"
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -30,7 +31,7 @@ private:
 	ALLEGRO_BITMAP *map_buffer; // whole map buffer
 	ALLEGRO_BITMAP *mapBG_buffer; //whole map bg buffer
 	std::vector<int> SolidBlockIds;
-	std::vector<Point> ExitPointBlocks;
+	std::vector<ExitPoint> ExitPointBlocks;
 	std::vector<std::vector<bool>> grid;
 	int player_dx;
 	MapLocations state;
@@ -60,6 +61,7 @@ public:
 	ALLEGRO_BITMAP* getMapBuffer() { return this->map_buffer; };
 	bool IsSolid(int x, int y);
 	bool IsExit(Point location);
+	ExitPoint GetExit(Point location);
 	
 	
 	void setState(MapLocations state) { this->state = state; };
@@ -67,7 +69,8 @@ public:
 
 	Point *GetSpawn() { return this->spawn; }
 
-	void ChangeMap(MapLocations state);
+	void ChangeMap(MapLocations state) { this->ChangeMap(stateToString(state)); this->state = state; };
+	void ChangeMap(std::string map);
 
 };
 

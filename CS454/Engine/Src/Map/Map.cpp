@@ -29,16 +29,14 @@ Map::Map(std::string path) {
 	
 }
 
-//change map
 
-void Map::ChangeMap(MapLocations state) {
+void Map::ChangeMap(std::string map) {
 	//al_destroy_bitmap(this->map_buffer);
     //al_destroy_bitmap(this->mapBG_buffer);
 
 	//this->map_buffer = al_create_bitmap(MUL_16(this->data[this->stateToString(state)]["CSVwidth"]), MUL_16(this->data[this->stateToString(state)]["CSVheight"]));
 	//this->mapBG_buffer = al_create_bitmap(MUL_16(this->data[this->stateToString(state)]["background"]["CSVwidth"]), MUL_16(this->data[this->stateToString(state)]["background"]["CSVheight"]));
 	
-	std::string map = stateToString(state);
 	this->cleanBuffer(this->map_buffer);
 	this->cleanBuffer(this->mapBG_buffer);
 	this->setTileMap(this->data[map]);
@@ -46,7 +44,6 @@ void Map::ChangeMap(MapLocations state) {
 	this->setExitPoints(this->data[map]["exit_points"]);
 	this->grid.clear();
 	this->setSpawn(this->data[map]);
-	this->state = state;
 	this->precomputeBg();
 	this->PrecomputeMap();
 	
@@ -268,13 +265,20 @@ bool Map::IsExit(Point location) {
 	return std::find(this->ExitPointBlocks.begin(), this->ExitPointBlocks.end(), location) != this->ExitPointBlocks.end();
 }
 
+ExitPoint Map::GetExit(Point location) {
+	std::vector<ExitPoint>::iterator it = std::find(this->ExitPointBlocks.begin(), this->ExitPointBlocks.end(), location);
+	if (it == this->ExitPointBlocks.end())
+		assert(0);
+	return this->ExitPointBlocks[it - this->ExitPointBlocks.begin()];
+}
+
 void Map::setExitPoints(json data) {
 	this->ExitPointBlocks.clear();
 	for (auto pair : data.items()){
 		std::string map_name = pair.key();
 		auto points = pair.value();
 		for (auto point : points) {
-			this->ExitPointBlocks.push_back(Point(point["x"], point["y"], map_name));
+			this->ExitPointBlocks.push_back(ExitPoint(point["x"], point["y"], map_name, new Point(point["spawn_x"], point["spawn_y"])));
 		}
 	}
 }

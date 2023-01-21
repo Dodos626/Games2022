@@ -14,6 +14,7 @@
 #include "../Player/Player.h"
 #include "../Misc/MusicPlayer/MusicPlayer.h"
 #include "../Utils/Point.h"
+#include "../Utils/ExitPoint.h"
 
 
 #include <nlohmann/json.hpp>
@@ -122,6 +123,7 @@ public:
 	
 	void CheckExit();
 	void ChangeMap(MapLocations new_map);
+	void ChangeMap(std::string new_map, Point* spawn_location);
 
 	//getters
 	Map* GetMap(void) { return background_map; }

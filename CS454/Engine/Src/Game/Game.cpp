@@ -206,6 +206,12 @@ void Game::ChangeMap(MapLocations new_map) {
 	return;
 }
 
+void Game::ChangeMap(std::string new_map, Point *spawn_location) {
+	this->background_map->ChangeMap(new_map);
+	this->player1->Respawn(spawn_location);
+	return;
+}
+
 void Game::Render(void) {
 	this->StartRender();
 	al_hold_bitmap_drawing(1);
@@ -384,7 +390,24 @@ void Game::CheckExit() {
 	int rx = (this->player1->GetX() + 15) / 16;
 	int uy = (this->player1->GetY()) / 16;
 	int dy = (this->player1->GetY() + this->player1->GetHeight() - 1) / 16;
-	std::cout << "lx: " << lx << " rx: " << rx << " uy: " << uy << " dy: " << dy << std::endl;
-	if (this->background_map->IsExit(Point(lx, uy)) || this->background_map->IsExit(Point(lx, dy)) || this->background_map->IsExit(Point(rx, uy)) || this->background_map->IsExit(Point(rx, dy)))
-		this->ChangeMap(MapLocations::first_floor);
+	Point* chosen_exit = NULL;
+	if (this->background_map->IsExit(Point(lx, uy)))
+		chosen_exit = new Point(lx, uy);
+	else if (this->background_map->IsExit(Point(lx, dy)))
+		chosen_exit = new Point(lx, dy);
+	else if (this->background_map->IsExit(Point(rx, uy)))
+		chosen_exit = new Point(rx, uy);
+	else if (this->background_map->IsExit(Point(rx, dy)))
+		chosen_exit = new Point(rx, dy);
+	if (chosen_exit != NULL) {
+		ExitPoint exit = this->background_map->GetExit(*chosen_exit);
+		std::cout << "Changing map: " << exit.GetNextMapName() << std::endl;
+		std::cout << "Spawn At: " << *exit.GetNextSpawn() << std::endl;
+		std::cout << "lx: " << lx << " rx: " << rx << " uy: " << uy << " dy: " << dy << std::endl;
+		
+		this->ChangeMap(exit.GetNextMapName(), exit.GetNextSpawn());
+	}
+	
+	
+		
 }
