@@ -1,8 +1,9 @@
 {
   "screen": {
-    "width": 700,
-    "height": 612,
-    "relative_location": 96
+    "width": 1400,
+    "height": 1024,
+    "relative_location": 96,
+    "scale": 4
   },
   "ticker": {
     "showfps": false,

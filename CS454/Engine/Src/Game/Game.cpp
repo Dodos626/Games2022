@@ -34,8 +34,8 @@ void Game::Initialise(void) {
 
 	this->timer = new Timer(data["ticker"]["rate"]); 
 	this->timer->setPrintFPS(data["ticker"]["showfps"]); 
-	this->screen = new Screen(data["screen"]["width"], data["screen"]["height"]);
-	this->screen->SetScalingFactor(16); // pros to parwn hardcoded
+	this->screen = new Screen(data["screen"]["width"], data["screen"]["height"], data["screen"]["scale"]);
+	
 
 	this->queue = al_create_event_queue();
 	Register();
@@ -57,7 +57,7 @@ void Game::Initialise(void) {
 	memset(this->key, 0, sizeof(this->key)); // initiate input key buffer
 	
 	this->player1 = new Player(spawn_location,
-							   this->screen->GetWidth() / 2,
+							   this->screen->GetScaledWidth(),
 							   MUL_16(this->background_map->getTileMap()->getTilemapWidth()),
 							   data["screen"]["relative_location"]
 							   );
@@ -182,6 +182,10 @@ void Game::HandleInput(void) {
 		this->ChangeMap(MapLocations::loading);
 		this->redraw = true;
 	}
+	if (key[ALLEGRO_KEY_5]) {
+		this->ChangeMap(MapLocations::first_floor_right);
+		this->redraw = true;
+	}
 	if (key[ALLEGRO_KEY_P]) {
 		PauseGame();
 		this->redraw = true;
@@ -206,8 +210,8 @@ void Game::Render(void) {
 	this->StartRender();
 	al_hold_bitmap_drawing(1);
 	
-	this->background_map->RenderBg(this->player1->GetCameraX(), this->screen->GetWidth() / 2, 0, this->screen->GetHeight() / 2);
-	this->background_map->Render(this->player1->GetCameraX(), this->screen->GetWidth() / 2, 0, this->screen->GetHeight() / 2);
+	this->background_map->RenderBg(this->player1->GetCameraX(), this->screen->GetScaledWidth(), 0, this->screen->GetScaledHeight());
+	this->background_map->Render(this->player1->GetCameraX(), this->screen->GetScaledWidth(), 0, this->screen->GetScaledHeight());
 	this->player1->Render();
 	
 	al_hold_bitmap_drawing(0);
@@ -217,6 +221,7 @@ void Game::Render(void) {
 void Game::StartRender(void) {
 	al_set_target_bitmap(this->buffer);
 	al_clear_to_color(al_map_rgb(0, 0, 0));
+	
 }
 
 void Game::DrawBufferToScreen(void) {
@@ -225,6 +230,7 @@ void Game::DrawBufferToScreen(void) {
 
 	int const max_x = this->screen->GetWidth();
 	int const max_y = this->screen->GetHeight();
+	int const scale = this->screen->GetScalingFactor();
 	
 	
 	if (this->game_state == game_state::paused) {
@@ -232,16 +238,17 @@ void Game::DrawBufferToScreen(void) {
 		al_draw_tinted_scaled_bitmap(this->buffer,
 			al_map_rgb(80, 80, 80),
 			0, 0,
-			max_x/2, max_y/2,
+			max_x/ scale, max_y/ scale,
 			0, 0,
 			max_x, max_y,
 			0);
+		
 		
 		al_draw_text(al_create_builtin_font(), al_map_rgb(255, 255, 255), max_x / 2, max_y / 2.2, ALLEGRO_ALIGN_CENTRE, "Game Paused");
 	}
 	else {
 		al_hold_bitmap_drawing(1);
-		al_draw_scaled_bitmap(this->buffer, 0, 0, max_x / 2, max_y / 2, 0, 0, max_x, max_y, 0);
+		al_draw_scaled_bitmap(this->buffer, 0, 0, max_x / scale, max_y / scale, 0, 0, max_x, max_y, 0);
 		al_hold_bitmap_drawing(0);
 	}
 	

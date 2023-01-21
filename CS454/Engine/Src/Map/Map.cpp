@@ -80,6 +80,8 @@ std::string Map::stateToString(MapLocations state) {
 		return "palace";
 	case MapLocations::first_floor:
 		return "first_floor";
+	case MapLocations::first_floor_right:
+		return "first_floor_right";
 	default:
 		exit(EXIT_FAILURE);
 	}

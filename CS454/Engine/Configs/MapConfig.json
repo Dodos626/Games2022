@@ -91,5 +91,20 @@
         }
       ]
     }
+  },
+  "first_floor_right": {
+
+    "CSVsource": "Media/background_map/1st_floor_right.csv",
+    "CSVwidth": 48,
+    "CSVheight": 16,
+    "SolidIds": [ 14, 24, 25, 26, 27, 28, 30, 31, 35, 36, 37, 38, 40, 41 ],
+    "spawn_x": 640,
+    "spawn_y": 120,
+    "background": {
+      "CSVsource": "Media/background_map/1st_floor_right_bg.csv",
+      "CSVwidth": 48,
+      "CSVheight": 16
+    },
+    "exit_points": {}
   }
 }

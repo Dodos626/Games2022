@@ -1,23 +1,25 @@
 Must:
-* Extract apo ta png tis theseis twn animations gia ton animator
+
+* ftiakse ta buttons //TEO
+* Extract apo ta png tis theseis twn animations gia ton animator //MINOS <- must
+* MUSIKI GIA KATHE DWMATIO , NA ALLAZEI STA TRANSITION *//TEO
 * Milestone: Animators/Sprites
-* Na ftiaksw to floor 1 part 2
 * Ftiakse Stats UI
-* Sto MapConfig na exw return previous to opoio krataei apo poia eisodo mphkame
+* Sto MapConfig na exw return previous to opoio krataei apo poia eisodo mphkame //GM
+
 Secondary:
+
 * Ta render prepei na ginetai dynamically bind (render playing, render pause, opws to input)
-* To MapConfig gia kathe Map entrance locations (mapname, tilex, tiley)
 * To AI na ginetai dynamic bind (render playing, render pause, opws to input)
-Later on:
-* Ftiakse enemies, attacks, spells klp
-* Map Transitions + Transitions positions ulopoihsh
+* ftiakse boss room
+
+* create base class gia enemies me to ti stats exun //MINOS
+   tha iparxei ena base enemy class kai kathe type enemy to kanei extend
+* create base class gia items me to ti stats exun //MINOS
+   tha iparxei ena base items class kai kathe type items to kanei extend
+* create base class gia spells me to ti stats exun //MINOS
+   tha iparxei ena base spells class kai kathe type spells to kanei extend
+* Grapsimo readme gia to ti einai configurable kai pws na usareis ta configs tou game //MINOS
 
 
 
-
-
-
-DONE:
-* Ta install apo to main loop na mpoune sto init
-* To gameloop na mpei apo to CS454 sto Game fakelo
-* Tha prepei na orisoume fakelo media pou tha mpoun ta telika media (grafika, mousikh klp) ekei mesa

@@ -17,7 +17,8 @@ enum class MapLocations {
 	loading, // loading screen
 	main_screen, //the main screen
 	palace, // the first map
-	first_floor // the first floor
+	first_floor, // the first floor
+	first_floor_right // the first floor right
 };
 
 
