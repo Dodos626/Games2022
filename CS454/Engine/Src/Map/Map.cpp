@@ -22,11 +22,11 @@ Map::Map(std::string path) {
 
 	
 	
-	
+	//al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
 	this->map_buffer = al_create_bitmap(MUL_16(this->data["loading_screen"]["CSVwidth"]), MUL_16(this->data["loading_screen"]["CSVheight"]));
 	this->mapBG_buffer = al_create_bitmap(MUL_16(this->data["loading_screen"]["background"]["CSVwidth"]), MUL_16(this->data["loading_screen"]["background"]["CSVheight"]));
 	this->ChangeMap(this->state);
-	
+	//al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 }
 
 
@@ -44,8 +44,10 @@ void Map::ChangeMap(std::string map) {
 	this->setExitPoints(this->data[map]["exit_points"]);
 	this->grid.clear();
 	this->setSpawn(this->data[map]);
+	al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
 	this->precomputeBg();
 	this->PrecomputeMap();
+	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 	
 }
 
