@@ -41,6 +41,7 @@ private:
 
 	//PLAYER
 	Player* player1;
+	
 
 	//BUFFER
 	ALLEGRO_BITMAP* buffer;

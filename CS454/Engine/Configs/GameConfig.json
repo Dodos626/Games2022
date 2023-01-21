@@ -6,7 +6,7 @@
     "scale": 4
   },
   "ticker": {
-    "showfps": false,
+    "showfps": true,
     "rate": 60
   },
   "bitmaps": {
@@ -25,8 +25,8 @@
     }
   },
   "physics": {
-    "jump_height": 200,
-    "jump_speed": 8,
-    "fall_speed": 4
+    "jump_height": 40,
+    "jump_speed": 3,
+    "fall_speed": 2
   }
 }

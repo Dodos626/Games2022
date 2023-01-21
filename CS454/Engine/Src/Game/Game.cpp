@@ -120,10 +120,13 @@ void Game::MainLoopIteration(void) {
 		this->doneFlag = true;
 		break;
 	case ALLEGRO_EVENT_KEY_DOWN:
-		key[event.keyboard.keycode] = KEY_SEEN | KEY_RELEASED;
+		key[event.keyboard.keycode] = true ;
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
-		key[event.keyboard.keycode] &= KEY_RELEASED;
+		if (event.keyboard.keycode == ALLEGRO_KEY_DOWN){ //ean afisame to katw belaki
+			this->player1->ChangeStance(); // allazume state
+		}
+		key[event.keyboard.keycode] &= false;
 		break;
 	default:
 		break;
@@ -149,7 +152,7 @@ void Game::HandleInput(void) {
 	if (key[ALLEGRO_KEY_UP] && this->TryMoveUp(x, y) && !this->TryMoveDown(x, y)) {
 		this->jump_y = this->jump_height;
 	}
-	if (key[ALLEGRO_KEY_DOWN] && !this->TryMoveDown(x, y)) {
+	if (key[ALLEGRO_KEY_DOWN] && !this->TryMoveDown(x, y) && !this->player1->isDucking()) {
 		this->player1->ChangeStance();
 	}
 	if (key[ALLEGRO_KEY_LEFT] && this->TryMoveLeft(x, y)) {
@@ -194,8 +197,10 @@ void Game::HandleInput(void) {
 
 	if (key[ALLEGRO_KEY_ESCAPE])
 		this->doneFlag = true;
+	//bool key_down = key[ALLEGRO_KEY_DOWN];
 	for (int i = 0; i < ALLEGRO_KEY_MAX; i++)
 		key[i] &= KEY_SEEN;
+	//key[ALLEGRO_KEY_DOWN] = key_down;
 	this->redraw = true;
 	return;
 }
