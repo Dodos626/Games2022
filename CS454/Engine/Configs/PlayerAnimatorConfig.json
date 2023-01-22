@@ -1,4 +1,6 @@
 {
+  "total_animations": 23,
+  "sprite_sheet_path": "Media/spriteSheet/link_sprite.png",
   "idle_left": {
     "animation_time": 1.0,
     "number_of_frames": 1,

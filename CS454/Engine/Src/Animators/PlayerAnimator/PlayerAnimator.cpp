@@ -1,20 +1,25 @@
 #include "PlayerAnimator.h"
 
 PlayerAnimator::PlayerAnimator(std::string path, int curr_state) {
+
+	std::ifstream fin(path);
+	json data = json::parse(fin);
+
+
+	std::string sprite_sheet_path = data["sprite_sheet_path"];
 	
 	//CREATE THE SPRITE SHEET
 	al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
-	this->sprite_sheet = al_load_bitmap("Media/spriteSheet/link_sprite.png");
+	this->sprite_sheet = al_load_bitmap(sprite_sheet_path.c_str());
 	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 
-	this->number_of_animations = 23;
+	this->number_of_animations = data["total_animations"];
 
 	this->curr_selected_animation = curr_state; //starting
 
 	
 
-	std::ifstream fin(path);
-	json data = json::parse(fin);
+	
 
 
 	for (int i = 0; i < this->number_of_animations; i++) {

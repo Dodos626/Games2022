@@ -100,6 +100,7 @@ void Game::MainLoopIteration(void) {
 	//CommitDestructions();
 	
 	al_wait_for_event(this->queue, &this->event);
+	
 	int y = this->player1->GetY();
 	int x = this->player1->GetX();
 	int step = this->player1->GetSpeed();
@@ -147,6 +148,7 @@ void Game::MainLoopIteration(void) {
 	this->player1->CheckSpellTimer(this->timer->getDelta());
 	
 	this->timer->fps();
+
 }
 
 void Game::HandleInput(void) {

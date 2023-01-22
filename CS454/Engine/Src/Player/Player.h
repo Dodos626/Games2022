@@ -106,6 +106,12 @@ public:
 	void castSpell(int id) {
 		this->mana -= this->spell_book.cast(id, this->mana);
 	}
+
+	/*
+	* checks all active spells if their effect is over
+	* the it calls the counter spell if it exists
+	* to remove the effect
+	*/
 	void CheckSpellTimer(double curr_time) {
 		this->spell_book.checkIfSpellsEnded(curr_time);
 	}

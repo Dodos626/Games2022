@@ -6,7 +6,7 @@
     "scale": 4
   },
   "ticker": {
-    "showfps": false,
+    "showfps": true,
     "rate": 60
   }
 }
