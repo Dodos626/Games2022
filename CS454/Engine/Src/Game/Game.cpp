@@ -190,6 +190,9 @@ void Game::HandleInput(void) {
 		this->ChangeMap(MapLocations::first_floor_right);
 		this->redraw = true;
 	}
+	if (key[ALLEGRO_KEY_6]) {
+		this->player1->castSpell(0);
+	}
 	if (key[ALLEGRO_KEY_P]) {
 		PauseGame();
 		this->redraw = true;
@@ -308,6 +311,7 @@ bool Game::TryMoveUp(int x, int y){
 }
 
 bool Game::TryMoveLeft(int x, int y){
+	this->player1->AnimateMoveLeft();
 	if (x <= 0)
 		return false;
 	int lx = (x - 1) / 16;		// left x - 1
@@ -319,6 +323,7 @@ bool Game::TryMoveLeft(int x, int y){
 }
 
 bool Game::TryMoveRight(int x, int y) {
+	this->player1->AnimateMoveRight();
 	if (x + 16 >= this->x_bound)
 		return false;
 	int rx = (x + 16) / 16;		// right x + 1

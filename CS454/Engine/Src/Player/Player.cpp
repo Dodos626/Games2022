@@ -35,6 +35,12 @@ Player::Player(Point *spawn, int screen_width, int map_width, int screen_dx) {
 	this->camera_dx = screen_dx;
 	this->duck = false;
 	this->height = 32;
+
+	//initiate spell book
+	this->spell_book = Spell_Book();
+	this->spell_book.registerSpell(new Spell(48, std::bind(&Player::spellJump, this), std::bind(&Player::counterSpellJump, this)));
+
+	//initiate spells
 }
 
 //MISC
@@ -54,6 +60,8 @@ void Player::Render(double curr_time) {
 		x += this->x - this->max_moving_x;
 	
 	this->animator->render(x, this->y, curr_time, static_cast<int>(this->state));
+
+	this->spell_book.checkIfSpellsEnded(curr_time);
 	
 	
 }
@@ -94,21 +102,32 @@ void Player::ChangeStance() {
 	else
 		this->Duck();
 }
-void Player::MoveLeft() { 
-	if (this->duck) {
+
+void Player::AnimateMoveLeft() {
+	if (this->duck) 
 		this->setState(p_state::crouch_left);
+	else
+		this->setState(p_state::move_left);
+}
+
+void Player::MoveLeft() { 
+	if (this->duck) 
 		return;
-	}
-	this->setState(p_state::move_left);
 	this->x -= this->speed;
 }
 
-void Player::MoveRight() { 
+void Player::AnimateMoveRight() {
 	if (this->duck) {
 		this->setState(p_state::crouch_right);
 		return;
 	}
 	this->setState(p_state::move_right);
+}
+
+void Player::MoveRight() { 
+	if (this->duck) {
+		return;
+	}
 	this->x += this->speed; 
 }
 
@@ -123,8 +142,16 @@ void Player::MoveDown() {
 	this->y += this->speed; 
 }
 
-
 void Player::StopMoving() {
 	if(this->state != p_state::crouch_left && this->state != p_state::crouch_right)
 		this->setStateWithDirection(p_state::idle_left);
+}
+
+
+void Player::spellJump() {
+	this->jump_height *= 2;
+}
+
+void Player::counterSpellJump() {
+	this->jump_height /= 2;
 }

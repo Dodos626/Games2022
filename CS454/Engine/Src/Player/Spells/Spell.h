@@ -4,6 +4,11 @@
 
 #include <iostream>
 #include <functional>
+#include <vector>
+
+
+
+
 
 
 class Spell {
@@ -33,7 +38,46 @@ public:
 		}
 		return false;
 	}
+	int getManaCost(void) { return mana_cost; }
 
+};
+
+
+class Spell_Book {
+private:
+	std::vector<Spell*> spells;
+	std::vector<bool> active_spells;
+public:
+
+	Spell_Book() {};
+
+	void registerSpell(Spell* spell) {
+		this->spells.push_back(spell);
+		this->active_spells.push_back(false);
+	}
+
+	/*
+	* Tries to cast the spell if already not active
+	* return the mana cost on success or 0 if it didn't cast anything
+	*/
+	int cast(int id, int current_mana) {
+		if(!active_spells[id] && spells[id]->getManaCost() <= current_mana) { // if it isn't already active and i have the mana
+			active_spells[id] = true; // mark it active
+			spells[id]->Cast(); // cast it
+			return spells[id]->getManaCost(); // return how much it costed
+		}
+
+		return 0; //nothing casted so 0 mana cost
+			
+	}
+
+	void checkIfSpellsEnded(double time) {
+		for (int i = 0; i < this->spells.size(); i++) {
+			if (active_spells[i]) {
+				active_spells[i] = !spells[i]->hasEnded(time);
+			}
+		}
+	}
 };
 
 #endif

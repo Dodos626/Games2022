@@ -51,7 +51,7 @@
     ]
   },
   "move_right": {
-    "animation_time": 0.25,
+    "animation_time": 0.3,
     "number_of_frames": 3,
     "mappings": [
       {

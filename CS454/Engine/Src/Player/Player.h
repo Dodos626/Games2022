@@ -10,7 +10,7 @@
 #include "../Utils/Point.h"
 #include "../Animators/PlayerAnimator/PlayerAnimator.h"
 #include "../Utils/player_state.h"
-
+#include "Spells/Spell.h"
 
 
 #define FIND_STATE(x, y) static_cast<p_state>(static_cast<int>(x)+ static_cast<int>(y)%2)
@@ -37,6 +37,8 @@ private :
 	int jump_speed;
 	int jump_height;
 	
+	//spells
+	Spell_Book spell_book;
 	
 	p_state state = p_state::idle_right;
 	PlayerAnimator* animator; //players animator
@@ -67,6 +69,8 @@ public:
 	//Move
 	void MoveLeft();
 	void MoveRight(); //oso kounieme deksia kanw progress to move_right ama stamatisw na kounieme reset all animation
+	void AnimateMoveRight();
+	void AnimateMoveLeft();
 	void MoveUp();
 	void MoveDown();
 	void Stand();
@@ -80,6 +84,14 @@ public:
 
 	//Render
 	void Render(double curr_time);
+
+
+	//Spells
+	void castSpell(int id) {
+		this->mana -= this->spell_book.cast(id, this->mana);
+	}
+	void spellJump(void);
+	void counterSpellJump(void);
 	
 	
 };
