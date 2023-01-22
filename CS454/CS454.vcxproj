@@ -193,6 +193,7 @@
     <ClInclude Include="CS454.h" />
     <ClInclude Include="Engine\Src\Misc\Screen\Screen.h" />
     <ClInclude Include="Engine\Src\Player\Player.h" />
+    <ClInclude Include="Engine\Src\Player\Spells\Spell.h" />
     <ClInclude Include="Engine\Src\Tiles\Parser\TileParser.h" />
     <ClInclude Include="Engine\Src\Tiles\Map\TileMap.h" />
     <ClInclude Include="Engine\Src\Utils\ExitPoint.h" />

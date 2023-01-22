@@ -1,6 +1,18 @@
 {
-  "health" : 100,
-  "attack_power": 10,
-  "armor" : 0,
-  "speed" : 1
+  "stats": {
+    "health": 100,
+    "attack_power": 10,
+    "armor": 0,
+    "mana": 100,
+    "points": 0,
+    "lifes": 3
+  },
+  "physics": {
+    "jump_height": 40,
+    "jump_speed": 2,
+    "fall_speed": 2,
+    "speed": 1
+  }
+  
+  
 }

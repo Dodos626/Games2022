@@ -94,9 +94,9 @@
     "mappings": [
       {
         "x": 248,
-        "y": 45,
+        "y": 40,
         "width": 16,
-        "height": 27
+        "height": 32
       }
     ]
   },
@@ -105,8 +105,8 @@
     "number_of_frames": 1,
     "mappings": [
       {
-        "x": 48,
-        "y": 40,
+        "x": 88,
+        "y": 80,
         "width": 16,
         "height": 32
       }
@@ -117,10 +117,10 @@
     "number_of_frames": 1,
     "mappings": [
       {
-        "x": 248,
-        "y": 45,
+        "x": 208,
+        "y": 80,
         "width": 16,
-        "height": 27
+        "height": 32
       }
     ]
   },
@@ -129,8 +129,8 @@
     "number_of_frames": 1,
     "mappings": [
       {
-        "x": 48,
-        "y": 0,
+        "x": 8,
+        "y": 80,
         "width": 16,
         "height": 32
       }
@@ -142,8 +142,8 @@
     "number_of_frames": 1,
     "mappings": [
       {
-        "x": 248,
-        "y": 0,
+        "x": 288,
+        "y": 80,
         "width": 16,
         "height": 32
       }

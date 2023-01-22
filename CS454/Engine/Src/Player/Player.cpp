@@ -12,10 +12,25 @@ Player::Player(Point *spawn, int screen_width, int map_width, int screen_dx) {
 
 	this->x = spawn->GetX();
 	this->y = spawn->GetY();
-	this->health = data["health"];
-	this->attack_power = data["attack_power"];
-	this->armor = data["armor"];
-	this->speed = data["speed"];
+
+
+	auto stats = data["stats"];
+	
+	this->health = stats["health"];
+	this->attack_power = stats["attack_power"];
+	this->armor = stats["armor"];
+	this->mana = stats["mana"];
+	this->lifes = stats["lifes"];
+	this->points = stats["points"];
+
+
+	auto physics = data["physics"];
+	this->fall_speed = physics["fall_speed"];
+	this->jump_speed = physics["jump_speed"];
+	this->jump_height = physics["jump_height"];
+	this->speed = physics["speed"];
+
+	
 	this->max_moving_x = map_width - screen_width + screen_dx;
 	this->camera_dx = screen_dx;
 	this->duck = false;
@@ -59,16 +74,18 @@ void Player::Respawn(Point *p) {
 void Player::Stand() {
 	if (!this->duck)
 		return;
-	this->y = y - 16;
-	this->height *= 2;
+	this->setStateWithDirection(p_state::idle_left);
+	//this->y = y - 16;
+	//this->height *= 2;
 	this->duck = false;
 }
 
 void Player::Duck() {
 	if (this->duck)
 		return;
-	this->y = y + 16;
-	this->height /= 2;
+	this->setStateWithDirection(p_state::crouch_left);
+	//this->y = y + 16;
+	//this->height /= 2;
 	this->duck = true;
 }
 void Player::ChangeStance() {
@@ -78,18 +95,36 @@ void Player::ChangeStance() {
 		this->Duck();
 }
 void Player::MoveLeft() { 
-	if (this->duck)
+	if (this->duck) {
+		this->setState(p_state::crouch_left);
 		return;
+	}
+	this->setState(p_state::move_left);
 	this->x -= this->speed;
 }
 
 void Player::MoveRight() { 
-	if (this->duck)
+	if (this->duck) {
+		this->setState(p_state::crouch_right);
 		return;
+	}
+	this->setState(p_state::move_right);
 	this->x += this->speed; 
 }
 
 void Player::MoveUp() { 
 	this->Stand();
+	setStateWithDirection(p_state::jump_left);
 	this->y -= this->speed; 
+}
+
+void Player::MoveDown() {
+	this->setStateWithDirection(p_state::land_left);
+	this->y += this->speed; 
+}
+
+
+void Player::StopMoving() {
+	if(this->state != p_state::crouch_left && this->state != p_state::crouch_right)
+		this->setStateWithDirection(p_state::idle_left);
 }

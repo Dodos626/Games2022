@@ -71,9 +71,7 @@ void Game::Initialise(void) {
 	this->y_bound = MUL_16(this->background_map->getTileMap()->getTilemapHeight());
 	this->x_bound = MUL_16(this->background_map->getTileMap()->getTilemapWidth());
 	this->jump_y = 0;
-	this->jump_height = data["physics"]["jump_height"];
-	this->jump_speed = data["physics"]["jump_speed"];
-	this->fall_speed = data["physics"]["fall_speed"];
+	
 	Action handle_input = [this]() {this->HandleInput(); };
 	Action gravity_pull = [this]() {this->GravityPull(); };
 	Action check_exit = [this]() {this->CheckExit(); };
@@ -126,6 +124,9 @@ void Game::MainLoopIteration(void) {
 		if (event.keyboard.keycode == ALLEGRO_KEY_DOWN){ //ean afisame to katw belaki
 			this->player1->ChangeStance(); // allazume state
 		}
+		else if (event.keyboard.keycode == ALLEGRO_KEY_LEFT || event.keyboard.keycode == ALLEGRO_KEY_RIGHT) { // stamatise na kouniete
+			this->player1->StopMoving();
+		}
 		key[event.keyboard.keycode] &= false;
 		break;
 	default:
@@ -150,17 +151,15 @@ void Game::HandleInput(void) {
 	int x = this->player1->GetX();
 	
 	if (key[ALLEGRO_KEY_UP] && this->TryMoveUp(x, y) && !this->TryMoveDown(x, y)) {
-		this->jump_y = this->jump_height;
+		this->jump_y = this->player1->GetJumpHeight();
 	}
 	if (key[ALLEGRO_KEY_DOWN] && !this->TryMoveDown(x, y) && !this->player1->isDucking()) {
 		this->player1->ChangeStance();
 	}
 	if (key[ALLEGRO_KEY_LEFT] && this->TryMoveLeft(x, y)) {
-		this->player1->setState(p_state::move_left);
 		this->player1->MoveLeft();
 	}
 	if (key[ALLEGRO_KEY_RIGHT] && this->TryMoveRight(x, y)) {
-		this->player1->setState(p_state::move_right);
 		this->player1->MoveRight();
 	}
 
@@ -370,8 +369,10 @@ void Game::GravityPull() {
 	int x = this->player1->GetX();
 	int y = this->player1->GetY();
 	int max_y = this->y_bound - 32;
+	int jump_speed = this->player1->GetJumpSpeed();
+	
 	if (this->jump_y > 0)
-		for (int i = 0; i < this->jump_speed; i++) {
+		for (int i = 0; i < jump_speed; i++) {
 			if (this->TryMoveUp(x, y)) {
 				this->player1->MoveUp();
 				this->jump_y--;
@@ -381,12 +382,19 @@ void Game::GravityPull() {
 			y = this->player1->GetY();
 		}
 	else if (this->TryMoveDown(x, y))
-		for (int i = 0; i < this->fall_speed; i++) {
+	{
+		int fall_speed = this->player1->GetFallSpeed();
+		for (int i = 0; i < fall_speed; i++) {
 			if (this->TryMoveDown(x, y)) {
 				this->player1->MoveDown();
 			}
 			y = this->player1->GetY();
 		}
+	}
+	else { // an teleiwse na peftei
+		if(this->player1->GetState() == p_state::land_left || this->player1->GetState() == p_state::land_right)
+			this->player1->StopMoving();
+	}
 
 }
 

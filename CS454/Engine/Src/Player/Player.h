@@ -13,7 +13,7 @@
 
 
 
-
+#define FIND_STATE(x, y) static_cast<p_state>(static_cast<int>(x)+ static_cast<int>(y)%2)
 
 
 class Player {
@@ -21,12 +21,23 @@ private :
 	int x, y;
 	int camera_dx;
 	int health;			//health points
+	int lifes;
+	int mana;
+	int points;
  	int attack_power;	//attack damage
 	int armor;			//armor is x where x is the damage it will prevent before health is affected
-	int speed;
-	int max_moving_x;
 	bool duck;
 	int height;
+
+
+	//physics
+	int speed;
+	int max_moving_x;
+	int fall_speed;
+	int jump_speed;
+	int jump_height;
+	
+	
 	p_state state = p_state::idle_right;
 	PlayerAnimator* animator; //players animator
 public:
@@ -41,20 +52,28 @@ public:
 	int GetArmor(void) const { return armor; }
 	int GetSpeed(void) const { return speed; }
 	int GetHeight(void) const { return height; }
+	int GetPoints(void) const { return points; }
+	int GetLifes(void) const { return lifes; }
+	int GetMana(void) const { return mana; }
+	int GetFallSpeed(void) const { return fall_speed; }
+	int GetJumpSpeed(void) const { return jump_speed; }
+	int GetJumpHeight(void) const { return jump_height; }
 	p_state GetState(void) const { return state; }
 
 	//SETTERS
 	void setState(p_state state_) { this->state = state_; };
+	void setStateWithDirection(p_state state_) { this->state = FIND_STATE(state_, this->state); }
 
 	//Move
 	void MoveLeft();
 	void MoveRight(); //oso kounieme deksia kanw progress to move_right ama stamatisw na kounieme reset all animation
 	void MoveUp();
-	void MoveDown() { this->y += this->speed; }
+	void MoveDown();
 	void Stand();
 	void Duck();
 	void ChangeStance();
 	void Respawn(Point *p);
+	void StopMoving();
 	bool isDucking(void) { return this->duck; };
 	//Attack - Damage functions
 	void TakeDamage(int damage);

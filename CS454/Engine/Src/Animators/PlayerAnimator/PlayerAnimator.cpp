@@ -40,8 +40,7 @@ void PlayerAnimator::render(int target_x, int target_y, double curr_time) {
 void PlayerAnimator::render(int target_x, int target_y, double curr_time, int curr_state){
 	
 	if (curr_state != this->curr_selected_animation) {
-		resetCurrentAnimation();
-		this->curr_selected_animation = static_cast<int>(curr_state);
+		this->selectAnimation(static_cast<int>(curr_state));
 	}
 
 	this->curr_mapping = this->animations.at(this->curr_selected_animation).getMapping(curr_time);

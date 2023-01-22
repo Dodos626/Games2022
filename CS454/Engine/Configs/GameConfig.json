@@ -8,11 +8,5 @@
   "ticker": {
     "showfps": false,
     "rate": 60
-  },
-  
-  "physics": {
-    "jump_height": 40,
-    "jump_speed": 3,
-    "fall_speed": 2
   }
 }

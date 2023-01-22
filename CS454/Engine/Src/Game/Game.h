@@ -72,9 +72,7 @@ private:
 
 	// Physics
 	int jump_y;
-	int jump_height;
-	int jump_speed;
-	int fall_speed;
+
 
 	//MUSIC PLAYER
 	MusicPlayer* music_player;

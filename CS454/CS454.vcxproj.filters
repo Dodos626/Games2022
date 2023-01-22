@@ -677,5 +677,8 @@
     <ClInclude Include="Engine\Src\Utils\player_state.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Src\Player\Spells\Spell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
