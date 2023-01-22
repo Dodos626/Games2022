@@ -25,10 +25,9 @@ private :
 	int mana;
 	int points;
  	int attack_power;	//attack damage
-	int armor;			//armor is x where x is the damage it will prevent before health is affected
 	bool duck;
 	int height;
-
+	int damage_reduction = 1;
 
 	//physics
 	int speed;
@@ -42,6 +41,24 @@ private :
 	
 	p_state state = p_state::idle_right;
 	PlayerAnimator* animator; //players animator
+
+	void CreateSpellBook(void);
+	
+	//spell shield
+	void spellShield(void);
+	void counterSpellShield(void);
+	
+	//spell jump
+	void spellJump(void);
+	void counterSpellJump(void);
+	
+	//spell life
+	void spellLife(void);
+
+	//spell fairy
+	void spellFairy(void);
+	void counterSpellFairy(void);
+	
 public:
 	Player(Point *spawn, int screen_width, int map_width, int screen_dx);
 	
@@ -51,7 +68,6 @@ public:
 	int GetY(void) const { return y; }
 	int GetHealth(void) const { return health; }
 	int GetAttackPower(void) const { return attack_power; }
-	int GetArmor(void) const { return armor; }
 	int GetSpeed(void) const { return speed; }
 	int GetHeight(void) const { return height; }
 	int GetPoints(void) const { return points; }
@@ -90,8 +106,10 @@ public:
 	void castSpell(int id) {
 		this->mana -= this->spell_book.cast(id, this->mana);
 	}
-	void spellJump(void);
-	void counterSpellJump(void);
+	void CheckSpellTimer(double curr_time) {
+		this->spell_book.checkIfSpellsEnded(curr_time);
+	}
+	
 	
 	
 };

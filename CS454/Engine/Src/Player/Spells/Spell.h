@@ -19,12 +19,13 @@ private:
 	Action spell, counter_spell;
 	double time = 30.0;
 	int mana_cost;
+	bool oneTime;
 	void Invoke(const Action& f) { if (f) f(); }
 	void UnCast(void) { Invoke(counter_spell); }
 	
 public:
-	Spell(int mana_cost, Action spell_, Action counter_spell_ = nullptr)
-		: mana_cost(mana_cost), spell(spell_), counter_spell(counter_spell_) {}
+	Spell(int mana_cost, Action spell_, Action counter_spell_ = nullptr, bool oneTime_ = false)
+		: mana_cost(mana_cost), spell(spell_), counter_spell(counter_spell_), oneTime(oneTime_) {}
 	
 	void Cast(void) { Invoke(spell); }
 	
@@ -40,6 +41,7 @@ public:
 	}
 	int getManaCost(void) { return mana_cost; }
 
+	bool isOneTime(void) { return oneTime; }
 };
 
 
@@ -62,7 +64,11 @@ public:
 	*/
 	int cast(int id, int current_mana) {
 		if(!active_spells[id] && spells[id]->getManaCost() <= current_mana) { // if it isn't already active and i have the mana
-			active_spells[id] = true; // mark it active
+			
+			if (!spells[id]->isOneTime()) { // if it isn't one time effect
+				active_spells[id] = true; // mark it active
+			}
+			
 			spells[id]->Cast(); // cast it
 			return spells[id]->getManaCost(); // return how much it costed
 		}

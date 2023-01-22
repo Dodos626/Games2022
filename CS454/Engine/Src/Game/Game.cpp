@@ -142,6 +142,9 @@ void Game::MainLoopIteration(void) {
 		this->Render();
 		this->redraw = false;
 	}
+
+	//USER HOOKS
+	this->player1->CheckSpellTimer(this->timer->getDelta());
 	
 	this->timer->fps();
 }
@@ -191,7 +194,7 @@ void Game::HandleInput(void) {
 		this->redraw = true;
 	}
 	if (key[ALLEGRO_KEY_6]) {
-		this->player1->castSpell(0);
+		this->player1->castSpell(3);
 	}
 	if (key[ALLEGRO_KEY_P]) {
 		PauseGame();

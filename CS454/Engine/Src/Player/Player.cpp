@@ -18,7 +18,6 @@ Player::Player(Point *spawn, int screen_width, int map_width, int screen_dx) {
 	
 	this->health = stats["health"];
 	this->attack_power = stats["attack_power"];
-	this->armor = stats["armor"];
 	this->mana = stats["mana"];
 	this->lifes = stats["lifes"];
 	this->points = stats["points"];
@@ -36,22 +35,16 @@ Player::Player(Point *spawn, int screen_width, int map_width, int screen_dx) {
 	this->duck = false;
 	this->height = 32;
 
-	//initiate spell book
-	this->spell_book = Spell_Book();
-	this->spell_book.registerSpell(new Spell(48, std::bind(&Player::spellJump, this), std::bind(&Player::counterSpellJump, this)));
+	//initiate spell book and spells
+	this->CreateSpellBook();
 
-	//initiate spells
+
 }
 
 //MISC
 void Player::TakeDamage(int damage) {
-	if (this->armor - damage > 0) { // armor perisoteri tu damage
-		this->armor -= damage;
-	}
-	else {
-		this->health -= damage - this->armor; // health = health + armor - damage
-		this->armor = 0; // midenizei to armor
-	}
+	
+	this->health -= damage/ this->damage_reduction;
 }
 
 void Player::Render(double curr_time) {
@@ -59,12 +52,11 @@ void Player::Render(double curr_time) {
 	if (this->x > this->max_moving_x)
 		x += this->x - this->max_moving_x;
 	
-	this->animator->render(x, this->y, curr_time, static_cast<int>(this->state));
-
-	this->spell_book.checkIfSpellsEnded(curr_time);
-	
+	this->animator->render(x, this->y, curr_time, static_cast<int>(this->state));	
 	
 }
+
+
 
 int Player::GetCameraX(){
 	if (this->x < this->camera_dx)
@@ -148,10 +140,47 @@ void Player::StopMoving() {
 }
 
 
+
+//SPELL SECTION
+
+void Player::CreateSpellBook(void) {
+	this->spell_book = Spell_Book();
+	this->spell_book.registerSpell(new Spell(32, std::bind(&Player::spellShield, this), std::bind(&Player::counterSpellShield, this), false));
+	this->spell_book.registerSpell(new Spell(48, std::bind(&Player::spellJump, this), std::bind(&Player::counterSpellJump, this), false));
+	this->spell_book.registerSpell(new Spell(70, std::bind(&Player::spellLife, this), nullptr, true));
+	this->spell_book.registerSpell(new Spell(80, std::bind(&Player::spellFairy, this), std::bind(&Player::counterSpellFairy, this), false));
+}
+
+//spell shield => link takes half damage
+void Player::spellShield() {
+	this->damage_reduction = 2;
+}
+void Player::counterSpellShield() {
+	this->damage_reduction = 1;
+}
+
+
+//spell jump => doubles the jump height
 void Player::spellJump() {
 	this->jump_height *= 2;
 }
-
 void Player::counterSpellJump() {
 	this->jump_height /= 2;
+}
+
+//spell life => heals 3 life
+void Player::spellLife() {
+	std::cout << "this was called \n";
+	this->lifes += 3;
+}
+
+//spell fairy => Allows you to reach high places and cross lengthy gaps.
+void Player::spellFairy() {
+	this->jump_speed -= 1;
+	this->fall_speed -= 1;
+}
+
+void Player::counterSpellFairy() {
+	this->jump_speed += 1;
+	this->fall_speed += 1;
 }
