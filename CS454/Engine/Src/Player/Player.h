@@ -35,6 +35,8 @@ private :
 	int fall_speed;
 	int jump_speed;
 	int jump_height;
+	bool is_attacking = false;
+	bool on_last_frame = false;
 	
 	//spells
 	Spell_Book spell_book;
@@ -79,8 +81,14 @@ public:
 	p_state GetState(void) const { return state; }
 
 	//SETTERS
-	void setState(p_state state_) { this->state = state_; };
-	void setStateWithDirection(p_state state_) { this->state = FIND_STATE(state_, this->state); }
+	void setState(p_state state_) { 
+		if (this->is_attacking) return;
+		this->state = state_; 
+	};
+	void setStateWithDirection(p_state state_) { 
+		if (this->is_attacking) return;
+		this->state = FIND_STATE(state_, this->state); 
+	}
 
 	//Move
 	void MoveLeft();

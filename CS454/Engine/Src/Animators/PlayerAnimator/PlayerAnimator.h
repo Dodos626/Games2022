@@ -14,6 +14,7 @@ public:
 	void render(int target_x, int target_y, double curr_time, int curr_state); // render the right animations->mapping
 	void selectAnimation(int animation_id);
 	void render(int target_x, int target_y, double curr_time);
+	int renderAttack(int target_x, int target_y, double curr_time, int curr_state, bool is_last_frame);
 };
 
 #endif

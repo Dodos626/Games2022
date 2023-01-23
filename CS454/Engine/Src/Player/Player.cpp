@@ -58,8 +58,28 @@ void Player::Render(double curr_time) {
 	if (this->x > this->max_moving_x)
 		x += this->x - this->max_moving_x;
 	al_draw_rectangle(x, this->y, x + 16, this->y + 32, al_map_rgb(150, 0, 0), 0);
-	this->animator->render(x, this->y, curr_time, static_cast<int>(this->state));	
 	
+	if (!this->is_attacking) //if not attacking simple render
+		this->animator->render(x, this->y, curr_time, static_cast<int>(this->state));
+	else // if attacking
+	{
+		// render attack returns 
+		// 0 = 1st frame of the attack
+		// 1 = second frame and last frame
+		// 2 = ended
+		int tmp = this->animator->renderAttack(x, this->y, curr_time, static_cast<int>(this->state), true);
+		std::cout << "tmp: " << tmp << std::endl;
+		if (tmp == 2) {
+			std::cout << "stop attacking \n ";
+			this->on_last_frame = false; //reset
+			this->is_attacking = false;  // not attacking 
+			this->setStateWithDirection(p_state::idle_left); // dont care state
+		}
+		else if (tmp == 1) {
+			this->on_last_frame = true;
+		}
+		
+	}
 }
 
 
@@ -146,10 +166,18 @@ void Player::StopMoving() {
 }
 
 void Player::Attack() {
-	if (this->state != p_state::crouch_left && this->state != p_state::crouch_right)
-		this->setStateWithDirection(p_state::atck_left);
+
+	if (this->is_attacking) return; //can't attack if already attacking
+
+	if (this->state != p_state::crouch_left && this->state != p_state::crouch_right) // if not crouching
+		this->setStateWithDirection(p_state::atck_left); // standing attack
 	else
-		this->setStateWithDirection(p_state::crouch_atck_left);
+		this->setStateWithDirection(p_state::crouch_atck_left); // else crouch attack
+	
+	this->animator->changeAnimation(static_cast<int>(this->state)); // change animation
+	
+	this->is_attacking = true; // set attacking to true
+	this->on_last_frame = false; // we are on the first frame of the attack
 }
 
 

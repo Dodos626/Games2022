@@ -152,7 +152,7 @@
     ]
   },
   "atck_left": {
-    "animation_time": 1.0,
+    "animation_time": 0.3,
     "number_of_frames": 2,
     "mappings": [
       {
@@ -170,7 +170,7 @@
     ]
   },
   "atck_right": {
-    "animation_time": 1.0,
+    "animation_time": 0.3,
     "number_of_frames": 2,
     "mappings": [
       {

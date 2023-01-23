@@ -45,9 +45,49 @@ void PlayerAnimator::render(int target_x, int target_y, double curr_time) {
 void PlayerAnimator::render(int target_x, int target_y, double curr_time, int curr_state){
 	int offset_width = 0;
 	if (curr_state != this->curr_selected_animation) {
-		this->selectAnimation(static_cast<int>(curr_state));
+		this->selectAnimation(curr_state);
 	}
-
 	this->curr_mapping = this->animations.at(this->curr_selected_animation).getMapping(curr_time);
 	al_draw_bitmap_region(this->sprite_sheet, this->curr_mapping.getX(), this->curr_mapping.getY(), this->curr_mapping.getWidth(), this->curr_mapping.getHeight(), target_x, target_y, 0);
 }; 
+
+int PlayerAnimator::renderAttack(int target_x, int target_y, double curr_time, int curr_state, bool is_last_frame) {
+	int offset_width = 0;
+	
+	bool changed_frame = false; // did we change frame ?
+
+	Mappings next_mapping = this->animations.at(this->curr_selected_animation).getMapping(curr_time); // take next mapping
+
+	if ( this->curr_mapping.getX() != next_mapping.getX() && this->curr_mapping.getY() != next_mapping.getY()) { // if the next mapping is different
+		std::cout << "frame changed \n";
+		changed_frame = true; // we changed frame
+		
+	}
+	
+
+	//sto right to 1o einai lathos
+	//sto left to 2o einai lathos
+	/*
+	if (!changed_frame && curr_state % 2 == 1) {
+		std::cout << "first frame of right attack\n";
+	}
+	else if (changed_frame && curr_state % 2 == 0) {
+		std::cout << "last frame of left attack\n";
+	}
+	*/
+	
+	this->curr_mapping = next_mapping;
+	
+	al_draw_bitmap_region(this->sprite_sheet, this->curr_mapping.getX(), this->curr_mapping.getY(), this->curr_mapping.getWidth(), this->curr_mapping.getHeight(), target_x, target_y, 0);
+
+	if (is_last_frame && changed_frame) {
+		return 2; // the animation ended
+	}
+	else if (changed_frame) {
+		return 1; // we are on last frame
+	}
+	else {
+		return 0; // we have still to run
+	}
+	
+};
