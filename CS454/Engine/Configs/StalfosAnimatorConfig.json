@@ -1,0 +1,20 @@
+{
+  "total_animations": 2,
+  "sprite_sheet_path": "Media/spriteSheet/enemy_sword1_sprites.png",
+  "enemy_sword1_move_right": {
+    "animation_time": 0.5,
+    "number_of_frames": 2,
+    "mappings": [
+      { "x": 0, "y": 0, "width": 16, "height": 32 },
+      { "x": 16, "y": 0, "width": 16, "height": 32 }
+    ]
+  },
+  "enemy_sword1_move_left": {
+    "animation_time": 0.5,
+    "number_of_frames": 2,
+    "mappings": [
+      { "x": 32, "y": 0, "width": 16, "height": 32 },
+      { "x": 48, "y": 0, "width": 16, "height": 32 }
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "total_animations": 6,
+  "sprite_sheet_path": "Media/spriteSheet/guma_sprite.png",
+  "guma_move_right": {
+    "animation_time": 0.5,
+    "number_of_frames": 2,
+    "mappings": [
+      { "x": 0, "y": 0, "width": 16, "height": 32 },
+      { "x": 16, "y": 0, "width": 16, "height": 32 }
+    ]
+  },
+  "guma_move_left": {
+    "animation_time": 0.5,
+    "number_of_frames": 2,
+    "mappings": [
+      { "x": 48, "y": 0, "width": 16, "height": 32 },
+      { "x": 32, "y": 0, "width": 16, "height": 32 }
+    ]
+  },
+  "guma_hurls_right": {
+    "animation_time": 0.5,
+    "number_of_frames": 2,
+    "mappings": [
+      { "x": 0, "y": 32, "width": 20, "height": 32 },
+      { "x": 20, "y": 32, "width": 20, "height": 32 }
+    ]
+  },
+  "guma_hurls_left": {
+    "animation_time": 0.5,
+    "number_of_frames": 2,
+    "mappings": [
+      { "x": 60, "y": 32, "width": 20, "height": 32 },
+      { "x": 40, "y": 32, "width": 20, "height": 32 }
+    ]
+  },
+  "guma_proj_right": {
+    "animation_time": 0.5,
+    "number_of_frames": 2,
+    "mappings": [
+      { "x": 0, "y": 64, "width": 16, "height": 16 },
+      { "x": 16, "y": 64, "width": 16, "height": 16 }
+    ]
+  },
+  "guma_proj_left": {
+    "animation_time": 0.5,
+    "number_of_frames": 2,
+    "mappings": [
+      { "x": 32, "y": 64, "width": 16, "height": 16 },
+      { "x": 48, "y": 64, "width": 16, "height": 16 }
+    ]
+  }
+}
