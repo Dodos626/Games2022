@@ -43,7 +43,7 @@ void PlayerAnimator::render(int target_x, int target_y, double curr_time) {
 }
 
 void PlayerAnimator::render(int target_x, int target_y, double curr_time, int curr_state){
-	
+	int offset_width = 0;
 	if (curr_state != this->curr_selected_animation) {
 		this->selectAnimation(static_cast<int>(curr_state));
 	}

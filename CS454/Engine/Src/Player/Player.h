@@ -94,6 +94,7 @@ public:
 	void ChangeStance();
 	void Respawn(Point *p);
 	void StopMoving();
+	void Attack();
 	bool isDucking(void) { return this->duck; };
 	//Attack - Damage functions
 	void TakeDamage(int damage);

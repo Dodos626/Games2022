@@ -145,6 +145,12 @@ void Player::StopMoving() {
 		this->setStateWithDirection(p_state::idle_left);
 }
 
+void Player::Attack() {
+	if (this->state != p_state::crouch_left && this->state != p_state::crouch_right)
+		this->setStateWithDirection(p_state::atck_left);
+	else
+		this->setStateWithDirection(p_state::crouch_atck_left);
+}
 
 
 //SPELL SECTION

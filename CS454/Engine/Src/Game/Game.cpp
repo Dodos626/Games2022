@@ -171,7 +171,9 @@ void Game::HandleInput(void) {
 	if (key[ALLEGRO_KEY_0]) {
 		this->music_player->Stop();
 	}
-
+	if (key[ALLEGRO_KEY_A]) {
+		this->player1->Attack();
+	}
 	//TO CHECK IF MAPS CHANGE 
 	if (key[ALLEGRO_KEY_1]) {
 		this->ChangeMap(MapLocations::main_screen);
