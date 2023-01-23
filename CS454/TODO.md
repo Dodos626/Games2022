@@ -1,25 +1,23 @@
 Must:
 
 * ftiakse ta buttons //TEO
-* Extract apo ta png tis theseis twn animations gia ton animator //MINOS <- must
-* MUSIKI GIA KATHE DWMATIO , NA ALLAZEI STA TRANSITION *//TEO
-* Milestone: Animators/Sprites
-* Ftiakse Stats UI
-* Sto MapConfig na exw return previous to opoio krataei apo poia eisodo mphkame //GM
+* Ftiakse Stats UI // TEO
+* Ftiakse Attack animations swsta // TEO
+* Ftiakse collision kai oti kanei attack akrivws mprosta tou // GM
+* Ftiakse Enemies kai items // GM
+* Ftiakse Item sprites configs // teo
+* Ftiakse AI // GM + TEO
+* Ftiakse Spells na mporei na ta usarei sto game // Teo
+
+
+Kleisimo:
+* ftiakse akrivws ta maps, ti tha exoun apo enemies, items pou spawnaroun auta klp
+* addons vale mousikh ana room/boss music h whatever
 
 Secondary:
 
 * Ta render prepei na ginetai dynamically bind (render playing, render pause, opws to input)
-* To AI na ginetai dynamic bind (render playing, render pause, opws to input)
 * ftiakse boss room
-
-* create base class gia enemies me to ti stats exun //MINOS
-   tha iparxei ena base enemy class kai kathe type enemy to kanei extend
-* create base class gia items me to ti stats exun //MINOS
-   tha iparxei ena base items class kai kathe type items to kanei extend
-* create base class gia spells me to ti stats exun //MINOS
-   tha iparxei ena base spells class kai kathe type spells to kanei extend
-* Grapsimo readme gia to ti einai configurable kai pws na usareis ta configs tou game //MINOS
-
-
+* Vale k to elevator
+* Vale kana key/door whatever
 
