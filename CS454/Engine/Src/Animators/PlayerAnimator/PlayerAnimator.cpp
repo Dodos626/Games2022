@@ -1,6 +1,6 @@
 #include "PlayerAnimator.h"
 
-PlayerAnimator::PlayerAnimator(std::string path, int curr_state) {
+PlayerAnimator::PlayerAnimator(std::string path, int curr_state, std::vector<std::string> animation_names) {
 
 	std::ifstream fin(path);
 	json data = json::parse(fin);
@@ -17,13 +17,13 @@ PlayerAnimator::PlayerAnimator(std::string path, int curr_state) {
 
 	this->curr_selected_animation = curr_state; //starting
 
-	
+	assert(this->number_of_animations == animation_names.size());
 
 	
 
 
 	for (int i = 0; i < this->number_of_animations; i++) {
-		this->registerSingleAnimation(data[p_stateToStr(static_cast<p_state>(i))]);
+		this->registerSingleAnimation(data[animation_names.at(i)]);
 	}
 	
 }

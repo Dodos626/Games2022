@@ -4,7 +4,13 @@ using json = nlohmann::json;
 
 Player::Player(Point *spawn, int screen_width, int map_width, int screen_dx) {
 
-	this->animator = new PlayerAnimator("Engine/Configs/PlayerAnimatorConfig.json", static_cast<int>(this->state));
+	std::vector<std::string> animation_names;
+	
+	for (int i = 0; i < static_cast<int>(p_state::victory_pose) + 1; i++) {
+		animation_names.push_back(p_stateToStr(static_cast<p_state>(i)));
+	}
+
+	this->animator = new PlayerAnimator("Engine/Configs/PlayerAnimatorConfig.json", static_cast<int>(this->state), animation_names);
 	
 	std::ifstream fin("Engine/Configs/PlayerConfig.json");
 	json data = json::parse(fin);
