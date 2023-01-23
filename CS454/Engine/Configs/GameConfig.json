@@ -8,5 +8,10 @@
   "ticker": {
     "showfps": true,
     "rate": 60
+  },
+  "comments": {
+    "scale of 3": [ 1050, 768 ],
+    "scale of 2": [ 70, 512 ],
+    "scale of 1": [ 35, 256 ]
   }
 }
