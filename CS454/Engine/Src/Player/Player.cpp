@@ -57,7 +57,7 @@ void Player::Render(double curr_time) {
 	int x = this->x - this->GetCameraX();
 	if (this->x > this->max_moving_x)
 		x += this->x - this->max_moving_x;
-	
+	al_draw_rectangle(x, this->y, x + 16, this->y + 32, al_map_rgb(150, 0, 0), 0);
 	this->animator->render(x, this->y, curr_time, static_cast<int>(this->state));	
 	
 }
