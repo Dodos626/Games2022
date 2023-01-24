@@ -8,6 +8,7 @@ Enemy* MapEntities::GetEnemyFromString(std::string enemy_name, Point* spawn) {
 	else if (enemy_name == "Wosu")
 		return new WosuEnemy(spawn);
 	assert(0);
+	return NULL;
 }
 
 Item* MapEntities::GetItemFromString(std::string item_name, Point* spawn) {
@@ -24,4 +25,5 @@ Item* MapEntities::GetItemFromString(std::string item_name, Point* spawn) {
 	else if (item_name == "BigPointBag")
 		return new PointBagItem(spawn, true);
 	assert(0);
+	return NULL;
 }
