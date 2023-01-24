@@ -8,6 +8,11 @@
 #include "../Entities/Enemies/WosuEnemy.h"
 
 #include "../Entities/Items/Item.h"
+#include "../Entities/Items/HealthPotionItem.h"
+#include "../Entities/Items/ManaPotionItem.h"
+#include "../Entities/Items/LifeUpItem.h"
+#include "../Entities/Items/KeyItem.h"
+#include "../Entities/Items/PointBagItem.h"
 
 #include "Point.h"
 

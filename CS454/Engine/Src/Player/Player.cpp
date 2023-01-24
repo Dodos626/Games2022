@@ -25,8 +25,9 @@ Player::Player(Point* spawn, int screen_width, int map_width, int screen_dx) {
 	this->health = this->max_health = stats["health"];
 	this->attack_power = stats["attack_power"];
 	this->mana = this->max_mana = stats["mana"];
-	this->lifes = stats["lifes"];
+	this->lives = stats["lives"];
 	this->points = stats["points"];
+	this->damage_reduction = 1;
 
 	this->stats_display = NULL;
 
@@ -42,6 +43,7 @@ Player::Player(Point* spawn, int screen_width, int map_width, int screen_dx) {
 	this->camera_dx = screen_dx;
 	this->duck = false;
 	this->height = 32;
+	this->keys = 0;
 
 	//initiate spell book and spells
 	this->CreateSpellBook();
@@ -53,9 +55,30 @@ void Player::LoadStats(int map_width, int map_height, int y_offset) {
 }
 
 //MISC
-void Player::TakeDamage(int damage) {
-	
-	this->health -= damage/ this->damage_reduction;
+void Player::TakeDamage(int damage) {	
+	this->health -= damage / this->damage_reduction;
+	// animate taking damage
+}
+void Player::RegenerateMana(int mana_gain) { 
+	this->mana = (this->mana + mana_gain <= this->max_mana) ? this->health + mana_gain : this->max_mana; 
+	// animate mana gain
+}
+void Player::RegenerateHealth(int hp_gain) {
+	this->health = (this->health + hp_gain <= this->max_health) ? this->health + hp_gain : this->max_health;
+	// animate hp gain
+}
+
+void Player::IncreaseLives(int difference) {
+	this->lives += difference;
+	// animate life gain
+}
+
+void Player::IncreasePoints(int points) {
+	this->points += points;
+}
+
+void Player::IncreaseKeys(int keys) {
+	this->keys += keys;
 }
 
 void Player::Render(double curr_time) {
@@ -218,7 +241,7 @@ void Player::counterSpellJump() {
 //spell life => heals 3 life
 void Player::spellLife() {
 	std::cout << "this was called \n";
-	this->lifes += 3;
+	this->lives += 3;
 }
 
 //spell fairy => Allows you to reach high places and cross lengthy gaps.

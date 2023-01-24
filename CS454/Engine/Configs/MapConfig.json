@@ -86,7 +86,18 @@
           }
         ]
       },
-      "items": {}
+      "items": {
+        "HealthPotion": [
+          {
+            "spawn_x": 35,
+            "spawn_y": 100
+          },
+          {
+            "spawn_x": 70,
+            "spawn_y": 50
+          }
+        ]
+      }
     }
   },
   "first_floor": {

@@ -167,6 +167,12 @@
     <ClCompile Include="Engine\Src\Entities\Enemies\PalaceBotEnemy.cpp" />
     <ClCompile Include="Engine\Src\Entities\Enemies\WosuEnemy.cpp" />
     <ClCompile Include="Engine\Src\Entities\Entity.cpp" />
+    <ClCompile Include="Engine\Src\Entities\Items\HealthPotionItem.cpp" />
+    <ClCompile Include="Engine\Src\Entities\Items\Item.cpp" />
+    <ClCompile Include="Engine\Src\Entities\Items\KeysItem.cpp" />
+    <ClCompile Include="Engine\Src\Entities\Items\LifeUpItem.cpp" />
+    <ClCompile Include="Engine\Src\Entities\Items\ManaPotionItem.cpp" />
+    <ClCompile Include="Engine\Src\Entities\Items\PointBagItem.cpp" />
     <ClCompile Include="Engine\Src\Game\Game.cpp" />
     <ClCompile Include="Engine\Src\Map\Map.cpp" />
     <ClCompile Include="Engine\Src\Misc\MusicPlayer\MusicPlayer.cpp" />
@@ -197,7 +203,12 @@
     <ClInclude Include="Engine\Src\Entities\Enemies\PalaceBotEnemy.h" />
     <ClInclude Include="Engine\Src\Entities\Enemies\WosuEnemy.h" />
     <ClInclude Include="Engine\Src\Entities\Entity.h" />
+    <ClInclude Include="Engine\Src\Entities\Items\HealthPotionItem.h" />
     <ClInclude Include="Engine\Src\Entities\Items\Item.h" />
+    <ClInclude Include="Engine\Src\Entities\Items\KeyItem.h" />
+    <ClInclude Include="Engine\Src\Entities\Items\LifeUpItem.h" />
+    <ClInclude Include="Engine\Src\Entities\Items\ManaPotionItem.h" />
+    <ClInclude Include="Engine\Src\Entities\Items\PointBagItem.h" />
     <ClInclude Include="Engine\Src\Game\Game.h" />
     <ClInclude Include="Engine\Src\Map\Map.h" />
     <ClInclude Include="Engine\Src\Misc\MusicPlayer\MusicPlayer.h" />

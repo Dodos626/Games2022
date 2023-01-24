@@ -108,7 +108,7 @@ void DisplayStats::PrepareStats() {
 
 
 	
-	al_draw_text(this->font, al_map_rgb(255, 255, 255), 5, this->box_y_offset, 0, std::to_string(this->player->lifes).c_str());
+	al_draw_text(this->font, al_map_rgb(255, 255, 255), 5, this->box_y_offset, 0, std::to_string(this->player->lives).c_str());
 	al_draw_text(this->font, al_map_rgb(255, 255, 255), 15 + this->health_box_x_offset*3, this->box_y_offset, 0, std::to_string(this->player->points).c_str());
 
 	

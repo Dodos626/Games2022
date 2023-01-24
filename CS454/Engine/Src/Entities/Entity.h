@@ -5,6 +5,7 @@
 #include "../Animators/Animator.h"
 #include <allegro5/allegro_primitives.h>
 #include <iostream>
+#include "../Player/Player.h"
 
 class Entity {
 protected:
@@ -18,9 +19,10 @@ public:
 	int GetHeight() { return this->height; }
 	int GetWidth() { return this->width; }
 
-	void Render();
-	bool Collides(Point* p) { return *p == *this->coordinates; }
-	
+	virtual void Render();
+	bool CheckCollision(Point* p) { return *p == *this->coordinates; }
+	virtual void Collide(Player &player) = 0;
+		
 	friend std::ostream& operator<<(std::ostream& os, const Entity& p);
 
 };

@@ -27,6 +27,7 @@ public:
 	Enemy(Point *spawn, std::string datapath, std::string animationpath);
 
 	virtual void AI() = 0;
+	void Collide(Player& player);
 
 	int GetHP() const { return this->health; }
 	int GetDamage() const { return this->damage; }

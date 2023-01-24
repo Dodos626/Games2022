@@ -49,3 +49,6 @@ void Enemy::_DropItem() {
 	this->dropped_item = this->drops[rand() % this->drops.size()];
 }
 
+void Enemy::Collide(Player& player) {
+	player.TakeDamage(this->damage);
+}

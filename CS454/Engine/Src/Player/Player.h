@@ -16,19 +16,21 @@
 #define FIND_STATE(x, y) static_cast<p_state>(static_cast<int>(x)+ static_cast<int>(y)%2)
 
 class DisplayStats;
+class Entity;
 
 class Player {
 private :
 	int x, y;
 	int camera_dx;
 	int health , max_health;			//health points
-	int lifes;
+	int lives;
 	int mana , max_mana;
 	int points;
  	int attack_power;	//attack damage
 	bool duck;
 	int height;
-	int damage_reduction = 1;
+	int damage_reduction;
+	int keys;
 
 	DisplayStats *stats_display;
 
@@ -76,7 +78,7 @@ public:
 	int GetSpeed(void) const { return speed; }
 	int GetHeight(void) const { return height; }
 	int GetPoints(void) const { return points; }
-	int GetLifes(void) const { return lifes; }
+	int GetLifes(void) const { return this->lives; }
 	int GetMana(void) const { return mana; }
 	int GetFallSpeed(void) const { return fall_speed; }
 	int GetJumpSpeed(void) const { return jump_speed; }
@@ -110,8 +112,14 @@ public:
 	void Stand();
 	void Respawn(Point *p);
 	void StopMoving();
-	//Attack - Damage functions
+
+	// Actions
 	void TakeDamage(int damage);
+	void RegenerateHealth(int hp_gain);
+	void RegenerateMana(int mana_gain);
+	void IncreaseLives(int difference);
+	void IncreasePoints(int points);
+	void IncreaseKeys(int keys);
 
 	//Render
 	void Render(double curr_time);
@@ -133,7 +141,7 @@ public:
 
 	void LoadStats();
 	friend class DisplayStats;
-	
+	friend class Entity;
 };
 
 #endif
