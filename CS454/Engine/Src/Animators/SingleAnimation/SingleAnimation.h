@@ -39,6 +39,7 @@ private:
 	void registerMappings(json data);
 public:
 	SingleAnimation(json data);
+	~SingleAnimation();
 	int getNumberOfFrames(void) { return this->number_of_frames; };
 	double getFrameDuration(void) { return this->frame_duration; };
 	int getCurrSelectedFrame(void) { return this->curr_selected_frame; };

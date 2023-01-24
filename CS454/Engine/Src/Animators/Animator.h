@@ -21,7 +21,12 @@ protected:
 	virtual void registerSingleAnimation(json data) = 0; // register the animations (from json)
 	
 public:
-
+	//destructor
+	~Animator() {
+		for (int i = 0; i < this->animations.size(); i++)
+			delete this->animations.at(i);
+		al_destroy_bitmap(this->sprite_sheet);
+	}
 	//VIRTUAL
 	virtual void render(int target_x, int target_y, double curr_time) = 0; // render the right animations->mapping
 	virtual void selectAnimation(int animation_id) = 0;
@@ -42,7 +47,7 @@ public:
 	void changeAnimation(int id) {
 		this->resetAllAnimation();
 		this->curr_selected_animation = id;
-	} 
+	}
 };
 
 #endif

@@ -58,6 +58,16 @@ private:
 	void cleanBuffer(ALLEGRO_BITMAP* buffer);
 public:
 	Map(std::string Path);
+	~Map() {
+		delete this->bitmap;
+		delete this->tilemap;
+		delete this->bgtilemap;
+		for (int i = 0; i < this->entities.size(); i++)
+			delete this->entities[i];
+		delete this->spawn;
+		al_destroy_bitmap(this->map_buffer);
+		al_destroy_bitmap(this->mapBG_buffer);
+	}
 	void PrecomputeMap();
 	void Render(int left_x, int max_x, int y, int max_y);
 	void RenderBg(int left_x, int max_x, int y, int max_y);

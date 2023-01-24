@@ -69,6 +69,11 @@ private :
 public:
 	Player(Point *spawn, int screen_width, int map_width, int screen_dx);
 	
+	~Player() {
+		delete animator;
+		delete stats_display;
+	};
+	
 	//GETTERS
 	int GetX(void) const { return x; }
 	int GetCameraX(void);

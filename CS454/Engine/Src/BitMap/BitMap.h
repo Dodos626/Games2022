@@ -17,6 +17,9 @@ private:
 	int tilesetHeight;
 public:
 	BitMap(const char* path, int tilesetWidth, int tilesetHeight);
+	~BitMap() {
+		al_destroy_bitmap(BitMapPng);
+	}
 	ALLEGRO_BITMAP* getBitMap();
 	void BitMapDestoy();
 	ALLEGRO_BITMAP* getTile(int id);

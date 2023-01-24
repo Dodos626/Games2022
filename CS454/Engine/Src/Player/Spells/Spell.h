@@ -53,6 +53,12 @@ public:
 
 	Spell_Book() {};
 
+	~Spell_Book() {
+		for (int i = 0; i < this->spells.size(); i++) {
+			delete this->spells[i];
+		}
+	};
+
 	void registerSpell(Spell* spell) {
 		this->spells.push_back(spell);
 		this->active_spells.push_back(false);
