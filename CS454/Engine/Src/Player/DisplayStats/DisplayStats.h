@@ -6,7 +6,7 @@
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 #include "allegro5/allegro_primitives.h"
-
+#include <string>
 class Player;
 
 class DisplayStats {
@@ -19,6 +19,7 @@ private:
 	int box_size = 11;
 	Player* player;
 	ALLEGRO_BITMAP* display_box;
+	ALLEGRO_FONT* font;
 
 	int margin = 2; // from box to box the offset
 	
@@ -29,6 +30,7 @@ private:
 	
 public:
 	DisplayStats(Player &player, int width, int height, int y_offset);
+	~DisplayStats();
 	void PrepareStats();
 	void Render();
 	void Precompute(); // pre - renders boxes so the render only fills them

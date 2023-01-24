@@ -19,7 +19,7 @@ void DisplayStats::Render() {
 
 
 void DisplayStats::Precompute() {
-	ALLEGRO_FONT* font = al_create_builtin_font();
+	this->font = al_create_builtin_font();
 
 	al_set_target_bitmap(this->display_box);
 	al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -42,10 +42,11 @@ void DisplayStats::Precompute() {
 	this->mana_box_x_offset = 10 + offset_x * 2;
 	
 
-	al_draw_text(font, al_map_rgb(255, 255, 255), 0, 3, 0, "Lives");
-	al_draw_text(font, al_map_rgb(255, 255, 255), offset_x, 3, 0, "Health");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 10 + offset_x*2, 3, 0, "Mana");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 15 + offset_x*3, 3, 0, "Points");
+	al_draw_text(this->font, al_map_rgb(255, 255, 255), 5, 3, 0, "Lives");
+	al_draw_text(this->font, al_map_rgb(255, 255, 255), offset_x, 3, 0, "Health");
+	al_draw_text(this->font, al_map_rgb(255, 255, 255), 10 + offset_x*2, 3, 0, "Mana");
+	al_draw_text(this->font, al_map_rgb(255, 255, 255), 15 + offset_x*3, 3, 0, "Points");
+	
 	
 	
 };
@@ -98,11 +99,26 @@ void DisplayStats::FillBoxes(int starting_x, int player_stat, int stat_per_box, 
 
 
 void DisplayStats::PrepareStats() {
+	al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
 	al_set_target_bitmap(this->display_box);
 	this->CreateBoxes(this->health_box_x_offset, this->max_health_boxes);
 	this->CreateBoxes(this->mana_box_x_offset, this->max_mana_boxes);
 	this->FillBoxes(this->health_box_x_offset, this->player->health, 20, al_map_rgb(255, 51, 51));
 	this->FillBoxes(this->mana_box_x_offset, this->player->mana, 50, al_map_rgb(51, 255, 255));
+
+
+	
+	al_draw_text(this->font, al_map_rgb(255, 255, 255), 5, this->box_y_offset, 0, std::to_string(this->player->lifes).c_str());
+	al_draw_text(this->font, al_map_rgb(255, 255, 255), 15 + this->health_box_x_offset*3, this->box_y_offset, 0, std::to_string(this->player->points).c_str());
+
+	
+	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 	//this->DisplayScore();
 	//this->DisplayLives();
 };
+
+
+DisplayStats::~DisplayStats() {
+	al_destroy_bitmap(this->display_box);
+	al_destroy_font(this->font);
+}
