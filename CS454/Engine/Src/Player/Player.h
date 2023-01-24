@@ -93,7 +93,7 @@ public:
 		if (this->is_attacking) return;
 		this->state = FIND_STATE(state_, this->state); 
 	}
-	void LoadStats(int map_width, int position_of_display_stats, int map_height);
+	void LoadStats(int map_width,  int map_height, int y_offset);
 
 	//Move
 	void AnimateMoveRight();

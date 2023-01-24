@@ -48,8 +48,8 @@ Player::Player(Point* spawn, int screen_width, int map_width, int screen_dx) {
 	this->on_last_frame = false;
 }
 
-void Player::LoadStats(int map_width, int position_of_display_stats, int map_height) {
-	this->stats_display = new DisplayStats(*this, position_of_display_stats, map_width, map_height);
+void Player::LoadStats(int map_width, int map_height, int y_offset) {
+	this->stats_display = new DisplayStats(*this, map_width, map_height, y_offset);
 }
 
 //MISC
