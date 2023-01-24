@@ -5,7 +5,7 @@
     "relative_location": 96,
     "scale": 3
   },
-  "stats_display":{
+  "stats_display": {
     "width": 1050,
     "height": 100
   },
@@ -14,8 +14,9 @@
     "rate": 60
   },
   "comments": {
+    "scale of 4": [ 1400, 1024 ],
     "scale of 3": [ 1050, 768 ],
-    "scale of 2": [ 70, 512 ],
-    "scale of 1": [ 35, 256 ]
+    "scale of 2": [ 700, 512 ],
+    "scale of 1": [ 350, 256 ]
   }
 }

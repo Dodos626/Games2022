@@ -45,8 +45,8 @@ void DisplayStats::Precompute() {
 	int offset_x = this->screen_width / 4;
 	std::cout << this->screen_width << ": screen , offset_X : " << offset_x <<std::endl;
 
-	al_draw_text(font, al_map_rgb(255, 255, 255), 0, 0, 0, "Lives: ");
-	al_draw_text(font, al_map_rgb(255, 255, 255), offset_x, 0, 0, "Health: ");
-	al_draw_text(font, al_map_rgb(255, 255, 255), offset_x*2, 0, 0, "Mana: ");
-	al_draw_text(font, al_map_rgb(255, 255, 255), offset_x*3, 0, 0, "Points: ");
+	al_draw_text(font, al_map_rgb(255, 255, 255), 0, 0, 0, "Lives:");
+	al_draw_text(font, al_map_rgb(255, 255, 255), offset_x, 0, 0, "Health:");
+	al_draw_text(font, al_map_rgb(255, 255, 255), offset_x*2, 0, 0, "Mana:");
+	al_draw_text(font, al_map_rgb(255, 255, 255), offset_x*3, 0, 0, "Points:");
 };
