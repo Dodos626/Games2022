@@ -128,6 +128,11 @@ public:
 	void CheckSpellTimer(double curr_time) {
 		this->spell_book.checkIfSpellsEnded(curr_time);
 	}
+
+
+	void BindPLayerToDisplayStats() {
+		this->stats_display->BindPlayer(this);
+	}
 	
 	friend class DisplayStats;
 	

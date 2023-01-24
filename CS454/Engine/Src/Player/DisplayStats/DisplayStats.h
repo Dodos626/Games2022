@@ -17,8 +17,7 @@ private:
 	ALLEGRO_BITMAP* display_box;
 	
 public:
-	DisplayStats(Player* player, int y_offset, int width, int height) {
-		this->player = player;
+	DisplayStats(int y_offset, int width, int height) {
 		this->y_offset = y_offset;
 		this->screen_width = width;
 		this->screen_height = height;
