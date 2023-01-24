@@ -1,9 +1,13 @@
 {
   "screen": {
-    "width": 1400,
-    "height": 1024,
+    "width": 1050,
+    "height": 768,
     "relative_location": 96,
-    "scale": 4
+    "scale": 3
+  },
+  "stats_display":{
+    "width": 1050,
+    "height": 100
   },
   "ticker": {
     "showfps": false,

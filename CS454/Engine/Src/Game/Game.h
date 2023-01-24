@@ -45,6 +45,7 @@ private:
 
 	//BUFFER
 	ALLEGRO_BITMAP* buffer;
+	int stats_display_height_offset;
 
 	//MAP
 	Map* background_map;

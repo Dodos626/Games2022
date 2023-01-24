@@ -11,7 +11,7 @@
 #include "../Animators/PlayerAnimator/PlayerAnimator.h"
 #include "../Utils/player_state.h"
 #include "Spells/Spell.h"
-
+#include "DisplayStats/DisplayStats.h"
 
 #define FIND_STATE(x, y) static_cast<p_state>(static_cast<int>(x)+ static_cast<int>(y)%2)
 
@@ -20,14 +20,16 @@ class Player {
 private :
 	int x, y;
 	int camera_dx;
-	int health;			//health points
+	int health , max_health;			//health points
 	int lifes;
-	int mana;
+	int mana , max_mana;
 	int points;
  	int attack_power;	//attack damage
 	bool duck;
 	int height;
 	int damage_reduction = 1;
+
+	DisplayStats *stats_display;
 
 	//physics
 	int speed;
@@ -62,7 +64,7 @@ private :
 	void counterSpellFairy(void);
 	
 public:
-	Player(Point *spawn, int screen_width, int map_width, int screen_dx);
+	Player(Point *spawn, int screen_width, int map_width, int screen_dx, int position_of_display_stats, int map_height);
 	
 	//GETTERS
 	int GetX(void) const { return x; }
@@ -127,7 +129,7 @@ public:
 		this->spell_book.checkIfSpellsEnded(curr_time);
 	}
 	
-	
+	friend class DisplayStats;
 	
 };
 

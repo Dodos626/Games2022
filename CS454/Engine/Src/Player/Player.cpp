@@ -2,7 +2,7 @@
 
 using json = nlohmann::json;
 
-Player::Player(Point *spawn, int screen_width, int map_width, int screen_dx) {
+Player::Player(Point *spawn, int screen_width, int map_width, int screen_dx, int position_of_display_stats, int map_height) {
 
 	std::vector<std::string> animation_names;
 	
@@ -22,11 +22,13 @@ Player::Player(Point *spawn, int screen_width, int map_width, int screen_dx) {
 
 	auto stats = data["stats"];
 	
-	this->health = stats["health"];
+	this->health = this->max_health = stats["health"];
 	this->attack_power = stats["attack_power"];
-	this->mana = stats["mana"];
+	this->mana = this->mana = stats["mana"];
 	this->lifes = stats["lifes"];
 	this->points = stats["points"];
+
+	this->stats_display = new DisplayStats(this, position_of_display_stats, map_width , map_height);
 
 
 	auto physics = data["physics"];
@@ -81,6 +83,7 @@ void Player::Render(double curr_time) {
 		}
 		
 	}
+	this->stats_display->Render();
 }
 
 

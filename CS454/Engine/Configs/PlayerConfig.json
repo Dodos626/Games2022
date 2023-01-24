@@ -1,8 +1,8 @@
 {
   "stats": {
-    "health": 100,
+    "health": 80,
     "attack_power": 10,
-    "mana": 100,
+    "mana": 200,
     "points": 0,
     "lifes": 3
   },

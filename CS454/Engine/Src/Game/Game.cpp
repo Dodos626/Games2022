@@ -32,9 +32,11 @@ void Game::Initialise(void) {
 	std::cout << data << std::endl;
 	
 
+	this->stats_display_height_offset = data["stats_display"]["height"]; // how much will displaying stats take of off screen
+	
 	this->timer = new Timer(data["ticker"]["rate"]); 
 	this->timer->setPrintFPS(data["ticker"]["showfps"]); 
-	this->screen = new Screen(data["screen"]["width"], data["screen"]["height"], data["screen"]["scale"]);
+	this->screen = new Screen(data["screen"]["width"], data["screen"]["height"] + this->stats_display_height_offset, data["screen"]["scale"]);
 	
 
 	this->queue = al_create_event_queue();
@@ -42,7 +44,7 @@ void Game::Initialise(void) {
 	
 	al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP); // faster bitmaps display must be initialised
 	
-	this->buffer = al_create_bitmap(data["screen"]["width"]/2, data["screen"]["height"]/2);
+	this->buffer = al_create_bitmap(data["screen"]["width"] / 2, (data["screen"]["height"] - this->stats_display_height_offset) / 2);
 	Point* spawn_location;
 	std::cout << "creating map\n";
 	try {
@@ -56,10 +58,12 @@ void Game::Initialise(void) {
 	}
 	memset(this->key, 0, sizeof(this->key)); // initiate input key buffer
 	
-	this->player1 = new Player(spawn_location,
-							   this->screen->GetScaledWidth(),
-							   MUL_16(this->background_map->getTileMap()->getTilemapWidth()),
-							   data["screen"]["relative_location"]
+	this->player1 = new Player(	spawn_location,
+								this->screen->GetScaledWidth(),
+								MUL_16(this->background_map->getTileMap()->getTilemapWidth()),
+								data["screen"]["relative_location"],
+								this->stats_display_height_offset,
+								MUL_16(this->background_map->getTileMap()->getTilemapHeight())
 							   );
 
 	this->music_player = new MusicPlayer();
