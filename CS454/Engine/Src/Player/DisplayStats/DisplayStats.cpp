@@ -39,8 +39,14 @@ void DisplayStats::Precompute() {
 
 	int max_health_boxes = max_health / 20;
 	int max_mana_boxes = max_mana / 40;
+	
 
-	al_draw_text(font, al_map_rgb(255, 255, 255), 0, 0, 0, "Health: ");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 20, 0, 0, "Mana: ");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 40, 0, 0, "Points: ");
+	
+	int offset_x = this->screen_width / 4;
+	std::cout << this->screen_width << ": screen , offset_X : " << offset_x <<std::endl;
+
+	al_draw_text(font, al_map_rgb(255, 255, 255), 0, 0, 0, "Lives: ");
+	al_draw_text(font, al_map_rgb(255, 255, 255), offset_x, 0, 0, "Health: ");
+	al_draw_text(font, al_map_rgb(255, 255, 255), offset_x*2, 0, 0, "Mana: ");
+	al_draw_text(font, al_map_rgb(255, 255, 255), offset_x*3, 0, 0, "Points: ");
 };
