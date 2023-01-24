@@ -1,5 +1,17 @@
 #include "DisplayStats.h"
 
+DisplayStats::DisplayStats(Player& player, int y_offset, int width, int height) {
+	this->player = &player;
+	this->y_offset = y_offset;
+	this->screen_width = width;
+	this->screen_height = height;
+	al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
+	this->display_box = al_create_bitmap(width, y_offset);
+	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
+	this->Precompute();
+}
+
+
 void DisplayStats::Render() {
 	int max_health = this->player->max_health;
 	int max_mana = this->player->max_mana;

@@ -2,7 +2,7 @@
 
 using json = nlohmann::json;
 
-Player::Player(Point* spawn, int screen_width, int map_width, int screen_dx, int position_of_display_stats, int map_height) {
+Player::Player(Point* spawn, int screen_width, int map_width, int screen_dx) {
 
 	std::vector<std::string> animation_names;
 	
@@ -28,7 +28,7 @@ Player::Player(Point* spawn, int screen_width, int map_width, int screen_dx, int
 	this->lifes = stats["lifes"];
 	this->points = stats["points"];
 
-	this->stats_display = new DisplayStats(position_of_display_stats, map_width , map_height);
+	this->stats_display = NULL;
 
 
 	auto physics = data["physics"];
@@ -46,8 +46,10 @@ Player::Player(Point* spawn, int screen_width, int map_width, int screen_dx, int
 	//initiate spell book and spells
 	this->CreateSpellBook();
 	this->on_last_frame = false;
+}
 
-
+void Player::LoadStats(int map_width, int position_of_display_stats, int map_height) {
+	this->stats_display = new DisplayStats(*this, position_of_display_stats, map_width, map_height);
 }
 
 //MISC
@@ -83,7 +85,8 @@ void Player::Render(double curr_time) {
 		}
 		
 	}
-	this->stats_display->Render();
+	if (this->stats_display)
+		this->stats_display->Render();
 }
 
 

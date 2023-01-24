@@ -7,6 +7,7 @@
 #include <allegro5/allegro_font.h>
 #include "allegro5/allegro_primitives.h"
 
+class Player;
 
 class DisplayStats {
 private:
@@ -17,18 +18,10 @@ private:
 	ALLEGRO_BITMAP* display_box;
 	
 public:
-	DisplayStats(int y_offset, int width, int height) {
-		this->y_offset = y_offset;
-		this->screen_width = width;
-		this->screen_height = height;
-		al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
-		this->display_box = al_create_bitmap(width, y_offset);
-		al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
-		this->Precompute();
-	};
+	DisplayStats(Player &player, int y_offset, int width, int height);
 	void Render();
 	void Precompute(); // pre - renders boxes so the render only fills them
-
+	
 };
 
 #endif

@@ -15,6 +15,7 @@
 
 #define FIND_STATE(x, y) static_cast<p_state>(static_cast<int>(x)+ static_cast<int>(y)%2)
 
+class DisplayStats;
 
 class Player {
 private :
@@ -64,7 +65,7 @@ private :
 	void counterSpellFairy(void);
 	
 public:
-	Player(Point *spawn, int screen_width, int map_width, int screen_dx, int position_of_display_stats, int map_height);
+	Player(Point *spawn, int screen_width, int map_width, int screen_dx);
 	
 	//GETTERS
 	int GetX(void) const { return x; }
@@ -92,6 +93,7 @@ public:
 		if (this->is_attacking) return;
 		this->state = FIND_STATE(state_, this->state); 
 	}
+	void LoadStats(int map_width, int position_of_display_stats, int map_height);
 
 	//Move
 	void AnimateMoveRight();
@@ -129,10 +131,6 @@ public:
 		this->spell_book.checkIfSpellsEnded(curr_time);
 	}
 
-
-	void BindPLayerToDisplayStats() {
-		this->stats_display->BindPlayer(this);
-	}
 	
 	friend class DisplayStats;
 	
