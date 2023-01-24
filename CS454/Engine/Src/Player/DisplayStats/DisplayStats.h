@@ -13,6 +13,9 @@ class DisplayStats {
 private:
 	int screen_width; 
 	int screen_height;
+	int health_box_x_offset;
+	int mana_box_x_offset;
+	int box_y_offset;
 	Player* player;
 	ALLEGRO_BITMAP* display_box;
 	

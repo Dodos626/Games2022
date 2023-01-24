@@ -63,7 +63,7 @@ void Game::Initialise(void) {
 								MUL_16(this->background_map->getTileMap()->getTilemapWidth()),
 								data["screen"]["relative_location"]
 							   );
-	this->player1->LoadStats(data["screen"]["width"] / data["screen"]["scale"], MUL_16(this->background_map->getTileMap()->getTilemapHeight()), this->stats_display_height_offset);
+	this->player1->LoadStats(data["screen"]["width"] / data["screen"]["scale"], MUL_16(this->background_map->getTileMap()->getTilemapHeight()), this->stats_display_height_offset/ data["screen"]["scale"]);
 	this->music_player = new MusicPlayer();
 	
 	
