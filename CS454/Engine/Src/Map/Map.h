@@ -5,6 +5,9 @@
 #include "../Tiles/Map/TileMap.h"
 #include "../Utils/Point.h"
 #include "../Utils/ExitPoint.h"
+#include "../Utils/MapEntities.h"
+#include "../Entities/Items/item.h"
+#include "../Entities/Enemies/Enemy.h"
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -33,6 +36,7 @@ private:
 	std::vector<int> SolidBlockIds;
 	std::vector<ExitPoint> ExitPointBlocks;
 	std::vector<std::vector<bool>> grid;
+	std::vector<Entity*> entities;
 	int player_dx;
 	MapLocations state;
 	Point *spawn;
@@ -43,6 +47,7 @@ private:
 	void setTileMap(json data);
 	void setSpawn(json data);
 	void setExitPoints(json data);
+	void setEntities(json data);
 	std::string stateToString(MapLocations state);
 
 	//gia to main screen ta grammata

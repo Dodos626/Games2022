@@ -42,6 +42,7 @@ void Map::ChangeMap(std::string map) {
 	this->setTileMap(this->data[map]);
 	this->setSolidBlocks(this->data[map]["SolidIds"]);
 	this->setExitPoints(this->data[map]["exit_points"]);
+	this->setEntities(this->data[map]["entities"]);
 	this->grid.clear();
 	this->setSpawn(this->data[map]);
 	al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
@@ -131,7 +132,10 @@ void Map::Render(int left_x, int max_x, int y, int max_y) {
 		0,								// dy -> 0
 		0);								// flags
 
-
+	for (Entity* entity : this->entities) {
+		entity->Render();
+	}
+		
 	al_hold_bitmap_drawing(false);
 	al_unlock_bitmap(this->map_buffer);
 }
@@ -281,6 +285,22 @@ void Map::setExitPoints(json data) {
 		auto points = pair.value();
 		for (auto point : points) {
 			this->ExitPointBlocks.push_back(ExitPoint(point["x"], point["y"], map_name, new Point(point["spawn_x"], point["spawn_y"])));
+		}
+	}
+}
+
+void Map::setEntities(json data) {
+	this->entities.clear();
+	for (auto enemy_pair : data["enemies"].items()) {
+		std::string enemy_name = enemy_pair.key();
+		for (auto spawn_location : enemy_pair.value()) {
+			this->entities.push_back(MapEntities::GetEnemyFromString(enemy_name, new Point(spawn_location["spawn_x"], spawn_location["spawn_y"])));
+		}
+	}
+	for (auto item_pair : data["items"].items()) {
+		std::string item_name = item_pair.key();
+		for (auto spawn_location : item_pair.value()) {
+			this->entities.push_back(MapEntities::GetItemFromString(item_name, new Point(spawn_location["spawn_x"], spawn_location["spawn_y"])));
 		}
 	}
 }

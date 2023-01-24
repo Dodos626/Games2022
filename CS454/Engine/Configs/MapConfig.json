@@ -60,6 +60,33 @@
           "spawn_y": 20
         }
       ]
+    },
+    "entities": {
+      "enemies": {
+        "Guma": [
+          {
+            "spawn_x": 35,
+            "spawn_y": 192
+          },
+          {
+            "spawn_x": 64,
+            "spawn_y": 170
+          }
+        ],
+        "PalaceBot": [
+          {
+            "spawn_x": 620,
+            "spawn_y": 36
+          }
+        ],
+        "Wosu": [
+          {
+            "spawn_x": 590,
+            "spawn_y": 36
+          }
+        ]
+      },
+      "items": {}
     }
   },
   "first_floor": {

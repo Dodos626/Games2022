@@ -2,26 +2,27 @@
 #ifndef ENTITY_INCLUDE
 #define ENTITY_INCLUDE
 #include "../Utils/Point.h"
+#include "../Animators/Animator.h"
+#include <allegro5/allegro_primitives.h>
+#include <iostream>
 
 class Entity {
 protected:
-	Point coordinates; // where it is
+	Point *coordinates; // where it is
 	int height, width; // size
+	Animator* animator;
+	std::string name;
 public:
-
 	//Getters
-	Point GetCoordinates() { return this->coordinates; }
+	Point *GetCoordinates() { return this->coordinates; }
 	int GetHeight() { return this->height; }
 	int GetWidth() { return this->width; }
-	
 
+	void Render();
+	bool Collides(Point* p) { return *p == *this->coordinates; }
 	
-	virtual void Render() = 0;
-	virtual bool Collides(Point p) = 0;
-	virtual void OnCollision() = 0; // if the player collides with it
-	virtual void Move() = 0; // creatures move items don't
-	virtual void Destroy() = 0; // in case of pickup / death
-	
+	friend std::ostream& operator<<(std::ostream& os, const Entity& p);
+
 };
 
 #endif
