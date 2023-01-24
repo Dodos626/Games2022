@@ -43,6 +43,7 @@ Player::Player(Point *spawn, int screen_width, int map_width, int screen_dx) {
 
 	//initiate spell book and spells
 	this->CreateSpellBook();
+	this->on_last_frame = false;
 
 
 }
@@ -67,7 +68,7 @@ void Player::Render(double curr_time) {
 		// 0 = 1st frame of the attack
 		// 1 = second frame and last frame
 		// 2 = ended
-		int tmp = this->animator->renderAttack(x, this->y, curr_time, static_cast<int>(this->state), true);
+		int tmp = this->animator->renderAttack(x, this->y, curr_time, static_cast<int>(this->state), this->on_last_frame);
 		std::cout << "tmp: " << tmp << std::endl;
 		if (tmp == 2) {
 			std::cout << "stop attacking \n ";

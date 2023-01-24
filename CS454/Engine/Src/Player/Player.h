@@ -79,6 +79,7 @@ public:
 	int GetJumpSpeed(void) const { return jump_speed; }
 	int GetJumpHeight(void) const { return jump_height; }
 	p_state GetState(void) const { return state; }
+	bool isDucking(void) { return this->duck; };
 
 	//SETTERS
 	void setState(p_state state_) { 
@@ -91,25 +92,26 @@ public:
 	}
 
 	//Move
-	void MoveLeft();
-	void MoveRight(); //oso kounieme deksia kanw progress to move_right ama stamatisw na kounieme reset all animation
 	void AnimateMoveRight();
 	void AnimateMoveLeft();
+	void Attack();
+
+	void ChangeStance();
+	void Duck();
+	void MoveLeft();
+	void MoveRight(); //oso kounieme deksia kanw progress to move_right ama stamatisw na kounieme reset all animation
 	void MoveUp();
 	void MoveDown();
+
 	void Stand();
-	void Duck();
-	void ChangeStance();
 	void Respawn(Point *p);
 	void StopMoving();
-	void Attack();
-	bool isDucking(void) { return this->duck; };
 	//Attack - Damage functions
 	void TakeDamage(int damage);
 
 	//Render
 	void Render(double curr_time);
-
+	void RenderAttack(double curr_time);
 
 	//Spells
 	void castSpell(int id) {

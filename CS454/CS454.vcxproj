@@ -162,7 +162,7 @@
     <ClCompile Include="Engine\Src\Animators\SingleAnimation\SingleAnimation.cpp" />
     <ClCompile Include="Engine\Src\App\App.cpp" />
     <ClCompile Include="Engine\Src\BitMap\BitMap.cpp" />
-    <ClCompile Include="Engine\Src\Entity\Entity.cpp" />
+    <ClCompile Include="Engine\Src\Entities\Entity.cpp" />
     <ClCompile Include="Engine\Src\Game\Game.cpp" />
     <ClCompile Include="Engine\Src\Map\Map.cpp" />
     <ClCompile Include="Engine\Src\Misc\MusicPlayer\MusicPlayer.cpp" />
@@ -186,7 +186,9 @@
     <ClInclude Include="Engine\Src\Animators\Animator.h" />
     <ClInclude Include="Engine\Src\App\App.h" />
     <ClInclude Include="Engine\Src\BitMap\BitMap.h" />
-    <ClInclude Include="Engine\Src\Entity\Entity.h" />
+    <ClInclude Include="Engine\Src\Entities\Enemies\Enemy.h" />
+    <ClInclude Include="Engine\Src\Entities\Entity.h" />
+    <ClInclude Include="Engine\Src\Entities\Items\Item.h" />
     <ClInclude Include="Engine\Src\Game\Game.h" />
     <ClInclude Include="Engine\Src\Map\Map.h" />
     <ClInclude Include="Engine\Src\Misc\MusicPlayer\MusicPlayer.h" />

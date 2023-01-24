@@ -58,7 +58,7 @@ int PlayerAnimator::renderAttack(int target_x, int target_y, double curr_time, i
 
 	Mappings next_mapping = this->animations.at(this->curr_selected_animation).getMapping(curr_time); // take next mapping
 
-	if ( this->curr_mapping.getX() != next_mapping.getX() && this->curr_mapping.getY() != next_mapping.getY()) { // if the next mapping is different
+	if ( this->curr_mapping.getX() != next_mapping.getX() || this->curr_mapping.getY() != next_mapping.getY()) { // if the next mapping is different
 		std::cout << "frame changed \n";
 		changed_frame = true; // we changed frame
 		
