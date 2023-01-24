@@ -1,6 +1,6 @@
 {
   "total_animations": 2,
-  "sprite_sheet_path": "Media/spriteSheet/enemy_sword1_sprites.png",
+  "sprite_sheet_path": "Media/spriteSheet/wosu_sprite.png",
   "enemy_sword1_move_right": {
     "animation_time": 0.5,
     "number_of_frames": 2,
