@@ -131,7 +131,7 @@ public:
 		this->spell_book.checkIfSpellsEnded(curr_time);
 	}
 
-	
+	void LoadStats();
 	friend class DisplayStats;
 	
 };

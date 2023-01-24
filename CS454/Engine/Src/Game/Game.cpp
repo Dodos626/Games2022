@@ -242,6 +242,7 @@ void Game::Render(void) {
 }
 
 void Game::StartRender(void) {
+	this->player1->LoadStats();
 	al_set_target_bitmap(this->buffer);
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 	

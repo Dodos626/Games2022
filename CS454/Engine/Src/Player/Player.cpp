@@ -24,7 +24,7 @@ Player::Player(Point* spawn, int screen_width, int map_width, int screen_dx) {
 	
 	this->health = this->max_health = stats["health"];
 	this->attack_power = stats["attack_power"];
-	this->mana = this->mana = stats["mana"];
+	this->mana = this->max_mana = stats["mana"];
 	this->lifes = stats["lifes"];
 	this->points = stats["points"];
 
@@ -135,7 +135,7 @@ void Player::AnimateMoveLeft() {
 		this->setState(p_state::move_left);
 }
 
-void Player::MoveLeft() { 
+void Player::MoveLeft() {
 	if (this->duck) 
 		return;
 	this->x -= this->speed;
@@ -231,3 +231,7 @@ void Player::counterSpellFairy() {
 	this->jump_speed += 1;
 	this->fall_speed += 1;
 }
+
+void Player::LoadStats() {
+	this->stats_display->PrepareStats();
+};
