@@ -35,7 +35,7 @@ void PlayerAnimator::selectAnimation(int animation_id) {
 
 
 void PlayerAnimator::registerSingleAnimation(json data) {
-	this->animations.push_back(SingleAnimation(data));
+	this->animations.push_back(new SingleAnimation(data));
 }; 
 
 void PlayerAnimator::render(int target_x, int target_y, double curr_time) {
@@ -47,8 +47,8 @@ void PlayerAnimator::render(int target_x, int target_y, double curr_time, int cu
 	if (curr_state != this->curr_selected_animation) {
 		this->selectAnimation(curr_state);
 	}
-	this->curr_mapping = this->animations.at(this->curr_selected_animation).getMapping(curr_time);
-	al_draw_bitmap_region(this->sprite_sheet, this->curr_mapping.getX(), this->curr_mapping.getY(), this->curr_mapping.getWidth(), this->curr_mapping.getHeight(), target_x, target_y, 0);
+	this->curr_mapping = this->animations.at(this->curr_selected_animation)->getMapping(curr_time);
+	al_draw_bitmap_region(this->sprite_sheet, this->curr_mapping->getX(), this->curr_mapping->getY(), this->curr_mapping->getWidth(), this->curr_mapping->getHeight(), target_x, target_y, 0);
 }; 
 
 int PlayerAnimator::renderAttack(int target_x, int target_y, double curr_time, int curr_state, bool is_last_frame) {
@@ -56,9 +56,9 @@ int PlayerAnimator::renderAttack(int target_x, int target_y, double curr_time, i
 	
 	bool changed_frame = false; // did we change frame ?
 
-	Mappings next_mapping = this->animations.at(this->curr_selected_animation).getMapping(curr_time); // take next mapping
+	Mappings *next_mapping = this->animations.at(this->curr_selected_animation)->getMapping(curr_time); // take next mapping
 
-	if ( this->curr_mapping.getX() != next_mapping.getX() || this->curr_mapping.getY() != next_mapping.getY()) { // if the next mapping is different
+	if ( this->curr_mapping->getX() != next_mapping->getX() || this->curr_mapping->getY() != next_mapping->getY()) { // if the next mapping is different
 		std::cout << "frame changed \n";
 		changed_frame = true; // we changed frame
 		
@@ -78,7 +78,7 @@ int PlayerAnimator::renderAttack(int target_x, int target_y, double curr_time, i
 	
 	this->curr_mapping = next_mapping;
 	
-	al_draw_bitmap_region(this->sprite_sheet, this->curr_mapping.getX(), this->curr_mapping.getY(), this->curr_mapping.getWidth(), this->curr_mapping.getHeight(), target_x, target_y, 0);
+	al_draw_bitmap_region(this->sprite_sheet, this->curr_mapping->getX(), this->curr_mapping->getY(), this->curr_mapping->getWidth(), this->curr_mapping->getHeight(), target_x, target_y, 0);
 
 	if (is_last_frame && changed_frame) {
 		return 2; // the animation ended

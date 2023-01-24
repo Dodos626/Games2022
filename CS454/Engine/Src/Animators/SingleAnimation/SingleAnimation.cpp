@@ -9,7 +9,7 @@ SingleAnimation::SingleAnimation(json data) {
 
 void SingleAnimation::registerMappings(json data) {
 	for (int i = 0; i < this->number_of_frames; i++) {
-		Mappings curr_mapping = Mappings(data[i]["x"], data[i]["y"], data[i]["width"], data[i]["height"]);
+		Mappings *curr_mapping = new Mappings(data[i]["x"], data[i]["y"], data[i]["width"], data[i]["height"]);
 		this->mappings.push_back(curr_mapping);
 	} 
 }
@@ -21,9 +21,9 @@ void SingleAnimation::progressAnimation() {
 		this->curr_selected_frame = 0;
 }
 
-Mappings SingleAnimation::getMapping(double current_time) {
+Mappings *SingleAnimation::getMapping(double current_time) {
 	
-	Mappings curr_mappings = this->mappings.at(this->curr_selected_frame); //take the current animation position
+	Mappings *curr_mappings = this->mappings.at(this->curr_selected_frame); //take the current animation position
 	
 
 	

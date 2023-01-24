@@ -14,7 +14,6 @@ private:
 	Point coordinates;
 	int width, height;
 public:
-	Mappings() {};
 	Mappings(int x_, int y_, int width_, int height_) :
 		coordinates(x_,y_), width(width_), height(height_) {};
 	
@@ -35,7 +34,7 @@ private:
 	int curr_selected_frame = 0;
 
 	// mappings = x,y,width,height of every frame in this single animation
-	std::vector<Mappings> mappings;
+	std::vector<Mappings *> mappings;
 	void progressAnimation(void);
 	void registerMappings(json data);
 public:
@@ -43,7 +42,7 @@ public:
 	int getNumberOfFrames(void) { return this->number_of_frames; };
 	double getFrameDuration(void) { return this->frame_duration; };
 	int getCurrSelectedFrame(void) { return this->curr_selected_frame; };
-	Mappings getMapping(double current_time);
+	Mappings *getMapping(double current_time);
 	void resetAnimation(void){ this->curr_selected_frame = 0; };
 };
 
