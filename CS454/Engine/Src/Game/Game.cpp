@@ -127,7 +127,7 @@ void Game::MainLoopIteration(void) {
 		if (event.keyboard.keycode == ALLEGRO_KEY_DOWN){ //ean afisame to katw belaki
 			this->player1->ChangeStance(); // allazume state
 		}
-		else if (event.keyboard.keycode == ALLEGRO_KEY_LEFT || event.keyboard.keycode == ALLEGRO_KEY_RIGHT || event.keyboard.keycode == ALLEGRO_KEY_A) { // stamatise na kouniete
+		else if (event.keyboard.keycode == ALLEGRO_KEY_LEFT || event.keyboard.keycode == ALLEGRO_KEY_RIGHT ) { // stamatise na kouniete
 			this->player1->StopMoving();
 		}
 		key[event.keyboard.keycode] &= false;

@@ -41,7 +41,6 @@ private :
 	int jump_speed;
 	int jump_height;
 	bool is_attacking = false;
-	bool on_last_frame = false;
 	
 	//spells
 	Spell_Book spell_book;

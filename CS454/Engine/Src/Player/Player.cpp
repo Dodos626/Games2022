@@ -47,7 +47,6 @@ Player::Player(Point* spawn, int screen_width, int map_width, int screen_dx) {
 
 	//initiate spell book and spells
 	this->CreateSpellBook();
-	this->on_last_frame = false;
 }
 
 void Player::LoadStats(int map_width, int map_height, int y_offset) {
@@ -91,20 +90,14 @@ void Player::Render(double curr_time) {
 		this->animator->render(x, this->y, curr_time, static_cast<int>(this->state));
 	else // if attacking
 	{
-		// render attack returns 
-		// 0 = 1st frame of the attack
-		// 1 = second frame and last frame
-		// 2 = ended
-		int tmp = this->animator->renderAttack(x, this->y, curr_time, static_cast<int>(this->state), this->on_last_frame);
-		std::cout << "tmp: " << tmp << std::endl;
-		if (tmp == 2) {
-			std::cout << "stop attacking \n ";
-			this->on_last_frame = false; //reset
-			this->is_attacking = false;  // not attacking 
-			this->setStateWithDirection(p_state::idle_left); // dont care state
-		}
-		else if (tmp == 1) {
-			this->on_last_frame = true;
+		
+		if (this->animator->renderAttack(x, this->y, curr_time, static_cast<int>(this->state))) // if attack animation is over
+		{
+			this->is_attacking = false;
+			if(this->duck)
+				this->setStateWithDirection(p_state::crouch_left);
+			else
+				this->setStateWithDirection(p_state::idle_left);
 		}
 		
 	}
@@ -128,7 +121,7 @@ void Player::Respawn(Point *p) {
 }
 
 void Player::Stand() {
-	if (!this->duck)
+	if (!this->duck || this->is_attacking)
 		return;
 	this->setStateWithDirection(p_state::idle_left);
 	//this->y = y - 16;
@@ -137,7 +130,7 @@ void Player::Stand() {
 }
 
 void Player::Duck() {
-	if (this->duck)
+	if (this->duck || this->is_attacking)
 		return;
 	this->setStateWithDirection(p_state::crouch_left);
 	//this->y = y + 16;
@@ -145,6 +138,8 @@ void Player::Duck() {
 	this->duck = true;
 }
 void Player::ChangeStance() {
+	if (this->is_attacking)
+		return;
 	if (this->duck)
 		this->Stand();
 	else
@@ -152,20 +147,20 @@ void Player::ChangeStance() {
 }
 
 void Player::AnimateMoveLeft() {
-	if (this->duck) 
+	if (this->duck || this->is_attacking)
 		this->setState(p_state::crouch_left);
 	else
 		this->setState(p_state::move_left);
 }
 
 void Player::MoveLeft() {
-	if (this->duck) 
+	if (this->duck || this->is_attacking)
 		return;
 	this->x -= this->speed;
 }
 
 void Player::AnimateMoveRight() {
-	if (this->duck) {
+	if (this->duck || this->is_attacking) {
 		this->setState(p_state::crouch_right);
 		return;
 	}
@@ -173,7 +168,7 @@ void Player::AnimateMoveRight() {
 }
 
 void Player::MoveRight() { 
-	if (this->duck) {
+	if (this->duck || this->is_attacking) {
 		return;
 	}
 	this->x += this->speed; 
@@ -200,14 +195,19 @@ void Player::Attack() {
 	if (this->is_attacking) return; //can't attack if already attacking
 
 	if (this->state != p_state::crouch_left && this->state != p_state::crouch_right) // if not crouching
+	{
 		this->setStateWithDirection(p_state::atck_left); // standing attack
+		this->animator->StartForcedAnimation(2); //set the numbers of forced frames
+	}
 	else
+	{
 		this->setStateWithDirection(p_state::crouch_atck_left); // else crouch attack
+		this->animator->StartForcedAnimation(1); //set the numbers of forced frames
+	}
 	
-	this->animator->changeAnimation(static_cast<int>(this->state)); // change animation
+	this->animator->changeAnimation(static_cast<int>(this->state)); // force change animation
 	
 	this->is_attacking = true; // set attacking to true
-	this->on_last_frame = false; // we are on the first frame of the attack
 }
 
 
@@ -255,6 +255,8 @@ void Player::counterSpellFairy() {
 	this->fall_speed += 1;
 }
 
+
+// DISPLAY STATS SECTION
 void Player::LoadStats() {
 	this->stats_display->PrepareStats();
 };

@@ -43,7 +43,6 @@ void PlayerAnimator::render(int target_x, int target_y, double curr_time) {
 }
 
 void PlayerAnimator::render(int target_x, int target_y, double curr_time, int curr_state){
-	int offset_width = 0;
 	if (curr_state != this->curr_selected_animation) {
 		this->selectAnimation(curr_state);
 	}
@@ -51,43 +50,38 @@ void PlayerAnimator::render(int target_x, int target_y, double curr_time, int cu
 	al_draw_bitmap_region(this->sprite_sheet, this->curr_mapping->getX(), this->curr_mapping->getY(), this->curr_mapping->getWidth(), this->curr_mapping->getHeight(), target_x, target_y, 0);
 }; 
 
-int PlayerAnimator::renderAttack(int target_x, int target_y, double curr_time, int curr_state, bool is_last_frame) {
-	int offset_width = 0;
-	
-	bool changed_frame = false; // did we change frame ?
+bool PlayerAnimator::renderAttack(int target_x, int target_y, double curr_time, int curr_state) {
 
 	Mappings *next_mapping = this->animations.at(this->curr_selected_animation)->getMapping(curr_time); // take next mapping
 
 	if ( this->curr_mapping->getX() != next_mapping->getX() || this->curr_mapping->getY() != next_mapping->getY()) { // if the next mapping is different
-		std::cout << "frame changed \n";
-		changed_frame = true; // we changed frame
 		
+		this->total_animation_frames -= 1;
+
+		std::cout << "remaining frames : " << this->total_animation_frames << std::endl;
 	}
 	
 
-	//sto right to 1o einai lathos
-	//sto left to 2o einai lathos
-	/*
-	if (!changed_frame && curr_state % 2 == 1) {
-		std::cout << "first frame of right attack\n";
+	int fix_x = 0;
+	// the curr_state is fixed to 11 for right attack and 10 for left attack and crouch left attack is 12
+	//so we can reuse this function in crouch attack right without mendling with it's x
+	if (this->total_animation_frames == 2 && curr_state  == 11) { 
+		fix_x = -16; //first frame of right attack needs to render 16 pixels to the left
 	}
-	else if (changed_frame && curr_state % 2 == 0) {
-		std::cout << "last frame of left attack\n";
+	else if (this->total_animation_frames <= 1 && (curr_state == 10 || curr_state == 12)) { 
+		fix_x = -16; // last frame of left attack and left crouch attack needs to render 16 pixels to the left
 	}
-	*/
 	
-	this->curr_mapping = next_mapping;
+	if(this->total_animation_frames != 0) // the last frame will be repeating the first frame
+		this->curr_mapping = next_mapping; // in order to hack it we extend the attack for 1 more render
 	
-	al_draw_bitmap_region(this->sprite_sheet, this->curr_mapping->getX(), this->curr_mapping->getY(), this->curr_mapping->getWidth(), this->curr_mapping->getHeight(), target_x, target_y, 0);
 
-	if (is_last_frame && changed_frame) {
-		return 2; // the animation ended
-	}
-	else if (changed_frame) {
-		return 1; // we are on last frame
+	al_draw_bitmap_region(this->sprite_sheet, this->curr_mapping->getX(), this->curr_mapping->getY(), this->curr_mapping->getWidth(), this->curr_mapping->getHeight(), target_x + fix_x, target_y, 0);
+
+	if (this->total_animation_frames == 0) {
+		return true;
 	}
 	else {
-		return 0; // we have still to run
+		return false;
 	}
-	
 };
