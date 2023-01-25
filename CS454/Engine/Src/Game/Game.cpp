@@ -131,8 +131,10 @@ void Game::MainLoopIteration(void) {
 		else if (event.keyboard.keycode == ALLEGRO_KEY_LEFT || event.keyboard.keycode == ALLEGRO_KEY_RIGHT ) { // stamatise na kouniete
 			this->player1->StopMoving();
 		}
+		if (event.keyboard.keycode == ALLEGRO_KEY_A) {
+			this->key_pressed = false;
+		}
 		key[event.keyboard.keycode] &= false;
-		this->key_pressed = false;
 		break;
 	default:
 		break;
