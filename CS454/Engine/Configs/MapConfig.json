@@ -62,8 +62,42 @@
       ]
     },
     "entities": {
-      "enemies": {},
-      "items": {}
+      "enemies": {
+        "Guma": [
+          {
+            "spawn_x": 35,
+            "spawn_y": 192
+          },
+          {
+            "spawn_x": 64,
+            "spawn_y": 170
+          }
+        ],
+        "PalaceBot": [
+          {
+            "spawn_x": 620,
+            "spawn_y": 36
+          }
+        ],
+        "Wosu": [
+          {
+            "spawn_x": 590,
+            "spawn_y": 36
+          }
+        ]
+      },
+      "items": {
+        "HealthPotion": [
+          {
+            "spawn_x": 35,
+            "spawn_y": 100
+          },
+          {
+            "spawn_x": 70,
+            "spawn_y": 50
+          }
+        ]
+      }
     }
   },
   "first_floor": {
