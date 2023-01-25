@@ -73,6 +73,7 @@ void Game::Initialise(void) {
 	this->y_bound = MUL_16(this->background_map->getTileMap()->getTilemapHeight());
 	this->x_bound = MUL_16(this->background_map->getTileMap()->getTilemapWidth());
 	this->jump_y = 0;
+	this->key_pressed = false;
 	
 	Action handle_input = [this]() {this->HandleInput(); };
 	Action gravity_pull = [this]() {this->GravityPull(); };
@@ -131,6 +132,7 @@ void Game::MainLoopIteration(void) {
 			this->player1->StopMoving();
 		}
 		key[event.keyboard.keycode] &= false;
+		this->key_pressed = false;
 		break;
 	default:
 		break;
@@ -173,9 +175,9 @@ void Game::HandleInput(void) {
 	if (key[ALLEGRO_KEY_0]) {
 		this->music_player->Stop();
 	}
-	if (key[ALLEGRO_KEY_A]) {
-		std::cout << "allegro key A\n";
+	if (key[ALLEGRO_KEY_A] && !this->key_pressed) {
 		this->player1->Attack();
+		this->key_pressed = true;
 	}
 	//TO CHECK IF MAPS CHANGE 
 	if (key[ALLEGRO_KEY_1]) {

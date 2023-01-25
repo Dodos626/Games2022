@@ -66,6 +66,7 @@ private:
 
 	//input key capture
 	unsigned char key[ALLEGRO_KEY_MAX];
+	bool key_pressed;
 
 	// bounds for x,y coordinates
 	int y_bound;
