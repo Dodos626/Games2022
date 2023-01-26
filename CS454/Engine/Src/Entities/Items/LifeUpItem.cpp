@@ -12,6 +12,6 @@ void LifeUpItem::PickUp(Player& player) {
 	player.IncreaseLives(this->lives_increase);
 }
 
-void LifeUpItem::Render(double curr_time) {
-	this->animator->render(this->coordinates->GetX(), this->coordinates->GetY(), curr_time,0);
+void LifeUpItem::Render(double curr_time, int relative_x) {
+	this->animator->render(this->coordinates->GetX() - relative_x, this->coordinates->GetY(), curr_time,0);
 }

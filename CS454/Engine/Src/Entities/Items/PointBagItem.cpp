@@ -19,6 +19,6 @@ void PointBagItem::PickUp(Player& player) {
 	player.IncreasePoints(this->points_increase);
 }
 
-void PointBagItem::Render(double curr_time) {
-	this->animator->render(this->coordinates->GetX(), this->coordinates->GetY(), curr_time, 0);
+void PointBagItem::Render(double curr_time, int relative_x) {
+	this->animator->render(this->coordinates->GetX()-relative_x, this->coordinates->GetY(), curr_time, 0);
 }

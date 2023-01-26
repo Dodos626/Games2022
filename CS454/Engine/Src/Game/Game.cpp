@@ -246,7 +246,7 @@ void Game::Render(void) {
 	this->background_map->RenderBg(this->player1->GetCameraX(), this->screen->GetScaledWidth(), 0, this->screen->GetScaledHeight());
 	this->background_map->Render(this->player1->GetCameraX(), this->screen->GetScaledWidth(), 0, this->screen->GetScaledHeight());
 	this->player1->Render(this->timer->getDelta());
-	this->background_map->RenderEntities(this->timer->getDelta());
+	this->background_map->RenderEntities(this->timer->getDelta(),this->player1->GetCameraX());
 	
 	al_hold_bitmap_drawing(0);
 	this->DrawBufferToScreen();

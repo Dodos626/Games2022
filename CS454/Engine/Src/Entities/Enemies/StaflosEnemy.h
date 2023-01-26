@@ -18,7 +18,7 @@ class StaflosEnemy : public Enemy {
 private:
 	staflos_state state = staflos_state::move_left;
 public:
-	void Render(double curr_time) override;
+	void Render(double curr_time, int relative_x) override;
 	int GetStateToInt(staflos_state state);
 	StaflosEnemy(Point* spawn);
 	void AI();

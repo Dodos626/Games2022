@@ -18,7 +18,7 @@ private:
 public:
 	WosuEnemy(Point* spawn);
 	void AI();
-	void Render(double curr_time)override;
+	void Render(double curr_time, int relative_x)override;
 };
 
 

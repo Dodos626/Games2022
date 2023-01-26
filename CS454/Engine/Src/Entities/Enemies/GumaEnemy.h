@@ -19,7 +19,7 @@ class GumaEnemy : public Enemy {
 private:
 	guma_state state = guma_state::move_left;
 public:
-	void Render(double curr_time) override;
+	void Render(double curr_time, int relative_x) override;
 	int GetStateToInt(guma_state state);
 	GumaEnemy(Point *spawn);
 	void AI();

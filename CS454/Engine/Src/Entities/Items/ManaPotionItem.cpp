@@ -10,6 +10,6 @@ void ManaPotionItem::PickUp(Player& player) {
 	player.RegenerateMana(this->mana_gain);
 }
 
-void ManaPotionItem::Render(double curr_time) {
-	this->animator->render(this->coordinates->GetX(), this->coordinates->GetY(), curr_time, 0);
+void ManaPotionItem::Render(double curr_time, int relative_x) {
+	this->animator->render(this->coordinates->GetX() - relative_x, this->coordinates->GetY(), curr_time, 0);
 }

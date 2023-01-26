@@ -28,7 +28,7 @@ public:
 	void MoveDown();
 
 
-	virtual void Render(double curr_time);
+	virtual void Render(double curr_time, int relative_x);
 	bool CheckCollision(Point* p) { return *p == *this->coordinates; }
 	virtual void Collide(Player &player) = 0;
 		

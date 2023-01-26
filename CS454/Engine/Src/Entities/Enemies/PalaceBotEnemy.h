@@ -19,7 +19,7 @@ public:
 	PalaceBotEnemy(Point* spawn);
 	void AI();
 	int GetStateToInt(palaceBot_state state);
-	void Render(double curr_time)override;
+	void Render(double curr_time, int relative_x)override;
 };
 
 

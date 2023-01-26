@@ -13,7 +13,7 @@ public:
 	//~Item();
 	void Collide(Player& player) { this->PickUp(player); };
 	virtual void PickUp(Player &player) = 0;
-	virtual void Render(double curr_time);
+	virtual void Render(double curr_time, int relative_x);
 };
 
 #endif

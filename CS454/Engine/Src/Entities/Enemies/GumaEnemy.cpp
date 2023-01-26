@@ -15,7 +15,7 @@ void GumaEnemy::AI() {
 
 }
 
-void GumaEnemy::Render(double curr_time) {
-	this->animator->render(this->coordinates->GetX(), this->coordinates->GetY(), curr_time, this->GetStateToInt(this->state));
+void GumaEnemy::Render(double curr_time, int relative_x) {
+	this->animator->render(this->coordinates->GetX() - relative_x, this->coordinates->GetY(), curr_time, this->GetStateToInt(this->state));
 }
 

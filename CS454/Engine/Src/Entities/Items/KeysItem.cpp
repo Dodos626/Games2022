@@ -11,6 +11,6 @@ KeyItem::KeyItem(Point* spawn) : Item(spawn) {
 void KeyItem::PickUp(Player& player) {
 	player.IncreaseKeys(this->keys_increase);
 }
-void KeyItem::Render(double curr_time) {
-	this->animator->render(this->coordinates->GetX(), this->coordinates->GetY(), curr_time, 0);
+void KeyItem::Render(double curr_time, int relative_x) {
+	this->animator->render(this->coordinates->GetX() - relative_x, this->coordinates->GetY(), curr_time, 0);
 }

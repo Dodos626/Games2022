@@ -303,8 +303,8 @@ void Map::setEntities(json data) {
 	}
 }
 
-void Map::RenderEntities(double curr_time) {
+void Map::RenderEntities(double curr_time, int relative_x) {
 	for (auto entity : this->entities) {
-		entity->Render(curr_time);
+		entity->Render(curr_time,relative_x);
 	}
 }
