@@ -14,7 +14,7 @@ public:
 	PlayerAnimator(std::string path, int curr_state, std::vector<std::string> animation_names);
 	void render(int target_x, int target_y, double curr_time, int curr_state); // render the right animations->mapping
 	void selectAnimation(int animation_id);
-	bool renderAttack(int target_x, int target_y, double curr_time, int curr_state);
+	bool renderWholeAnimationWithFixFrame(int target_x, int target_y, double curr_time, int fix_x_amount, int fix_y_amount, int frame_to_fix);
 	
 	// the + 1 part is because if we need 2 frames, we need to render the first frame 
 	// and then the second frame till the end which will happen when frame 3 will come up
