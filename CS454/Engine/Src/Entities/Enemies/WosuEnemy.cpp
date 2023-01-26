@@ -6,7 +6,22 @@ WosuEnemy::WosuEnemy(Point* spawn, Action tryMoveLeft_, Action tryMoveRight_, Ac
 }
 
 void WosuEnemy::AI(Point player_position) {
-
+	if (this->state == wosu_state::move_right) { // an paei deksia
+		if (this->tryMoveRight(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight())) { // kai mporei na sinexisei
+			this->MoveRight();
+		}
+		else {
+			this->state = wosu_state::move_left;
+		}
+	}
+	if (this->state == wosu_state::move_left) {
+		if (this->tryMoveLeft(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight())) { // kai mporei na sinexisei
+			this->MoveLeft();
+		}
+		else {
+			this->state = wosu_state::move_right;
+		}
+	}
 }
 
 void WosuEnemy::Render(double curr_time, int relative_x) {

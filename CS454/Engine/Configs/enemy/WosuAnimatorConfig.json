@@ -2,7 +2,7 @@
   "total_animations": 2,
   "sprite_sheet_path": "Media/spriteSheet/wosu_sprite.png",
   "move_left": {
-    "animation_time": 0.5,
+    "animation_time": 0.2,
     "number_of_frames": 2,
     "mappings": [
       {
@@ -20,7 +20,7 @@
     ]
   },
   "move_right": {
-    "animation_time": 0.5,
+    "animation_time": 0.2,
     "number_of_frames": 2,
     "mappings": [
       {
