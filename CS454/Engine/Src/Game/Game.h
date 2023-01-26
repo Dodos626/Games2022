@@ -145,6 +145,6 @@ public:
 	bool TryMoveLeft(int x, int y, int width, int height);
 	bool TryMoveRight(int x, int y, int width, int height);
 
-	void GravityPull(void);
+	void HandlePhysics(void);
 };
 #endif

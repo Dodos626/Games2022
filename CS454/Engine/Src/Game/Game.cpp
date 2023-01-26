@@ -76,7 +76,7 @@ void Game::Initialise(void) {
 	this->key_pressed = false;
 	
 	Action handle_input = [this]() {this->HandleInput(); };
-	Action gravity_pull = [this]() {this->Physics(); };
+	Action gravity_pull = [this]() {this->HandlePhysics(); };
 	Action check_exit = [this]() {this->CheckExit(); };
 	this->SetInput(handle_input);
 	this->SetPhysics(gravity_pull);
@@ -160,7 +160,7 @@ void Game::MainLoopIteration(void) {
 void Game::HandleInput(void) {
 	int y = this->player1->GetY();
 	int x = this->player1->GetX();
-	int width = 16;
+	int width = this->player1->GetWidth();
 	int height = this->player1->GetHeight();
 	
 	if (key[ALLEGRO_KEY_UP] && this->TryMoveUp(x, y, width, height) && !this->TryMoveDown(x, y, width, height)) {
@@ -390,10 +390,10 @@ void Game::HandlePauseInput(void) {
 	this->redraw = true;
 }
 
-void Game::Physics() {
+void Game::HandlePhysics(void) {
 	int x = this->player1->GetX();
 	int y = this->player1->GetY();
-	int width = 16;
+	int width = this->player1->GetWidth();
 	int height = this->player1->GetHeight();
 	int max_y = this->y_bound - 32;
 	int jump_speed = this->player1->GetJumpSpeed();
