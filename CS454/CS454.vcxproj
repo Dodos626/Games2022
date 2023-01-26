@@ -165,6 +165,7 @@
     <ClCompile Include="Engine\Src\Entities\Enemies\Enemy.cpp" />
     <ClCompile Include="Engine\Src\Entities\Enemies\GumaEnemy.cpp" />
     <ClCompile Include="Engine\Src\Entities\Enemies\PalaceBotEnemy.cpp" />
+    <ClCompile Include="Engine\Src\Entities\Enemies\StaflosEnemy.cpp" />
     <ClCompile Include="Engine\Src\Entities\Enemies\WosuEnemy.cpp" />
     <ClCompile Include="Engine\Src\Entities\Entity.cpp" />
     <ClCompile Include="Engine\Src\Entities\Items\HealthPotionItem.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="Engine\Src\Entities\Enemies\Enemy.h" />
     <ClInclude Include="Engine\Src\Entities\Enemies\GumaEnemy.h" />
     <ClInclude Include="Engine\Src\Entities\Enemies\PalaceBotEnemy.h" />
+    <ClInclude Include="Engine\Src\Entities\Enemies\StaflosEnemy.h" />
     <ClInclude Include="Engine\Src\Entities\Enemies\WosuEnemy.h" />
     <ClInclude Include="Engine\Src\Entities\Entity.h" />
     <ClInclude Include="Engine\Src\Entities\Items\HealthPotionItem.h" />

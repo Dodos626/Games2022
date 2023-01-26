@@ -1,6 +1,6 @@
 {
   "total_animations": 4,
-  "sprite_sheet_path": "Media/spriteSheet/guma_sprite.png",
+  "sprite_sheet_path": "Media/spriteSheet/staflos_sprite.png",
   "staflos_move_left": {
     "animation_time": 0.2,
     "number_of_frames": 2,

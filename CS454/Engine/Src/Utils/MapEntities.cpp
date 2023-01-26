@@ -7,6 +7,8 @@ Enemy* MapEntities::GetEnemyFromString(std::string enemy_name, Point* spawn) {
 		return new PalaceBotEnemy(spawn);
 	else if (enemy_name == "Wosu")
 		return new WosuEnemy(spawn);
+	else if (enemy_name == "Staflos")
+		return new StaflosEnemy(spawn);
 	assert(0);
 	return NULL;
 }

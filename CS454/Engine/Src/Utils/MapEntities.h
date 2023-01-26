@@ -6,6 +6,7 @@
 #include "../Entities/Enemies/GumaEnemy.h"
 #include "../Entities/Enemies/PalaceBotEnemy.h"
 #include "../Entities/Enemies/WosuEnemy.h"
+#include "../Entities/Enemies/StaflosEnemy.h"
 
 #include "../Entities/Items/Item.h"
 #include "../Entities/Items/HealthPotionItem.h"
