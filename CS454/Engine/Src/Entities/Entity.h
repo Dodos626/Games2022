@@ -11,6 +11,7 @@ class Entity {
 protected:
 	Point *coordinates; // where it is
 	int height, width; // size
+	int speed;
 	PlayerAnimator* animator;
 	std::string name;
 public:
@@ -18,6 +19,14 @@ public:
 	Point *GetCoordinates() { return this->coordinates; }
 	int GetHeight() { return this->height; }
 	int GetWidth() { return this->width; }
+	int GetX() const { return this->coordinates->GetX(); }
+	int GetY() const { return this->coordinates->GetY(); }
+
+	void MoveLeft();
+	void MoveRight();
+	void MoveUp();
+	void MoveDown();
+
 
 	virtual void Render(double curr_time);
 	bool CheckCollision(Point* p) { return *p == *this->coordinates; }

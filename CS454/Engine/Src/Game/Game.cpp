@@ -315,7 +315,7 @@ void Game::Register() {
 
 
 bool Game::TryMoveDown(int x, int y, int width, int height) {
-	if (y + 32 >= this->y_bound)
+	if (y + height >= this->y_bound)
 		return false;
 	int lx = x / 16;									// left x
 	int dy = (y + height) / 16;		// left down y + height (tiles)
@@ -391,14 +391,18 @@ void Game::HandlePauseInput(void) {
 }
 
 void Game::HandlePhysics(void) {
+	this->HandlePlayerPhysics();
+	this->HandleMapEntitiesPhysics();
+}
+
+void Game::HandlePlayerPhysics(void) {
 	int x = this->player1->GetX();
 	int y = this->player1->GetY();
 	int width = this->player1->GetWidth();
 	int height = this->player1->GetHeight();
-	int max_y = this->y_bound - 32;
-	int jump_speed = this->player1->GetJumpSpeed();
-	
-	if (this->jump_y > 0)
+
+	if (this->jump_y > 0) {
+		int jump_speed = this->player1->GetJumpSpeed();
 		for (int i = 0; i < jump_speed; i++) {
 			if (this->TryMoveUp(x, y, width, height)) {
 				this->player1->MoveUp();
@@ -408,6 +412,7 @@ void Game::HandlePhysics(void) {
 				this->jump_y = 0;
 			y = this->player1->GetY();
 		}
+	}
 	else if (this->TryMoveDown(x, y, width, height))
 	{
 		int fall_speed = this->player1->GetFallSpeed();
@@ -415,14 +420,38 @@ void Game::HandlePhysics(void) {
 			if (this->TryMoveDown(x, y, width, height)) {
 				this->player1->MoveDown();
 			}
+			else
+				break;
 			y = this->player1->GetY();
 		}
 	}
 	else { // an teleiwse na peftei
-		if(this->player1->GetState() == p_state::land_left || this->player1->GetState() == p_state::land_right)
+		if (this->player1->GetState() == p_state::land_left || this->player1->GetState() == p_state::land_right)
 			this->player1->StopMoving();
 	}
+}
 
+void Game::HandleMapEntitiesPhysics(void) {
+	
+	for (Entity* entity : this->background_map->GetMapEntities()) {
+		int x = entity->GetX();
+		int y = entity->GetY();
+		int width = entity->GetWidth();
+		int height = entity->GetHeight();
+		int fall_speed = this->player1->GetFallSpeed();
+		if (this->TryMoveDown(x, y, width, height))
+		{
+			for (int i = 0; i < fall_speed; i++) {
+				if (this->TryMoveDown(x, y, width, height)) {
+					entity->MoveDown();
+				}
+				else
+					break;
+				y = entity->GetY();
+			}
+		}
+	}
+	
 }
 
 void Game::CheckExit() {

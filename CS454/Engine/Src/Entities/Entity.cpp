@@ -8,6 +8,30 @@ void Entity::Render(double curr_time) {
 	al_draw_filled_rectangle(x, y, x + this->width, y + this->height, al_map_rgb(255, 32, 65));
 }
 
+void Entity::MoveLeft() {
+	//if (this->duck || this->is_attacking)
+	//	return;
+	this->coordinates->AddToX(-this->speed);
+}
+
+void Entity::MoveRight() {
+	//if (this->duck || this->is_attacking) {
+	//	return;
+	//}
+	this->coordinates->AddToX(this->speed);
+}
+
+void Entity::MoveUp() {
+	//this->Stand();
+	//setStateWithDirection(p_state::jump_left);
+	this->coordinates->AddToY(-this->speed);
+}
+
+void Entity::MoveDown() {
+	//this->setStateWithDirection(p_state::land_left);
+	this->coordinates->AddToY(this->speed);
+}
+
 std::ostream& operator<<(std::ostream& os, const Entity& p) {
 	std::cout << p.name << std::endl;
 	return std::cout;

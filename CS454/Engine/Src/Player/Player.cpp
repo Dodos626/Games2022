@@ -154,11 +154,6 @@ void Player::AnimateMoveLeft() {
 		this->setState(p_state::move_left);
 }
 
-void Player::MoveLeft() {
-	if (this->duck || this->is_attacking)
-		return;
-	this->x -= this->speed;
-}
 
 void Player::AnimateMoveRight() {
 	if (this->duck || this->is_attacking) {
@@ -166,6 +161,12 @@ void Player::AnimateMoveRight() {
 		return;
 	}
 	this->setState(p_state::move_right);
+}
+
+void Player::MoveLeft() {
+	if (this->duck || this->is_attacking)
+		return;
+	this->x -= this->speed;
 }
 
 void Player::MoveRight() { 

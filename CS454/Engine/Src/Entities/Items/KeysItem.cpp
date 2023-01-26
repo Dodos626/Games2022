@@ -1,7 +1,7 @@
 #include "KeyItem.h"
 
 KeyItem::KeyItem(Point* spawn) : Item(spawn) {
-	this->name = "LifeUp";
+	this->name = "Key";
 	this->keys_increase = 1;
 
 	std::vector<std::string> animations = { "key_animation" };

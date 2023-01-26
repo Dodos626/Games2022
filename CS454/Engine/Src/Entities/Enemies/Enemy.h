@@ -12,7 +12,6 @@ class Enemy : public Entity {
 protected:
 	int health;
 	int damage;
-	int speed;
 	int points;
 	int drop_chance;
 	int percentage;

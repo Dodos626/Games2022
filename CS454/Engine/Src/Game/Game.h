@@ -146,5 +146,7 @@ public:
 	bool TryMoveRight(int x, int y, int width, int height);
 
 	void HandlePhysics(void);
+	void HandlePlayerPhysics(void);
+	void HandleMapEntitiesPhysics(void);
 };
 #endif

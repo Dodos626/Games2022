@@ -71,18 +71,19 @@ public:
 	void PrecomputeMap();
 	void Render(int left_x, int max_x, int y, int max_y);
 	void RenderBg(int left_x, int max_x, int y, int max_y);
-	BitMap* getBitMap() { return this->bitmap; };
-	TileMap* getTileMap() { return this->tilemap; };
-	ALLEGRO_BITMAP* getMapBuffer() { return this->map_buffer; };
+	BitMap* getBitMap() { return this->bitmap; }
+	TileMap* getTileMap() { return this->tilemap; }
+	ALLEGRO_BITMAP* getMapBuffer() { return this->map_buffer; }
+	std::vector<Entity*> GetMapEntities() { return this->entities; }
 	bool IsSolid(int x, int y);
 	bool IsExit(Point location);
 	ExitPoint GetExit(Point location);
-	
+	Point* GetSpawn() { return this->spawn; }
 	
 	void setState(MapLocations state) { this->state = state; };
 	MapLocations getState() { return this->state; }; 
 
-	Point *GetSpawn() { return this->spawn; }
+	
 	
 	void RenderEntities(double curr_time);
 
