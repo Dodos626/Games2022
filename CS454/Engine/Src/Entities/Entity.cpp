@@ -11,25 +11,25 @@ void Entity::Render(double curr_time, int relative_x) {
 void Entity::MoveLeft() {
 	//if (this->duck || this->is_attacking)
 	//	return;
-	this->coordinates->AddToX(-this->speed);
+	this->coordinates->AddToX(-1);
 }
 
 void Entity::MoveRight() {
 	//if (this->duck || this->is_attacking) {
 	//	return;
 	//}
-	this->coordinates->AddToX(this->speed);
+	this->coordinates->AddToX(1);
 }
 
 void Entity::MoveUp() {
 	//this->Stand();
 	//setStateWithDirection(p_state::jump_left);
-	this->coordinates->AddToY(-this->speed);
+	this->coordinates->AddToY(-1);
 }
 
 void Entity::MoveDown() {
 	//this->setStateWithDirection(p_state::land_left);
-	this->coordinates->AddToY(this->speed);
+	this->coordinates->AddToY(1);
 }
 
 std::ostream& operator<<(std::ostream& os, const Entity& p) {
