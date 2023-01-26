@@ -10,6 +10,7 @@ private:
 public:
 	ManaPotionItem(Point* spawn);
 	void PickUp(Player& player);
+	void Render(double curr_time);
 };
 
 #endif

@@ -1,7 +1,7 @@
 #include "Entity.h"
 
 
-void Entity::Render() {
+void Entity::Render(double curr_time) {
 	int x = this->coordinates->GetX();
 	int y = this->coordinates->GetY();
 

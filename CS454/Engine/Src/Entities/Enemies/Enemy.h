@@ -24,7 +24,7 @@ protected:
 	void _Death();
 	
 public:
-	Enemy(Point *spawn, std::string datapath, std::string animationpath);
+	Enemy(Point* spawn, std::string datapath);
 
 	virtual void AI() = 0;
 	void Collide(Player& player);

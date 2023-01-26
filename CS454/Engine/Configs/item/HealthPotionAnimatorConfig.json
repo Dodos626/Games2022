@@ -1,9 +1,9 @@
 {
   "total_animations": 1,
   "sprite_sheet_path": "Media/spriteSheet/health_potion.png",
-  "enemy_sword1_move_right": {
-    "animation_time": 0.3,
-    "number_of_frames": 3,
+  "HealthPotion": {
+    "animation_time": 1.5,
+    "number_of_frames": 12,
     "mappings": [
       {
         "x": 0,
@@ -19,6 +19,60 @@
       },
       {
         "x": 32,
+        "y": 0,
+        "width": 16,
+        "height": 16
+      },
+      {
+        "x": 48,
+        "y": 0,
+        "width": 16,
+        "height": 16
+      },
+      {
+        "x": 64,
+        "y": 0,
+        "width": 16,
+        "height": 16
+      },
+      {
+        "x": 80,
+        "y": 0,
+        "width": 16,
+        "height": 16
+      },
+      {
+        "x": 96,
+        "y": 0,
+        "width": 16,
+        "height": 16
+      },
+      {
+        "x": 112,
+        "y": 0,
+        "width": 16,
+        "height": 16
+      },
+      {
+        "x": 128,
+        "y": 0,
+        "width": 16,
+        "height": 16
+      },
+      {
+        "x": 144,
+        "y": 0,
+        "width": 16,
+        "height": 16
+      },
+      {
+        "x": 160,
+        "y": 0,
+        "width": 16,
+        "height": 16
+      },
+      {
+        "x": 176,
         "y": 0,
         "width": 16,
         "height": 16

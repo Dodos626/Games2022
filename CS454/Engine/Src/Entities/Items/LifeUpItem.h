@@ -10,6 +10,7 @@ private:
 public:
 	LifeUpItem(Point* spawn);
 	void PickUp(Player& player);
+	void Render(double curr_time)override;
 };
 
 #endif

@@ -132,9 +132,7 @@ void Map::Render(int left_x, int max_x, int y, int max_y) {
 		0,								// dy -> 0
 		0);								// flags
 
-	for (Entity* entity : this->entities) {
-		entity->Render();
-	}
+	
 		
 	al_hold_bitmap_drawing(false);
 	al_unlock_bitmap(this->map_buffer);
@@ -305,3 +303,8 @@ void Map::setEntities(json data) {
 	}
 }
 
+void Map::RenderEntities(double curr_time) {
+	for (auto entity : this->entities) {
+		entity->Render(curr_time);
+	}
+}

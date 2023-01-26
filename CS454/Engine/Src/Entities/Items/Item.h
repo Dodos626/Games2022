@@ -9,11 +9,11 @@ class Item : public Entity {
 	//just exists and is being rendered before enemies and player
 	//if it collides with a player it's picked up
 public:
-	Item(Point* spawn, std::string animationpath);
+	Item(Point* spawn);
 	//~Item();
 	void Collide(Player& player) { this->PickUp(player); };
 	virtual void PickUp(Player &player) = 0;
-	virtual void Render();
+	virtual void Render(double curr_time);
 };
 
 #endif

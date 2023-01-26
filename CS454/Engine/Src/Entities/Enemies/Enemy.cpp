@@ -3,7 +3,7 @@
 
 using json = nlohmann::json;
 
-Enemy::Enemy(Point *spawn, std::string datapath, std::string animationpath) {
+Enemy::Enemy(Point *spawn, std::string datapath) {
 	std::ifstream fin(datapath);
 	json data = json::parse(fin);
 	std::cout << data << std::endl;
@@ -13,7 +13,7 @@ Enemy::Enemy(Point *spawn, std::string datapath, std::string animationpath) {
 	this->points = data["rp"];
 	this->coordinates = spawn;
 	this->animator = NULL;
-	//this->animator = new PlayerAnimator(animationpath, static_cast<int>(this->state), animation_names);
+
 	this->percentage = 100;
 	this->dropped_item = NULL;
 	this->is_alive = true;

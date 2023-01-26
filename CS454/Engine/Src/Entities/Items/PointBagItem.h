@@ -10,6 +10,7 @@ private:
 public:
 	PointBagItem(Point* spawn, bool is_big);
 	void PickUp(Player& player);
+	void Render(double curr_time)override;
 };
 
 #endif

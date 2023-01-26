@@ -83,6 +83,8 @@ public:
 	MapLocations getState() { return this->state; }; 
 
 	Point *GetSpawn() { return this->spawn; }
+	
+	void RenderEntities(double curr_time);
 
 	void ChangeMap(MapLocations state) { this->ChangeMap(stateToString(state)); this->state = state; };
 	void ChangeMap(std::string map);
