@@ -1,7 +1,7 @@
 {
   "total_animations": 3,
   "sprite_sheet_path": "Media/spriteSheet/palace_bot.png",
-  "red_pacman_monster": {
+  "palaceBot_red": {
     "animation_time": 0.5,
     "number_of_frames": 2,
     "mappings": [
@@ -19,7 +19,7 @@
       }
     ]
   },
-  "cyan_pacman_monster": {
+  "palaceBot_cyan": {
     "animation_time": 0.5,
     "number_of_frames": 2,
     "mappings": [
@@ -37,7 +37,7 @@
       }
     ]
   },
-  "blue_pacman_monster": {
+  "palaceBot_blue": {
     "animation_time": 0.5,
     "number_of_frames": 2,
     "mappings": [
