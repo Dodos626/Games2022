@@ -3,7 +3,7 @@ Must:
 * ftiakse ta buttons //TEO
 * Ftiakse Attack animations swsta // TEO
 * Ftiakse collision kai oti kanei attack akrivws mprosta tou // GM
-* Ftiakse Enemies kai items // GM
+* Ftiakse Enemy Physics + kane to player entity // GM
 * Ftiakse Item sprites configs // teo
 * Ftiakse AI // GM + TEO
 * Ftiakse Spells na mporei na ta usarei sto game // Teo
