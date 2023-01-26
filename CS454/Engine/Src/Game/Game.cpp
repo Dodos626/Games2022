@@ -76,7 +76,7 @@ void Game::Initialise(void) {
 	this->key_pressed = false;
 	
 	Action handle_input = [this]() {this->HandleInput(); };
-	Action gravity_pull = [this]() {this->GravityPull(); };
+	Action gravity_pull = [this]() {this->Physics(); };
 	Action check_exit = [this]() {this->CheckExit(); };
 	this->SetInput(handle_input);
 	this->SetPhysics(gravity_pull);
@@ -160,21 +160,23 @@ void Game::MainLoopIteration(void) {
 void Game::HandleInput(void) {
 	int y = this->player1->GetY();
 	int x = this->player1->GetX();
+	int width = 16;
+	int height = this->player1->GetHeight();
 	
-	if (key[ALLEGRO_KEY_UP] && this->TryMoveUp(x, y) && !this->TryMoveDown(x, y)) {
+	if (key[ALLEGRO_KEY_UP] && this->TryMoveUp(x, y, width, height) && !this->TryMoveDown(x, y, width, height)) {
 		this->jump_y = this->player1->GetJumpHeight();
 	}
-	if (key[ALLEGRO_KEY_DOWN] && !this->TryMoveDown(x, y) && !this->player1->isDucking()) {
+	if (key[ALLEGRO_KEY_DOWN] && !this->TryMoveDown(x, y, width, height) && !this->player1->isDucking()) {
 		this->player1->ChangeStance();
 	}
 	if (key[ALLEGRO_KEY_LEFT]) {
 		this->player1->AnimateMoveLeft();
-		if(this->TryMoveLeft(x, y))
+		if(this->TryMoveLeft(x, y, width, height))
 			this->player1->MoveLeft();
 	}
 	if (key[ALLEGRO_KEY_RIGHT]) {
 		this->player1->AnimateMoveRight();
-		if (this->TryMoveRight(x, y))
+		if (this->TryMoveRight(x, y, width, height))
 			this->player1->MoveRight();
 	}
 
@@ -312,42 +314,42 @@ void Game::Register() {
 }
 
 
-bool Game::TryMoveDown(int x, int y) {
+bool Game::TryMoveDown(int x, int y, int width, int height) {
 	if (y + 32 >= this->y_bound)
 		return false;
 	int lx = x / 16;									// left x
-	int dy = (y + this->player1->GetHeight()) / 16;		// left down y + height (tiles)
-	int rx = (x + 15) / 16;								// right x
+	int dy = (y + height) / 16;		// left down y + height (tiles)
+	int rx = (x + width - 1) / 16;								// right x
 	return !(this->background_map->IsSolid(lx, dy) || this->background_map->IsSolid(rx, dy));
 }
 
-bool Game::TryMoveUp(int x, int y){
+bool Game::TryMoveUp(int x, int y, int width, int height){
 	if (y <= 0)
 		return false;
 	int lx = x / 16;			// left x
 	int uy = (y - 1) / 16;		// left upper y - 1
-	int rx = (x + 15) / 16;		// right x
+	int rx = (x + width - 1) / 16;		// right x
 	return !(this->background_map->IsSolid(lx, uy) || this->background_map->IsSolid(rx, uy));
 }
 
-bool Game::TryMoveLeft(int x, int y){
+bool Game::TryMoveLeft(int x, int y, int width, int height){
 	if (x <= 0)
 		return false;
 	int lx = (x - 1) / 16;		// left x - 1
 	int uy = (y) / 16;			// upper y
-	int my = (y + 15) / 16;		// middle y
-	int dy = (y + 31) / 16;		// down y
+	int my = (y + (height/2) - 1) / 16;		// middle y
+	int dy = (y + height - 1) / 16;		// down y
 
 	return !(this->background_map->IsSolid(lx, uy) || this->background_map->IsSolid(lx, my) || this->background_map->IsSolid(lx, dy));
 }
 
-bool Game::TryMoveRight(int x, int y) {
+bool Game::TryMoveRight(int x, int y, int width, int height) {
 	if (x + 16 >= this->x_bound)
 		return false;
-	int rx = (x + 16) / 16;		// right x + 1
+	int rx = (x + width) / 16;		// right x + 1
 	int uy = (y) / 16;			// upper y
-	int my = (y + 15) / 16;		// middle y
-	int dy = (y + 31) / 16;		// down y
+	int my = (y + (height / 2) - 1) / 16;		// middle y
+	int dy = (y + height - 1) / 16;		// down y
 
 	return !(this->background_map->IsSolid(rx, uy) || this->background_map->IsSolid(rx, my) || this->background_map->IsSolid(rx, dy));
 	
@@ -363,7 +365,7 @@ void Game::PauseGame() {
 
 void Game::ResumeGame() {
 	Action handle_input = [this]() {this->HandleInput(); };
-	Action gravity_pull = [this]() {this->GravityPull(); };
+	Action gravity_pull = [this]() {this->Physics(); };
 	this->SetInput(handle_input);
 	this->SetPhysics(gravity_pull);
 	game_state = game_state::playing;
@@ -388,15 +390,17 @@ void Game::HandlePauseInput(void) {
 	this->redraw = true;
 }
 
-void Game::GravityPull() {
+void Game::Physics() {
 	int x = this->player1->GetX();
 	int y = this->player1->GetY();
+	int width = 16;
+	int height = this->player1->GetHeight();
 	int max_y = this->y_bound - 32;
 	int jump_speed = this->player1->GetJumpSpeed();
 	
 	if (this->jump_y > 0)
 		for (int i = 0; i < jump_speed; i++) {
-			if (this->TryMoveUp(x, y)) {
+			if (this->TryMoveUp(x, y, width, height)) {
 				this->player1->MoveUp();
 				this->jump_y--;
 			}
@@ -404,11 +408,11 @@ void Game::GravityPull() {
 				this->jump_y = 0;
 			y = this->player1->GetY();
 		}
-	else if (this->TryMoveDown(x, y))
+	else if (this->TryMoveDown(x, y, width, height))
 	{
 		int fall_speed = this->player1->GetFallSpeed();
 		for (int i = 0; i < fall_speed; i++) {
-			if (this->TryMoveDown(x, y)) {
+			if (this->TryMoveDown(x, y, width, height)) {
 				this->player1->MoveDown();
 			}
 			y = this->player1->GetY();

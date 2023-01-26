@@ -29,6 +29,7 @@ private :
  	int attack_power;	//attack damage
 	bool duck;
 	int height;
+	int width;
 	int damage_reduction;
 	int keys;
 
@@ -81,6 +82,7 @@ public:
 	int GetAttackPower(void) const { return attack_power; }
 	int GetSpeed(void) const { return speed; }
 	int GetHeight(void) const { return height; }
+	int GetWidth(void) const { return this->width; }
 	int GetPoints(void) const { return points; }
 	int GetLifes(void) const { return this->lives; }
 	int GetMana(void) const { return mana; }

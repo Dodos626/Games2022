@@ -43,6 +43,7 @@ Player::Player(Point* spawn, int screen_width, int map_width, int screen_dx) {
 	this->camera_dx = screen_dx;
 	this->duck = false;
 	this->height = 32;
+	this->width = 16;
 	this->keys = 0;
 
 	//initiate spell book and spells

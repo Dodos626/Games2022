@@ -140,11 +140,11 @@ public:
 	void DrawBufferToScreen(void);
 
 	//Collision Detector
-	bool TryMoveDown(int x, int y);
-	bool TryMoveUp(int x, int y);
-	bool TryMoveLeft(int x, int y);
-	bool TryMoveRight(int x, int y);
+	bool TryMoveDown(int x, int y, int width, int height);
+	bool TryMoveUp(int x, int y, int width, int height);
+	bool TryMoveLeft(int x, int y, int width, int height);
+	bool TryMoveRight(int x, int y, int width, int height);
 
-	void GravityPull();
+	void GravityPull(void);
 };
 #endif
