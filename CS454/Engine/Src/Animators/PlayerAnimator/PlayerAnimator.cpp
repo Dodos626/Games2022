@@ -48,33 +48,33 @@ void PlayerAnimator::render(int target_x, int target_y, double curr_time, int cu
 	al_draw_bitmap_region(this->sprite_sheet, this->curr_mapping->getX(), this->curr_mapping->getY(), this->curr_mapping->getWidth(), this->curr_mapping->getHeight(), target_x, target_y, 0);
 }; 
 
-bool PlayerAnimator::renderAttack(int target_x, int target_y, double curr_time, int curr_state) {
 
-	Mappings *next_mapping = this->animations.at(this->curr_selected_animation)->getMapping(curr_time); // take next mapping
 
-	if ( this->curr_mapping->getX() != next_mapping->getX() || this->curr_mapping->getY() != next_mapping->getY()) { // if the next mapping is different
-		
+
+bool PlayerAnimator::renderWholeAnimationWithFixFrame(int target_x, int target_y, double curr_time, int fix_x_amount, int fix_y_amount, int frame_to_fix) {
+	Mappings* next_mapping = this->animations.at(this->curr_selected_animation)->getMapping(curr_time); // take next mapping
+
+	if (this->curr_mapping->getX() != next_mapping->getX() || this->curr_mapping->getY() != next_mapping->getY()) { // if the next mapping is different
+
 		this->total_animation_frames -= 1;
 
 		std::cout << "remaining frames : " << this->total_animation_frames << std::endl;
 	}
-	
 
-	int fix_x = 0;
-	// the curr_state is fixed to 11 for right attack and 10 for left attack and crouch left attack is 12
-	//so we can reuse this function in crouch attack right without mendling with it's x
-	if (this->total_animation_frames == 2 && curr_state  == 11) { 
-		fix_x = -16; //first frame of right attack needs to render 16 pixels to the left
-	}
-	else if (this->total_animation_frames <= 1 && (curr_state == 10 || curr_state == 12)) { 
-		fix_x = -16; // last frame of left attack and left crouch attack needs to render 16 pixels to the left
-	}
-	
-	if(this->total_animation_frames != 0) // the last frame will be repeating the first frame
+	if (this->total_animation_frames != 0) // the last frame will be repeating the first frame
 		this->curr_mapping = next_mapping; // in order to hack it we extend the attack for 1 more render
-	
 
-	al_draw_bitmap_region(this->sprite_sheet, this->curr_mapping->getX(), this->curr_mapping->getY(), this->curr_mapping->getWidth(), this->curr_mapping->getHeight(), target_x + fix_x, target_y, 0);
+
+	// if we are at the frame that needs fix
+	// or if we are on the hack frame and the frame to fix was the previous that we hold for 1 more render
+	if (this->total_animation_frames == frame_to_fix || (this->total_animation_frames == 0 && frame_to_fix == 1)){
+		al_draw_bitmap_region(this->sprite_sheet, this->curr_mapping->getX(), this->curr_mapping->getY(), this->curr_mapping->getWidth(), this->curr_mapping->getHeight(), target_x + fix_x_amount, target_y + fix_y_amount, 0);
+	}
+	else {
+		al_draw_bitmap_region(this->sprite_sheet, this->curr_mapping->getX(), this->curr_mapping->getY(), this->curr_mapping->getWidth(), this->curr_mapping->getHeight(), target_x, target_y, 0);
+	}
+
+	
 
 	if (this->total_animation_frames == 0) {
 		return true;
@@ -82,4 +82,7 @@ bool PlayerAnimator::renderAttack(int target_x, int target_y, double curr_time, 
 	else {
 		return false;
 	}
-};
+}
+
+
+// fix_x_amount , frame_of_fix

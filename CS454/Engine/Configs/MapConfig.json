@@ -63,7 +63,7 @@
     },
     "entities": {
       "enemies": {
-        "Guma": [
+        "Staflos": [
           {
             "spawn_x": 35,
             "spawn_y": 192

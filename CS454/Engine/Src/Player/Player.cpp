@@ -86,21 +86,34 @@ void Player::Render(double curr_time) {
 	if (this->x > this->max_moving_x)
 		x += this->x - this->max_moving_x;
 	al_draw_rectangle(x, this->y, x + 16, this->y + 32, al_map_rgb(150, 0, 0), 0);
-	
+
 	if (!this->is_attacking) //if not attacking simple render
 		this->animator->render(x, this->y, curr_time, static_cast<int>(this->state));
 	else // if attacking
 	{
-		
-		if (this->animator->renderAttack(x, this->y, curr_time, static_cast<int>(this->state))) // if attack animation is over
-		{
+		bool flag = false;
+		if (this->state == p_state::atck_left || this->state == p_state::crouch_atck_left) {
+			flag = this->animator->renderWholeAnimationWithFixFrame(x, this->y, curr_time, -16, 0, 1);
+		}
+		else if (this->state == p_state::atck_right) {
+			flag = this->animator->renderWholeAnimationWithFixFrame(x, this->y, curr_time, -16, 0, 2);
+		}
+		else {
+			flag = this->animator->renderWholeAnimationWithFixFrame(x, this->y, curr_time, 0, 0, 0);
+		}
+
+
+
+		if (flag) {
 			this->is_attacking = false;
-			if(this->duck)
+			if (this->duck)
 				this->setStateWithDirection(p_state::crouch_left);
 			else
 				this->setStateWithDirection(p_state::idle_left);
 		}
-		
+
+
+
 	}
 	if (this->stats_display)
 		this->stats_display->Render();
