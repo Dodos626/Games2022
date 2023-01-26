@@ -3,7 +3,12 @@
 
 using json = nlohmann::json;
 
-Enemy::Enemy(Point *spawn, std::string datapath) {
+Enemy::Enemy(Point *spawn, std::string datapath, Action tryMoveLeft_, Action tryMoveRight_, Action tryMoveUp_, Action tryMoveDown_):
+	tryMoveLeft(tryMoveLeft_),
+	tryMoveRight(tryMoveRight_),
+	tryMoveUp(tryMoveUp_),
+	tryMoveDown(tryMoveDown_)
+{
 	std::ifstream fin(datapath);
 	json data = json::parse(fin);
 	std::cout << data << std::endl;

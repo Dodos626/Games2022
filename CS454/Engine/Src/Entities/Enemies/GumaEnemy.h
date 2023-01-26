@@ -21,8 +21,8 @@ private:
 public:
 	void Render(double curr_time, int relative_x) override;
 	int GetStateToInt(guma_state state);
-	GumaEnemy(Point *spawn);
-	void AI();
+	GumaEnemy(Point* spawn, Action tryMoveLeft_, Action tryMoveRight_, Action tryMoveUp_, Action tryMoveDown_);
+	void AI(Point player_position);
 };
 
 

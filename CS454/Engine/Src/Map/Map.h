@@ -56,6 +56,9 @@ private:
 	void precomputeBg();
 
 	void cleanBuffer(ALLEGRO_BITMAP* buffer);
+
+	//collision detector helpers
+	int x_bound, y_bound;
 public:
 	Map(std::string Path);
 	~Map() {
@@ -89,6 +92,25 @@ public:
 
 	void ChangeMap(MapLocations state) { this->ChangeMap(stateToString(state)); this->state = state; };
 	void ChangeMap(std::string map);
+
+
+	void AiUpdate(Point player_position);
+
+	//Collision Detector
+	bool TryMoveDown(int x, int y, int width, int height);
+	bool TryMoveUp(int x, int y, int width, int height);
+	bool TryMoveLeft(int x, int y, int width, int height);
+	bool TryMoveRight(int x, int y, int width, int height);
+
+	//returns the X that is the offset of the camera relating to the map
+	int GetCameraOffsetX(int camera_x, int camera_width) {
+		int camera_stops_at = MUL_16(this->bgtilemap->getTilemapWidth());
+
+		if (camera_x + camera_width > camera_stops_at) {
+			camera_x = camera_stops_at - camera_width;
+		}
+		return camera_x;
+	}
 
 };
 

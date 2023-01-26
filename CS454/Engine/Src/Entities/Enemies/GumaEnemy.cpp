@@ -1,6 +1,6 @@
 #include "GumaEnemy.h"
 
-GumaEnemy::GumaEnemy(Point *spawn) : Enemy(spawn, "Engine/Configs/enemy/GumaConfig.json") {
+GumaEnemy::GumaEnemy(Point* spawn, Action tryMoveLeft_, Action tryMoveRight_, Action tryMoveUp_, Action tryMoveDown_) : Enemy(spawn, "Engine/Configs/enemy/GumaConfig.json", tryMoveLeft_, tryMoveRight_, tryMoveUp_, tryMoveDown_){
 	this->animator = new PlayerAnimator("Engine/Configs/enemy/GumaAnimatorConfig.json",0,animation_names);
 	this->name = "Guma";
 }
@@ -11,7 +11,7 @@ int GumaEnemy::GetStateToInt(guma_state state){
 }
 
 
-void GumaEnemy::AI() {
+void GumaEnemy::AI(Point player_position) {
 
 }
 

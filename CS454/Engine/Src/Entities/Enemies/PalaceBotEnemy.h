@@ -14,10 +14,11 @@ enum class palaceBot_state {
 
 class PalaceBotEnemy : public Enemy {
 private:
+	bool moves_right = false;
 	palaceBot_state state = palaceBot_state::red;
 public:
-	PalaceBotEnemy(Point* spawn);
-	void AI();
+	PalaceBotEnemy(Point* spawn, Action tryMoveLeft_, Action tryMoveRight_, Action tryMoveUp_, Action tryMoveDown_);
+	void AI(Point player_position);
 	int GetStateToInt(palaceBot_state state);
 	void Render(double curr_time, int relative_x)override;
 };

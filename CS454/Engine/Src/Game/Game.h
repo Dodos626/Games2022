@@ -68,9 +68,6 @@ private:
 	unsigned char key[ALLEGRO_KEY_MAX];
 	bool key_pressed;
 
-	// bounds for x,y coordinates
-	int y_bound;
-	int x_bound;
 
 	// Physics
 	int jump_y;
@@ -139,11 +136,7 @@ public:
 	void StartRender(void);
 	void DrawBufferToScreen(void);
 
-	//Collision Detector
-	bool TryMoveDown(int x, int y, int width, int height);
-	bool TryMoveUp(int x, int y, int width, int height);
-	bool TryMoveLeft(int x, int y, int width, int height);
-	bool TryMoveRight(int x, int y, int width, int height);
+
 
 	void HandlePhysics(void);
 	void HandlePlayerPhysics(void);

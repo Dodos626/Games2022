@@ -16,8 +16,8 @@ private:
 	wosu_state state = wosu_state::move_left;
 	int GetStateToInt(wosu_state state);
 public:
-	WosuEnemy(Point* spawn);
-	void AI();
+	WosuEnemy(Point* spawn, Action tryMoveLeft_, Action tryMoveRight_, Action tryMoveUp_, Action tryMoveDown_);
+	void AI(Point player_position);
 	void Render(double curr_time, int relative_x)override;
 };
 

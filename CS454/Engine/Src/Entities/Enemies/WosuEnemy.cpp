@@ -1,11 +1,11 @@
 #include "WosuEnemy.h"
 
-WosuEnemy::WosuEnemy(Point* spawn) : Enemy(spawn, "Engine/Configs/enemy/WosuConfig.json") {
+WosuEnemy::WosuEnemy(Point* spawn, Action tryMoveLeft_, Action tryMoveRight_, Action tryMoveUp_, Action tryMoveDown_) : Enemy(spawn, "Engine/Configs/enemy/WosuConfig.json", tryMoveLeft_, tryMoveRight_, tryMoveUp_, tryMoveDown_){
 	this->name = "Wosu";
 	this->animator = new PlayerAnimator("Engine/Configs/enemy/WosuAnimatorConfig.json", 0, { "move_left","move_right"});
 }
 
-void WosuEnemy::AI() {
+void WosuEnemy::AI(Point player_position) {
 
 }
 

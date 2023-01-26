@@ -14,12 +14,12 @@
 #include "../Entities/Items/LifeUpItem.h"
 #include "../Entities/Items/KeyItem.h"
 #include "../Entities/Items/PointBagItem.h"
-
 #include "Point.h"
 
 
 namespace MapEntities {
-	Enemy* GetEnemyFromString(std::string enemy_name, Point* spawn);
+	using Action = std::function<bool(int, int, int, int)>;
+	Enemy* GetEnemyFromString(std::string enemy_name, Point* spawn, Action tryMoveLeft, Action tryMoveRight, Action tryMoveUp, Action tryMoveDown);
 	Item* GetItemFromString(std::string item_name, Point* spawn);
 }
 

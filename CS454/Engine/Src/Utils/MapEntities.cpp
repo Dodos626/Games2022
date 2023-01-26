@@ -1,14 +1,14 @@
 #include "MapEntities.h"
 
-Enemy* MapEntities::GetEnemyFromString(std::string enemy_name, Point* spawn) {
+Enemy* MapEntities::GetEnemyFromString(std::string enemy_name, Point* spawn, Action tryMoveLeft, Action tryMoveRight, Action tryMoveUp, Action tryMoveDown) {
 	if (enemy_name == "Guma")
-		return new GumaEnemy(spawn);
+		return new GumaEnemy(spawn, tryMoveLeft, tryMoveRight, tryMoveUp, tryMoveDown);
 	else if (enemy_name == "PalaceBot")
-		return new PalaceBotEnemy(spawn);
+		return new PalaceBotEnemy(spawn, tryMoveLeft, tryMoveRight, tryMoveUp, tryMoveDown);
 	else if (enemy_name == "Wosu")
-		return new WosuEnemy(spawn);
+		return new WosuEnemy(spawn, tryMoveLeft, tryMoveRight, tryMoveUp, tryMoveDown);
 	else if (enemy_name == "Staflos")
-		return new StaflosEnemy(spawn);
+		return new StaflosEnemy(spawn, tryMoveLeft, tryMoveRight, tryMoveUp, tryMoveDown);
 	assert(0);
 	return NULL;
 }

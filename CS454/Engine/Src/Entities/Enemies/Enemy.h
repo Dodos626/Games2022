@@ -10,6 +10,10 @@
 
 class Enemy : public Entity {
 protected:
+	using Action = std::function<bool(int, int, int, int)>; // to bind the tryMoveX functions
+
+	Action tryMoveLeft, tryMoveRight, tryMoveUp, tryMoveDown;
+	
 	int health;
 	int damage;
 	int points;
@@ -23,9 +27,9 @@ protected:
 	void _Death();
 	
 public:
-	Enemy(Point* spawn, std::string datapath);
+	Enemy(Point* spawn, std::string datapath, Action tryMoveLeft_, Action tryMoveRight_, Action tryMoveUp_, Action tryMoveDown_);
 
-	virtual void AI() = 0;
+
 	void Collide(Player& player);
 
 	int GetHP() const { return this->health; }

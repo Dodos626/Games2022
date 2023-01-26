@@ -6,9 +6,11 @@
 #include <allegro5/allegro_primitives.h>
 #include <iostream>
 #include "../Player/Player.h"
+#include "../Utils/Point.h"
 
 class Entity {
 protected:
+		
 	Point *coordinates; // where it is
 	int height, width; // size
 	int speed;
@@ -27,6 +29,8 @@ public:
 	void MoveUp();
 	void MoveDown();
 
+
+	virtual void AI(Point player_position) { return; }; // all items take this implementation , enemies extend it
 
 	virtual void Render(double curr_time, int relative_x);
 	bool CheckCollision(Point* p) { return *p == *this->coordinates; }

@@ -70,8 +70,7 @@ void Game::Initialise(void) {
 	
 	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 	
-	this->y_bound = MUL_16(this->background_map->getTileMap()->getTilemapHeight());
-	this->x_bound = MUL_16(this->background_map->getTileMap()->getTilemapWidth());
+
 	this->jump_y = 0;
 	this->key_pressed = false;
 	
@@ -114,6 +113,7 @@ void Game::MainLoopIteration(void) {
 	case ALLEGRO_EVENT_TIMER:
 
 		this->Input();
+		this->background_map->AiUpdate(Point(this->player1->GetX(), this->player1->GetY())); //FIX TODO proswrino tha mpei sto AI kai tha ginete me dynamic bind
 		this->Physics();
 		this->UserCode();
 		
@@ -163,20 +163,20 @@ void Game::HandleInput(void) {
 	int width = this->player1->GetWidth();
 	int height = this->player1->GetHeight();
 	
-	if (key[ALLEGRO_KEY_UP] && this->TryMoveUp(x, y, width, height) && !this->TryMoveDown(x, y, width, height)) {
+	if (key[ALLEGRO_KEY_UP] && this->background_map->TryMoveUp(x, y, width, height) && !this->background_map->TryMoveDown(x, y, width, height)) {
 		this->jump_y = this->player1->GetJumpHeight();
 	}
-	if (key[ALLEGRO_KEY_DOWN] && !this->TryMoveDown(x, y, width, height) && !this->player1->isDucking()) {
+	if (key[ALLEGRO_KEY_DOWN] && !this->background_map->TryMoveDown(x, y, width, height) && !this->player1->isDucking()) {
 		this->player1->ChangeStance();
 	}
 	if (key[ALLEGRO_KEY_LEFT]) {
 		this->player1->AnimateMoveLeft();
-		if(this->TryMoveLeft(x, y, width, height))
+		if(this->background_map->TryMoveLeft(x, y, width, height))
 			this->player1->MoveLeft();
 	}
 	if (key[ALLEGRO_KEY_RIGHT]) {
 		this->player1->AnimateMoveRight();
-		if (this->TryMoveRight(x, y, width, height))
+		if (this->background_map->TryMoveRight(x, y, width, height))
 			this->player1->MoveRight();
 	}
 
@@ -242,11 +242,14 @@ void Game::ChangeMap(std::string new_map, Point *spawn_location) {
 void Game::Render(void) {
 	this->StartRender();
 	al_hold_bitmap_drawing(1);
+
+	//briskei to camera_x to opoio einai poso exei proxwrisei to screen se sxesi me ta relative location tu map
+	int camera_x = this->background_map->GetCameraOffsetX(this->player1->GetCameraX(), this->screen->GetScaledWidth());
 	
 	this->background_map->RenderBg(this->player1->GetCameraX(), this->screen->GetScaledWidth(), 0, this->screen->GetScaledHeight());
 	this->background_map->Render(this->player1->GetCameraX(), this->screen->GetScaledWidth(), 0, this->screen->GetScaledHeight());
 	this->player1->Render(this->timer->getDelta());
-	this->background_map->RenderEntities(this->timer->getDelta(),this->player1->GetCameraX());
+	this->background_map->RenderEntities(this->timer->getDelta(), camera_x);
 	
 	al_hold_bitmap_drawing(0);
 	this->DrawBufferToScreen();
@@ -314,46 +317,7 @@ void Game::Register() {
 }
 
 
-bool Game::TryMoveDown(int x, int y, int width, int height) {
-	if (y + height >= this->y_bound)
-		return false;
-	int lx = x / 16;									// left x
-	int dy = (y + height) / 16;		// left down y + height (tiles)
-	int rx = (x + width - 1) / 16;								// right x
-	return !(this->background_map->IsSolid(lx, dy) || this->background_map->IsSolid(rx, dy));
-}
 
-bool Game::TryMoveUp(int x, int y, int width, int height){
-	if (y <= 0)
-		return false;
-	int lx = x / 16;			// left x
-	int uy = (y - 1) / 16;		// left upper y - 1
-	int rx = (x + width - 1) / 16;		// right x
-	return !(this->background_map->IsSolid(lx, uy) || this->background_map->IsSolid(rx, uy));
-}
-
-bool Game::TryMoveLeft(int x, int y, int width, int height){
-	if (x <= 0)
-		return false;
-	int lx = (x - 1) / 16;		// left x - 1
-	int uy = (y) / 16;			// upper y
-	int my = (y + (height/2) - 1) / 16;		// middle y
-	int dy = (y + height - 1) / 16;		// down y
-
-	return !(this->background_map->IsSolid(lx, uy) || this->background_map->IsSolid(lx, my) || this->background_map->IsSolid(lx, dy));
-}
-
-bool Game::TryMoveRight(int x, int y, int width, int height) {
-	if (x + 16 >= this->x_bound)
-		return false;
-	int rx = (x + width) / 16;		// right x + 1
-	int uy = (y) / 16;			// upper y
-	int my = (y + (height / 2) - 1) / 16;		// middle y
-	int dy = (y + height - 1) / 16;		// down y
-
-	return !(this->background_map->IsSolid(rx, uy) || this->background_map->IsSolid(rx, my) || this->background_map->IsSolid(rx, dy));
-	
-}
 
 void Game::PauseGame() {
 	this->game_state = game_state::paused;
@@ -404,7 +368,7 @@ void Game::HandlePlayerPhysics(void) {
 	if (this->jump_y > 0) {
 		int jump_speed = this->player1->GetJumpSpeed();
 		for (int i = 0; i < jump_speed; i++) {
-			if (this->TryMoveUp(x, y, width, height)) {
+			if (this->background_map->TryMoveUp(x, y, width, height)) {
 				this->player1->MoveUp();
 				this->jump_y--;
 			}
@@ -413,11 +377,11 @@ void Game::HandlePlayerPhysics(void) {
 			y = this->player1->GetY();
 		}
 	}
-	else if (this->TryMoveDown(x, y, width, height))
+	else if (this->background_map->TryMoveDown(x, y, width, height))
 	{
 		int fall_speed = this->player1->GetFallSpeed();
 		for (int i = 0; i < fall_speed; i++) {
-			if (this->TryMoveDown(x, y, width, height)) {
+			if (this->background_map->TryMoveDown(x, y, width, height)) {
 				this->player1->MoveDown();
 			}
 			else
@@ -439,10 +403,10 @@ void Game::HandleMapEntitiesPhysics(void) {
 		int width = entity->GetWidth();
 		int height = entity->GetHeight();
 		int fall_speed = this->player1->GetFallSpeed();
-		if (this->TryMoveDown(x, y, width, height))
+		if (this->background_map->TryMoveDown(x, y, width, height))
 		{
 			for (int i = 0; i < fall_speed; i++) {
-				if (this->TryMoveDown(x, y, width, height)) {
+				if (this->background_map->TryMoveDown(x, y, width, height)) {
 					entity->MoveDown();
 				}
 				else

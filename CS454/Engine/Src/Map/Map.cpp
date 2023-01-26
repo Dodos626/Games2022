@@ -27,6 +27,8 @@ Map::Map(std::string path) {
 	this->mapBG_buffer = al_create_bitmap(MUL_16(this->data["loading_screen"]["background"]["CSVwidth"]), MUL_16(this->data["loading_screen"]["background"]["CSVheight"]));
 	this->ChangeMap(this->state);
 	//al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
+	this->y_bound = MUL_16(this->getTileMap()->getTilemapHeight());
+	this->x_bound = MUL_16(this->getTileMap()->getTilemapWidth());
 }
 
 
@@ -286,13 +288,20 @@ void Map::setExitPoints(json data) {
 		}
 	}
 }
-
 void Map::setEntities(json data) {
 	this->entities.clear();
 	for (auto enemy_pair : data["enemies"].items()) {
 		std::string enemy_name = enemy_pair.key();
 		for (auto spawn_location : enemy_pair.value()) {
-			this->entities.push_back(MapEntities::GetEnemyFromString(enemy_name, new Point(spawn_location["spawn_x"], spawn_location["spawn_y"])));
+			this->entities.push_back(
+				MapEntities::GetEnemyFromString(
+					enemy_name,
+					new Point(spawn_location["spawn_x"], spawn_location["spawn_y"]),
+						std::bind(&Map::TryMoveLeft, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4),
+						std::bind(&Map::TryMoveRight, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4),
+						std::bind(&Map::TryMoveUp, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4),
+						std::bind(&Map::TryMoveDown, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4)
+					));
 		}
 	}
 	for (auto item_pair : data["items"].items()) {
@@ -307,4 +316,54 @@ void Map::RenderEntities(double curr_time, int relative_x) {
 	for (auto entity : this->entities) {
 		entity->Render(curr_time,relative_x);
 	}
+}
+
+void Map::AiUpdate(Point player_position) {
+	for (auto entity : this->entities) {
+		entity->AI(player_position);
+	}
+}
+
+
+//COLLISION DETECTORS
+
+bool Map::TryMoveDown(int x, int y, int width, int height) {
+	if (y + height >= this->y_bound)
+		return false;
+	int lx = x / 16;									// left x
+	int dy = (y + height) / 16;		// left down y + height (tiles)
+	int rx = (x + width - 1) / 16;								// right x
+	return !(this->IsSolid(lx, dy) || this->IsSolid(rx, dy));
+}
+
+bool Map::TryMoveUp(int x, int y, int width, int height) {
+	if (y <= 0)
+		return false;
+	int lx = x / 16;			// left x
+	int uy = (y - 1) / 16;		// left upper y - 1
+	int rx = (x + width - 1) / 16;		// right x
+	return !(this->IsSolid(lx, uy) || this->IsSolid(rx, uy));
+}
+
+bool Map::TryMoveLeft(int x, int y, int width, int height) {
+	if (x <= 0)
+		return false;
+	int lx = (x - 1) / 16;		// left x - 1
+	int uy = (y) / 16;			// upper y
+	int my = (y + (height / 2) - 1) / 16;		// middle y
+	int dy = (y + height - 1) / 16;		// down y
+
+	return !(this->IsSolid(lx, uy) || this->IsSolid(lx, my) || this->IsSolid(lx, dy));
+}
+
+bool Map::TryMoveRight(int x, int y, int width, int height) {
+	if (x + 16 >= this->x_bound)
+		return false;
+	int rx = (x + width) / 16;		// right x + 1
+	int uy = (y) / 16;			// upper y
+	int my = (y + (height / 2) - 1) / 16;		// middle y
+	int dy = (y + height - 1) / 16;		// down y
+
+	return !(this->IsSolid(rx, uy) || this->IsSolid(rx, my) || this->IsSolid(rx, dy));
+
 }
