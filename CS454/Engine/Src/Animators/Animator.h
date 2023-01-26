@@ -28,7 +28,7 @@ public:
 		al_destroy_bitmap(this->sprite_sheet);
 	}
 	//VIRTUAL
-	virtual void render(int target_x, int target_y, double curr_time) = 0; // render the right animations->mapping
+	virtual void render(int target_x, int target_y, double curr_time, int curr_state) = 0; // render the right animations->mapping
 	virtual void selectAnimation(int animation_id) = 0;
 
 

@@ -167,11 +167,15 @@ void Game::HandleInput(void) {
 	if (key[ALLEGRO_KEY_DOWN] && !this->TryMoveDown(x, y) && !this->player1->isDucking()) {
 		this->player1->ChangeStance();
 	}
-	if (key[ALLEGRO_KEY_LEFT] && this->TryMoveLeft(x, y)) {
-		this->player1->MoveLeft();
+	if (key[ALLEGRO_KEY_LEFT]) {
+		this->player1->AnimateMoveLeft();
+		if(this->TryMoveLeft(x, y))
+			this->player1->MoveLeft();
 	}
-	if (key[ALLEGRO_KEY_RIGHT] && this->TryMoveRight(x, y)) {
-		this->player1->MoveRight();
+	if (key[ALLEGRO_KEY_RIGHT]) {
+		this->player1->AnimateMoveRight();
+		if (this->TryMoveRight(x, y))
+			this->player1->MoveRight();
 	}
 
 	if (key[ALLEGRO_KEY_0]) {
@@ -327,7 +331,6 @@ bool Game::TryMoveUp(int x, int y){
 }
 
 bool Game::TryMoveLeft(int x, int y){
-	this->player1->AnimateMoveLeft();
 	if (x <= 0)
 		return false;
 	int lx = (x - 1) / 16;		// left x - 1
@@ -339,7 +342,6 @@ bool Game::TryMoveLeft(int x, int y){
 }
 
 bool Game::TryMoveRight(int x, int y) {
-	this->player1->AnimateMoveRight();
 	if (x + 16 >= this->x_bound)
 		return false;
 	int rx = (x + 16) / 16;		// right x + 1

@@ -38,9 +38,7 @@ void PlayerAnimator::registerSingleAnimation(json data) {
 	this->animations.push_back(new SingleAnimation(data));
 }; 
 
-void PlayerAnimator::render(int target_x, int target_y, double curr_time) {
-	exit(EXIT_FAILURE);
-}
+
 
 void PlayerAnimator::render(int target_x, int target_y, double curr_time, int curr_state){
 	if (curr_state != this->curr_selected_animation) {

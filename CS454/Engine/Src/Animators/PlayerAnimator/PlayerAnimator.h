@@ -14,7 +14,6 @@ public:
 	PlayerAnimator(std::string path, int curr_state, std::vector<std::string> animation_names);
 	void render(int target_x, int target_y, double curr_time, int curr_state); // render the right animations->mapping
 	void selectAnimation(int animation_id);
-	void render(int target_x, int target_y, double curr_time);
 	bool renderAttack(int target_x, int target_y, double curr_time, int curr_state);
 	
 	// the + 1 part is because if we need 2 frames, we need to render the first frame 
