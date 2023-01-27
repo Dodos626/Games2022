@@ -73,6 +73,7 @@ private:
 	int jump_y;
 
 	// Ai
+	void HandleAI();
 	bool ai_flag = false;
 
 

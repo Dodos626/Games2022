@@ -416,6 +416,7 @@ void Map::PlayerAttack(Player *player) {
 					this->items.push_back(drop);
 
 				this->enemies.erase(this->enemies.begin() + i);
+				return;
 			}
 		}
 			
@@ -423,6 +424,41 @@ void Map::PlayerAttack(Player *player) {
 	}
 
 }
-void Map::EnemyAttack(Enemy *enemy, Player *player) {
-	
+void Map::CheckPlayerCollisionsWithEntities(Player *player) {
+	int pl_ux = player->GetX();
+	int pl_ly = player->GetY();
+	int pl_width = player->GetWidth();
+	int pl_height = player->GetHeight();
+	Point* p = new Point(pl_ux, pl_ly);
+	for (Enemy* enemy : this->enemies) {
+		int en_ux = enemy->GetX();
+		int en_ly = enemy->GetY();
+		int en_width = enemy->GetWidth();
+		int en_height = enemy->GetHeight();
+		Point ul(en_ux, en_ly);
+		Point dl(en_ux, en_ly + en_height);
+		Point ur(en_ux + en_width, en_ly);
+		Point dr(en_ux + en_width, en_ly + en_height);
+		if (p->InRectangle(ul, pl_width, pl_height) || p->InRectangle(dl, pl_width, pl_height) || p->InRectangle(ur, pl_width, pl_height) || p->InRectangle(dr, pl_width, pl_height)) {
+			player->TakeDamage(enemy->GetDamage());
+			enemy->ChangeDirection();
+			return;
+		}
+	}
+	for (int i = 0; i < this->items.size(); i++) {
+		Item* item = this->items[i];
+		int en_ux = item->GetX();
+		int en_ly = item->GetY();
+		int en_width = item->GetWidth();
+		int en_height = item->GetHeight();
+		Point ul(en_ux, en_ly);
+		Point dl(en_ux, en_ly + en_height);
+		Point ur(en_ux + en_width, en_ly);
+		Point dr(en_ux + en_width, en_ly + en_height);
+		if (p->InRectangle(ul, pl_width, pl_height) || p->InRectangle(dl, pl_width, pl_height) || p->InRectangle(ur, pl_width, pl_height) || p->InRectangle(dr, pl_width, pl_height)) {
+			item->PickUp(*player);
+			this->items.erase(this->items.begin() + i);
+			return;
+		}
+	}
 }

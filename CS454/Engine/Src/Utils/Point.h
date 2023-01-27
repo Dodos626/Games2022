@@ -19,6 +19,8 @@ public:
 	void AddToX(int dx) { this->x += dx; }
 	void AddToY(int dy) { this->y += dy; }
 
+	bool InRectangle(Point &p, int dx, int dy);
+
 	bool operator==(const Point &p2) { return this->x == p2.x && this->y == p2.y; };
 	Point *operator+(Point* p2);
 	int operator-(Point* p2);

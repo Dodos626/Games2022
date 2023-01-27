@@ -102,7 +102,7 @@ public:
 
 	void AiUpdate(Point player_position);
 	void PlayerAttack(Player* player);
-	void EnemyAttack(Enemy* enemy, Player *player);
+	void CheckPlayerCollisionsWithEntities(Player *player);
 
 	//Collision Detector
 	bool TryMoveDown(int x, int y, int width, int height);

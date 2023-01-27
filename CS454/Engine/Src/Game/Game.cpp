@@ -77,9 +77,11 @@ void Game::Initialise(void) {
 	Action handle_input = [this]() {this->HandleInput(); };
 	Action gravity_pull = [this]() {this->HandlePhysics(); };
 	Action check_exit = [this]() {this->CheckExit(); };
+	Action handle_ai = [this]() {this->HandleAI(); };
 	this->SetInput(handle_input);
 	this->SetPhysics(gravity_pull);
 	this->SetUser(check_exit);
+	this->SetAI(handle_ai);
 	
 }
 void Game::CastThunder() {
@@ -116,15 +118,7 @@ void Game::MainLoopIteration(void) {
 	case ALLEGRO_EVENT_TIMER:
 
 		this->Input();
-		
-		if (ai_flag) { // ai moves once per 2 loops
-			this->background_map->AiUpdate(Point(this->player1->GetX(), this->player1->GetY())); //FIX TODO proswrino tha mpei sto AI kai tha ginete me dynamic bind
-			ai_flag = false;
-		}
-		else {
-			ai_flag = true;
-		}
-		
+		this->AI();
 		this->Physics();
 		this->UserCode();
 		
@@ -169,6 +163,17 @@ void Game::MainLoopIteration(void) {
 	
 	this->timer->fps();
 
+}
+
+void Game::HandleAI(void) {
+	if (ai_flag) { // ai moves once per 2 loops
+		this->background_map->AiUpdate(Point(this->player1->GetX(), this->player1->GetY())); //FIX TODO proswrino tha mpei sto AI kai tha ginete me dynamic bind
+		
+		this->ai_flag = false;
+	}
+	else {
+		this->ai_flag = true;
+	}
 }
 
 void Game::HandleInput(void) {
@@ -399,6 +404,7 @@ void Game::HandlePhysics(void) {
 	this->HandlePlayerPhysics();
 	this->HandleMapEnemiesPhysics();
 	this->HandleMapItemPhysics();
+	this->background_map->CheckPlayerCollisionsWithEntities(this->player1);
 }
 
 void Game::HandlePlayerPhysics(void) {
