@@ -248,12 +248,14 @@ Point Player::GetAttackPoint() {
 		x -= 16;
 	}
 	else {
-		x += 16;
+
+		x += 31; 
 	}
 	if (this->duck) {
-		y += 16; 
+		y += 16; // y = 0 is top y = max_y is bottom
 	}
-
+	std::cout << "Player point : " << this->x/16 << " :x " << this->y / 16 << " :y \n";
+	std::cout << "Attack point : " << x / 16 << " :x " << y / 16 << " :y \n";
 	return Point(x, y);
 }
 
