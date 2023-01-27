@@ -192,7 +192,14 @@ void Game::HandleInput(void) {
 		this->music_player->Stop();
 	}
 	if (key[ALLEGRO_KEY_A] && !this->key_pressed) {
-		this->player1->Attack();
+		Point of_attack = this->player1->GetAttackPoint();
+		if (this->background_map->TryAttack(of_attack.GetX(), of_attack.GetY())) {
+			this->player1->Attack();
+		}
+		else {
+			this->player1->CancelledAttack();
+		}
+		
 		this->key_pressed = true;
 	}
 	//TO CHECK IF MAPS CHANGE 

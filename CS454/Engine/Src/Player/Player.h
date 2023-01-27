@@ -42,6 +42,9 @@ private :
 	int jump_speed;
 	int jump_height;
 	bool is_attacking = false;
+	// in case of a cancelled attack this offset applies to fix the right frame
+	// because the animation will be shorter so  cancelled_attack_offset = Frames to render - Total frames
+	int cancelled_attack_offset = 0; 
 	
 	//spells
 	Spell_Book spell_book;
@@ -106,7 +109,8 @@ public:
 	//Move
 	void AnimateMoveRight();
 	void AnimateMoveLeft();
-	void Attack();
+
+	
 
 	void ChangeStance();
 	void Duck();
@@ -118,6 +122,11 @@ public:
 	void Stand();
 	void Respawn(Point *p);
 	void StopMoving();
+
+	//Attacks
+	void Attack();
+	void CancelledAttack();
+	Point GetAttackPoint();
 
 	// Actions
 	void TakeDamage(int damage);

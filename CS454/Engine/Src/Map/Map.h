@@ -101,7 +101,7 @@ public:
 	bool TryMoveUp(int x, int y, int width, int height);
 	bool TryMoveLeft(int x, int y, int width, int height);
 	bool TryMoveRight(int x, int y, int width, int height);
-	bool TryAttack(int x, int y, int dx, int dy);
+	bool TryAttack(int x, int y);
 
 	//returns the X that is the offset of the camera relating to the map
 	int GetCameraOffsetX(int camera_x, int camera_width) {

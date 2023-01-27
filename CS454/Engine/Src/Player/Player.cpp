@@ -93,10 +93,10 @@ void Player::Render(double curr_time) {
 	{
 		bool flag = false;
 		if (this->state == p_state::atck_left || this->state == p_state::crouch_atck_left) {
-			flag = this->animator->renderWholeAnimationWithFixFrame(x, this->y, curr_time, -16, 0, 1);
+			flag = this->animator->renderWholeAnimationWithFixFrame(x, this->y, curr_time, -16, 0, 1 + this->cancelled_attack_offset);
 		}
 		else if (this->state == p_state::atck_right) {
-			flag = this->animator->renderWholeAnimationWithFixFrame(x, this->y, curr_time, -16, 0, 2);
+			flag = this->animator->renderWholeAnimationWithFixFrame(x, this->y, curr_time, -16, 0, 2 + this->cancelled_attack_offset);
 		}
 		else {
 			flag = this->animator->renderWholeAnimationWithFixFrame(x, this->y, curr_time, 0, 0, 0);
@@ -105,6 +105,7 @@ void Player::Render(double curr_time) {
 
 
 		if (flag) {
+			this->cancelled_attack_offset = 0;
 			this->is_attacking = false;
 			if (this->duck)
 				this->setStateWithDirection(p_state::crouch_left);
@@ -223,6 +224,37 @@ void Player::Attack() {
 	this->animator->changeAnimation(static_cast<int>(this->state)); // force change animation
 	
 	this->is_attacking = true; // set attacking to true
+}
+
+void Player::CancelledAttack() {
+	if (this->is_attacking) return; //can't attack if already attacking
+
+	if (this->state != p_state::crouch_left && this->state != p_state::crouch_right) // if not crouching
+	{
+		this->setStateWithDirection(p_state::atck_left); // standing attack
+		this->animator->StartForcedAnimation(1); //set the numbers of forced frames
+		this->animator->changeAnimation(static_cast<int>(this->state)); // force change animation
+		this->is_attacking = true; // set attacking to true
+		this->cancelled_attack_offset = -1;
+	}
+
+	
+}
+
+Point Player::GetAttackPoint() {
+	int x = this->x;
+	int y = this->y;
+	if (static_cast<int>(this->state) % 2 == 0) { // if on left move
+		x -= 16;
+	}
+	else {
+		x += 16;
+	}
+	if (this->duck) {
+		y += 16; 
+	}
+
+	return Point(x, y);
 }
 
 

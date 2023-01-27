@@ -58,16 +58,17 @@ bool PlayerAnimator::renderWholeAnimationWithFixFrame(int target_x, int target_y
 
 		this->total_animation_frames -= 1;
 
-		std::cout << "remaining frames : " << this->total_animation_frames << std::endl;
 	}
 
 	if (this->total_animation_frames != 0) // the last frame will be repeating the first frame
 		this->curr_mapping = next_mapping; // in order to hack it we extend the attack for 1 more render
 
 
+
 	// if we are at the frame that needs fix
 	// or if we are on the hack frame and the frame to fix was the previous that we hold for 1 more render
-	if (this->total_animation_frames == frame_to_fix || (this->total_animation_frames == 0 && frame_to_fix == 1)){
+	// if the frame to fix is 0 we dont fix it cause 0 is just the repeating of the last frame that we hold for 1 more render
+	if (frame_to_fix != 0 && (this->total_animation_frames == frame_to_fix || (this->total_animation_frames == 0 && frame_to_fix == 1))){
 		al_draw_bitmap_region(this->sprite_sheet, this->curr_mapping->getX(), this->curr_mapping->getY(), this->curr_mapping->getWidth(), this->curr_mapping->getHeight(), target_x + fix_x_amount, target_y + fix_y_amount, 0);
 	}
 	else {
