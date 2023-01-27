@@ -72,6 +72,9 @@ private:
 	// Physics
 	int jump_y;
 
+	// Ai
+	bool ai_flag = false;
+
 
 	//MUSIC PLAYER
 	MusicPlayer* music_player;

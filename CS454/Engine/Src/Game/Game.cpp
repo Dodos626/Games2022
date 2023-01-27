@@ -113,7 +113,15 @@ void Game::MainLoopIteration(void) {
 	case ALLEGRO_EVENT_TIMER:
 
 		this->Input();
-		this->background_map->AiUpdate(Point(this->player1->GetX(), this->player1->GetY())); //FIX TODO proswrino tha mpei sto AI kai tha ginete me dynamic bind
+		
+		if (ai_flag) { // ai moves once per 2 loops
+			this->background_map->AiUpdate(Point(this->player1->GetX(), this->player1->GetY())); //FIX TODO proswrino tha mpei sto AI kai tha ginete me dynamic bind
+			ai_flag = false;
+		}
+		else {
+			ai_flag = true;
+		}
+		
 		this->Physics();
 		this->UserCode();
 		
