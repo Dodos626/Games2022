@@ -440,8 +440,7 @@ void Map::CheckPlayerCollisionsWithEntities(Player *player) {
 		Point ur(en_ux + en_width, en_ly);
 		Point dr(en_ux + en_width, en_ly + en_height);
 		if (p->InRectangle(ul, pl_width, pl_height) || p->InRectangle(dl, pl_width, pl_height) || p->InRectangle(ur, pl_width, pl_height) || p->InRectangle(dr, pl_width, pl_height)) {
-			player->TakeDamage(enemy->GetDamage());
-			enemy->ChangeDirection();
+			enemy->Collide(*player);
 			return;
 		}
 	}

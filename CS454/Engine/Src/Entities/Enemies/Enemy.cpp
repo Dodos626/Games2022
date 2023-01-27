@@ -65,4 +65,5 @@ void Enemy::_DropItem() {
 
 void Enemy::Collide(Player& player) {
 	player.TakeDamage(this->damage);
+	this->ChangeDirection();
 }
