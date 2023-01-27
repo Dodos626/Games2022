@@ -66,3 +66,27 @@ void PalaceBotEnemy::Render(double curr_time, int relative_x) {
 int PalaceBotEnemy::GetStateToInt(palaceBot_state state) {
 	return static_cast<int>(state);
 }
+
+
+void PalaceBotEnemy::GetAttacked(int damage, Point point_of_attack) {
+	if (!this->is_alive)
+		return;
+	this->health -= damage;
+	this->takes_damage = true;
+	this->SuffleAnimation();
+	// Animate Damage
+	if (this->health <= 0)
+		this->_Death();
+}
+
+void PalaceBotEnemy::SuffleAnimation() {
+	if (this->state == palaceBot_state::red) {
+		this->state = palaceBot_state::blue;
+	}
+	else if (this->state == palaceBot_state::blue) {
+		this->state = palaceBot_state::cyan;
+	}
+	else if (this->state == palaceBot_state::cyan) {
+		this->state = palaceBot_state::red;
+	}
+}
