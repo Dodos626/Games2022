@@ -39,6 +39,8 @@ public:
 	bool GetIsAlive() const { return this->is_alive; }
 	Item *GetDroppedItem() const { return this->dropped_item; }
 	void GetAttacked(int damage) override;
+
+	void KillInstantly(void);
 	//has a animator
 	//has a state
 	//has a health

@@ -143,6 +143,7 @@ public:
 
 	void HandlePhysics(void);
 	void HandlePlayerPhysics(void);
-	void HandleMapEntitiesPhysics(void);
+	void HandleMapEnemiesPhysics(void);
+	void HandleMapItemPhysics(void);
 };
 #endif

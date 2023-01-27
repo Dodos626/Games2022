@@ -289,11 +289,11 @@ void Map::setExitPoints(json data) {
 	}
 }
 void Map::setEntities(json data) {
-	this->entities.clear();
+	this->enemies.clear();
 	for (auto enemy_pair : data["enemies"].items()) {
 		std::string enemy_name = enemy_pair.key();
 		for (auto spawn_location : enemy_pair.value()) {
-			this->entities.push_back(
+			this->enemies.push_back(
 				MapEntities::GetEnemyFromString(
 					enemy_name,
 					new Point(spawn_location["spawn_x"], spawn_location["spawn_y"]),
@@ -304,22 +304,34 @@ void Map::setEntities(json data) {
 					));
 		}
 	}
+	this->items.clear();
 	for (auto item_pair : data["items"].items()) {
 		std::string item_name = item_pair.key();
 		for (auto spawn_location : item_pair.value()) {
-			this->entities.push_back(MapEntities::GetItemFromString(item_name, new Point(spawn_location["spawn_x"], spawn_location["spawn_y"])));
+			this->items.push_back(MapEntities::GetItemFromString(item_name, new Point(spawn_location["spawn_x"], spawn_location["spawn_y"])));
 		}
 	}
 }
 
 void Map::RenderEntities(double curr_time, int relative_x) {
-	for (auto entity : this->entities) {
+	this->RenderEnemies(curr_time, relative_x);
+	this->RenderItems(curr_time, relative_x);
+}
+
+void Map::RenderEnemies(double curr_time, int relative_x) {
+	for (auto entity : this->enemies) {
 		entity->Render(curr_time,relative_x);
 	}
 }
 
+void Map::RenderItems(double curr_time, int relative_x) {
+	for (auto entity : this->items) {
+		entity->Render(curr_time, relative_x);
+	}
+}
+
 void Map::AiUpdate(Point player_position) {
-	for (auto entity : this->entities) {
+	for (auto entity : this->enemies) {
 		entity->AI(player_position);
 	}
 }
@@ -372,4 +384,42 @@ bool Map::TryAttack(int x, int y) {
 	if (x  < 0 || x  >= this->x_bound || y  < 0 || y  >= this->y_bound)
 		return false;
 	return !(this->IsSolid(x/16, y/16) );
+}
+
+void Map::KillAllEnemies(void) {
+	// The final solution
+	for (Enemy* enemy : this->enemies) {
+		enemy->KillInstantly();
+		Item* drop = enemy->GetDroppedItem();
+		if (drop)
+			this->items.push_back(drop);
+	}
+	this->enemies.clear();
+}
+
+
+void Map::PlayerAttack(Player *player) {
+	Point coordinates = player->GetAttackPoint();
+	int damage = player->GetAttackPower();
+	for (int i = 0; i < this->enemies.size(); i++) {
+		Enemy* enemy = this->enemies[i];
+		if (enemy->GetX() <= coordinates.GetX() && coordinates.GetX() <= enemy->GetX() + enemy->GetWidth() &&
+			enemy->GetY() <= coordinates.GetY() && coordinates.GetY() <= enemy->GetY() + enemy->GetHeight()) {
+			enemy->GetAttacked(damage);
+			std::cout << "attacking enemy " << *enemy << std::endl;
+			if (!enemy->GetIsAlive()) {
+				this->enemies.erase(this->enemies.begin() + i);
+				Item* drop = enemy->GetDroppedItem();
+
+				if (drop)
+					this->items.push_back(drop);
+			}
+		}
+			
+			
+	}
+
+}
+void Map::EnemyAttack(Enemy *enemy) {
+
 }

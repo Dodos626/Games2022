@@ -195,11 +195,16 @@ void Game::HandleInput(void) {
 		Point of_attack = this->player1->GetAttackPoint();
 		if (this->background_map->TryAttack(of_attack.GetX(), of_attack.GetY())) {
 			this->player1->Attack();
+			this->background_map->PlayerAttack(this->player1);
 		}
 		else {
 			this->player1->CancelledAttack();
 		}
 		
+		this->key_pressed = true;
+	}
+	if (key[ALLEGRO_KEY_E] && !this->key_pressed) {
+		this->background_map->KillAllEnemies();
 		this->key_pressed = true;
 	}
 	//TO CHECK IF MAPS CHANGE 
@@ -372,7 +377,8 @@ void Game::HandlePauseInput(void) {
 
 void Game::HandlePhysics(void) {
 	this->HandlePlayerPhysics();
-	this->HandleMapEntitiesPhysics();
+	this->HandleMapEnemiesPhysics();
+	this->HandleMapItemPhysics();
 }
 
 void Game::HandlePlayerPhysics(void) {
@@ -411,9 +417,8 @@ void Game::HandlePlayerPhysics(void) {
 	}
 }
 
-void Game::HandleMapEntitiesPhysics(void) {
-	
-	for (Entity* entity : this->background_map->GetMapEntities()) {
+void Game::HandleMapEnemiesPhysics(void) {
+	for (Entity* entity : this->background_map->GetMapEnemies()) {
 		int x = entity->GetX();
 		int y = entity->GetY();
 		int width = entity->GetWidth();
@@ -431,8 +436,30 @@ void Game::HandleMapEntitiesPhysics(void) {
 			}
 		}
 	}
-	
 }
+
+void Game::HandleMapItemPhysics(void) {
+	for (Entity* entity : this->background_map->GetMapItems()) {
+		int x = entity->GetX();
+		int y = entity->GetY();
+		int width = entity->GetWidth();
+		int height = entity->GetHeight();
+		int fall_speed = this->player1->GetFallSpeed();
+		if (this->background_map->TryMoveDown(x, y, width, height))
+		{
+			for (int i = 0; i < fall_speed; i++) {
+				if (this->background_map->TryMoveDown(x, y, width, height)) {
+					entity->MoveDown();
+				}
+				else
+					break;
+				y = entity->GetY();
+			}
+		}
+	}
+}
+
+
 
 void Game::CheckExit() {
 	int lx = (this->player1->GetX()) / 16;

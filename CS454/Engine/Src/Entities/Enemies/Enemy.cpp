@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "../../Utils/MapEntities.h"
+#include <assert.h>
 
 using json = nlohmann::json;
 
@@ -41,6 +42,12 @@ void Enemy::GetAttacked(int damage) {
 		this->_Death();
 }
 
+void Enemy::KillInstantly(void) {
+	this->health = 0;
+	this->_Death();
+}
+
+
 void Enemy::_Death() {
 	this->is_alive = false;
 	// Animate death
@@ -52,6 +59,7 @@ void Enemy::_Death() {
 
 void Enemy::_DropItem() {
 	this->dropped_item = this->drops[rand() % this->drops.size()];
+	assert(*this->dropped_item->GetCoordinates() == *this->coordinates);
 }
 
 void Enemy::Collide(Player& player) {

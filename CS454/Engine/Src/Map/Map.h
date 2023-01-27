@@ -36,7 +36,8 @@ private:
 	std::vector<int> SolidBlockIds;
 	std::vector<ExitPoint> ExitPointBlocks;
 	std::vector<std::vector<bool>> grid;
-	std::vector<Entity*> entities;
+	std::vector<Enemy *> enemies;
+	std::vector<Item*> items;
 	int player_dx;
 	MapLocations state;
 	Point *spawn;
@@ -65,8 +66,10 @@ public:
 		delete this->bitmap;
 		delete this->tilemap;
 		delete this->bgtilemap;
-		for (int i = 0; i < this->entities.size(); i++)
-			delete this->entities[i];
+		for (int i = 0; i < this->enemies.size(); i++)
+			delete this->enemies[i];
+		for (int i = 0; i < this->items.size(); i++)
+			delete this->items[i];
 		delete this->spawn;
 		al_destroy_bitmap(this->map_buffer);
 		al_destroy_bitmap(this->mapBG_buffer);
@@ -77,7 +80,8 @@ public:
 	BitMap* getBitMap() { return this->bitmap; }
 	TileMap* getTileMap() { return this->tilemap; }
 	ALLEGRO_BITMAP* getMapBuffer() { return this->map_buffer; }
-	std::vector<Entity*> GetMapEntities() { return this->entities; }
+	std::vector<Enemy *> GetMapEnemies() { return this->enemies; }
+	std::vector<Item *> GetMapItems() { return this->items; }
 	bool IsSolid(int x, int y);
 	bool IsExit(Point location);
 	ExitPoint GetExit(Point location);
@@ -86,15 +90,19 @@ public:
 	void setState(MapLocations state) { this->state = state; };
 	MapLocations getState() { return this->state; }; 
 
-	
+	void KillAllEnemies(void);
 	
 	void RenderEntities(double curr_time, int relative_x);
+	void RenderEnemies(double curr_time, int relative_x);
+	void RenderItems(double curr_time, int relative_x);
 
 	void ChangeMap(MapLocations state) { this->ChangeMap(stateToString(state)); this->state = state; };
 	void ChangeMap(std::string map);
 
 
 	void AiUpdate(Point player_position);
+	void PlayerAttack(Player* player);
+	void EnemyAttack(Enemy* enemy);
 
 	//Collision Detector
 	bool TryMoveDown(int x, int y, int width, int height);
