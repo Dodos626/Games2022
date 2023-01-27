@@ -145,5 +145,8 @@ public:
 	void HandlePlayerPhysics(void);
 	void HandleMapEnemiesPhysics(void);
 	void HandleMapItemPhysics(void);
+
+	//encapsulate the spell thunder
+	void CastThunder();
 };
 #endif

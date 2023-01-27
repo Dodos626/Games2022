@@ -66,7 +66,7 @@ void Game::Initialise(void) {
 	this->player1->LoadStats(data["screen"]["width"] / data["screen"]["scale"], MUL_16(this->background_map->getTileMap()->getTilemapHeight()), this->stats_display_height_offset/ data["screen"]["scale"]);
 	this->music_player = new MusicPlayer();
 	
-	this->player1->RegisterSpell(std::bind(&Map::KillAllEnemies, this->background_map, this->player1), 120);
+	this->player1->RegisterSpell(std::bind(&Game::CastThunder, this), 120);
 	
 	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 	
@@ -81,6 +81,9 @@ void Game::Initialise(void) {
 	this->SetPhysics(gravity_pull);
 	this->SetUser(check_exit);
 	
+}
+void Game::CastThunder() {
+	this->background_map->KillAllEnemies(this->player1);
 }
 
 void Game::MainLoop(void) {
@@ -203,10 +206,7 @@ void Game::HandleInput(void) {
 		
 		this->key_pressed = true;
 	}
-	if (key[ALLEGRO_KEY_E] && !this->key_pressed) {
-		this->background_map->KillAllEnemies(this->player1);
-		this->key_pressed = true;
-	}
+	
 	//TO CHECK IF MAPS CHANGE 
 	if (key[ALLEGRO_KEY_1]) {
 		this->ChangeMap(MapLocations::main_screen);
@@ -230,6 +230,7 @@ void Game::HandleInput(void) {
 		this->ChangeMap(MapLocations::first_floor_right);
 		this->redraw = true;
 	}
+	//spells
 	if (key[ALLEGRO_KEY_Q]) {
 		this->player1->castSpell(0);
 	}
