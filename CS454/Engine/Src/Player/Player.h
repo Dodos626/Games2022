@@ -145,6 +145,10 @@ public:
 		this->mana -= this->spell_book.cast(id, this->mana);
 	}
 
+	void RegisterSpell(std::function<void(void)> f, int cost) {
+		this->spell_book.registerSpell(new Spell(cost,f,nullptr,true));
+	}
+
 	/*
 	* checks all active spells if their effect is over
 	* the it calls the counter spell if it exists

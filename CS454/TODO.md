@@ -6,7 +6,7 @@ Must:
 	** CHECK KEYS GIA CONSUMPTION K ITEM CONSUMPTION KLP 
 
 * Teleiwse to AI // TEO
-* Ftiakse Spells na mporei na ta usarei sto game k vale to kainourio (KILL ALL ENEMIES) // Teo
+
 * Ftiakse destructor gia :
 * *  enemies , items , game (?)
 * End Screen (Win screen/lose screen)
@@ -35,3 +35,18 @@ Secondary:
 GIA PARUSIASI :
 * etoimase oti xreiasteis apo config gia na flexarume live eisagwgi neu map
 
+
+
+//README GIA TA KEYS
+jump = up arrow
+duck = down arrow
+move left = left arrow
+move right = right arrow
+attack = a
+
+spells 
+q = spell shield
+w = spell jump
+e =	spell life
+r =	spell fairy
+t = spell thunder

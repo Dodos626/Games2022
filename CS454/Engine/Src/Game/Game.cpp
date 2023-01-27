@@ -66,7 +66,7 @@ void Game::Initialise(void) {
 	this->player1->LoadStats(data["screen"]["width"] / data["screen"]["scale"], MUL_16(this->background_map->getTileMap()->getTilemapHeight()), this->stats_display_height_offset/ data["screen"]["scale"]);
 	this->music_player = new MusicPlayer();
 	
-	
+	this->player1->RegisterSpell(std::bind(&Map::KillAllEnemies, this->background_map, this->player1), 120);
 	
 	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 	
@@ -230,8 +230,20 @@ void Game::HandleInput(void) {
 		this->ChangeMap(MapLocations::first_floor_right);
 		this->redraw = true;
 	}
-	if (key[ALLEGRO_KEY_6]) {
+	if (key[ALLEGRO_KEY_Q]) {
+		this->player1->castSpell(0);
+	}
+	if (key[ALLEGRO_KEY_W]) {
+		this->player1->castSpell(1);
+	}
+	if (key[ALLEGRO_KEY_E]) {
+		this->player1->castSpell(2);
+	}
+	if (key[ALLEGRO_KEY_R]) {
 		this->player1->castSpell(3);
+	}
+	if (key[ALLEGRO_KEY_T]) {
+		this->player1->castSpell(4);
 	}
 	if (key[ALLEGRO_KEY_P]) {
 		PauseGame();
