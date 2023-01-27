@@ -9,7 +9,8 @@ PalaceBotEnemy::PalaceBotEnemy(Point* spawn, Action tryMoveLeft_, Action tryMove
 void PalaceBotEnemy::AI(Point player_position) {
 	//int x, int y, int width, int height
 	if (moves_right) { // an paei deksia
-		if (this->tryMoveRight(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight())) { // kai mporei na sinexisei
+		if (this->tryMoveRight(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight()) && // kai mporei na sinexisei
+			!this->tryMoveDown(this->GetX() + 16, this->GetY(), this->GetWidth(), this->GetHeight())) { // xwris na pesei
 			this->MoveRight();
 		}
 		else {
@@ -17,7 +18,8 @@ void PalaceBotEnemy::AI(Point player_position) {
 		}
 	}
 	if (!moves_right) {
-		if (this->tryMoveLeft(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight())) { // kai mporei na sinexisei
+		if (this->tryMoveLeft(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight()) && // kai mporei na sinexisei
+			!this->tryMoveDown(this->GetX() + 16, this->GetY(), this->GetWidth(), this->GetHeight())) { // xwris na pesei
 			this->MoveLeft();
 		}
 		else {

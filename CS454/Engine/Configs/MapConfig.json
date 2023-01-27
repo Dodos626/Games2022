@@ -31,7 +31,20 @@
       "CSVwidth": 48,
       "CSVheight": 16
     },
-    "exit_points": {}
+    "exit_points": {},
+    "entities": {
+      "enemies": {
+        "Wosu": [
+          {
+            "spawn_x": 224,
+            "spawn_y": 144
+          }
+        ]
+      },
+      "items": {
+    
+      }
+    }
   },
   "palace": {
     "CSVsource": "Media/background_map/background_palace_map.csv",
@@ -81,8 +94,12 @@
         ],
         "Wosu": [
           {
-            "spawn_x": 150,
-            "spawn_y": 36
+            "spawn_x": 96,
+            "spawn_y": 176
+          },
+          {
+            "spawn_x": 128,
+            "spawn_y": 160
           }
         ]
       },

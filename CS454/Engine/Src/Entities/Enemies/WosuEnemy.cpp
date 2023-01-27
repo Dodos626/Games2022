@@ -7,7 +7,8 @@ WosuEnemy::WosuEnemy(Point* spawn, Action tryMoveLeft_, Action tryMoveRight_, Ac
 
 void WosuEnemy::AI(Point player_position) {
 	if (this->state == wosu_state::move_right) { // an paei deksia
-		if (this->tryMoveRight(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight())) { // kai mporei na sinexisei
+		if (this->tryMoveRight(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight()) && // kai mporei na sinexisei
+			!this->tryMoveDown(this->GetX()+16, this->GetY(), this->GetWidth(), this->GetHeight())) { // xwris na pesei
 			this->MoveRight();
 		}
 		else {
@@ -15,7 +16,8 @@ void WosuEnemy::AI(Point player_position) {
 		}
 	}
 	if (this->state == wosu_state::move_left) {
-		if (this->tryMoveLeft(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight())) { // kai mporei na sinexisei
+		if (this->tryMoveLeft(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight()) // kai mporei na sinexisei
+			&& !this->tryMoveDown(this->GetX() - 16, this->GetY(), this->GetWidth(), this->GetHeight())) { // xwris na pesei
 			this->MoveLeft();
 		}
 		else {
