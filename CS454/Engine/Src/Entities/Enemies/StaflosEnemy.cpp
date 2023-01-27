@@ -30,3 +30,25 @@ void StaflosEnemy::ChangeDirection() { // cannot change direction if attacking
 	if (this->state == staflos_state::move_left) { this->state = staflos_state::move_right; }
 	else if (this->state == staflos_state::move_right) { this->state = staflos_state::move_left; }
 };
+
+
+void StaflosEnemy::GetAttacked(int damage, Point point_of_attack) {
+	if (!this->is_alive)
+		return;
+	
+	int attack_x = point_of_attack.GetX();
+	int attack_y = point_of_attack.GetY();
+
+	int my_state = static_cast<int>(this->state);
+	
+	std::cout << attack_y << " " << this->GetY() << "\n";
+	if ((attack_y > this->GetY())|| //ean trwei crouch attack 
+		((my_state % 2 == 1)&&(attack_x < this->GetX())) || // ama koitaei deksia kai trwei apo aristera
+		((my_state % 2 == 0) && (attack_x > this->GetX()))) { // ama koitaei aristera kai trwei apo deksia
+		this->health -= damage;
+		this->takes_damage = true;
+		// Animate Damage
+		if (this->health <= 0)
+			this->_Death();
+	}
+}
