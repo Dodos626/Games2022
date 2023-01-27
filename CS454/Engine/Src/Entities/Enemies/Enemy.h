@@ -38,8 +38,7 @@ public:
 	int GetPoints() const { return this->points; }
 	bool GetIsAlive() const { return this->is_alive; }
 	Item *GetDroppedItem() const { return this->dropped_item; }
-
-	void GetDamaged(int damage);
+	void GetAttacked(int damage) override;
 	//has a animator
 	//has a state
 	//has a health

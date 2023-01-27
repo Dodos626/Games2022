@@ -12,6 +12,7 @@ public:
 	Item(Point* spawn);
 	//~Item();
 	void Collide(Player& player) { this->PickUp(player); };
+	void GetAttacked(int damage) {};
 	virtual void PickUp(Player &player) = 0;
 	virtual void Render(double curr_time, int relative_x);
 };

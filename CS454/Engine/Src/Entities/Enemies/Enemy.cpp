@@ -32,7 +32,7 @@ Enemy::Enemy(Point *spawn, std::string datapath, Action tryMoveLeft_, Action try
 		this->drops.push_back(MapEntities::GetItemFromString(item, this->coordinates));
 }
 
-void Enemy::GetDamaged(int damage) {
+void Enemy::GetAttacked(int damage) {
 	if (!this->is_alive)
 		return;
 	this->health -= damage;

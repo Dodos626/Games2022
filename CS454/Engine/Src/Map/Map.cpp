@@ -367,3 +367,12 @@ bool Map::TryMoveRight(int x, int y, int width, int height) {
 	return !(this->IsSolid(rx, uy) || this->IsSolid(rx, my) || this->IsSolid(rx, dy));
 
 }
+
+bool Map::TryAttack(int x, int y, int dx, int dy) {
+	if (x + dx < 0 || x + dx >= this->x_bound || y + dy < 0 || y + dy >= this->y_bound)
+		return false;
+	int ux = (x) / 16;
+	int lx = (x + dx) / 16;
+	int y2 = (y + dy) / 16;
+	return !(this->IsSolid(ux, y2) || this->IsSolid(lx, y2));
+}
