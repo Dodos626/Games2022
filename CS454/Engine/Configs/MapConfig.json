@@ -82,10 +82,7 @@
     "entities": {
       "enemies": {
         "Staflos": [
-          {
-            "spawn_x": 35,
-            "spawn_y": 100
-          },
+          
           {
             "spawn_x": 64,
             "spawn_y": 170

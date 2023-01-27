@@ -55,8 +55,27 @@ void Player::LoadStats(int map_width, int map_height, int y_offset) {
 }
 
 //MISC
-void Player::TakeDamage(int damage) {	
-	this->health -= damage / this->damage_reduction;
+void Player::TakeDamage(int damage, Point point_of_attack) {
+	if (this->is_damaged) return;
+
+	if (this->state == p_state::crouch_left && point_of_attack.GetX() < this->x) { // an skibume kai koitame aristera
+
+	}
+	else if (this->state == p_state::crouch_right && point_of_attack.GetX() > this->x) { // an skivume kai koitame deksia
+
+	}
+	else {
+		this->health -= damage / this->damage_reduction;
+	}
+
+
+	this->is_damaged = true;
+	this->immunity = 0.5;
+
+	if (this->is_attacking) {
+		this->animator->StartForcedAnimation(0);
+		this->is_attacking = false;
+	}
 	// animate taking damage
 }
 void Player::RegenerateMana(int mana_gain) { 
@@ -88,8 +107,27 @@ void Player::Render(double curr_time) {
 	if (this->toggle_collision_box)
 		al_draw_rectangle(x, this->y, x + 16, this->y + 32, al_map_rgb(150, 0, 0), 0);
 
-	if (!this->is_attacking) //if not attacking simple render
+	if (!this->is_attacking && !this->is_damaged) //if not attacking simple render
 		this->animator->render(x, this->y, curr_time, static_cast<int>(this->state));
+	else if (this->is_damaged && !this->is_attacking) {
+		this->immunity -= curr_time;
+
+		if (static_cast<int>(this->state) % 2 == 1 && this->immunity > 0.25 && this->x > 1) { // deksia koituse o link
+			this->MoveUp();
+			this->MoveLeft();
+
+		}
+		else if (this->immunity > 0.25) {
+			this->MoveUp();
+			this->MoveRight();
+		}
+		this->animator->render(x, this->y, curr_time, static_cast<int>(this->state));
+		if (this->immunity <= 0) { // taking damage ended
+			this->is_damaged = false;
+			this->immunity = 0;
+
+		}
+	}
 	else // if attacking
 	{
 		bool flag = false;
@@ -209,7 +247,7 @@ void Player::StopMoving() {
 
 void Player::Attack() {
 
-	if (this->is_attacking) return; //can't attack if already attacking
+	if (this->is_attacking || this->is_damaged) return; //can't attack if already attacking
 
 	if (this->state != p_state::crouch_left && this->state != p_state::crouch_right) // if not crouching
 	{
@@ -228,7 +266,7 @@ void Player::Attack() {
 }
 
 void Player::CancelledAttack() {
-	if (this->is_attacking) return; //can't attack if already attacking
+	if (this->is_attacking || this->is_damaged) return; //can't attack if already attacking
 
 	if (this->state != p_state::crouch_left && this->state != p_state::crouch_right) // if not crouching
 	{

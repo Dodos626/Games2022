@@ -406,7 +406,11 @@ void Map::PlayerAttack(Player *player) {
 		Enemy* enemy = this->enemies[i];
 		if (enemy->GetX() <= coordinates.GetX() && coordinates.GetX() <= enemy->GetX() + enemy->GetWidth() &&
 			enemy->GetY() <= coordinates.GetY() && coordinates.GetY() <= enemy->GetY() + enemy->GetHeight()) {
-			enemy->GetAttacked(damage, Point(player->GetX(), player->GetY()));
+			int tmp = 0;
+			if (player->isDucking()) {
+				tmp += 16;
+			}
+			enemy->GetAttacked(damage, Point(player->GetX(), player->GetY() + tmp));
 			std::cout << "attacking enemy " << *enemy << std::endl;
 			if (!enemy->GetIsAlive()) {
 				player->IncreasePoints(enemy->GetPoints());

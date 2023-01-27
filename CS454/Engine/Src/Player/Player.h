@@ -52,6 +52,10 @@ private :
 	p_state state = p_state::idle_right;
 	PlayerAnimator* animator; //players animator
 
+	//immunity
+	bool is_damaged = false;
+	double immunity = 0;
+
 	void CreateSpellBook(void);
 	
 	//spell shield
@@ -101,11 +105,11 @@ public:
 
 	//SETTERS
 	void setState(p_state state_) { 
-		if (this->is_attacking) return;
+		if (this->is_attacking || this->is_damaged) return;
 		this->state = state_; 
 	};
 	void setStateWithDirection(p_state state_) { 
-		if (this->is_attacking) return;
+		if (this->is_attacking || this->is_damaged) return;
 		this->state = FIND_STATE(state_, this->state); 
 	}
 	void LoadStats(int map_width,  int map_height, int y_offset);
@@ -133,7 +137,7 @@ public:
 	Point GetAttackPoint();
 
 	// Actions
-	void TakeDamage(int damage);
+	void TakeDamage(int damage, Point point_of_attack);
 	void RegenerateHealth(int hp_gain);
 	void RegenerateMana(int mana_gain);
 	void IncreaseLives(int difference);
