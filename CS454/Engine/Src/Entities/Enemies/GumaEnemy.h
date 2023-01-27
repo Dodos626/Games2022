@@ -23,6 +23,10 @@ public:
 	int GetStateToInt(guma_state state);
 	GumaEnemy(Point* spawn, Action tryMoveLeft_, Action tryMoveRight_, Action tryMoveUp_, Action tryMoveDown_);
 	void AI(Point player_position);
+	void ChangeDirection()
+	{
+		;
+	};
 };
 
 

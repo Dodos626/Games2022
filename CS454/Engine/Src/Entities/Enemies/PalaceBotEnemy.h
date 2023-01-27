@@ -21,6 +21,9 @@ public:
 	void AI(Point player_position);
 	int GetStateToInt(palaceBot_state state);
 	void Render(double curr_time, int relative_x)override;
+	void ChangeDirection() {
+		this->moves_right = !this->moves_right;
+	}
 };
 
 

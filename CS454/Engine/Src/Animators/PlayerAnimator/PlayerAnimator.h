@@ -10,12 +10,13 @@ class PlayerAnimator :  public Animator {
 private:
 	void registerSingleAnimation(json data); // register the animations (from json)
 	int total_animation_frames = 0; // used only on forced animations
+	bool set_total_animations = true; // used only on forced animations
 public:
 	PlayerAnimator(std::string path, int curr_state, std::vector<std::string> animation_names);
 	void render(int target_x, int target_y, double curr_time, int curr_state); // render the right animations->mapping
 	void selectAnimation(int animation_id);
 	bool renderWholeAnimationWithFixFrame(int target_x, int target_y, double curr_time, int fix_x_amount, int fix_y_amount, int frame_to_fix);
-	
+	bool renderNframesOfAnimationWithFixFrame(int target_x, int target_y, double curr_time, int n_frames);
 	// the + 1 part is because if we need 2 frames, we need to render the first frame 
 	// and then the second frame till the end which will happen when frame 3 will come up
 	void StartForcedAnimation(int total_animation_frames){

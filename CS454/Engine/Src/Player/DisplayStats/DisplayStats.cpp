@@ -107,6 +107,9 @@ void DisplayStats::PrepareStats() {
 	this->FillBoxes(this->mana_box_x_offset, this->player->mana, 50, al_map_rgb(51, 255, 255));
 
 
+	//temporary solution because the letters where stacking on each other
+	al_draw_filled_rectangle(5, this->box_y_offset, this->health_box_x_offset - 10, 30, al_map_rgb(0, 0, 0));
+	al_draw_filled_rectangle(15 + this->health_box_x_offset * 3, this->box_y_offset, 115 + this->health_box_x_offset * 3, 30, al_map_rgb(0, 0, 0));
 	
 	al_draw_text(this->font, al_map_rgb(255, 255, 255), 5, this->box_y_offset, 0, std::to_string(this->player->lives).c_str());
 	al_draw_text(this->font, al_map_rgb(255, 255, 255), 15 + this->health_box_x_offset*3, this->box_y_offset, 0, std::to_string(this->player->points).c_str());

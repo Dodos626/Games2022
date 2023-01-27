@@ -37,6 +37,7 @@ void Enemy::GetAttacked(int damage) {
 	if (!this->is_alive)
 		return;
 	this->health -= damage;
+	this->takes_damage = true;
 	// Animate Damage
 	if (this->health <= 0)
 		this->_Death();

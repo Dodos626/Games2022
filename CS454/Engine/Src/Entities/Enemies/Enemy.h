@@ -25,7 +25,7 @@ protected:
 	//add state
 	void _DropItem();
 	void _Death();
-	
+	bool takes_damage = false;
 public:
 	Enemy(Point* spawn, std::string datapath, Action tryMoveLeft_, Action tryMoveRight_, Action tryMoveUp_, Action tryMoveDown_);
 
@@ -39,6 +39,8 @@ public:
 	bool GetIsAlive() const { return this->is_alive; }
 	Item *GetDroppedItem() const { return this->dropped_item; }
 	void GetAttacked(int damage) override;
+
+	virtual void ChangeDirection() { return; };
 
 	void KillInstantly(void);
 	//has a animator

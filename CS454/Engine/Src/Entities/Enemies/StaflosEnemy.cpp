@@ -13,9 +13,20 @@ int StaflosEnemy::GetStateToInt(staflos_state state) {
 
 
 void StaflosEnemy::AI(Point player_position) {
+	//blepei ama trwei attack den kanei attack
+	//ama mporei na baresei ton link ton baraei
+	// alliws ama o link einai se 4 block apostasi
+	// ton kinigaei kai krataei ligi apostasi
+	// alliws meine akinitos
+	
 
 }
 
 void StaflosEnemy::Render(double curr_time, int relative_x) {
 	this->animator->render(this->coordinates->GetX() - relative_x, this->coordinates->GetY(), curr_time, this->GetStateToInt(this->state));
 }
+
+void StaflosEnemy::ChangeDirection() { // cannot change direction if attacking
+	if (this->state == staflos_state::move_left) { this->state = staflos_state::move_right; }
+	else if (this->state == staflos_state::move_right) { this->state = staflos_state::move_left; }
+};
