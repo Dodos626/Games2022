@@ -14,6 +14,7 @@
 #include "../Entities/Items/LifeUpItem.h"
 #include "../Entities/Items/KeyItem.h"
 #include "../Entities/Items/PointBagItem.h"
+#include "../Entities/Items/Sword.h"
 #include "Point.h"
 
 

@@ -108,6 +108,9 @@
     <ClCompile Include="Engine\Src\Entities\Enemies\StaflosEnemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Src\Entities\Items\Sword.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -762,6 +765,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Src\Entities\Enemies\StaflosEnemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Src\Entities\Items\Sword.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

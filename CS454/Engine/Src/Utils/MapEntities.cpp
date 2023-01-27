@@ -26,6 +26,8 @@ Item* MapEntities::GetItemFromString(std::string item_name, Point* spawn) {
 		return new PointBagItem(spawn, false);
 	else if (item_name == "BigPointBag")
 		return new PointBagItem(spawn, true);
+	else if (item_name == "Sword")
+		return new SwordItem(spawn);
 	assert(0);
 	return NULL;
 }
