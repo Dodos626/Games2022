@@ -24,13 +24,13 @@
     "number_of_frames": 2,
     "mappings": [
       {
-        "x": 0,
+        "x": 1,
         "y": 0,
         "width": 16,
         "height": 32
       },
       {
-        "x": 16,
+        "x": 17,
         "y": 0,
         "width": 16,
         "height": 32
