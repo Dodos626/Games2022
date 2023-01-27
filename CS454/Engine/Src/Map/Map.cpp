@@ -357,7 +357,7 @@ bool Map::TryMoveLeft(int x, int y, int width, int height) {
 }
 
 bool Map::TryMoveRight(int x, int y, int width, int height) {
-	if (x + 16 >= this->x_bound)
+	if (x + width >= this->x_bound)
 		return false;
 	int rx = (x + width) / 16;		// right x + 1
 	int uy = (y) / 16;			// upper y
