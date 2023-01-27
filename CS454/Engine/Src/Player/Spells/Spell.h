@@ -69,13 +69,8 @@ public:
 	* return the mana cost on success or 0 if it didn't cast anything
 	*/
 	int cast(int id, int current_mana) {
-		std::cout << "id : " << id << "current mana : " << current_mana << std::endl;
 		if(!active_spells[id] && spells[id]->getManaCost() <= current_mana) { // if it isn't already active and i have the mana
-			std::cout << "spell was cast \n";
-			
 			active_spells[id] = true; // mark it active
-			
-			
 			spells[id]->Cast(); // cast it
 			return spells[id]->getManaCost(); // return how much it costed
 		}
