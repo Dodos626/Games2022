@@ -29,7 +29,7 @@ public:
 	void MoveUp();
 	void MoveDown();
 
-	virtual void GetAttacked(int damage) = 0;
+	virtual void GetAttacked(int damage, Point point_of_attack) = 0;
 
 	virtual void AI(Point player_position) { return; }; // all items take this implementation , enemies extend it
 
