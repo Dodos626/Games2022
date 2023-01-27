@@ -386,10 +386,11 @@ bool Map::TryAttack(int x, int y) {
 	return !(this->IsSolid(x/16, y/16) );
 }
 
-void Map::KillAllEnemies(void) {
+void Map::KillAllEnemies(Player *player) {
 	// The final solution
 	for (Enemy* enemy : this->enemies) {
 		enemy->KillInstantly();
+		player->IncreasePoints(enemy->GetPoints());
 		Item* drop = enemy->GetDroppedItem();
 		if (drop)
 			this->items.push_back(drop);
@@ -408,11 +409,13 @@ void Map::PlayerAttack(Player *player) {
 			enemy->GetAttacked(damage);
 			std::cout << "attacking enemy " << *enemy << std::endl;
 			if (!enemy->GetIsAlive()) {
-				this->enemies.erase(this->enemies.begin() + i);
+				player->IncreasePoints(enemy->GetPoints());
 				Item* drop = enemy->GetDroppedItem();
 
 				if (drop)
 					this->items.push_back(drop);
+
+				this->enemies.erase(this->enemies.begin() + i);
 			}
 		}
 			

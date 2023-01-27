@@ -90,7 +90,7 @@ public:
 	void setState(MapLocations state) { this->state = state; };
 	MapLocations getState() { return this->state; }; 
 
-	void KillAllEnemies(void);
+	void KillAllEnemies(Player *player);
 	
 	void RenderEntities(double curr_time, int relative_x);
 	void RenderEnemies(double curr_time, int relative_x);

@@ -204,7 +204,7 @@ void Game::HandleInput(void) {
 		this->key_pressed = true;
 	}
 	if (key[ALLEGRO_KEY_E] && !this->key_pressed) {
-		this->background_map->KillAllEnemies();
+		this->background_map->KillAllEnemies(this->player1);
 		this->key_pressed = true;
 	}
 	//TO CHECK IF MAPS CHANGE 
