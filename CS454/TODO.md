@@ -1,23 +1,27 @@
 Must:
 
 * ftiakse ta buttons //TEO
-* Ftiakse Attack animations swsta // TEO
-* Ftiakse collision kai oti kanei attack akrivws mprosta tou // GM
-* Ftiakse Enemy Physics + kane to player entity // GM
-* Ftiakse Item sprites configs // teo
-* Ftiakse AI // GM + TEO
-* Ftiakse Spells na mporei na ta usarei sto game // Teo
+* Ftiakse collision me entities // GM
+	** Otan ena enemy kanei collide kalw thn change direction tou enemy
+	** CHECK KEYS GIA CONSUMPTION K ITEM CONSUMPTION KLP 
+
+* Teleiwse to AI // TEO
+* Ftiakse Spells na mporei na ta usarei sto game k vale to kainourio (KILL ALL ENEMIES) // Teo
 * Ftiakse destructor gia :
 * *  enemies , items , game (?)
+* End Screen (Win screen/lose screen)
+* Respawn -> ChangeMap on the same map on death //GM
+* Win condition -> Sword item // Teo
 
 Kleisimo:
 * ftiakse akrivws ta maps, ti tha exoun apo enemies, items pou spawnaroun auta klp
-* addons vale mousikh ana room/boss music h whatever
+* addons vale mousikh ana room h whatever
+* Ftiakse timed message board (posh wra h whatever)
+* Elevator Palace
 
 Secondary:
 
-* Ta render prepei na ginetai dynamically bind (render playing, render pause, opws to input)
+
 * ftiakse boss room
-* Vale k to elevator
-* Vale kana key/door whatever
+* Vale kana door whatever
 
