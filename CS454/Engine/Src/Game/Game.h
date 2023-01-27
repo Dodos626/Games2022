@@ -67,7 +67,7 @@ private:
 	//input key capture
 	unsigned char key[ALLEGRO_KEY_MAX];
 	bool key_pressed;
-
+	bool toggle_player_collision_box = false;
 
 	// Physics
 	int jump_y;

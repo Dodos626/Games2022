@@ -38,15 +38,26 @@ GIA PARUSIASI :
 
 
 //README GIA TA KEYS
-jump = up arrow
-duck = down arrow
-move left = left arrow
-move right = right arrow
-attack = a
 
-spells 
+
+up arrow = jump
+down arrow = duck
+left arrow = move left
+right arrow = move right
+a = attack
+
 q = spell shield
 w = spell jump
 e =	spell life
 r =	spell fairy
 t = spell thunder
+
+
+1 = main screen
+2 = palace
+3 = dungeon 1
+4 = loading screen
+5 = dungeon 1 right map
+
+
+f = toggles the grid collision block for the player

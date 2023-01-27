@@ -145,6 +145,9 @@ void Game::MainLoopIteration(void) {
 		if (event.keyboard.keycode == ALLEGRO_KEY_A) {
 			this->key_pressed = false;
 		}
+		if (event.keyboard.keycode == ALLEGRO_KEY_F) {
+			this->toggle_player_collision_box = false;
+		}
 		key[event.keyboard.keycode] &= false;
 		break;
 	default:
@@ -189,6 +192,10 @@ void Game::HandleInput(void) {
 		this->player1->AnimateMoveRight();
 		if (this->background_map->TryMoveRight(x, y, width, height))
 			this->player1->MoveRight();
+	}
+	if (key[ALLEGRO_KEY_F] && !this->toggle_player_collision_box) {
+		this->toggle_player_collision_box = true;
+		this->player1->ToggleCollisionBoxRender();
 	}
 
 	if (key[ALLEGRO_KEY_0]) {

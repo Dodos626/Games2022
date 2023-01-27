@@ -68,6 +68,10 @@ private :
 	//spell fairy
 	void spellFairy(void);
 	void counterSpellFairy(void);
+
+
+	//toggles
+	bool toggle_collision_box = false;
 	
 public:
 	Player(Point *spawn, int screen_width, int map_width, int screen_dx);
@@ -156,6 +160,10 @@ public:
 	*/
 	void CheckSpellTimer(double curr_time) {
 		this->spell_book.checkIfSpellsEnded(curr_time);
+	}
+
+	void ToggleCollisionBoxRender() {
+		this->toggle_collision_box = !this->toggle_collision_box;
 	}
 
 	void LoadStats();
