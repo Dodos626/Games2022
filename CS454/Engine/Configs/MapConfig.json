@@ -137,19 +137,19 @@
           "x": 0,
           "y": 8,
           "spawn_x": 700,
-          "spawn_y": 160
+          "spawn_y": 144
         },
         {
           "x": 0,
           "y": 9,
           "spawn_x": 700,
-          "spawn_y": 160
+          "spawn_y": 144
         },
         {
           "x": 0,
           "y": 10,
           "spawn_x": 700,
-          "spawn_y": 160
+          "spawn_y": 144
         }
       ],
       "first_floor_right": [
@@ -182,6 +182,12 @@
         "Door": [
           {
             "spawn_x": 32,
+            "spawn_y": 144
+          }
+        ],
+        "Key": [
+          {
+            "spawn_x": 48,
             "spawn_y": 144
           }
         ]
@@ -278,13 +284,34 @@
     "CSVheight": 16,
     "SolidIds": [ 14, 24, 25, 26, 27, 28, 30, 31, 35, 36, 37, 38, 40, 41 ],
     "spawn_x": 700,
-    "spawn_y": 160,
+    "spawn_y": 144,
     "background": {
       "CSVsource": "Media/background_map/boss_room_bg.csv",
       "CSVwidth": 48,
       "CSVheight": 16
     },
-    "exit_points": {},
+    "exit_points": {
+      "first_floor": [
+        {
+          "x": 47,
+          "y": 8,
+          "spawn_x": 16,
+          "spawn_y": 128
+        },
+        {
+          "x": 47,
+          "y": 9,
+          "spawn_x": 16,
+          "spawn_y": 128
+        },
+        {
+          "x": 47,
+          "y": 10,
+          "spawn_x": 16,
+          "spawn_y": 128
+        }
+      ]
+    },
     "entities": {
       "enemies": {
         "Guma": [
