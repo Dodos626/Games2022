@@ -9,6 +9,7 @@
 #include "../Entities/Items/item.h"
 #include "../Entities/Enemies/Enemy.h"
 #include "../Entities/Objects/Elevator.h"
+#include "../Entities/Items/DoorItem.h"
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -52,6 +53,8 @@ private:
 	void setSpawn(json data);
 	void setExitPoints(json data);
 	void setEntities(json data);
+	void RegisterDoor(DoorItem* door);
+	void RemoveDoor(DoorItem* door);
 	std::string stateToString(MapLocations state);
 
 	//gia to main screen ta grammata

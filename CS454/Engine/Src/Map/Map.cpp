@@ -310,7 +310,12 @@ void Map::setEntities(json data) {
 	for (auto item_pair : data["items"].items()) {
 		std::string item_name = item_pair.key();
 		for (auto spawn_location : item_pair.value()) {
-			this->items.push_back(MapEntities::GetItemFromString(item_name, new Point(spawn_location["spawn_x"], spawn_location["spawn_y"])));
+			Point* spawn = new Point(spawn_location["spawn_x"], spawn_location["spawn_y"]);
+			Item* item = MapEntities::GetItemFromString(item_name, spawn);
+			if (item_name == "Door") {
+				this->RegisterDoor((DoorItem *)item);
+			}
+			this->items.push_back(item);
 		}
 	}
 	this->objects.clear();
@@ -497,8 +502,58 @@ void Map::CheckPlayerCollisionsWithEntities(Player *player) {
 		Point dr(en_ux + en_width, en_ly + en_height);
 		if (p.InRectangle(ul, pl_width, pl_height) || p.InRectangle(dl, pl_width, pl_height) || p.InRectangle(ur, pl_width, pl_height) || p.InRectangle(dr, pl_width, pl_height)) {
 			item->PickUp(*player);
-			this->items.erase(this->items.begin() + i);
+			if (item->GetName() == "Door") {
+				if (!((DoorItem*)item)->GetIsLocked()) {
+					this->RemoveDoor((DoorItem*)item);
+					this->items.erase(this->items.begin() + i);
+				}
+			} else
+				this->items.erase(this->items.begin() + i);
 			return;
 		}
 	}
+}
+
+void Map::RegisterDoor(DoorItem* door) {
+	int dx = door->GetX();
+	int dy = door->GetY();
+	int height = door->GetHeight();
+	int b1x = (dx) / 16;
+	int b1y = (dy) / 16;
+	int b2y = b1y + 1;
+	int b3y = b2y + 1;
+	std::cout << "registering door at:" << b1x << " , y = " << b1y << std::endl;
+	std::cout << "Grid before changes:\n";
+	for (int i = 0; i < this->grid.size(); i++) {
+		for (int j = 0; j < this->grid[i].size(); j++) {
+			std::cout << this->grid[i][j];
+		}
+		std::cout << std::endl;
+	}
+	this->grid[b1y][b1x] = true;
+	this->grid[b2y][b1x] = true;
+	this->grid[b3y][b1x] = true;
+
+	std::cout << "\n\nGrid after changes:\n";
+	for (int i = 0; i < this->grid.size(); i++) {
+		for (int j = 0; j < this->grid[i].size(); j++) {
+			std::cout << this->grid[i][j];
+		}
+		std::cout << std::endl;
+	}
+}
+
+void Map::RemoveDoor(DoorItem* door) {
+	int dx = door->GetX();
+	int dy = door->GetY();
+	int height = door->GetHeight();
+	int b1x = (dx) / 16;
+	int b1y = (dy) / 16;
+	int b2y = b1y + 1;
+	int b3y = b2y + 1;
+	std::cout << "removing door at:" << b1x << " , y = " << b1y << std::endl;
+	this->grid[b1y][b1x] = false;
+	this->grid[b2y][b1x] = false;
+	this->grid[b3y][b1x] = false;
+
 }
