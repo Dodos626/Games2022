@@ -149,6 +149,7 @@ public:
 	void IncreaseLives(int difference);
 	void IncreasePoints(int points);
 	void IncreaseKeys(int keys);
+	bool UseKey();
 
 	//Render
 	void Render(double curr_time, bool can_move_right, bool can_move_left, bool can_move_up);

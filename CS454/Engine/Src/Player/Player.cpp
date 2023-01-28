@@ -132,6 +132,14 @@ void Player::IncreaseKeys(int keys) {
 	this->keys += keys;
 }
 
+bool Player::UseKey() {
+	if (this->keys > 0) {
+		this->keys -= 1;
+		return true;
+	}
+	return false;
+}
+
 void Player::Render(double curr_time, bool can_move_right, bool can_move_left, bool can_move_up) {
 	int x = this->x - this->GetCameraX();
 	if (this->x > this->max_moving_x)
