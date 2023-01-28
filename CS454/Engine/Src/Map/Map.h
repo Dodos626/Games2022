@@ -8,6 +8,7 @@
 #include "../Utils/MapEntities.h"
 #include "../Entities/Items/item.h"
 #include "../Entities/Enemies/Enemy.h"
+#include "../Entities/Objects/Elevator.h"
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -39,6 +40,7 @@ private:
 	std::vector<std::vector<bool>> grid;
 	std::vector<Enemy *> enemies;
 	std::vector<Item*> items;
+	std::vector<Elevator *> objects;
 	int player_dx;
 	MapLocations state;
 	Point *spawn;

@@ -313,6 +313,13 @@ void Map::setEntities(json data) {
 			this->items.push_back(MapEntities::GetItemFromString(item_name, new Point(spawn_location["spawn_x"], spawn_location["spawn_y"])));
 		}
 	}
+	this->objects.clear();
+	for (auto object_pair : data["Objects"].items()) {
+		std::string item_name = object_pair.key();
+		for (auto spawn_location : object_pair.value()) {
+			this->objects.push_back(new Elevator());
+		}
+	}
 }
 
 void Map::RenderEntities(double curr_time, int relative_x) {

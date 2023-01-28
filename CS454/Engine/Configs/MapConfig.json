@@ -101,6 +101,16 @@
             "spawn_y": 50
           }
         ]
+      },
+      "objects": {
+        "Elevator": [
+          {
+            "spawn_x": 624,
+            "spawn_y": 178,
+            "end_x": 624,
+            "end_y": 194
+          }
+        ]
       }
     }
   },

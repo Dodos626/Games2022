@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ENEMY_INCLUDE
-#define ENEMY_INCLUDE
+#ifndef ELEVATOR_INCLUDE
+#define ELEVATOR_INCLUDE
 #include "../Entity.h"
 #include "../Items/Item.h"
 #include "../../Utils/Point.h"
