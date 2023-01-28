@@ -29,6 +29,8 @@ Player::Player(Point* spawn, int screen_width, int map_width, int screen_dx) {
 	this->points = stats["points"];
 	this->damage_reduction = 1;
 
+	this->point_penalty = data["death"]["point_penalty"];
+
 	this->stats_display = NULL;
 
 
@@ -56,7 +58,7 @@ void Player::LoadStats(int map_width, int map_height, int y_offset) {
 
 //MISC
 void Player::TakeDamage(int damage, Point point_of_attack) {
-	if (this->is_damaged) return;
+	if (this->is_damaged || !this->isAlive()) return;
 
 	if (this->state == p_state::crouch_left && point_of_attack.GetX() < this->x) { // an skibume kai koitame aristera
 
@@ -66,10 +68,12 @@ void Player::TakeDamage(int damage, Point point_of_attack) {
 	}
 	else {
 		this->health -= damage / this->damage_reduction;
+		if (this->health <= 0) {
+			this->health = 0;
+			// Death Animation here
+		}
+		
 	}
-
-
-	
 
 	if (this->is_attacking) {
 		this->animator->StartForcedAnimation(0);
@@ -81,6 +85,20 @@ void Player::TakeDamage(int damage, Point point_of_attack) {
 	this->immunity = 0.5;
 	// animate taking damage
 }
+
+
+void Player::FromDeath() {
+	if (this->lives > 0) {
+		this->lives -= 1;
+		this->health = this->max_health;
+		this->mana = this->max_mana;
+		this->points -= this->point_penalty;
+	}
+	else {
+		// Lose game here
+	}
+}
+
 void Player::RegenerateMana(int mana_gain) { 
 	this->mana = (this->mana + mana_gain <= this->max_mana) ? this->health + mana_gain : this->max_mana; 
 	// animate mana gain
@@ -173,6 +191,8 @@ int Player::GetCameraX(){
 }
 
 void Player::Respawn(Point *p) {
+	if (!this->isAlive())
+		this->FromDeath();
 	this->x = p->GetX();
 	this->y = p->GetY();
 }
@@ -329,7 +349,6 @@ void Player::counterSpellJump() {
 
 //spell life => heals 3 life
 void Player::spellLife() {
-	std::cout << "this was called \n";
 	this->lives += 3;
 }
 

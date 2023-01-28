@@ -11,7 +11,9 @@
     "jump_speed": 2,
     "fall_speed": 2,
     "speed": 1
+  },
+  "death": {
+    "point_penalty": 200
   }
-  
   
 }

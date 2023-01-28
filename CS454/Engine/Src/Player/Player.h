@@ -30,6 +30,7 @@ private :
 	bool duck;
 	int height;
 	int width;
+	int point_penalty;
 	int damage_reduction;
 	int keys;
 
@@ -74,6 +75,8 @@ private :
 	void spellFairy(void);
 	void counterSpellFairy(void);
 
+	void FromDeath(void);
+
 
 	//toggles
 	bool toggle_collision_box = false;
@@ -103,7 +106,7 @@ public:
 	int GetJumpHeight(void) const { return jump_height; }
 	p_state GetState(void) const { return state; }
 	bool isDucking(void) { return this->duck; };
-
+	bool isAlive(void) { return this->health > 0; };
 	//SETTERS
 	void setState(p_state state_) { 
 		if (this->is_attacking || this->is_damaged) return;
