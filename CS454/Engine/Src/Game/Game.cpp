@@ -98,6 +98,7 @@ void Game::InitiateDestructionMusic() {
 	if (!this->changed_music && this->background_map->getState() == MapLocations::boss_room) {
 		this->music_player->Play(1);
 		this->changed_music = true;
+		this->player1->DisplayTimedMessage("Now playing Boss music", 3);
 	}
 }
 
@@ -124,9 +125,12 @@ void Game::MainLoopIteration(void) {
 	case ALLEGRO_EVENT_TIMER:
 
 		this->Input();
-		this->AI();
-		this->Physics();
-		this->UserCode();
+		if (this->game_state == game_state::playing) {
+			this->AI();
+			this->Physics();
+			this->UserCode();
+		}
+		
 		
 		break;
 	case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -163,6 +167,7 @@ void Game::MainLoopIteration(void) {
 		if (event.keyboard.keycode == ALLEGRO_KEY_T) {
 			this->key_t = false;
 		}
+		
 		key[event.keyboard.keycode] &= false;
 		break;
 	default:
@@ -224,6 +229,7 @@ void Game::HandleInput(void) {
 		this->toggle_player_collision_box = true;
 		this->player1->ToggleCollisionBoxRender();
 	}
+
 
 	if (key[ALLEGRO_KEY_0]) {
 		this->music_player->Stop();
@@ -296,6 +302,7 @@ void Game::HandleInput(void) {
 	if (key[ALLEGRO_KEY_P]) {
 		PauseGame();
 		this->redraw = true;
+		
 		return;
 	}
 
@@ -418,7 +425,7 @@ void Game::PauseGame() {
 
 void Game::ResumeGame() {
 	Action handle_input = [this]() {this->HandleInput(); };
-	Action gravity_pull = [this]() {this->Physics(); };
+	Action gravity_pull = [this]() {this->HandlePhysics(); };
 	this->SetInput(handle_input);
 	this->SetPhysics(gravity_pull);
 	game_state = game_state::playing;
