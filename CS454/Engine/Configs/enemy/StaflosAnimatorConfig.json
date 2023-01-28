@@ -66,19 +66,19 @@
     "number_of_frames": 3,
     "mappings": [
       {
-        "x": 32,
+        "x": 33,
         "y": 0,
         "width": 16,
         "height": 32
       },
       {
-        "x": 48,
+        "x": 49,
         "y": 0,
         "width": 16,
         "height": 32
       },
       {
-        "x": 64,
+        "x": 65,
         "y": 0,
         "width": 32,
         "height": 32

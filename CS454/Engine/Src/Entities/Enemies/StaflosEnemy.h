@@ -17,6 +17,8 @@ enum class staflos_state {
 class StaflosEnemy : public Enemy {
 private:
 	staflos_state state = staflos_state::move_left;
+	bool is_attacking = false;
+	double attack_cd = 0;
 public:
 	void Render(double curr_time, int relative_x) override;
 	int GetStateToInt(staflos_state state);

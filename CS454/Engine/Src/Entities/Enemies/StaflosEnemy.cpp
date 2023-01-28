@@ -20,55 +20,87 @@ enum class staflos_state {
 
 void StaflosEnemy::AI(Player& player) {
 	//blepei ama trwei attack den kanei attack
-	//ama mporei na baresei ton link ton baraei
-	// alliws ama o link einai se 4 block apostasi
-	// ton kinigaei kai krataei ligi apostasi
-	// alliws meine akinitos
+	
+	int staflos_x = this->GetX();
+	int staflos_y = this->GetY();
+	int player_x = player.GetX();
+	int player_y = player.GetY();
+
+	bool can_move_right = this->tryMoveRight(staflos_x, staflos_y, this->GetWidth(), this->GetHeight());
+	bool can_move_left = this->tryMoveLeft(staflos_x, staflos_y, this->GetWidth(), this->GetHeight());
+	bool can_move_up = this->tryMoveUp(staflos_x, staflos_y, this->GetWidth(), this->GetHeight());
+	bool can_move_down = this->tryMoveDown(staflos_x, staflos_y, this->GetWidth(), this->GetHeight());
 	
 	if (this->takes_damage) { // an exei pathei damage
-		if (this->GetX() > player.GetX()) { // to attack irthe apo aristera
-			if (this->tryMoveUp(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight())) // kai mporei na sinexisei
+		if (this->is_attacking) { // an ekana attack ekeini tin wra
+			if(this->state == staflos_state::atack_left)
+				this->state = staflos_state::move_left;
+			else
+				this->state = staflos_state::move_right;
+			
+			this->is_attacking = false;
+			this->animator->StartForcedAnimation(0);
+		}
+		if (staflos_x > player_x) { // to attack irthe apo aristera
+			if (can_move_up) // kai mporei na sinexisei
 			{
 				this->MoveUp(); // three times create a small 
 				this->MoveUp(); // shaking effect
 				this->MoveUp();
 			}
-			if (this->tryMoveRight(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight())) // kai mporei na sinexisei
+			if (can_move_right) // kai mporei na sinexisei
 				this->MoveRight();
 
 		}
 		else { // to attack irthe apo aristera
-			if (this->tryMoveUp(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight())) // kai mporei na sinexisei
+			if (can_move_up) // kai mporei na sinexisei
 			{
 				this->MoveUp();
 				this->MoveUp();
 				this->MoveUp();
 			}
-			if (this->tryMoveLeft(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight())) // kai mporei na sinexisei
+			if (can_move_left) // kai mporei na sinexisei
 				this->MoveLeft();
 
 		}
 		return;
 	}
-	//int x, int y, int width, int height
-	if (this->state == staflos_state::move_right) { // an paei deksia
-		if (this->tryMoveRight(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight()) && // kai mporei na sinexisei
-			!this->tryMoveDown(this->GetX() + 16, this->GetY(), this->GetWidth(), this->GetHeight())) { // xwris na pesei
-			this->MoveRight();
+	//ama mporei na baresei ton link ton baraei
+	// alliws ama o link einai se 4 block apostasi
+	// ton kinigaei kai krataei ligi apostasi
+	// alliws meine akinitos
+	
+	int distance = abs(staflos_x - player_x);
+
+	std::cout << distance << " == distance \n";
+	if (distance <= 64) { // player within 4 blocks
+		if (distance <= 20) { // if within attack range
+			if (this->is_attacking || this->attack_cd > 0) { // if already attacking
+				return;
+			}
+			if (player_x < staflos_x) // if player on my left
+				this->state = staflos_state::atack_left;
+			else
+				this->state = staflos_state::atack_right;
+			this->animator->changeAnimation(this->GetStateToInt(this->state));
+			this->animator->StartForcedAnimation(3);
+			this->is_attacking = true;
+			player.TakeDamage(this->damage, Point(staflos_x,staflos_y));
+			this->attack_cd = 0.5;
 		}
-		else {
-			this->state = staflos_state::move_left;
+		else { // if within range but not attack range
+			if (player_x > staflos_x && can_move_right) { // o player einai pio deksia kai mporw na paw pio deksia
+				if (this->state == staflos_state::move_left) // an koituses aristera
+					this->state = staflos_state::move_right; // girna deksia
+				this->MoveRight();
+			}else if (player_x < staflos_x && can_move_left) { // o player einai pio aristera kai mporw na paw pio aristera
+				if (this->state == staflos_state::move_right) // an koituses deksia
+					this->state = staflos_state::move_left; // girna aristera
+				this->MoveLeft();
+			}
 		}
 	}
-	if (this->state == staflos_state::move_left) {
-		if (this->tryMoveLeft(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight()) && // kai mporei na sinexisei
-			!this->tryMoveDown(this->GetX() + 16, this->GetY(), this->GetWidth(), this->GetHeight())) { // xwris na pesei
-			this->MoveLeft();
-		}
-		else {
-			this->state = staflos_state::move_right;
-		}
-	}
+	
 }
 
 void StaflosEnemy::Render(double curr_time, int relative_x) {
@@ -78,8 +110,27 @@ void StaflosEnemy::Render(double curr_time, int relative_x) {
 	if (this->takes_damage) {
 		this->takes_damage = !this->animator->renderNframesOfAnimationWithFixFrame(this->coordinates->GetX() - relative_x, this->coordinates->GetY(), curr_time, 1);
 	}
+	else if (this->is_attacking) {
+		if (this->state == staflos_state::atack_left) { // left attack
+			if (this->animator->renderWholeAnimationWithFixFrame(this->GetX(), this->GetY(), curr_time, -16, 0, 1)) {
+				this->is_attacking = false;
+				this->state = staflos_state::move_left;
+			}
+		}
+		else {
+			if (this->animator->renderWholeAnimationWithFixFrame(this->GetX(), this->GetY(), curr_time, 0, 0, 0)) {
+				this->is_attacking = false;
+				this->state = staflos_state::move_left;
+			}
+		}
+		
+	}
 	else {
 		this->animator->render(this->coordinates->GetX() - relative_x, this->coordinates->GetY(), curr_time, this->GetStateToInt(this->state));
+	}
+
+	if (!this->is_attacking && this->attack_cd > 0) {
+		this->attack_cd -= curr_time;
 	}
 }
 
