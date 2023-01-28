@@ -102,6 +102,10 @@ void Player::RespawnFromDeath() {
 		this->is_dead = true;
 		// Lose game here
 	}
+	this->immunity = 0;
+	this->is_attacking = false;
+	this->is_damaged = false;
+	this->setState(p_state::idle_left);
 }
 
 void Player::RegenerateMana(int mana_gain) { 
