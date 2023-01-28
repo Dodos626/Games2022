@@ -23,8 +23,8 @@ Map::Map(std::string path) {
 	
 	
 	//al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
-	this->map_buffer = al_create_bitmap(MUL_16(this->data["loading_screen"]["CSVwidth"]), MUL_16(this->data["loading_screen"]["CSVheight"]));
-	this->mapBG_buffer = al_create_bitmap(MUL_16(this->data["loading_screen"]["background"]["CSVwidth"]), MUL_16(this->data["loading_screen"]["background"]["CSVheight"]));
+	this->map_buffer = al_create_bitmap(MUL_16(this->data["main_screen"]["CSVwidth"]), MUL_16(this->data["main_screen"]["CSVheight"]));
+	this->mapBG_buffer = al_create_bitmap(MUL_16(this->data["main_screen"]["background"]["CSVwidth"]), MUL_16(this->data["main_screen"]["background"]["CSVheight"]));
 	this->ChangeMap(this->state);
 	//al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 	this->y_bound = MUL_16(this->getTileMap()->getTilemapHeight());
@@ -74,8 +74,8 @@ void Map::cleanBuffer(ALLEGRO_BITMAP* buffer) { //TODO veltiwsh epidoshs
 std::string Map::stateToString(MapLocations state) {
 	switch (state)
 	{
-	case MapLocations::loading:
-		return "loading_screen";
+	case MapLocations::win_screen:
+		return "win_screen";
 	case MapLocations::main_screen:
 		return "main_screen";
 	case MapLocations::palace:
@@ -84,6 +84,8 @@ std::string Map::stateToString(MapLocations state) {
 		return "first_floor";
 	case MapLocations::first_floor_right:
 		return "first_floor_right";
+	case MapLocations::loose_screen:
+		return "loose_screen";
 	default:
 		exit(EXIT_FAILURE);
 	}

@@ -18,11 +18,12 @@ using json = nlohmann::json;
 #define MUL_16(x) (x << 4)
 
 enum class MapLocations {
-	loading, // loading screen
+	win_screen, // main screen
 	main_screen, //the main screen
 	palace, // the first map
 	first_floor, // the first floor
-	first_floor_right // the first floor right
+	first_floor_right, // the first floor right
+	loose_screen // the loose screen
 };
 
 

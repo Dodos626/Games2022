@@ -235,11 +235,15 @@ void Game::HandleInput(void) {
 		this->redraw = true;
 	}
 	if (key[ALLEGRO_KEY_4]) {
-		this->ChangeMap(MapLocations::loading);
+		this->ChangeMap(MapLocations::win_screen);
 		this->redraw = true;
 	}
 	if (key[ALLEGRO_KEY_5]) {
 		this->ChangeMap(MapLocations::first_floor_right);
+		this->redraw = true;
+	}
+	if (key[ALLEGRO_KEY_6]) {
+		this->ChangeMap(MapLocations::loose_screen);
 		this->redraw = true;
 	}
 	//spells

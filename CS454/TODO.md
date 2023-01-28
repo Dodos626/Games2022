@@ -56,8 +56,8 @@ t = spell thunder
 1 = main screen
 2 = palace
 3 = dungeon 1
-4 = loading screen
+4 = win screen
 5 = dungeon 1 right map
-
+6 = loose screen
 
 f = toggles the grid collision block for the player
