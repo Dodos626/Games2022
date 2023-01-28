@@ -3,7 +3,7 @@
 
 Elevator::Elevator(Point* location, Point *stop_location, ElevatorStatus status) {
 	std::ifstream fin("Engine/Configs/object/ElevatorAnimatorConfig.json");
-	this->animator = new PlayerAnimator("Engine/Configs/object/ElevatorAnimatorConfig.json", 0, { "elevator" });
+	
 	json data = json::parse(fin);
 	std::cout << data << std::endl;
 	this->speed = data["speed"];
@@ -12,6 +12,8 @@ Elevator::Elevator(Point* location, Point *stop_location, ElevatorStatus status)
 	this->status = status;
 	this->name = "elevator";
 	assert(this->coordinates->GetX() == this->stop_location->GetX());
+	fin.close();
+	this->animator = new PlayerAnimator("Engine/Configs/object/ElevatorAnimatorConfig.json", 0, { "elevator" });
 }
 
 void Elevator::AI(Player& player) {
