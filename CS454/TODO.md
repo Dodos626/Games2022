@@ -51,3 +51,4 @@ t = spell thunder
 6 = loose screen
 
 f = toggles the grid collision block for the player
+p = pause screen

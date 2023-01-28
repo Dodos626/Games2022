@@ -43,6 +43,8 @@ private:
 	Player* player1;
 	
 
+	bool changed_music = false;
+
 	//BUFFER
 	ALLEGRO_BITMAP* buffer;
 	int stats_display_height_offset;
@@ -98,6 +100,8 @@ private:
 	void PauseGame();
 	void ResumeGame();
 	void RenderPauseScreen();
+
+	void InitiateDestructionMusic();
 public:
 	//constructor
 	Game();

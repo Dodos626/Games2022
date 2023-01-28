@@ -94,6 +94,12 @@ void Game::MainLoop(void) {
 		this->MainLoopIteration();
 }
 
+void Game::InitiateDestructionMusic() {
+	if (!this->changed_music && this->background_map->getState() == MapLocations::boss_room) {
+		this->music_player->Play(1);
+		this->changed_music = true;
+	}
+}
 
 
 void Game::MainLoopIteration(void) {
@@ -181,6 +187,7 @@ void Game::MainLoopIteration(void) {
 }
 
 void Game::HandleAI(void) {
+	this->InitiateDestructionMusic();
 	if (ai_flag) { // ai moves once per 2 loops
 		this->background_map->AiUpdate(this->player1); //FIX TODO proswrino tha mpei sto AI kai tha ginete me dynamic bind
 		
@@ -232,6 +239,10 @@ void Game::HandleInput(void) {
 		}
 		
 		this->key_pressed = true;
+	}
+	if (this->background_map->getState() == MapLocations::main_screen && key[ALLEGRO_KEY_ENTER] ) {
+		this->ChangeMap(MapLocations::palace);
+		this->redraw = true;
 	}
 	
 	//TO CHECK IF MAPS CHANGE 
@@ -319,6 +330,8 @@ void Game::Render(void) {
 	this->background_map->Render(this->player1->GetCameraX(), this->screen->GetScaledWidth(), 0, this->screen->GetScaledHeight());
 	this->background_map->RenderEntities(this->timer->getDelta(), camera_x);
 
+	
+	
 
 	bool player_can_move_right = this->background_map->TryMoveRight(this->player1->GetX(), this->player1->GetY(), this->player1->GetWidth(), this->player1->GetHeight());
 	bool player_can_move_left = this->background_map->TryMoveLeft(this->player1->GetX(), this->player1->GetY(), this->player1->GetWidth(), this->player1->GetHeight());

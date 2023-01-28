@@ -38,7 +38,7 @@ void Map::ChangeMap(std::string map) {
 
 	//this->map_buffer = al_create_bitmap(MUL_16(this->data[this->stateToString(state)]["CSVwidth"]), MUL_16(this->data[this->stateToString(state)]["CSVheight"]));
 	//this->mapBG_buffer = al_create_bitmap(MUL_16(this->data[this->stateToString(state)]["background"]["CSVwidth"]), MUL_16(this->data[this->stateToString(state)]["background"]["CSVheight"]));
-	
+	this->setState(this->stringToState(map));
 	this->cleanBuffer(this->map_buffer);
 	this->cleanBuffer(this->mapBG_buffer);
 	this->setTileMap(this->data[map]);
@@ -51,7 +51,7 @@ void Map::ChangeMap(std::string map) {
 	this->PrecomputeMap();
 	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 	this->setEntities(this->data[map]["entities"]);
-	this->setState(this->stringToState(map));
+	
 	
 }
 
