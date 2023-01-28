@@ -31,7 +31,7 @@ public:
 
 	virtual void GetAttacked(int damage, Point point_of_attack) = 0;
 
-	virtual void AI(Point player_position) { return; }; // all items take this implementation , enemies extend it
+	virtual void AI(Player &player) { return; }; // all items take this implementation , enemies extend it
 
 	virtual void Render(double curr_time, int relative_x);
 	bool CheckCollision(Point* p) { return *p == *this->coordinates; }

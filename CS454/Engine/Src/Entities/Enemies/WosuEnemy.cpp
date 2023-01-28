@@ -5,9 +5,9 @@ WosuEnemy::WosuEnemy(Point* spawn, Action tryMoveLeft_, Action tryMoveRight_, Ac
 	this->animator = new PlayerAnimator("Engine/Configs/enemy/WosuAnimatorConfig.json", 0, { "move_left","move_right"});
 }
 
-void WosuEnemy::AI(Point player_position) {
+void WosuEnemy::AI(Player& player) {
 	if (this->takes_damage) {
-		if (this->GetX() > player_position.GetX()) { // to attack irthe apo aristera
+		if (this->GetX() > player.GetX()) { // to attack irthe apo aristera
 			if (this->tryMoveUp(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight())) // kai mporei na sinexisei
 			{
 				this->MoveUp(); // three times create a small 

@@ -6,9 +6,9 @@ PalaceBotEnemy::PalaceBotEnemy(Point* spawn, Action tryMoveLeft_, Action tryMove
 	this->animator = new PlayerAnimator("Engine/Configs/enemy/PalaceBotAnimatorConfig.json", 0, { "palaceBot_red", "palaceBot_blue", "palaceBot_cyan" });
 }
 
-void PalaceBotEnemy::AI(Point player_position) {
+void PalaceBotEnemy::AI(Player& player) {
 	if (this->takes_damage) {
-		if (this->GetX() > player_position.GetX()) { // to attack irthe apo aristera
+		if (this->GetX() > player.GetX()) { // to attack irthe apo aristera
 			if (this->tryMoveUp(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight())) // kai mporei na sinexisei
 			{
 				this->MoveUp(); // three times create a small 

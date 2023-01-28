@@ -18,7 +18,7 @@ private:
 	
 public:
 	WosuEnemy(Point* spawn, Action tryMoveLeft_, Action tryMoveRight_, Action tryMoveUp_, Action tryMoveDown_);
-	void AI(Point player_position);
+	void AI(Player& player);
 	void Render(double curr_time, int relative_x)override;
 	void ChangeDirection() override;
 };

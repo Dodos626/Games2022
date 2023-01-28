@@ -167,7 +167,7 @@ void Game::MainLoopIteration(void) {
 
 void Game::HandleAI(void) {
 	if (ai_flag) { // ai moves once per 2 loops
-		this->background_map->AiUpdate(Point(this->player1->GetX(), this->player1->GetY())); //FIX TODO proswrino tha mpei sto AI kai tha ginete me dynamic bind
+		this->background_map->AiUpdate(this->player1); //FIX TODO proswrino tha mpei sto AI kai tha ginete me dynamic bind
 		
 		this->ai_flag = false;
 	}

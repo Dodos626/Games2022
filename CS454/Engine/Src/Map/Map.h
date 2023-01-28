@@ -100,7 +100,7 @@ public:
 	void ChangeMap(std::string map);
 
 
-	void AiUpdate(Point player_position);
+	void AiUpdate(Player  *player);
 	void PlayerAttack(Player* player);
 	void CheckPlayerCollisionsWithEntities(Player *player);
 

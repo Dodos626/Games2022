@@ -21,7 +21,7 @@ public:
 	void Render(double curr_time, int relative_x) override;
 	int GetStateToInt(staflos_state state);
 	StaflosEnemy(Point* spawn, Action tryMoveLeft_, Action tryMoveRight_, Action tryMoveUp_, Action tryMoveDown_);
-	void AI(Point player_position);
+	void AI(Player& player);
 	void GetAttacked(int damage, Point point_of_attack)override;
 	void ChangeDirection() ;
 };

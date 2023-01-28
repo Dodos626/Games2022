@@ -330,9 +330,9 @@ void Map::RenderItems(double curr_time, int relative_x) {
 	}
 }
 
-void Map::AiUpdate(Point player_position) {
+void Map::AiUpdate(Player *player) {
 	for (auto entity : this->enemies) {
-		entity->AI(player_position);
+		entity->AI(*player);
 	}
 }
 

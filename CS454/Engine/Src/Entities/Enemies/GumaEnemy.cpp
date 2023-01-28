@@ -11,9 +11,9 @@ int GumaEnemy::GetStateToInt(guma_state state){
 }
 
 
-void GumaEnemy::AI(Point player_position) {
+void GumaEnemy::AI(Player& player) {
 	if (this->takes_damage) { // an exei pathei damage
-		if (this->GetX() > player_position.GetX()) { // to attack irthe apo aristera
+		if (this->GetX() > player.GetX()) { // to attack irthe apo aristera
 			if (this->tryMoveUp(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight())) // kai mporei na sinexisei
 			{
 				this->MoveUp(); // three times create a small 

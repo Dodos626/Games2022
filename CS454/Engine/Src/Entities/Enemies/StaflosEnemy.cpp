@@ -18,7 +18,7 @@ enum class staflos_state {
 	atack_right
 };*/
 
-void StaflosEnemy::AI(Point player_position) {
+void StaflosEnemy::AI(Player& player) {
 	//blepei ama trwei attack den kanei attack
 	//ama mporei na baresei ton link ton baraei
 	// alliws ama o link einai se 4 block apostasi
@@ -26,7 +26,7 @@ void StaflosEnemy::AI(Point player_position) {
 	// alliws meine akinitos
 	
 	if (this->takes_damage) { // an exei pathei damage
-		if (this->GetX() > player_position.GetX()) { // to attack irthe apo aristera
+		if (this->GetX() > player.GetX()) { // to attack irthe apo aristera
 			if (this->tryMoveUp(this->GetX(), this->GetY(), this->GetWidth(), this->GetHeight())) // kai mporei na sinexisei
 			{
 				this->MoveUp(); // three times create a small 
