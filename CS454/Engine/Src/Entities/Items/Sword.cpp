@@ -7,6 +7,7 @@ SwordItem::SwordItem(Point* spawn): Item(spawn) {
 }
 void SwordItem::PickUp(Player& player) {
 	player.DisplayTimedMessage("You won, rest now !", 10);
+	player.PickTheSword();
 }
 void SwordItem::Render(double curr_time, int relative_x) {
 	this->animator->render(this->coordinates->GetX() - relative_x, this->coordinates->GetY(), curr_time, 0);

@@ -11,7 +11,6 @@ BitMap::BitMap(const char* path, int tilesetWidth, int tilesetHeight)
 	}
 	this->tilesetWidth = tilesetWidth;
 	this->tilesetHeight = tilesetHeight;
-	std::cout << "BitMap constructor " << path << std::endl;
 	
 }
 

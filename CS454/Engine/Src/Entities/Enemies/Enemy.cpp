@@ -12,7 +12,6 @@ Enemy::Enemy(Point *spawn, std::string datapath, Action tryMoveLeft_, Action try
 {
 	std::ifstream fin(datapath);
 	json data = json::parse(fin);
-	std::cout << data << std::endl;
 	this->health = data["hp"];
 	this->damage = data["ad"];
 	this->speed = data["speed"];
@@ -31,6 +30,7 @@ Enemy::Enemy(Point *spawn, std::string datapath, Action tryMoveLeft_, Action try
 	this->drop_chance = data["drop_chance"];
 	for (auto item : data["drops"])
 		this->drops.push_back(MapEntities::GetItemFromString(item, this->coordinates));
+	fin.close();
 }
 
 void Enemy::GetAttacked(int damage, Point point_of_attack) {

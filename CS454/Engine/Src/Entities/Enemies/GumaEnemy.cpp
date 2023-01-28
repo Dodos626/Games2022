@@ -140,7 +140,6 @@ void GumaEnemy::Render(double curr_time, int relative_x) {
 }
 
 void GumaEnemy::SpawnProjectile(guma_state state) {
-	//std::cout << this->GetX() << " " << this->GetY() << std::endl;
 	//224 176
 	if(static_cast<int>(state)%2 == 0) // koitaei aristera
 		this->projectiles.push_back(new Projectile(new Point(this->GetX(), this->GetY()), ProjectileDirection::fly_left, tryMoveLeft, tryMoveRight));

@@ -33,6 +33,6 @@ void Entity::MoveDown() {
 }
 
 std::ostream& operator<<(std::ostream& os, const Entity& p) {
-	std::cout << p.name << std::endl;
-	return std::cout;
+	os << p.name << std::endl;
+	return os;
 }

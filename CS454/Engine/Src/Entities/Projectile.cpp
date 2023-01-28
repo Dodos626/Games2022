@@ -7,7 +7,6 @@ Projectile::Projectile(Point* spawn, ProjectileDirection direction, Action tryMo
 
 	std::ifstream fin("Engine/Configs/enemy/ProjectileConfig.json");
 	json data = json::parse(fin);
-	std::cout << data << std::endl;
 	this->direction = direction;
 	this->location = spawn;
 	this->speed = data["speed"];
@@ -18,7 +17,7 @@ Projectile::Projectile(Point* spawn, ProjectileDirection direction, Action tryMo
 	this->is_flying = true;
 	fin.close();
 	this->animator = new PlayerAnimator("Engine/Configs/enemy/ProjectileAnimatorConfig.json", GetStateToInt(direction), { "fly_left", "fly_right" });
-	std::cout << "ok here \n";
+	
 }
 
 void Projectile::AI(Player &player) {

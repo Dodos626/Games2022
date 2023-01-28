@@ -43,7 +43,6 @@ Mappings *SingleAnimation::getMapping(double current_time) {
 
 
 SingleAnimation::~SingleAnimation() {
-	std::cout << "Single Animation destructor called\n";
 	for (int i = 0; i < this->mappings.size(); i++)
 		delete this->mappings.at(i);
 }

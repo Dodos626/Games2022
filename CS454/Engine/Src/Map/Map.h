@@ -57,6 +57,7 @@ private:
 	void RegisterDoor(DoorItem* door);
 	void RemoveDoor(DoorItem* door);
 	std::string stateToString(MapLocations state);
+	MapLocations stringToState(std::string state);
 
 	//gia to main screen ta grammata
 	void mainScreenRender();

@@ -3,9 +3,9 @@
   "hp": 100,
   "rp": 100,
   "speed": 2,
-  "drop_chance": 5,
+  "drop_chance": 100,
   "width": 16,
   "height": 32,
-  "drops": [ "HealthPotion" ],
+  "drops": [ "Sword" ],
   "view_distance": 10
 }

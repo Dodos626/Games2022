@@ -6,7 +6,6 @@ using json = nlohmann::json;
 MusicPlayer::MusicPlayer() {
 	std::ifstream fin("Engine/Configs/MusicConfig.json");
 	json data = json::parse(fin);
-	std::cout << data << std::endl;
 
 	std::string sample = data["songs_path"]["main_theme"];
 	std::string sample2 = data["songs_path"]["palace_theme"];

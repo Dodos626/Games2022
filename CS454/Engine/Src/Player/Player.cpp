@@ -14,7 +14,6 @@ Player::Player(Point* spawn, int screen_width, int map_width, int screen_dx) {
 	
 	std::ifstream fin("Engine/Configs/PlayerConfig.json");
 	json data = json::parse(fin);
-	std::cout << data << std::endl;
 
 	this->x = spawn->GetX();
 	this->y = spawn->GetY();
@@ -51,6 +50,7 @@ Player::Player(Point* spawn, int screen_width, int map_width, int screen_dx) {
 
 	//initiate spell book and spells
 	this->CreateSpellBook();
+	fin.close();
 }
 
 void Player::LoadStats(int map_width, int map_height, int y_offset) {
@@ -377,7 +377,7 @@ void Player::counterSpellJump() {
 //spell life => heals 3 life
 void Player::spellLife() {
 	this->stats_display->DisplayTimedMessage("Casted life", 1);
-	this->lives += 3;
+	this->RegenerateHealth(20);
 }
 
 //spell fairy => Allows you to reach high places and cross lengthy gaps.

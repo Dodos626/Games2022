@@ -25,7 +25,7 @@ PlayerAnimator::PlayerAnimator(std::string path, int curr_state, std::vector<std
 	for (int i = 0; i < this->number_of_animations; i++) {
 		this->registerSingleAnimation(data[animation_names.at(i)]);
 	}
-	
+	fin.close();
 }
 
 void PlayerAnimator::selectAnimation(int animation_id) {

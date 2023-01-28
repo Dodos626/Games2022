@@ -5,7 +5,6 @@ Map::Map(std::string path) {
 
 	std::ifstream f(path);
 	this->data = json::parse(f);
-	std::cout << this->data << std::endl;
 
 	this->state = MapLocations::main_screen;
 	
@@ -29,6 +28,7 @@ Map::Map(std::string path) {
 	//al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 	this->y_bound = MUL_16(this->getTileMap()->getTilemapHeight());
 	this->x_bound = MUL_16(this->getTileMap()->getTilemapWidth());
+	f.close();
 }
 
 
@@ -51,6 +51,7 @@ void Map::ChangeMap(std::string map) {
 	this->PrecomputeMap();
 	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 	this->setEntities(this->data[map]["entities"]);
+	this->setState(this->stringToState(map));
 	
 }
 
@@ -91,6 +92,31 @@ std::string Map::stateToString(MapLocations state) {
 	default:
 		exit(EXIT_FAILURE);
 	}
+}
+
+
+MapLocations Map::stringToState(std::string state) {
+	if (state == "win_screen")
+		return MapLocations::win_screen;
+
+	else if (state == "main_screen")
+		return MapLocations::main_screen;
+
+	else if (state == "palace")
+		return MapLocations::palace;
+
+	else if (state == "first_floor")
+		return MapLocations::first_floor;
+
+	else if (state == "first_floor_right")
+		return MapLocations::first_floor_right;
+
+	else if (state == "loose_screen")
+		return MapLocations::loose_screen;
+
+	else if (state == "boss_room")
+		return MapLocations::boss_room;
+	assert(0);
 }
 
 void Map::setSolidBlocks(std::vector<int> SolidBlockIds) {
@@ -431,6 +457,10 @@ bool Map::TryAttack(int x, int y) {
 }
 
 void Map::KillAllEnemies(Player *player) {
+	if (this->state == MapLocations::boss_room) {
+		player->DisplayTimedMessage("THUNDER INEFFECTIVE!", 3);
+		return;
+	}
 	// The final solution
 	for (Enemy* enemy : this->enemies) {
 		enemy->KillInstantly();
@@ -455,7 +485,6 @@ void Map::PlayerAttack(Player *player) {
 				tmp += 16;
 			}
 			enemy->GetAttacked(damage, Point(player->GetX(), player->GetY() + tmp));
-			std::cout << "attacking enemy " << *enemy << std::endl;
 			if (!enemy->GetIsAlive()) {
 				player->IncreasePoints(enemy->GetPoints());
 				Item* drop = enemy->GetDroppedItem();
@@ -509,9 +538,6 @@ void Map::CheckPlayerCollisionsWithEntities(Player *player) {
 					this->RemoveDoor((DoorItem*)item);
 					this->items.erase(this->items.begin() + i);
 				}
-			}
-			else if (item->GetName() == "Sword") {
-				this->ChangeMap("win_screen");
 			}
 			else
 				this->items.erase(this->items.begin() + i);

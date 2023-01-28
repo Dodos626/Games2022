@@ -29,7 +29,6 @@ void Game::Initialise(void) {
 
 	std::ifstream f("Engine/Configs/GameConfig.json");
 	json data = json::parse(f);
-	std::cout << data << std::endl;
 	
 
 	this->stats_display_height_offset = data["stats_display"]["height"]; // how much will displaying stats take of off screen
@@ -46,7 +45,6 @@ void Game::Initialise(void) {
 	
 	this->buffer = al_create_bitmap(data["screen"]["width"] / 2, (data["screen"]["height"] - this->stats_display_height_offset) / 2);
 	Point* spawn_location;
-	std::cout << "creating map\n";
 	try {
 		auto background_json = data["bitmaps"]["background"];
 		this->background_map = new Map("Engine/Configs/MapConfig.json");
@@ -82,19 +80,12 @@ void Game::Initialise(void) {
 	this->SetPhysics(gravity_pull);
 	this->SetUser(check_exit);
 	this->SetAI(handle_ai);
+	f.close();
 	
 }
 void Game::CastThunder() {
-	if (this->background_map->getState() == MapLocations::boss_room)
-	{
-		this->player1->DisplayTimedMessage("THIS WON'T WORK!", 3);
-		
-	}
-	else {
-		this->player1->DisplayTimedMessage("Casted Thunder", 1);
-		this->background_map->KillAllEnemies(this->player1);
-	}
-	
+	this->player1->DisplayTimedMessage("Casted Thunder", 1);
+	this->background_map->KillAllEnemies(this->player1);
 }
 
 void Game::MainLoop(void) {
@@ -450,6 +441,10 @@ void Game::HandlePhysics(void) {
 		else
 			this->ChangeMap(MapLocations::loose_screen);
 	}
+	else if (this->player1->hasTheSword()) {
+		this->ChangeMap(MapLocations::win_screen);
+		this->player1->DropTheSword();
+	}
 }
 
 void Game::HandlePlayerPhysics(void) {
@@ -548,9 +543,6 @@ void Game::CheckExit() {
 		chosen_exit = new Point(rx, dy);
 	if (chosen_exit != NULL) {
 		ExitPoint exit = this->background_map->GetExit(*chosen_exit);
-		std::cout << "Changing map: " << exit.GetNextMapName() << std::endl;
-		std::cout << "Spawn At: " << *exit.GetNextSpawn() << std::endl;
-		std::cout << "lx: " << lx << " rx: " << rx << " uy: " << uy << " dy: " << dy << std::endl;
 		
 		this->ChangeMap(exit.GetNextMapName(), exit.GetNextSpawn());
 	}

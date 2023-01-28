@@ -72,7 +72,6 @@ void StaflosEnemy::AI(Player& player) {
 	
 	int distance = abs(staflos_x - player_x);
 
-	std::cout << distance << " == distance \n";
 	if (distance <= 16*this->view_distance) { // player within 4 blocks
 		if (distance <= 25) { // if within attack range
 			if (this->is_attacking || this->attack_cd > 0) { // if already attacking
@@ -159,8 +158,7 @@ void StaflosEnemy::GetAttacked(int damage, Point point_of_attack) {
 	int attack_y = point_of_attack.GetY();
 
 	int my_state = static_cast<int>(this->state);
-	
-	std::cout << attack_y << " " << this->GetY() << "\n";
+
 	if ((attack_y > this->GetY())|| //ean trwei crouch attack 
 		((my_state % 2 == 1)&&(attack_x < this->GetX())) || // ama koitaei deksia kai trwei apo aristera
 		((my_state % 2 == 0) && (attack_x > this->GetX()))) { // ama koitaei aristera kai trwei apo deksia

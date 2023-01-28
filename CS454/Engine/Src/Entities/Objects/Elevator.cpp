@@ -5,7 +5,6 @@ Elevator::Elevator(Point* location, Point *stop_location, ElevatorStatus status)
 	std::ifstream fin("Engine/Configs/object/ElevatorAnimatorConfig.json");
 	
 	json data = json::parse(fin);
-	std::cout << data << std::endl;
 	this->speed = data["speed"];
 	this->coordinates = location;
 	this->initial_location = new Point(location->GetX(), location->GetY());

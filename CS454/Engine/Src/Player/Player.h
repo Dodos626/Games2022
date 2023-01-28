@@ -110,6 +110,7 @@ public:
 	p_state GetState(void) const { return state; }
 	bool isDucking(void) { return this->duck; };
 	bool isAlive(void) { return this->health > 0; };
+	bool hasTheSword(void) const {return this->has_the_sword;}
 	bool canRespawn(void) { return this->lives > 0; };
 	//SETTERS
 	void setState(p_state state_) { 
@@ -151,6 +152,8 @@ public:
 	void IncreaseLives(int difference);
 	void IncreasePoints(int points);
 	void IncreaseKeys(int keys);
+	void PickTheSword() { this->has_the_sword = true; }
+	void DropTheSword() { this->has_the_sword = false; }
 	bool UseKey();
 
 	//Render
