@@ -86,6 +86,8 @@ std::string Map::stateToString(MapLocations state) {
 		return "first_floor_right";
 	case MapLocations::loose_screen:
 		return "loose_screen";
+	case MapLocations::boss_room:
+		return "boss_room";
 	default:
 		exit(EXIT_FAILURE);
 	}
@@ -429,6 +431,11 @@ bool Map::TryAttack(int x, int y) {
 }
 
 void Map::KillAllEnemies(Player *player) {
+	if (this->state == MapLocations::boss_room)
+	{
+		player->DisplayTimedMessage("THIS WON'T WORK!", 3);
+		return;
+	}
 	// The final solution
 	for (Enemy* enemy : this->enemies) {
 		enemy->KillInstantly();

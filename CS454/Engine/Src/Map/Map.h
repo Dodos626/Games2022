@@ -25,7 +25,8 @@ enum class MapLocations {
 	palace, // the first map
 	first_floor, // the first floor
 	first_floor_right, // the first floor right
-	loose_screen // the loose screen
+	loose_screen, // the loose screen
+	boss_room
 };
 
 

@@ -34,12 +34,7 @@
     "exit_points": {},
     "entities": {
       "enemies": {
-        "Guma": [
-          {
-            "spawn_x": 224,
-            "spawn_y": 144
-          }
-        ]
+        
       },
       "items": {
         "Sword": [
@@ -81,8 +76,8 @@
     },
     "entities": {
       "enemies": {
-        
-        
+
+
       },
       "items": {
         "Key": [
@@ -135,24 +130,26 @@
           "y": 0,
           "spawn_x": 608,
           "spawn_y": 160
-        },
+        }
+      ],
+      "boss_room": [
         {
           "x": 0,
           "y": 8,
           "spawn_x": 700,
-          "spawn_y": 0
+          "spawn_y": 160
         },
         {
           "x": 0,
           "y": 9,
           "spawn_x": 700,
-          "spawn_y": 0
+          "spawn_y": 160
         },
         {
           "x": 0,
           "y": 10,
           "spawn_x": 700,
-          "spawn_y": 0
+          "spawn_y": 160
         }
       ],
       "first_floor_right": [
@@ -202,77 +199,102 @@
       }
     }
   },
-    "first_floor_right": {
+  "first_floor_right": {
 
-      "CSVsource": "Media/background_map/1st_floor_right.csv",
+    "CSVsource": "Media/background_map/1st_floor_right.csv",
+    "CSVwidth": 48,
+    "CSVheight": 16,
+    "SolidIds": [ 14, 24, 25, 26, 27, 28, 30, 31, 35, 36, 37, 38, 40, 41 ],
+    "spawn_x": 640,
+    "spawn_y": 120,
+    "background": {
+      "CSVsource": "Media/background_map/1st_floor_right_bg.csv",
       "CSVwidth": 48,
-      "CSVheight": 16,
-      "SolidIds": [ 14, 24, 25, 26, 27, 28, 30, 31, 35, 36, 37, 38, 40, 41 ],
-      "spawn_x": 640,
-      "spawn_y": 120,
-      "background": {
-        "CSVsource": "Media/background_map/1st_floor_right_bg.csv",
-        "CSVwidth": 48,
-        "CSVheight": 16
-      },
-      "exit_points": {
-        "first_floor": [
+      "CSVheight": 16
+    },
+    "exit_points": {
+      "first_floor": [
+        {
+          "x": 0,
+          "y": 8,
+          "spawn_x": 736,
+          "spawn_y": 128
+        },
+        {
+          "x": 0,
+          "y": 9,
+          "spawn_x": 736,
+          "spawn_y": 128
+        },
+        {
+          "x": 0,
+          "y": 10,
+          "spawn_x": 736,
+          "spawn_y": 128
+        }
+      ]
+    }
+  },
+  "loose_screen": {
+    "CSVsource": "Media/background_map/loose_screen.csv",
+    "CSVwidth": 48,
+    "CSVheight": 16,
+    "SolidIds": [ 14, 24, 25, 26, 27, 28, 30, 31, 35, 36, 37, 38, 40, 41 ],
+    "spawn_x": 352,
+    "spawn_y": 80,
+    "background": {
+      "CSVsource": "Media/background_map/loose_screen_bg.csv",
+      "CSVwidth": 48,
+      "CSVheight": 16
+    },
+    "exit_points": {},
+    "entities": {
+      "enemies": {
+        "Staflos": [
+
           {
-            "x": 0,
-            "y": 8,
-            "spawn_x": 736,
-            "spawn_y": 128
-          },
+            "spawn_x": 672,
+            "spawn_y": 100
+          }
+        ],
+        "PalaceBot": [
           {
-            "x": 0,
-            "y": 9,
-            "spawn_x": 736,
-            "spawn_y": 128
-          },
+            "spawn_x": 512,
+            "spawn_y": 100
+          }
+        ],
+        "Wosu": [
           {
-            "x": 0,
-            "y": 10,
-            "spawn_x": 736,
-            "spawn_y": 128
+            "spawn_x": 192,
+            "spawn_y": 100
           }
         ]
       }
-    },
-    "loose_screen": {
-      "CSVsource": "Media/background_map/loose_screen.csv",
+    }
+  },
+  "boss_room": {
+    "CSVsource": "Media/background_map/boss_room.csv",
+    "CSVwidth": 48,
+    "CSVheight": 16,
+    "SolidIds": [ 14, 24, 25, 26, 27, 28, 30, 31, 35, 36, 37, 38, 40, 41 ],
+    "spawn_x": 700,
+    "spawn_y": 160,
+    "background": {
+      "CSVsource": "Media/background_map/boss_room_bg.csv",
       "CSVwidth": 48,
-      "CSVheight": 16,
-      "SolidIds": [ 14, 24, 25, 26, 27, 28, 30, 31, 35, 36, 37, 38, 40, 41 ],
-      "spawn_x": 352,
-      "spawn_y": 80,
-      "background": {
-        "CSVsource": "Media/background_map/loose_screen_bg.csv",
-        "CSVwidth": 48,
-        "CSVheight": 16
-      },
-      "exit_points": {},
-      "entities": {
-        "enemies": {
-          "Staflos": [
-
-            {
-              "spawn_x": 672,
-              "spawn_y": 100
-            }
-          ],
-          "PalaceBot": [
-            {
-              "spawn_x": 512,
-              "spawn_y": 100
-            }
-          ],
-          "Wosu": [
-            {
-              "spawn_x": 192,
-              "spawn_y": 100
-            }
-          ]
-        }
+      "CSVheight": 16
+    },
+    "exit_points": {},
+    "entities": {
+      "enemies": {
+        "Guma": [
+          {
+            "spawn_x": 224,
+            "spawn_y": 144
+          }
+        ]
       }
     }
   }
+
+}
