@@ -22,6 +22,6 @@ bool Point::InRectangle(Point &p, int dx, int dy) {
 
 
 std::ostream &operator<<(std::ostream &os, const Point &p) {
-	std::cout << p.x << ", " << p.y;
-	return std::cout;
+	os << p.x << ", " << p.y;
+	return os;
 }
