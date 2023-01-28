@@ -44,13 +44,13 @@ void Map::ChangeMap(std::string map) {
 	this->setTileMap(this->data[map]);
 	this->setSolidBlocks(this->data[map]["SolidIds"]);
 	this->setExitPoints(this->data[map]["exit_points"]);
-	this->setEntities(this->data[map]["entities"]);
 	this->grid.clear();
 	this->setSpawn(this->data[map]);
 	al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
 	this->precomputeBg();
 	this->PrecomputeMap();
 	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
+	this->setEntities(this->data[map]["entities"]);
 	
 }
 
@@ -521,26 +521,8 @@ void Map::RegisterDoor(DoorItem* door) {
 	int b1x = (dx) / 16;
 	int b1y = (dy) / 16;
 	int b2y = b1y + 1;
-	int b3y = b2y + 1;
-	std::cout << "registering door at:" << b1x << " , y = " << b1y << std::endl;
-	std::cout << "Grid before changes:\n";
-	for (int i = 0; i < this->grid.size(); i++) {
-		for (int j = 0; j < this->grid[i].size(); j++) {
-			std::cout << this->grid[i][j];
-		}
-		std::cout << std::endl;
-	}
 	this->grid[b1y][b1x] = true;
 	this->grid[b2y][b1x] = true;
-	this->grid[b3y][b1x] = true;
-
-	std::cout << "\n\nGrid after changes:\n";
-	for (int i = 0; i < this->grid.size(); i++) {
-		for (int j = 0; j < this->grid[i].size(); j++) {
-			std::cout << this->grid[i][j];
-		}
-		std::cout << std::endl;
-	}
 }
 
 void Map::RemoveDoor(DoorItem* door) {
@@ -550,10 +532,7 @@ void Map::RemoveDoor(DoorItem* door) {
 	int b1x = (dx) / 16;
 	int b1y = (dy) / 16;
 	int b2y = b1y + 1;
-	int b3y = b2y + 1;
-	std::cout << "removing door at:" << b1x << " , y = " << b1y << std::endl;
 	this->grid[b1y][b1x] = false;
 	this->grid[b2y][b1x] = false;
-	this->grid[b3y][b1x] = false;
 
 }
