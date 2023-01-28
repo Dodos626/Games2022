@@ -52,6 +52,9 @@ void WosuEnemy::AI(Player& player) {
 }
 
 void WosuEnemy::Render(double curr_time, int relative_x) {
+	if (this->immunity > 0) {
+		this->immunity -= curr_time;
+	}
 	if (this->takes_damage) {
 		this->takes_damage = !this->animator->renderNframesOfAnimationWithFixFrame(this->coordinates->GetX() - relative_x, this->coordinates->GetY(), curr_time, 1);
 	}
@@ -67,6 +70,8 @@ int WosuEnemy::GetStateToInt(wosu_state state) {
 
 
 void WosuEnemy::ChangeDirection() {
+	if (this->immunity > 0) { return; }
+	this->immunity = 0.5;
 	if (this->state == wosu_state::move_left) {
 		this->state = wosu_state::move_right;
 	}

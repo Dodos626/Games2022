@@ -54,6 +54,9 @@ void PalaceBotEnemy::AI(Player& player) {
 }
 
 void PalaceBotEnemy::Render(double curr_time, int relative_x) {
+	if (this->immunity > 0) {
+		this->immunity -= curr_time;
+	}
 	if (this->takes_damage) {
 		this->takes_damage = !this->animator->renderNframesOfAnimationWithFixFrame(this->coordinates->GetX() - relative_x, this->coordinates->GetY(), curr_time, 1);
 	}

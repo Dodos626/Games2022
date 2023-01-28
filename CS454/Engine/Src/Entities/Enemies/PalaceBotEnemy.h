@@ -23,6 +23,8 @@ public:
 	void Render(double curr_time, int relative_x)override;
 	void GetAttacked(int damage, Point point_of_attack)override;
 	void ChangeDirection() {
+		if (this->immunity > 0) { return; }
+		this->immunity = 0.5;
 		this->moves_right = !this->moves_right;
 	}
 	void SuffleAnimation();

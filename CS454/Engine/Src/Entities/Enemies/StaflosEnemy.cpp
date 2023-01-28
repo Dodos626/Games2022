@@ -72,6 +72,9 @@ void StaflosEnemy::AI(Player& player) {
 }
 
 void StaflosEnemy::Render(double curr_time, int relative_x) {
+	if (this->immunity > 0) {
+		this->immunity -= curr_time;
+	}
 	if (this->takes_damage) {
 		this->takes_damage = !this->animator->renderNframesOfAnimationWithFixFrame(this->coordinates->GetX() - relative_x, this->coordinates->GetY(), curr_time, 1);
 	}
@@ -81,6 +84,8 @@ void StaflosEnemy::Render(double curr_time, int relative_x) {
 }
 
 void StaflosEnemy::ChangeDirection() { // cannot change direction if attacking
+	if (this->immunity > 0) { return; }
+	this->immunity = 0.5;
 	if (this->state == staflos_state::move_left) { this->state = staflos_state::move_right; }
 	else if (this->state == staflos_state::move_right) { this->state = staflos_state::move_left; }
 };
