@@ -161,6 +161,9 @@ public:
 		this->spell_book.registerSpell(new Spell(cost,f,nullptr,true));
 	}
 
+
+	void DisplayTimedMessage(std::string message, double time);
+
 	/*
 	* checks all active spells if their effect is over
 	* the it calls the counter spell if it exists

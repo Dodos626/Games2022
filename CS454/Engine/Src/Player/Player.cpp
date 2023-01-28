@@ -402,3 +402,7 @@ void Player::castSpell(int id) {
 void Player::LoadStats() {
 	this->stats_display->PrepareStats();
 };
+
+void  Player::DisplayTimedMessage(std::string message, double time) {
+	this->stats_display->DisplayTimedMessage(message, time);
+}
