@@ -74,8 +74,9 @@ public:
 			spells[id]->Cast(); // cast it
 			return spells[id]->getManaCost(); // return how much it costed
 		}
-
-		return 0; //nothing casted so 0 mana cost
+		if(active_spells[id])
+			return 0; //spell is on cooldown
+		return -1; // not enough mana
 			
 	}
 

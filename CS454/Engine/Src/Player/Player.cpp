@@ -95,8 +95,10 @@ void Player::RespawnFromDeath() {
 		this->health = this->max_health;
 		this->mana = this->max_mana;
 		this->points -= this->point_penalty;
+		this->stats_display->DisplayTimedMessage("Be carefull next time", 3);
 	}
 	else {
+		this->stats_display->DisplayTimedMessage("YOU LOST", 10);
 		this->health = 1;
 		this->mana = 1;
 		this->is_dead = true;
@@ -190,7 +192,7 @@ void Player::Render(double curr_time, bool can_move_right, bool can_move_left, b
 
 	}
 	if (this->stats_display)
-		this->stats_display->Render();
+		this->stats_display->Render(curr_time);
 }
 
 
@@ -345,28 +347,34 @@ void Player::CreateSpellBook(void) {
 
 //spell shield => link takes half damage
 void Player::spellShield() {
+	this->stats_display->DisplayTimedMessage("Casted shield", 1);
 	this->damage_reduction = 2;
 }
 void Player::counterSpellShield() {
 	this->damage_reduction = 1;
+	this->stats_display->DisplayTimedMessage("Spell shield ended", 1);
 }
 
 
 //spell jump => doubles the jump height
 void Player::spellJump() {
+	this->stats_display->DisplayTimedMessage("Casted jump", 1);
 	this->jump_height *= 2;
 }
 void Player::counterSpellJump() {
 	this->jump_height /= 2;
+	this->stats_display->DisplayTimedMessage("Spell jump ended", 1);
 }
 
 //spell life => heals 3 life
 void Player::spellLife() {
+	this->stats_display->DisplayTimedMessage("Casted life", 1);
 	this->lives += 3;
 }
 
 //spell fairy => Allows you to reach high places and cross lengthy gaps.
 void Player::spellFairy() {
+	this->stats_display->DisplayTimedMessage("Casted fairy", 1);
 	this->jump_speed -= 1;
 	this->fall_speed -= 1;
 }
@@ -374,8 +382,21 @@ void Player::spellFairy() {
 void Player::counterSpellFairy() {
 	this->jump_speed += 1;
 	this->fall_speed += 1;
+	this->stats_display->DisplayTimedMessage("Spell fairy ended", 1);
 }
 
+void Player::castSpell(int id) {
+	int mana_consumed = this->spell_book.cast(id, this->mana);
+	if (mana_consumed == 0) {
+		this->stats_display->DisplayTimedMessage("Spell has Cooldown", 1);
+		return;
+	}
+	else if (mana_consumed == -1) {
+		this->stats_display->DisplayTimedMessage("Not enough mana", 1);
+		return;
+	}
+	this->mana -= mana_consumed;
+}
 
 // DISPLAY STATS SECTION
 void Player::LoadStats() {

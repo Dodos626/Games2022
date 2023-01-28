@@ -142,6 +142,21 @@ void Game::MainLoopIteration(void) {
 		if (event.keyboard.keycode == ALLEGRO_KEY_F) {
 			this->toggle_player_collision_box = false;
 		}
+		if (event.keyboard.keycode == ALLEGRO_KEY_Q) {
+			this->key_q = false;
+		}
+		if (event.keyboard.keycode == ALLEGRO_KEY_W) {
+			this->key_w = false;
+		}
+		if (event.keyboard.keycode == ALLEGRO_KEY_E) {
+			this->key_e = false;
+		}
+		if (event.keyboard.keycode == ALLEGRO_KEY_R) {
+			this->key_r = false;
+		}
+		if (event.keyboard.keycode == ALLEGRO_KEY_T) {
+			this->key_t = false;
+		}
 		key[event.keyboard.keycode] &= false;
 		break;
 	default:
@@ -247,20 +262,25 @@ void Game::HandleInput(void) {
 		this->redraw = true;
 	}
 	//spells
-	if (key[ALLEGRO_KEY_Q]) {
+	if (key[ALLEGRO_KEY_Q] && !this->key_q) {
 		this->player1->castSpell(0);
+		this->key_q = true;
 	}
-	if (key[ALLEGRO_KEY_W]) {
+	if (key[ALLEGRO_KEY_W] && !this->key_w) {
 		this->player1->castSpell(1);
+		this->key_w = true;
 	}
-	if (key[ALLEGRO_KEY_E]) {
+	if (key[ALLEGRO_KEY_E] && !this->key_e) {
 		this->player1->castSpell(2);
+		this->key_e = true;
 	}
-	if (key[ALLEGRO_KEY_R]) {
+	if (key[ALLEGRO_KEY_R] && !this->key_r) {
 		this->player1->castSpell(3);
+		this->key_r = true;
 	}
-	if (key[ALLEGRO_KEY_T]) {
+	if (key[ALLEGRO_KEY_T] && !this->key_t) {
 		this->player1->castSpell(4);
+		this->key_t = true;
 	}
 	if (key[ALLEGRO_KEY_P]) {
 		PauseGame();

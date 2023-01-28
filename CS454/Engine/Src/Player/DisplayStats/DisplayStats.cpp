@@ -6,6 +6,7 @@ DisplayStats::DisplayStats(Player& player, int width, int height, int y_offset) 
 	this->screen_height = height;
 	al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
 	this->display_box = al_create_bitmap(width, y_offset);
+	this->display_message = al_create_bitmap(width / 2, 10);
 	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 	this->box_y_offset = y_offset / 2;
 
@@ -13,7 +14,11 @@ DisplayStats::DisplayStats(Player& player, int width, int height, int y_offset) 
 }
 
 
-void DisplayStats::Render() {
+void DisplayStats::Render(double curr_time) {
+	if (this->time > 0) {
+		this->time -= curr_time;
+		al_draw_bitmap(this->display_message, this->screen_width / 4, this->screen_height - 10, 0);
+	}
 	al_draw_bitmap(this->display_box, 0, this->screen_height , 0);
 };
 
@@ -114,6 +119,12 @@ void DisplayStats::PrepareStats() {
 	al_draw_text(this->font, al_map_rgb(255, 255, 255), 5, this->box_y_offset, 0, std::to_string(this->player->lives).c_str());
 	al_draw_text(this->font, al_map_rgb(255, 255, 255), 15 + this->health_box_x_offset*3, this->box_y_offset, 0, std::to_string(this->player->points).c_str());
 
+	if (this->time > 0) {
+		al_set_target_bitmap(this->display_message);
+		al_clear_to_color(al_map_rgb(0, 0, 0));
+		al_draw_text(this->font, al_map_rgb(255, 255, 255), 5, 2 , 0, this->message.c_str());
+	}
+	
 	
 	al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 	//this->DisplayScore();

@@ -77,6 +77,14 @@ private:
 	bool ai_flag = false;
 
 
+	//spells
+	bool key_q = false;
+	bool key_w = false;
+	bool key_e = false;
+	bool key_r = false;
+	bool key_t = false;
+
+
 	//MUSIC PLAYER
 	MusicPlayer* music_player;
 

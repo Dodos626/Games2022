@@ -155,9 +155,7 @@ public:
 	void RenderAttack(double curr_time);
 
 	//Spells
-	void castSpell(int id) {
-		this->mana -= this->spell_book.cast(id, this->mana);
-	}
+	void castSpell(int id);
 
 	void RegisterSpell(std::function<void(void)> f, int cost) {
 		this->spell_book.registerSpell(new Spell(cost,f,nullptr,true));
