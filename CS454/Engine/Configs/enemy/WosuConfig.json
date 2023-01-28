@@ -1,11 +1,11 @@
 {
-  "ad": 2,
-  "hp": 100,
+  "ad": 15,
+  "hp": 50,
   "rp": 100,
   "speed": 2,
-  "drop_chance": 100,
+  "drop_chance": 40,
   "width": 16,
   "height": 32,
-  "drops": [ "HealthPotion" ],
+  "drops": [ "PointBag", "HealthPotion" ],
   "view_distance": 4
 }

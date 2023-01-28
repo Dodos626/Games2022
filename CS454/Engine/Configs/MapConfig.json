@@ -17,7 +17,50 @@
       "CSVwidth": 48,
       "CSVheight": 16
     },
-    "exit_points": {}
+    "exit_points": {},
+    "entities": {
+      "enemies": {
+
+      },
+      "items": {
+        "BigPointBag": [
+          {
+            "spawn_x": 130,
+            "spawn_y": 208
+          },
+          {
+            "spawn_x": 170,
+            "spawn_y": 208
+          },
+          {
+            "spawn_x": 260,
+            "spawn_y": 208
+          },
+          {
+            "spawn_x": 480,
+            "spawn_y": 208
+          }
+        ],
+        "PointBag": [
+          {
+            "spawn_x": 150,
+            "spawn_y": 208
+          },
+          {
+            "spawn_x": 230,
+            "spawn_y": 208
+          },
+          {
+            "spawn_x": 350,
+            "spawn_y": 208
+          },
+          {
+            "spawn_x": 540,
+            "spawn_y": 208
+          }
+        ]
+      }
+    }
   },
   "main_screen": {
     "CSVsource": "Media/background_map/main_screen.csv",
@@ -100,10 +143,10 @@
         "Elevator": [
           {
             "spawn_x": 624,
-            "spawn_y": 200,
+            "spawn_y": 230,
             "end_x": 624,
-            "end_y": 240,
-            "status": "is_up"
+            "end_y": 196,
+            "status": "moving_up"
           }
         ]
       }
@@ -127,14 +170,14 @@
         {
           "x": 40,
           "y": 0,
-          "spawn_x": 608,
-          "spawn_y": 160
+          "spawn_x": 624,
+          "spawn_y": 202
         },
         {
           "x": 41,
           "y": 0,
-          "spawn_x": 608,
-          "spawn_y": 160
+          "spawn_x": 624,
+          "spawn_y": 202
         }
       ],
       "boss_room": [
