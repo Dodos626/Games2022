@@ -12,7 +12,9 @@ enum class staflos_state {
 	move_left,
 	move_right,
 	atack_left,
-	atack_right
+	atack_right,
+	idle_left,
+	idle_right
 };
 class StaflosEnemy : public Enemy {
 private:

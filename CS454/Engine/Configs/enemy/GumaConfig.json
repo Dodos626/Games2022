@@ -6,5 +6,6 @@
   "drop_chance": 5,
   "width": 16,
   "height": 32,
-  "drops": [ "HealthPotion" ]
+  "drops": [ "HealthPotion" ],
+  "view_distance": 4
 }

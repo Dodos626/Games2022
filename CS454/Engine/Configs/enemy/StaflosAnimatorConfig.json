@@ -1,5 +1,5 @@
 {
-  "total_animations": 4,
+  "total_animations": 6,
   "sprite_sheet_path": "Media/spriteSheet/staflos_sprite.png",
   "staflos_move_left": {
     "animation_time": 0.2,
@@ -81,6 +81,30 @@
         "x": 65,
         "y": 0,
         "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "staflos_idle_left": {
+    "animation_time": 0.2,
+    "number_of_frames": 1,
+    "mappings": [
+      {
+        "x": 176,
+        "y": 0,
+        "width": 16,
+        "height": 32
+      }
+    ]
+  },
+  "staflos_idle_right": {
+    "animation_time": 0.2,
+    "number_of_frames": 1,
+    "mappings": [
+      {
+        "x": 1,
+        "y": 0,
+        "width": 16,
         "height": 32
       }
     ]

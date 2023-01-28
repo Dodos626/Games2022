@@ -2,7 +2,7 @@
 
 
 StaflosEnemy::StaflosEnemy(Point* spawn, Action tryMoveLeft_, Action tryMoveRight_, Action tryMoveUp_, Action tryMoveDown_) : Enemy(spawn, "Engine/Configs/enemy/StaflosConfig.json", tryMoveLeft_, tryMoveRight_, tryMoveUp_, tryMoveDown_){
-	this->animator = new PlayerAnimator("Engine/Configs/enemy/StaflosAnimatorConfig.json", 0, { "staflos_move_left", "staflos_move_right", "staflos_attack_left", "staflos_attack_right" });
+	this->animator = new PlayerAnimator("Engine/Configs/enemy/StaflosAnimatorConfig.json", 0, { "staflos_move_left", "staflos_move_right", "staflos_attack_left", "staflos_attack_right", "staflos_idle_left", "staflos_idle_right"});
 	this->name = "Staflos";
 }
 
@@ -73,7 +73,7 @@ void StaflosEnemy::AI(Player& player) {
 	int distance = abs(staflos_x - player_x);
 
 	std::cout << distance << " == distance \n";
-	if (distance <= 64) { // player within 4 blocks
+	if (distance <= 16*this->view_distance) { // player within 4 blocks
 		if (distance <= 25) { // if within attack range
 			if (this->is_attacking || this->attack_cd > 0) { // if already attacking
 				return;
@@ -91,14 +91,22 @@ void StaflosEnemy::AI(Player& player) {
 		}
 		else if(!this->is_attacking){ // if within range but not attack range
 			if (player_x > staflos_x && can_move_right) { // o player einai pio deksia kai mporw na paw pio deksia
-				if (this->state == staflos_state::move_left) // an koituses aristera
-					this->state = staflos_state::move_right; // girna deksia
+				
+				this->state = staflos_state::move_right; // girna deksia
+				
 				this->MoveRight();
 			}else if (player_x < staflos_x && can_move_left) { // o player einai pio aristera kai mporw na paw pio aristera
-				if (this->state == staflos_state::move_right) // an koituses deksia
-					this->state = staflos_state::move_left; // girna aristera
+				this->state = staflos_state::move_left; // girna aristera
 				this->MoveLeft();
 			}
+		}
+	}
+	else {
+		if (static_cast<int>(this->state) % 2 == 0) {
+			this->state = staflos_state::idle_left;
+		}
+		else {
+			this->state = staflos_state::idle_right;
 		}
 	}
 	

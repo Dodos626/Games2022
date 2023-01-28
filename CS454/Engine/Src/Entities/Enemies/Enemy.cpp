@@ -19,7 +19,7 @@ Enemy::Enemy(Point *spawn, std::string datapath, Action tryMoveLeft_, Action try
 	this->points = data["rp"];
 	this->coordinates = spawn;
 	this->animator = NULL;
-
+	this->view_distance = data["view_distance"];
 	this->percentage = 100;
 	this->dropped_item = NULL;
 	this->is_alive = true;

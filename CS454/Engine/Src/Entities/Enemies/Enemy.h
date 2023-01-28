@@ -27,6 +27,7 @@ protected:
 	void _Death();
 	bool takes_damage = false;
 	double immunity = 0;
+	int view_distance;
 public:
 	Enemy(Point* spawn, std::string datapath, Action tryMoveLeft_, Action tryMoveRight_, Action tryMoveUp_, Action tryMoveDown_);
 
