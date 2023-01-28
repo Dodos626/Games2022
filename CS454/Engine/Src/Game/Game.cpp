@@ -131,7 +131,10 @@ void Game::MainLoopIteration(void) {
 			this->UserCode();
 		}
 		
-		
+		//USER HOOKS
+		this->player1->CheckSpellTimer(this->timer->getDelta());
+
+		this->timer->fps();
 		break;
 	case ALLEGRO_EVENT_DISPLAY_CLOSE:
 		this->doneFlag = true;
@@ -184,10 +187,7 @@ void Game::MainLoopIteration(void) {
 		this->redraw = false;
 	}
 
-	//USER HOOKS
-	this->player1->CheckSpellTimer(this->timer->getDelta());
 	
-	this->timer->fps();
 
 }
 

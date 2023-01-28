@@ -2,7 +2,7 @@
 
 ManaPotionItem::ManaPotionItem(Point* spawn) : Item(spawn) {
 	this->name = "ManaPotion";
-	this->mana_gain = 20;
+	this->mana_gain = 50;
 
 	this->animator = new PlayerAnimator("Engine/Configs/item/ManaPotionAnimatorConfig.json", 0, { "mana_potion_animation" });
 }

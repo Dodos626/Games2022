@@ -1,5 +1,5 @@
 {
-  "volume" :  1.0,
+  "volume" :  0.1,
   "songs_path": {
     "palace_theme": "Media/Music/palace_theme.ogg",
     "main_theme": "Media/Music/main_theme.ogg"
