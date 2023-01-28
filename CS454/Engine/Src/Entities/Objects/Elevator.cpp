@@ -3,12 +3,14 @@
 
 Elevator::Elevator(Point* location, Point *stop_location, ElevatorStatus status) {
 	std::ifstream fin("Engine/Configs/object/ElevatorAnimatorConfig.json");
+	this->animator = new PlayerAnimator("Engine/Configs/object/ElevatorAnimatorConfig.json", 0, { "elevator" });
 	json data = json::parse(fin);
 	std::cout << data << std::endl;
 	this->speed = data["speed"];
 	this->coordinates = location;
 	this->stop_location = stop_location;
 	this->status = status;
+	this->name = "elevator";
 	assert(this->coordinates->GetX() == this->stop_location->GetX());
 }
 
@@ -59,5 +61,6 @@ bool Elevator::isPlayerOn(Player& player) {
 void Elevator::Render(double curr_time, int relative_x) {
 	int x = this->coordinates->GetX() - relative_x;
 	int y = this->coordinates->GetY();
-	al_draw_rectangle(x , y, x + this->width, y + this->height, al_map_rgb(150, 0, 0), 0);
+	this->animator->render(x, y, curr_time, 0);
+	//al_draw_rectangle(x , y, x + this->width, y + this->height, al_map_rgb(150, 0, 0), 0);
 }

@@ -1,18 +1,18 @@
 {
   "total_animations": 2,
-  "sprite_sheet_path": "Media/spriteSheet/palace_bot.png",
+  "sprite_sheet_path": "Media/spriteSheet/projectile_sprite.png",
   "fly_left": {
-    "animation_time": 0.5,
+    "animation_time": 0.1,
     "number_of_frames": 2,
     "mappings": [
       {
-        "x": 1,
+        "x": 0,
         "y": 0,
         "width": 16,
         "height": 16
       },
       {
-        "x": 19,
+        "x": 48,
         "y": 0,
         "width": 16,
         "height": 16
@@ -20,17 +20,17 @@
     ]
   },
   "fly_right": {
-    "animation_time": 0.5,
+    "animation_time": 0.1,
     "number_of_frames": 2,
     "mappings": [
       {
-        "x": 44,
+        "x": 16,
         "y": 0,
         "width": 16,
         "height": 16
       },
       {
-        "x": 62,
+        "x": 32,
         "y": 0,
         "width": 16,
         "height": 16

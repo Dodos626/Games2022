@@ -1,14 +1,14 @@
 {
   "total_animations": 1,
-  "sprite_sheet_path": "Media/spriteSheet/fairy.png",
-  "enemy_sword1_move_right": {
+  "sprite_sheet_path": "Media/spriteSheet/elevator.png",
+  "elevator": {
     "animation_time": 0.1,
     "number_of_frames": 1,
     "mappings": [
       {
         "x": 0,
         "y": 0,
-        "width": 16,
+        "width": 32,
         "height": 16
       }
     ]
