@@ -69,13 +69,16 @@ void Player::TakeDamage(int damage, Point point_of_attack) {
 	}
 
 
-	this->is_damaged = true;
-	this->immunity = 0.5;
+	
 
 	if (this->is_attacking) {
 		this->animator->StartForcedAnimation(0);
 		this->is_attacking = false;
+		this->setStateWithDirection(p_state::idle_left);
 	}
+	this->point_of_attack = point_of_attack;
+	this->is_damaged = true;
+	this->immunity = 0.5;
 	// animate taking damage
 }
 void Player::RegenerateMana(int mana_gain) { 
@@ -112,7 +115,7 @@ void Player::Render(double curr_time) {
 	else if (this->is_damaged && !this->is_attacking) {
 		this->immunity -= curr_time;
 
-		if (static_cast<int>(this->state) % 2 == 1 && this->immunity > 0.25 && this->x > 1) { // deksia koituse o link
+		if (this->point_of_attack.GetX() > this->x && this->immunity > 0.25 && this->x > 1) { // deksia koituse o link
 			this->MoveUp();
 			this->MoveLeft();
 

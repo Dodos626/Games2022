@@ -55,6 +55,7 @@ private :
 	//immunity
 	bool is_damaged = false;
 	double immunity = 0;
+	Point point_of_attack;
 
 	void CreateSpellBook(void);
 	
