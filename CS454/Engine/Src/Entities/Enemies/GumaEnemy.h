@@ -33,7 +33,7 @@ public:
 		;
 	};
 
-	
+	void GetAttacked(int damage, Point point_of_attack)override;
 	void ClearProjectiles();
 	void SpawnProjectile(guma_state state);
 	void AiProjectile(Player& player);

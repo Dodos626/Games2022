@@ -37,9 +37,9 @@ void GumaEnemy::AI(Player& player) {
 			}
 			if (can_move_right) // kai mporei na sinexisei
 				this->MoveRight();
-
+			this->state = guma_state::idle_left;
 		}
-		else { // to attack irthe apo aristera
+		else { // to attack irthe apo deksia
 			if (can_move_up) // kai mporei na sinexisei
 			{
 				this->MoveUp();
@@ -48,7 +48,7 @@ void GumaEnemy::AI(Player& player) {
 			}
 			if (can_move_left) // kai mporei na sinexisei
 				this->MoveLeft();
-
+			this->state = guma_state::idle_right;
 		}
 		return;
 	}
@@ -57,7 +57,7 @@ void GumaEnemy::AI(Player& player) {
 	if (distance <= 16 * this->view_distance) { // player within view distance
 		
 		
-		if ( distance > 80) { // if enemy far enough to cast a projectile
+		if ( distance > 3*16) { // if enemy far enough to cast a projectile
 			if (this->is_attacking || this->attack_cd > 0) { // if already attacking
 				return;
 			}
@@ -82,7 +82,7 @@ void GumaEnemy::AI(Player& player) {
 				this->state = guma_state::move_right; // girna deksia
 				this->MoveRight(); // kai apofige ton
 			} 
-			/*
+			
 			else if (!this->takes_damage){ // cant escape attack link
 				std::cout << " mpike edw \n";
 				if (this->is_attacking || this->attack_cd > 0) { // if already attacking
@@ -97,7 +97,7 @@ void GumaEnemy::AI(Player& player) {
 				this->is_attacking = true;
 				this->SpawnProjectile(this->state);
 				this->attack_cd = 0.5;
-			}*/
+			}
 		}
 	}
 	else { //player nowhere to be found
@@ -179,3 +179,35 @@ void GumaEnemy::ClearProjectiles() {
 	}
 
 };
+
+
+void GumaEnemy::GetAttacked(int damage, Point point_of_attack) {
+	if (!this->is_alive )
+		return;
+	this->health -= damage;
+
+	// Animate Damage
+	if (this->health <= 0)
+		this->_Death();
+	
+	for (int i = 10; i > 0; i--) {
+		
+		if (tryMoveLeft(this->GetX() - i*16 + 16, this->GetY(), this->GetWidth(), this->GetHeight())) 
+		{
+			this->coordinates->SetX(this->GetX() - i * 16);
+			return;
+		}
+		else if (tryMoveRight(this->GetX() + i*16 + 16, this->GetY(), this->GetWidth(), this->GetHeight()))
+		{
+			this->coordinates->SetX(this->GetX() + i * 16);
+			return;
+		}
+		
+	}
+		
+	
+		
+	
+		
+	
+}

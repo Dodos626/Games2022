@@ -34,7 +34,7 @@ Enemy::Enemy(Point *spawn, std::string datapath, Action tryMoveLeft_, Action try
 }
 
 void Enemy::GetAttacked(int damage, Point point_of_attack) {
-	if (!this->is_alive)
+	if (!this->is_alive )
 		return;
 	this->health -= damage;
 	this->takes_damage = true;
