@@ -435,7 +435,7 @@ void Map::CheckPlayerCollisionsWithEntities(Player *player) {
 	int pl_ly = player->GetY();
 	int pl_width = player->GetWidth();
 	int pl_height = player->GetHeight();
-	Point* p = new Point(pl_ux, pl_ly);
+	Point  p(pl_ux, pl_ly);
 	for (Enemy* enemy : this->enemies) {
 		int en_ux = enemy->GetX();
 		int en_ly = enemy->GetY();
@@ -445,7 +445,7 @@ void Map::CheckPlayerCollisionsWithEntities(Player *player) {
 		Point dl(en_ux, en_ly + en_height);
 		Point ur(en_ux + en_width, en_ly);
 		Point dr(en_ux + en_width, en_ly + en_height);
-		if (p->InRectangle(ul, pl_width, pl_height) || p->InRectangle(dl, pl_width, pl_height) || p->InRectangle(ur, pl_width, pl_height) || p->InRectangle(dr, pl_width, pl_height)) {
+		if (p.InRectangle(ul, pl_width, pl_height) || p.InRectangle(dl, pl_width, pl_height) || p.InRectangle(ur, pl_width, pl_height) || p.InRectangle(dr, pl_width, pl_height)) {
 			enemy->Collide(*player);
 			return;
 		}
@@ -460,7 +460,7 @@ void Map::CheckPlayerCollisionsWithEntities(Player *player) {
 		Point dl(en_ux, en_ly + en_height);
 		Point ur(en_ux + en_width, en_ly);
 		Point dr(en_ux + en_width, en_ly + en_height);
-		if (p->InRectangle(ul, pl_width, pl_height) || p->InRectangle(dl, pl_width, pl_height) || p->InRectangle(ur, pl_width, pl_height) || p->InRectangle(dr, pl_width, pl_height)) {
+		if (p.InRectangle(ul, pl_width, pl_height) || p.InRectangle(dl, pl_width, pl_height) || p.InRectangle(ur, pl_width, pl_height) || p.InRectangle(dr, pl_width, pl_height)) {
 			item->PickUp(*player);
 			this->items.erase(this->items.begin() + i);
 			return;

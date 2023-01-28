@@ -1,0 +1,40 @@
+{
+  "total_animations": 2,
+  "sprite_sheet_path": "Media/spriteSheet/palace_bot.png",
+  "fly_left": {
+    "animation_time": 0.5,
+    "number_of_frames": 2,
+    "mappings": [
+      {
+        "x": 1,
+        "y": 0,
+        "width": 16,
+        "height": 16
+      },
+      {
+        "x": 19,
+        "y": 0,
+        "width": 16,
+        "height": 16
+      }
+    ]
+  },
+  "fly_right": {
+    "animation_time": 0.5,
+    "number_of_frames": 2,
+    "mappings": [
+      {
+        "x": 44,
+        "y": 0,
+        "width": 16,
+        "height": 16
+      },
+      {
+        "x": 62,
+        "y": 0,
+        "width": 16,
+        "height": 16
+      }
+    ]
+  }
+}

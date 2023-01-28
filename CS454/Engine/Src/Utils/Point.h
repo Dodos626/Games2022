@@ -22,7 +22,7 @@ public:
 	bool InRectangle(Point &p, int dx, int dy);
 
 	bool operator==(const Point &p2) { return this->x == p2.x && this->y == p2.y; };
-	Point *operator+(Point* p2);
+	Point &operator+(Point &p2);
 	int operator-(Point* p2);
 	friend std::ostream &operator<<(std::ostream& os, const Point &p);
 };

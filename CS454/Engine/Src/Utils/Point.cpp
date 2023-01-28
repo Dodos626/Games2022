@@ -6,8 +6,9 @@ Point::Point(int x, int y) {
 }
 
 
-Point *Point::operator+(Point *p2) {
-	return new Point(this->x + p2->x, this->y + p2->y);
+Point &Point::operator+(Point &p2) {
+	Point new_point(this->x + p2.x, this->y + p2.y);
+	return new_point;
 }
 
 int Point::operator-(Point* p2) {
