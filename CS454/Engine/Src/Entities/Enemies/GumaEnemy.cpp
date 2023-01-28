@@ -3,6 +3,8 @@
 GumaEnemy::GumaEnemy(Point* spawn, Action tryMoveLeft_, Action tryMoveRight_, Action tryMoveUp_, Action tryMoveDown_) : Enemy(spawn, "Engine/Configs/enemy/GumaConfig.json", tryMoveLeft_, tryMoveRight_, tryMoveUp_, tryMoveDown_){
 	this->animator = new PlayerAnimator("Engine/Configs/enemy/GumaAnimatorConfig.json",0,animation_names);
 	this->name = "Guma";
+	this->max_health = this->health;
+
 }
 
 
@@ -69,7 +71,7 @@ void GumaEnemy::AI(Player& player) {
 			this->animator->StartForcedAnimation(1);
 			this->is_attacking = true;
 			this->SpawnProjectile(this->state);
-			this->attack_cd = 0.5;
+			this->attack_cd = 0.8;
 		}
 		else if (!this->is_attacking) { // if too close
 			if (player_x > guma_x && can_move_left) { // o player einai pio deksia kai mporw na paw pio aristera
@@ -83,21 +85,7 @@ void GumaEnemy::AI(Player& player) {
 				this->MoveRight(); // kai apofige ton
 			} 
 			
-			else if (!this->takes_damage){ // cant escape attack link
-				std::cout << " mpike edw \n";
-				if (this->is_attacking || this->attack_cd > 0) { // if already attacking
-					return;
-				}
-				if (player_x < guma_x) // if player on my left
-					this->state = guma_state::atack_left;
-				else
-					this->state = guma_state::atack_right;
-				this->animator->changeAnimation(this->GetStateToInt(this->state));
-				this->animator->StartForcedAnimation(1);
-				this->is_attacking = true;
-				this->SpawnProjectile(this->state);
-				this->attack_cd = 0.5;
-			}
+	
 		}
 	}
 	else { //player nowhere to be found
@@ -142,6 +130,12 @@ void GumaEnemy::Render(double curr_time, int relative_x) {
 	if (!this->is_attacking && this->attack_cd > 0) {
 		this->attack_cd -= curr_time;
 	}
+
+
+	
+
+	
+	al_draw_filled_rectangle(this->coordinates->GetX() - relative_x, this->GetY() - 2, this->coordinates->GetX() - relative_x + (this->health / 6), this->GetY(), al_map_rgb(213, 15, 15));
 	this->RenderProjectile(curr_time, relative_x);
 }
 
@@ -192,12 +186,12 @@ void GumaEnemy::GetAttacked(int damage, Point point_of_attack) {
 	
 	for (int i = 10; i > 0; i--) {
 		
-		if (tryMoveLeft(this->GetX() - i*16 + 16, this->GetY(), this->GetWidth(), this->GetHeight())) 
+		if (tryMoveLeft(this->GetX() - i*16 , this->GetY(), this->GetWidth(), this->GetHeight())) 
 		{
 			this->coordinates->SetX(this->GetX() - i * 16);
 			return;
 		}
-		else if (tryMoveRight(this->GetX() + i*16 + 16, this->GetY(), this->GetWidth(), this->GetHeight()))
+		else if (tryMoveRight(this->GetX() + i*16 , this->GetY(), this->GetWidth(), this->GetHeight()))
 		{
 			this->coordinates->SetX(this->GetX() + i * 16);
 			return;
