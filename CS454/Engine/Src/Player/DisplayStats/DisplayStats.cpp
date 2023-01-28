@@ -40,7 +40,6 @@ void DisplayStats::Precompute() {
 
 	
 	int offset_x = this->screen_width / 4;
-	std::cout << this->screen_width << ": screen , offset_X : " << offset_x <<std::endl;
 
 
 	this->health_box_x_offset = offset_x;
