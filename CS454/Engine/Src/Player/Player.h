@@ -151,7 +151,7 @@ public:
 	void IncreaseKeys(int keys);
 
 	//Render
-	void Render(double curr_time);
+	void Render(double curr_time, bool can_move_right, bool can_move_left, bool can_move_up);
 	void RenderAttack(double curr_time);
 
 	//Spells

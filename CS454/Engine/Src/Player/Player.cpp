@@ -130,7 +130,7 @@ void Player::IncreaseKeys(int keys) {
 	this->keys += keys;
 }
 
-void Player::Render(double curr_time) {
+void Player::Render(double curr_time, bool can_move_right, bool can_move_left, bool can_move_up) {
 	int x = this->x - this->GetCameraX();
 	if (this->x > this->max_moving_x)
 		x += this->x - this->max_moving_x;
@@ -143,13 +143,17 @@ void Player::Render(double curr_time) {
 		this->immunity -= curr_time;
 
 		if (this->point_of_attack.GetX() > this->x && this->immunity > 0.25 && this->x > 1) { // deksia koituse o link
-			this->MoveUp();
-			this->MoveLeft();
+			if(can_move_up)
+				this->MoveUp();
+			if(can_move_left)
+				this->MoveLeft();
 
 		}
 		else if (this->immunity > 0.25) {
-			this->MoveUp();
-			this->MoveRight();
+			if (can_move_up)
+				this->MoveUp();
+			if (can_move_right)
+				this->MoveRight();
 		}
 		this->animator->render(x, this->y, curr_time, static_cast<int>(this->state));
 		if (this->immunity <= 0) { // taking damage ended

@@ -84,26 +84,11 @@
         "Staflos": [
 
           {
-            "spawn_x": 64,
-            "spawn_y": 170
-          }
-        ],
-        "PalaceBot": [
-          {
             "spawn_x": 350,
             "spawn_y": 100
           }
-        ],
-        "Wosu": [
-          {
-            "spawn_x": 96,
-            "spawn_y": 176
-          },
-          {
-            "spawn_x": 128,
-            "spawn_y": 160
-          }
         ]
+        
       },
       "items": {
         "Key": [

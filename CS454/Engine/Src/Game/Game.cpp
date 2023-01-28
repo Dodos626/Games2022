@@ -298,7 +298,13 @@ void Game::Render(void) {
 	this->background_map->RenderBg(this->player1->GetCameraX(), this->screen->GetScaledWidth(), 0, this->screen->GetScaledHeight());
 	this->background_map->Render(this->player1->GetCameraX(), this->screen->GetScaledWidth(), 0, this->screen->GetScaledHeight());
 	this->background_map->RenderEntities(this->timer->getDelta(), camera_x);
-	this->player1->Render(this->timer->getDelta());
+
+
+	bool player_can_move_right = this->background_map->TryMoveRight(this->player1->GetX(), this->player1->GetY(), this->player1->GetWidth(), this->player1->GetHeight());
+	bool player_can_move_left = this->background_map->TryMoveLeft(this->player1->GetX(), this->player1->GetY(), this->player1->GetWidth(), this->player1->GetHeight());
+	bool player_can_move_up = this->background_map->TryMoveUp(this->player1->GetX(), this->player1->GetY(), this->player1->GetWidth(), this->player1->GetHeight());
+	
+	this->player1->Render(this->timer->getDelta(), player_can_move_right, player_can_move_left, player_can_move_up);
 	
 	
 	al_hold_bitmap_drawing(0);

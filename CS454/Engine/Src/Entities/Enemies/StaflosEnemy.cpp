@@ -74,7 +74,7 @@ void StaflosEnemy::AI(Player& player) {
 
 	std::cout << distance << " == distance \n";
 	if (distance <= 64) { // player within 4 blocks
-		if (distance <= 20) { // if within attack range
+		if (distance <= 25) { // if within attack range
 			if (this->is_attacking || this->attack_cd > 0) { // if already attacking
 				return;
 			}
@@ -85,10 +85,11 @@ void StaflosEnemy::AI(Player& player) {
 			this->animator->changeAnimation(this->GetStateToInt(this->state));
 			this->animator->StartForcedAnimation(3);
 			this->is_attacking = true;
-			player.TakeDamage(this->damage, Point(staflos_x,staflos_y));
+			if(staflos_y - player_y <= 16 && staflos_y - player_y >= -16) // an to y einai se attack range kane damage
+				player.TakeDamage(this->damage, Point(staflos_x,staflos_y));
 			this->attack_cd = 0.5;
 		}
-		else { // if within range but not attack range
+		else if(!this->is_attacking){ // if within range but not attack range
 			if (player_x > staflos_x && can_move_right) { // o player einai pio deksia kai mporw na paw pio deksia
 				if (this->state == staflos_state::move_left) // an koituses aristera
 					this->state = staflos_state::move_right; // girna deksia
@@ -112,15 +113,15 @@ void StaflosEnemy::Render(double curr_time, int relative_x) {
 	}
 	else if (this->is_attacking) {
 		if (this->state == staflos_state::atack_left) { // left attack
-			if (this->animator->renderWholeAnimationWithFixFrame(this->GetX(), this->GetY(), curr_time, -16, 0, 1)) {
+			if (this->animator->renderWholeAnimationWithFixFrame(this->GetX() - relative_x, this->GetY(), curr_time, -16, 0, 1)) {
 				this->is_attacking = false;
 				this->state = staflos_state::move_left;
 			}
 		}
 		else {
-			if (this->animator->renderWholeAnimationWithFixFrame(this->GetX(), this->GetY(), curr_time, 0, 0, 0)) {
+			if (this->animator->renderWholeAnimationWithFixFrame(this->GetX() - relative_x, this->GetY(), curr_time, 0, 0, 0)) {
 				this->is_attacking = false;
-				this->state = staflos_state::move_left;
+				this->state = staflos_state::move_right;
 			}
 		}
 		
