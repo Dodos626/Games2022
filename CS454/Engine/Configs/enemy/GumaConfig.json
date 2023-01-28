@@ -7,5 +7,5 @@
   "width": 16,
   "height": 32,
   "drops": [ "HealthPotion" ],
-  "view_distance": 4
+  "view_distance": 10
 }

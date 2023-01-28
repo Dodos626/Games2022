@@ -37,7 +37,7 @@
       }
     ]
   },
-  "guma_hurls_left": {
+  "guma_attack_left": {
     "animation_time": 0.5,
     "number_of_frames": 2,
     "mappings": [
@@ -55,7 +55,7 @@
       }
     ]
   },
-  "guma_hurls_right": {
+  "guma_attack_right": {
     "animation_time": 0.5,
     "number_of_frames": 2,
     "mappings": [
@@ -73,39 +73,27 @@
       }
     ]
   },
-  "guma_proj_left": {
+  "guma_idle_left": {
     "animation_time": 0.5,
-    "number_of_frames": 2,
+    "number_of_frames": 1,
     "mappings": [
       {
-        "x": 32,
-        "y": 64,
-        "width": 16,
-        "height": 16
-      },
-      {
         "x": 48,
-        "y": 64,
+        "y": 0,
         "width": 16,
-        "height": 16
+        "height": 32
       }
     ]
   },
-  "guma_proj_right": {
+  "guma_idle_right": {
     "animation_time": 0.5,
-    "number_of_frames": 2,
+    "number_of_frames": 1,
     "mappings": [
       {
         "x": 0,
-        "y": 64,
+        "y": 0,
         "width": 16,
-        "height": 16
-      },
-      {
-        "x": 16,
-        "y": 64,
-        "width": 16,
-        "height": 16
+        "height": 32
       }
     ]
   }

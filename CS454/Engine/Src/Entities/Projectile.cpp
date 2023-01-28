@@ -9,73 +9,79 @@ Projectile::Projectile(Point* spawn, ProjectileDirection direction, Action tryMo
 	json data = json::parse(fin);
 	std::cout << data << std::endl;
 	this->direction = direction;
-	this->animator = new PlayerAnimator("Engine/Configs/enemy/ProjectileAnimatorConfig.json", 0, {"fly_left", "fly_right"});
+	this->location = spawn;
 	this->speed = data["speed"];
 	this->range = data["range"];
 	this->width = data["width"];
 	this->height = data["height"];
 	this->damage = data["damage"];
 	this->is_flying = true;
+	fin.close();
+	this->animator = new PlayerAnimator("Engine/Configs/enemy/ProjectileAnimatorConfig.json", GetStateToInt(direction), { "fly_left", "fly_right" });
+	std::cout << "ok here \n";
 }
 
 void Projectile::AI(Player &player) {
-
-	if (!this->is_flying)
+	if (!this->is_flying) {
 		return;
-	int pl_ux = player.GetX();
-	int pl_ly = player.GetY();
-	int pl_width = player.GetWidth();
-	int pl_height = player.GetHeight();
-	Point pl(pl_ux, pl_ly);
+	}
 
-	int p_ux = this->GetX();
-	int p_ly = this->GetY();
-	int p_width = this->width;
-	int p_height = this->height;
-	for (int i = 0; i < this->speed; i++) {
-
-		if (this->range == 0) {
-			this->is_flying = false;
-			break;
-		}
-		this->range -= 1;
-		if (this->direction == ProjectileDirection::fly_right) {
-			if (this->tryMoveRight(this->GetX(), this->GetY(), this->width, this->height)) {
-				this->MoveRight();
-			}
-			else {
-				this->is_flying = false;
-				break;
-			}
-			
-		}
-		else {
+	int player_x = player.GetX();
+	int player_y = player.GetY();
+	int projectile_x = this->GetX();
+	int projectile_y = this->GetY();
+	int player_h = player.GetHeight();
+	int player_w = player.GetWidth();
+	
+	if (this->direction == ProjectileDirection::fly_left) { // an pame aristera
+		for (int i = 0; i < this->speed; i++) {
 			if (this->tryMoveLeft(this->GetX(), this->GetY(), this->width, this->height)) {
 				this->MoveLeft();
+				this->range -= 1;
+				if (this->range == 0)
+					this->Stop();
+				// ean i arxi tu projectile einai anamesa stin aristeri kai deksia pleura tu paikti
+				if ((player_x < projectile_x && projectile_x < player_x + player_w) && (player_y <= projectile_y && player_y + player_h >= projectile_y)) {
+					player.TakeDamage(this->damage, Point(projectile_x, projectile_y));
+					this->Stop();
+				}
 			}
 			else {
-				this->is_flying = false;
-				break;
+				this->Stop();
 			}
-
 		}
-		p_ux = this->GetX();
-		Point ul(p_ux, p_ly);
-		Point dl(p_ux, p_ly + p_height);
-		Point ur(p_ux + p_width, p_ly);
-		Point dr(p_ux + p_width, p_ly + p_height);
-		if (pl.InRectangle(ul, pl_width, pl_height) || pl.InRectangle(dl, pl_width, pl_height) || pl.InRectangle(ur, pl_width, pl_height) || pl.InRectangle(dr, pl_width, pl_height))
-		{
-			player.TakeDamage(this->damage, *this->location); 
-			this->is_flying = false;
-			break;
+		
+	}
+	else if (this->direction == ProjectileDirection::fly_right) {
+		for (int i = 0; i < this->speed; i++) {
+			if (this->tryMoveRight(this->GetX(), this->GetY(), this->width, this->height)) {
+				this->MoveRight();
+				this->range -= 1;
+				if (this->range == 0)
+					this->Stop();
+				// ean to deksi kommati tu projectile einai meta tin arxi tu paikti kai i arxi tu projectile prin to telos tote eimaste mesa tu ston aksona x
+				// ean to y tou paikti einai pio psila apo to projectile kai to projectile einai mesa ston paikti + to ipsos tu
+				if ((projectile_x + 16 > player_x && projectile_x < player_x + 16) && (player_y <= projectile_y && player_y + player_h >= projectile_y)) {
+					player.TakeDamage(this->damage, Point(projectile_x, projectile_y));
+					this->Stop();
+				}
+			}
+			else {
+				this->Stop();
+			}
 		}
 	}
+	else {
+		assert(false);
+	}
+
 }
 
 void Projectile::Render(double curr_time, int relative_x) {
-	if(this->is_flying)
-		this->animator->render(this->location->GetX() - relative_x, this->location->GetY(), curr_time, this->GetStateToInt(this->direction));
+	if (!this->is_flying) {
+		return;
+	}
+	this->animator->render(this->location->GetX() - relative_x, this->location->GetY(), curr_time, this->GetStateToInt(this->direction));
 	
 }
 

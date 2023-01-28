@@ -40,6 +40,10 @@ public:
 	void Stop() { this->is_flying = false; }
 	void Render(double curr_time, int relative_x);
 	
+	~Projectile() {
+		delete this->location;
+		delete this->animator;
+	}
 };
 
 
