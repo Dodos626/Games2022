@@ -182,14 +182,10 @@
 
       },
       "items": {
-        "Key": [
+        "Door": [
           {
-            "spawn_x": 35,
-            "spawn_y": 100
-          },
-          {
-            "spawn_x": 70,
-            "spawn_y": 50
+            "spawn_x": 32,
+            "spawn_y": 128
           }
         ]
       },

@@ -15,6 +15,7 @@
 #include "../Entities/Items/KeyItem.h"
 #include "../Entities/Items/PointBagItem.h"
 #include "../Entities/Items/Sword.h"
+#include "../Entities/Items/DoorItem.h"
 
 #include "../Entities/Objects/Elevator.h"
 #include "Point.h"
