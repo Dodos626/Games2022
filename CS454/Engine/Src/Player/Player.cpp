@@ -47,6 +47,7 @@ Player::Player(Point* spawn, int screen_width, int map_width, int screen_dx) {
 	this->height = 32;
 	this->width = 16;
 	this->keys = 0;
+	this->is_dead = false;
 
 	//initiate spell book and spells
 	this->CreateSpellBook();
@@ -70,6 +71,8 @@ void Player::TakeDamage(int damage, Point point_of_attack) {
 		this->health -= damage / this->damage_reduction;
 		if (this->health <= 0) {
 			this->health = 0;
+
+			this->lives -= 1;
 			// Death Animation here
 		}
 		
@@ -87,14 +90,16 @@ void Player::TakeDamage(int damage, Point point_of_attack) {
 }
 
 
-void Player::FromDeath() {
+void Player::RespawnFromDeath() {
 	if (this->lives > 0) {
-		this->lives -= 1;
 		this->health = this->max_health;
 		this->mana = this->max_mana;
 		this->points -= this->point_penalty;
 	}
 	else {
+		this->health = 1;
+		this->mana = 1;
+		this->is_dead = true;
 		// Lose game here
 	}
 }
@@ -192,7 +197,7 @@ int Player::GetCameraX(){
 
 void Player::Respawn(Point *p) {
 	if (!this->isAlive())
-		this->FromDeath();
+		this->RespawnFromDeath();
 	this->x = p->GetX();
 	this->y = p->GetY();
 }

@@ -409,6 +409,12 @@ void Game::HandlePhysics(void) {
 	this->HandleMapEnemiesPhysics();
 	this->HandleMapItemPhysics();
 	this->background_map->CheckPlayerCollisionsWithEntities(this->player1);
+	if (!this->player1->isAlive()) {
+		if (this->player1->canRespawn())
+			this->ChangeMap(this->background_map->getState());
+		else
+			this->ChangeMap(MapLocations::loose_screen);
+	}
 }
 
 void Game::HandlePlayerPhysics(void) {

@@ -56,6 +56,7 @@ private :
 	//immunity
 	bool is_damaged = false;
 	double immunity = 0;
+	bool is_dead;
 	Point point_of_attack;
 
 	void CreateSpellBook(void);
@@ -75,7 +76,7 @@ private :
 	void spellFairy(void);
 	void counterSpellFairy(void);
 
-	void FromDeath(void);
+	void RespawnFromDeath(void);
 
 
 	//toggles
@@ -107,6 +108,7 @@ public:
 	p_state GetState(void) const { return state; }
 	bool isDucking(void) { return this->duck; };
 	bool isAlive(void) { return this->health > 0; };
+	bool canRespawn(void) { return this->lives > 0; };
 	//SETTERS
 	void setState(p_state state_) { 
 		if (this->is_attacking || this->is_damaged) return;
