@@ -431,11 +431,6 @@ bool Map::TryAttack(int x, int y) {
 }
 
 void Map::KillAllEnemies(Player *player) {
-	if (this->state == MapLocations::boss_room)
-	{
-		player->DisplayTimedMessage("THIS WON'T WORK!", 3);
-		return;
-	}
 	// The final solution
 	for (Enemy* enemy : this->enemies) {
 		enemy->KillInstantly();
@@ -514,7 +509,11 @@ void Map::CheckPlayerCollisionsWithEntities(Player *player) {
 					this->RemoveDoor((DoorItem*)item);
 					this->items.erase(this->items.begin() + i);
 				}
-			} else
+			}
+			else if (item->GetName() == "Sword") {
+				this->ChangeMap("win_screen");
+			}
+			else
 				this->items.erase(this->items.begin() + i);
 			return;
 		}

@@ -34,6 +34,8 @@ private :
 	int damage_reduction;
 	int keys;
 
+	bool has_the_sword = false;
+
 	DisplayStats *stats_display;
 
 	//physics

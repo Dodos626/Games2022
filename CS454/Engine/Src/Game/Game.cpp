@@ -85,8 +85,16 @@ void Game::Initialise(void) {
 	
 }
 void Game::CastThunder() {
-	this->player1->DisplayTimedMessage("Casted Thunder", 1);
-	this->background_map->KillAllEnemies(this->player1);
+	if (this->background_map->getState() == MapLocations::boss_room)
+	{
+		this->player1->DisplayTimedMessage("THIS WON'T WORK!", 3);
+		
+	}
+	else {
+		this->player1->DisplayTimedMessage("Casted Thunder", 1);
+		this->background_map->KillAllEnemies(this->player1);
+	}
+	
 }
 
 void Game::MainLoop(void) {

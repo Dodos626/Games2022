@@ -178,7 +178,7 @@ void GumaEnemy::ClearProjectiles() {
 void GumaEnemy::GetAttacked(int damage, Point point_of_attack) {
 	if (!this->is_alive )
 		return;
-	this->health -= damage;
+	this->health -= damage*2;
 
 	// Animate Damage
 	if (this->health <= 0)
@@ -188,11 +188,15 @@ void GumaEnemy::GetAttacked(int damage, Point point_of_attack) {
 		
 		if (tryMoveLeft(this->GetX() - i*16 , this->GetY(), this->GetWidth(), this->GetHeight())) 
 		{
-			this->coordinates->SetX(this->GetX() - i * 16);
-			return;
+			if (this->GetX() - i * 16 > 16) {
+				this->coordinates->SetX(this->GetX() - i * 16);
+				return;
+			}
+			
 		}
-		else if (tryMoveRight(this->GetX() + i*16 , this->GetY(), this->GetWidth(), this->GetHeight()))
+		if (tryMoveRight(this->GetX() + i*16 , this->GetY(), this->GetWidth(), this->GetHeight()))
 		{
+			
 			this->coordinates->SetX(this->GetX() + i * 16);
 			return;
 		}

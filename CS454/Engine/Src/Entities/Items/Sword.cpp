@@ -6,7 +6,7 @@ SwordItem::SwordItem(Point* spawn): Item(spawn) {
 	this->animator = new PlayerAnimator("Engine/Configs/item/SwordAnimatorConfig.json", 0, animation_names);
 }
 void SwordItem::PickUp(Player& player) {
-	
+	player.DisplayTimedMessage("You won, rest now !", 10);
 }
 void SwordItem::Render(double curr_time, int relative_x) {
 	this->animator->render(this->coordinates->GetX() - relative_x, this->coordinates->GetY(), curr_time, 0);
