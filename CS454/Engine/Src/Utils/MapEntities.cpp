@@ -31,3 +31,17 @@ Item* MapEntities::GetItemFromString(std::string item_name, Point* spawn) {
 	assert(0);
 	return NULL;
 }
+
+ElevatorStatus MapEntities::GetElevatorStatusFromString(std::string status) {
+	if (status == "moving_up")
+		return ElevatorStatus::moving_up;
+	else if (status == "moving_down")
+		return ElevatorStatus::moving_down;
+	else if (status == "is_up")
+		return ElevatorStatus::is_up;
+	else if (status == "is_down")
+		return ElevatorStatus::is_down;
+	else
+		assert(0);
+
+}

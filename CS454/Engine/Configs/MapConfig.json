@@ -81,13 +81,7 @@
     },
     "entities": {
       "enemies": {
-        "Staflos": [
-
-          {
-            "spawn_x": 350,
-            "spawn_y": 100
-          }
-        ]
+        
         
       },
       "items": {
@@ -108,7 +102,8 @@
             "spawn_x": 624,
             "spawn_y": 178,
             "end_x": 624,
-            "end_y": 194
+            "end_y": 194,
+            "status": "is_up"
           }
         ]
       }

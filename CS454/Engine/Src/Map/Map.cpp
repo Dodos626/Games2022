@@ -314,10 +314,10 @@ void Map::setEntities(json data) {
 		}
 	}
 	this->objects.clear();
-	for (auto object_pair : data["Objects"].items()) {
+	for (auto object_pair : data["objects"].items()) {
 		std::string item_name = object_pair.key();
 		for (auto spawn_location : object_pair.value()) {
-			this->objects.push_back(new Elevator());
+			this->objects.push_back(new Elevator(new Point(spawn_location["spawn_x"], spawn_location["spawn_y"]), new Point(spawn_location["end_x"], spawn_location["end_y"]), MapEntities::GetElevatorStatusFromString(spawn_location["status"])));
 		}
 	}
 }
@@ -325,6 +325,7 @@ void Map::setEntities(json data) {
 void Map::RenderEntities(double curr_time, int relative_x) {
 	this->RenderEnemies(curr_time, relative_x);
 	this->RenderItems(curr_time, relative_x);
+	this->RenderObjects(curr_time, relative_x);
 }
 
 void Map::RenderEnemies(double curr_time, int relative_x) {
@@ -338,6 +339,14 @@ void Map::RenderItems(double curr_time, int relative_x) {
 		entity->Render(curr_time, relative_x);
 	}
 }
+
+void Map::RenderObjects(double curr_time, int relative_x) {
+	for (auto entity : this->objects) {
+		std::cout << "rendering elevator..";
+		entity->Render(curr_time, relative_x);
+	}
+}
+
 
 void Map::AiUpdate(Player *player) {
 	for (auto entity : this->enemies) {

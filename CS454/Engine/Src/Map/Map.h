@@ -98,6 +98,7 @@ public:
 	void RenderEntities(double curr_time, int relative_x);
 	void RenderEnemies(double curr_time, int relative_x);
 	void RenderItems(double curr_time, int relative_x);
+	void RenderObjects(double curr_time, int relative_x);
 
 	void ChangeMap(MapLocations state) { this->ChangeMap(stateToString(state)); this->state = state; };
 	void ChangeMap(std::string map);

@@ -29,7 +29,8 @@ public:
 	int GetWidth() { return this->width; }
 	int GetX() const { return this->coordinates->GetX(); }
 	int GetY() const { return this->coordinates->GetY(); }
-
+	void GetAttacked(int damage, Point point_of_attack) { assert(0); }
+	void Collide(Player& player) { assert(0); }
 	bool HasToStop() { return this->coordinates->GetY() == this->stop_location->GetY(); }
 
 

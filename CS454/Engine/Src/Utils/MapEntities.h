@@ -15,6 +15,8 @@
 #include "../Entities/Items/KeyItem.h"
 #include "../Entities/Items/PointBagItem.h"
 #include "../Entities/Items/Sword.h"
+
+#include "../Entities/Objects/Elevator.h"
 #include "Point.h"
 
 
@@ -22,6 +24,7 @@ namespace MapEntities {
 	using Action = std::function<bool(int, int, int, int)>;
 	Enemy* GetEnemyFromString(std::string enemy_name, Point* spawn, Action tryMoveLeft, Action tryMoveRight, Action tryMoveUp, Action tryMoveDown);
 	Item* GetItemFromString(std::string item_name, Point* spawn);
+	ElevatorStatus GetElevatorStatusFromString(std::string status);
 }
 
 
