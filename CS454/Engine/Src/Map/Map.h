@@ -109,6 +109,8 @@ public:
 	void CheckPlayerCollisionsWithEntities(Player *player);
 
 	//Collision Detector
+	bool CheckObjectCollision(Player &player);
+	bool PlayerMoveDown(Player& player);
 	bool TryMoveDown(int x, int y, int width, int height);
 	bool TryMoveUp(int x, int y, int width, int height);
 	bool TryMoveLeft(int x, int y, int width, int height);

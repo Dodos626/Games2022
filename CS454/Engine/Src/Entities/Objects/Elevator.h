@@ -20,8 +20,10 @@ enum class ElevatorStatus {
 class Elevator : Entity {
 private:
 	ElevatorStatus status;
-	bool isPlayerOn(Player& player);
 	Point* stop_location;
+	Point* initial_location;
+
+	void SwapLocations() { Point* tmp = this->stop_location; this->stop_location = this->initial_location; this->initial_location = tmp; }
 public:
 	Elevator(Point *location, Point *stop_location, ElevatorStatus status);
 	Point* GetCoordinates() { return this->coordinates; }
@@ -34,6 +36,7 @@ public:
 	bool HasToStop() { return this->coordinates->GetY() == this->stop_location->GetY(); }
 
 
+	bool isPlayerOn(Player& player);
 	void MoveLeft() { ; };
 	void MoveRight() { ; };
 

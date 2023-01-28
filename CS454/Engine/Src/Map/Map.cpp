@@ -342,7 +342,6 @@ void Map::RenderItems(double curr_time, int relative_x) {
 
 void Map::RenderObjects(double curr_time, int relative_x) {
 	for (auto entity : this->objects) {
-		std::cout << "rendering elevator..";
 		entity->Render(curr_time, relative_x);
 	}
 }
@@ -352,10 +351,21 @@ void Map::AiUpdate(Player *player) {
 	for (auto entity : this->enemies) {
 		entity->AI(*player);
 	}
+	for (auto object : this->objects) {
+		object->AI(*player);
+	}
 }
 
 
 //COLLISION DETECTORS
+bool Map::CheckObjectCollision(Player &player) {
+	for (Elevator* elevator : this->objects) {
+		if (elevator->isPlayerOn(player))
+			return true;
+	}
+	return false;
+}
+
 
 bool Map::TryMoveDown(int x, int y, int width, int height) {
 	if (y + height >= this->y_bound)
@@ -364,6 +374,15 @@ bool Map::TryMoveDown(int x, int y, int width, int height) {
 	int dy = (y + height) / 16;		// left down y + height (tiles)
 	int rx = (x + width - 1) / 16;								// right x
 	return !(this->IsSolid(lx, dy) || this->IsSolid(rx, dy));
+}
+
+bool Map::PlayerMoveDown(Player& player) {
+	int x = player.GetX();
+	int y = player.GetY();
+	int width = player.GetWidth();
+	int height = player.GetHeight();
+	return (this->TryMoveDown(x, y, width, height) && !this->CheckObjectCollision(player));
+
 }
 
 bool Map::TryMoveUp(int x, int y, int width, int height) {

@@ -131,7 +131,7 @@ void Game::MainLoopIteration(void) {
 		key[event.keyboard.keycode] = true ;
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
-		if (event.keyboard.keycode == ALLEGRO_KEY_DOWN){ //ean afisame to katw belaki
+		if (event.keyboard.keycode == ALLEGRO_KEY_DOWN && this->player1->isDucking()){ //ean afisame to katw belaki
 			this->player1->ChangeStance(); // allazume state
 		}
 		else if (event.keyboard.keycode == ALLEGRO_KEY_LEFT || event.keyboard.keycode == ALLEGRO_KEY_RIGHT ) { // stamatise na kouniete
@@ -198,10 +198,10 @@ void Game::HandleInput(void) {
 	int width = this->player1->GetWidth();
 	int height = this->player1->GetHeight();
 	
-	if (key[ALLEGRO_KEY_UP] && this->background_map->TryMoveUp(x, y, width, height) && !this->background_map->TryMoveDown(x, y, width, height)) {
+	if (key[ALLEGRO_KEY_UP] && this->background_map->TryMoveUp(x, y, width, height) && !this->background_map->TryMoveDown(x, y, width, height) && !this->background_map->CheckObjectCollision(*this->player1)) {
 		this->jump_y = this->player1->GetJumpHeight();
 	}
-	if (key[ALLEGRO_KEY_DOWN] && !this->background_map->TryMoveDown(x, y, width, height) && !this->player1->isDucking()) {
+	if (key[ALLEGRO_KEY_DOWN] && !this->player1->isDucking() && !this->background_map->TryMoveDown(x, y, width, height) && !this->background_map->CheckObjectCollision(*this->player1) ) {
 		this->player1->ChangeStance();
 	}
 	if (key[ALLEGRO_KEY_LEFT]) {
@@ -462,11 +462,11 @@ void Game::HandlePlayerPhysics(void) {
 			y = this->player1->GetY();
 		}
 	}
-	else if (this->background_map->TryMoveDown(x, y, width, height))
+	else if (this->background_map->PlayerMoveDown(*this->player1))
 	{
 		int fall_speed = this->player1->GetFallSpeed();
 		for (int i = 0; i < fall_speed; i++) {
-			if (this->background_map->TryMoveDown(x, y, width, height)) {
+			if (this->background_map->PlayerMoveDown(*this->player1)) {
 				this->player1->MoveDown();
 			}
 			else

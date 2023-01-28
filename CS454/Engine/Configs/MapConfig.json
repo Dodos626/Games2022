@@ -34,7 +34,7 @@
     "exit_points": {},
     "entities": {
       "enemies": {
-        "Wosu": [
+        "Guma": [
           {
             "spawn_x": 224,
             "spawn_y": 144
@@ -100,9 +100,9 @@
         "Elevator": [
           {
             "spawn_x": 624,
-            "spawn_y": 178,
+            "spawn_y": 200,
             "end_x": 624,
-            "end_y": 194,
+            "end_y": 240,
             "status": "is_up"
           }
         ]
@@ -175,79 +175,108 @@
           "spawn_y": 120
         }
       ]
-    }
-  },
-  "first_floor_right": {
-
-    "CSVsource": "Media/background_map/1st_floor_right.csv",
-    "CSVwidth": 48,
-    "CSVheight": 16,
-    "SolidIds": [ 14, 24, 25, 26, 27, 28, 30, 31, 35, 36, 37, 38, 40, 41 ],
-    "spawn_x": 640,
-    "spawn_y": 120,
-    "background": {
-      "CSVsource": "Media/background_map/1st_floor_right_bg.csv",
-      "CSVwidth": 48,
-      "CSVheight": 16
     },
-    "exit_points": {
-      "first_floor": [
-        {
-          "x": 0,
-          "y": 8,
-          "spawn_x": 736,
-          "spawn_y": 128
-        },
-        {
-          "x": 0,
-          "y": 9,
-          "spawn_x": 736,
-          "spawn_y": 128
-        },
-        {
-          "x": 0,
-          "y": 10,
-          "spawn_x": 736,
-          "spawn_y": 128
-        }
-      ]
-    }
-  },
-  "loose_screen": {
-    "CSVsource": "Media/background_map/loose_screen.csv",
-    "CSVwidth": 48,
-    "CSVheight": 16,
-    "SolidIds": [ 14, 24, 25, 26, 27, 28, 30, 31, 35, 36, 37, 38, 40, 41 ],
-    "spawn_x": 352,
-    "spawn_y": 80,
-    "background": {
-      "CSVsource": "Media/background_map/loose_screen_bg.csv",
-      "CSVwidth": 48,
-      "CSVheight": 16
-    },
-    "exit_points": {},
     "entities": {
       "enemies": {
-        "Staflos": [
 
+
+      },
+      "items": {
+        "Key": [
           {
-            "spawn_x": 672,
+            "spawn_x": 35,
             "spawn_y": 100
+          },
+          {
+            "spawn_x": 70,
+            "spawn_y": 50
           }
-        ],
-        "PalaceBot": [
+        ]
+      },
+      "objects": {
+        "Elevator": [
           {
-            "spawn_x": 512,
-            "spawn_y": 100
-          }
-        ],
-        "Wosu": [
-          {
-            "spawn_x": 192,
-            "spawn_y": 100
+            "spawn_x": 640,
+            "spawn_y": 40,
+            "end_x": 640,
+            "end_y": 160,
+            "status": "moving_down"
           }
         ]
       }
     }
+  },
+    "first_floor_right": {
+
+      "CSVsource": "Media/background_map/1st_floor_right.csv",
+      "CSVwidth": 48,
+      "CSVheight": 16,
+      "SolidIds": [ 14, 24, 25, 26, 27, 28, 30, 31, 35, 36, 37, 38, 40, 41 ],
+      "spawn_x": 640,
+      "spawn_y": 120,
+      "background": {
+        "CSVsource": "Media/background_map/1st_floor_right_bg.csv",
+        "CSVwidth": 48,
+        "CSVheight": 16
+      },
+      "exit_points": {
+        "first_floor": [
+          {
+            "x": 0,
+            "y": 8,
+            "spawn_x": 736,
+            "spawn_y": 128
+          },
+          {
+            "x": 0,
+            "y": 9,
+            "spawn_x": 736,
+            "spawn_y": 128
+          },
+          {
+            "x": 0,
+            "y": 10,
+            "spawn_x": 736,
+            "spawn_y": 128
+          }
+        ]
+      }
+    },
+    "loose_screen": {
+      "CSVsource": "Media/background_map/loose_screen.csv",
+      "CSVwidth": 48,
+      "CSVheight": 16,
+      "SolidIds": [ 14, 24, 25, 26, 27, 28, 30, 31, 35, 36, 37, 38, 40, 41 ],
+      "spawn_x": 352,
+      "spawn_y": 80,
+      "background": {
+        "CSVsource": "Media/background_map/loose_screen_bg.csv",
+        "CSVwidth": 48,
+        "CSVheight": 16
+      },
+      "exit_points": {},
+      "entities": {
+        "enemies": {
+          "Staflos": [
+
+            {
+              "spawn_x": 672,
+              "spawn_y": 100
+            }
+          ],
+          "PalaceBot": [
+            {
+              "spawn_x": 512,
+              "spawn_y": 100
+            }
+          ],
+          "Wosu": [
+            {
+              "spawn_x": 192,
+              "spawn_y": 100
+            }
+          ]
+        }
+      }
+    }
   }
-}

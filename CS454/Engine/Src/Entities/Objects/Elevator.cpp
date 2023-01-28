@@ -8,9 +8,12 @@ Elevator::Elevator(Point* location, Point *stop_location, ElevatorStatus status)
 	std::cout << data << std::endl;
 	this->speed = data["speed"];
 	this->coordinates = location;
+	this->initial_location = new Point(location->GetX(), location->GetY());
 	this->stop_location = stop_location;
 	this->status = status;
 	this->name = "elevator";
+	this->width = data["width"];
+	this->height = data["height"];
 	assert(this->coordinates->GetX() == this->stop_location->GetX());
 	fin.close();
 	this->animator = new PlayerAnimator("Engine/Configs/object/ElevatorAnimatorConfig.json", 0, { "elevator" });
@@ -31,17 +34,35 @@ void Elevator::AI(Player& player) {
 		break;
 	case ElevatorStatus::moving_up:
 		for (int i = 0; i < this->speed; i++) {
-			this->MoveUp();
+			
 			if (this->HasToStop()) {
-				this->status = ElevatorStatus::is_up;
+				if (!this->isPlayerOn(player)) {
+					this->status = ElevatorStatus::is_up;
+					this->SwapLocations();
+				}
 			}
+			else {
+				if (this->isPlayerOn(player))
+					player.MoveUp();
+				this->MoveUp();
+			}
+				
 		}
 		break;
 	case ElevatorStatus::moving_down:
 		for (int i = 0; i < this->speed; i++) {
-			this->MoveDown();
 			if (this->HasToStop()) {
-				this->status = ElevatorStatus::is_down;
+				if (!this->isPlayerOn(player)) {
+					this->status = ElevatorStatus::is_down;
+					this->SwapLocations();
+					this->stop_location->AddToY(-16);
+				}
+					
+			}
+			else {
+				if (this->isPlayerOn(player))
+					player.MoveDown();
+				this->MoveDown();
 			}
 		}
 		break;
@@ -55,8 +76,9 @@ bool Elevator::isPlayerOn(Player& player) {
 	int player_x = player.GetX();
 	int player_y = player.GetY();
 	int player_height = player.GetHeight();
-	if (player_x == this->coordinates->GetX() && player_y + height == this->coordinates->GetY() - 1)
+	if (this->coordinates->GetX() <= player_x && player_x <= this->coordinates->GetX() + this->width && this->coordinates->GetY() - 20 <= player_y && player_y  <= this->coordinates->GetY() + 1) {
 		return true;
+	}
 	return false;
 }
 
