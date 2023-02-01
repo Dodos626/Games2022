@@ -111,7 +111,7 @@ void Player::RespawnFromDeath() {
 }
 
 void Player::RegenerateMana(int mana_gain) { 
-	this->mana = (this->mana + mana_gain <= this->max_mana) ? this->health + mana_gain : this->max_mana; 
+	this->mana = (this->mana + mana_gain <= this->max_mana) ? this->mana + mana_gain : this->max_mana; 
 	// animate mana gain
 }
 void Player::RegenerateHealth(int hp_gain) {

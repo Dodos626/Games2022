@@ -143,6 +143,7 @@ void Game::MainLoopIteration(void) {
 		key[event.keyboard.keycode] = true ;
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
+		if (this->game_state == game_state::paused) break;
 		if (event.keyboard.keycode == ALLEGRO_KEY_DOWN && this->player1->isDucking()){ //ean afisame to katw belaki
 			this->player1->ChangeStance(); // allazume state
 		}
