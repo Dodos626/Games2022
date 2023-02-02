@@ -1,0 +1,321 @@
+cmake_minimum_required(VERSION 3.19)
+project(Games2022)
+
+set(CMAKE_CXX_STANDARD 14)
+set(SOURCE CMAKE_SOURCE_DIR)
+
+include_directories(${PROJECT_SOURCE_DIR})
+
+
+
+include_directories(CS454)
+include_directories(CS454/Engine/Src/Animators)
+include_directories(CS454/Engine/Src/Animators/PlayerAnimator)
+include_directories(CS454/Engine/Src/Animators/SingleAnimation)
+include_directories(CS454/Engine/Src/App)
+include_directories(CS454/Engine/Src/BitMap)
+include_directories(CS454/Engine/Src/Entities)
+include_directories(CS454/Engine/Src/Entities/Enemies)
+include_directories(CS454/Engine/Src/Entities/Items)
+include_directories(CS454/Engine/Src/Entities/Objects)
+include_directories(CS454/Engine/Src/Game)
+include_directories(CS454/Engine/Src/Map)
+include_directories(CS454/Engine/Src/Misc)
+include_directories(CS454/Engine/Src/Misc/MusicPlayer)
+include_directories(CS454/Engine/Src/Misc/Screen)
+include_directories(CS454/Engine/Src/Misc/Timer)
+include_directories(CS454/Engine/Src/Player)
+include_directories(CS454/Engine/Src/Player/DisplayStats)
+include_directories(CS454/Engine/Src/Player/Spells)
+include_directories(CS454/Engine/Src/Tiles/Map)
+include_directories(CS454/Engine/Src/Tiles/Parser)
+include_directories(CS454/Engine/Src/Utils)
+include_directories(CS454/packages)
+include_directories(CS454/packages/Allegro.5.2.8)
+include_directories(CS454/packages/Allegro.5.2.8/build)
+include_directories(CS454/packages/Allegro.5.2.8/build/native)
+include_directories(CS454/packages/Allegro.5.2.8/build/native/include)
+include_directories(CS454/packages/Allegro.5.2.8/build/native/include/allegro5)
+include_directories(CS454/packages/Allegro.5.2.8/build/native/include/allegro5/inline)
+include_directories(CS454/packages/Allegro.5.2.8/build/native/include/allegro5/internal)
+include_directories(CS454/packages/Allegro.5.2.8/build/native/include/allegro5/opengl)
+include_directories(CS454/packages/Allegro.5.2.8/build/native/include/allegro5/opengl/GLext)
+include_directories(CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform)
+include_directories(CS454/packages/AllegroDeps.1.13.0)
+include_directories(CS454/packages/AllegroDeps.1.13.0/build)
+include_directories(CS454/packages/AllegroDeps.1.13.0/build/native)
+include_directories(CS454/packages/AllegroDeps.1.13.0/build/native/include)
+include_directories(CS454/packages/AllegroDeps.1.13.0/build/native/include/FLAC)
+include_directories(CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2)
+include_directories(CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype)
+include_directories(CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/config)
+include_directories(CS454/packages/AllegroDeps.1.13.0/build/native/include/libpng16)
+include_directories(CS454/packages/AllegroDeps.1.13.0/build/native/include/ogg)
+include_directories(CS454/packages/AllegroDeps.1.13.0/build/native/include/opus)
+include_directories(CS454/packages/AllegroDeps.1.13.0/build/native/include/theora)
+include_directories(CS454/packages/AllegroDeps.1.13.0/build/native/include/vorbis)
+include_directories(CS454/packages/AllegroDeps.1.13.0/build/native/include/webp)
+include_directories(CS454/packages/nlohmann.json.3.11.2)
+include_directories(CS454/packages/nlohmann.json.3.11.2/build)
+include_directories(CS454/packages/nlohmann.json.3.11.2/build/native)
+include_directories(CS454/packages/nlohmann.json.3.11.2/build/native/include)
+include_directories(CS454/packages/nlohmann.json.3.11.2/build/native/include/nlohmann)
+
+add_executable(Games2022
+    CS454/Engine/Src/Animators/PlayerAnimator/PlayerAnimator.cpp
+    CS454/Engine/Src/Animators/PlayerAnimator/PlayerAnimator.h
+    CS454/Engine/Src/Animators/SingleAnimation/SingleAnimation.cpp
+    CS454/Engine/Src/Animators/SingleAnimation/SingleAnimation.h
+    CS454/Engine/Src/Animators/Animator.h
+    CS454/Engine/Src/App/App.cpp
+    CS454/Engine/Src/App/App.h
+    CS454/Engine/Src/BitMap/BitMap.cpp
+    CS454/Engine/Src/BitMap/BitMap.h
+    CS454/Engine/Src/Entities/Enemies/Enemy.cpp
+    CS454/Engine/Src/Entities/Enemies/Enemy.h
+    CS454/Engine/Src/Entities/Enemies/GumaEnemy.cpp
+    CS454/Engine/Src/Entities/Enemies/GumaEnemy.h
+    CS454/Engine/Src/Entities/Enemies/PalaceBotEnemy.cpp
+    CS454/Engine/Src/Entities/Enemies/PalaceBotEnemy.h
+    CS454/Engine/Src/Entities/Enemies/StaflosEnemy.cpp
+    CS454/Engine/Src/Entities/Enemies/StaflosEnemy.h
+    CS454/Engine/Src/Entities/Enemies/WosuEnemy.cpp
+    CS454/Engine/Src/Entities/Enemies/WosuEnemy.h
+    CS454/Engine/Src/Entities/Items/DoorItem.cpp
+    CS454/Engine/Src/Entities/Items/DoorItem.h
+    CS454/Engine/Src/Entities/Items/HealthPotionItem.cpp
+    CS454/Engine/Src/Entities/Items/HealthPotionItem.h
+    CS454/Engine/Src/Entities/Items/Item.cpp
+    CS454/Engine/Src/Entities/Items/Item.h
+    CS454/Engine/Src/Entities/Items/KeyItem.h
+    CS454/Engine/Src/Entities/Items/KeysItem.cpp
+    CS454/Engine/Src/Entities/Items/LifeUpItem.cpp
+    CS454/Engine/Src/Entities/Items/LifeUpItem.h
+    CS454/Engine/Src/Entities/Items/ManaPotionItem.cpp
+    CS454/Engine/Src/Entities/Items/ManaPotionItem.h
+    CS454/Engine/Src/Entities/Items/PointBagItem.cpp
+    CS454/Engine/Src/Entities/Items/PointBagItem.h
+    CS454/Engine/Src/Entities/Items/Sword.cpp
+    CS454/Engine/Src/Entities/Items/Sword.h
+    CS454/Engine/Src/Entities/Objects/Elevator.cpp
+    CS454/Engine/Src/Entities/Objects/Elevator.h
+    CS454/Engine/Src/Entities/Entity.cpp
+    CS454/Engine/Src/Entities/Entity.h
+    CS454/Engine/Src/Entities/Projectile.cpp
+    CS454/Engine/Src/Entities/Projectile.h
+    CS454/Engine/Src/Game/Game.cpp
+    CS454/Engine/Src/Game/Game.h
+    CS454/Engine/Src/Map/Map.cpp
+    CS454/Engine/Src/Map/Map.h
+    CS454/Engine/Src/Misc/MusicPlayer/MusicPlayer.cpp
+    CS454/Engine/Src/Misc/MusicPlayer/MusicPlayer.h
+    CS454/Engine/Src/Misc/Screen/Screen.cpp
+    CS454/Engine/Src/Misc/Screen/Screen.h
+    CS454/Engine/Src/Misc/Timer/Timer.cpp
+    CS454/Engine/Src/Misc/Timer/Timer.h
+    CS454/Engine/Src/Misc/Source.cpp
+    CS454/Engine/Src/Misc/WhereAmI.h
+    CS454/Engine/Src/Player/DisplayStats/DisplayStats.cpp
+    CS454/Engine/Src/Player/DisplayStats/DisplayStats.h
+    CS454/Engine/Src/Player/Spells/Spell.h
+    CS454/Engine/Src/Player/Player.cpp
+    CS454/Engine/Src/Player/Player.h
+    CS454/Engine/Src/Tiles/Map/TileMap.cpp
+    CS454/Engine/Src/Tiles/Map/TileMap.h
+    CS454/Engine/Src/Tiles/Parser/TileParser.cpp
+    CS454/Engine/Src/Tiles/Parser/TileParser.h
+    CS454/Engine/Src/Utils/ExitPoint.cpp
+    CS454/Engine/Src/Utils/ExitPoint.h
+    CS454/Engine/Src/Utils/MapEntities.cpp
+    CS454/Engine/Src/Utils/MapEntities.h
+    CS454/Engine/Src/Utils/player_state.cpp
+    CS454/Engine/Src/Utils/player_state.h
+    CS454/Engine/Src/Utils/Point.cpp
+    CS454/Engine/Src/Utils/Point.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/inline/fmaths.inl
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/internal/alconfig.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/opengl/GLext/gl_ext_alias.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/opengl/GLext/gl_ext_api.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/opengl/GLext/gl_ext_defs.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/opengl/GLext/gl_ext_list.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/opengl/GLext/glx_ext_alias.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/opengl/GLext/glx_ext_api.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/opengl/GLext/glx_ext_defs.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/opengl/GLext/glx_ext_list.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/opengl/GLext/wgl_ext_alias.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/opengl/GLext/wgl_ext_api.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/opengl/GLext/wgl_ext_defs.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/opengl/GLext/wgl_ext_list.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/opengl/gl_ext.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/alandroid.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/alandroidcfg.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/albcc32.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/aliphone.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/aliphonecfg.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/allegro_sdl_config.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/almngw32.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/almsvc.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/alosx.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/alosxcfg.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/alplatf.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/alraspberrypi.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/alraspberrypicfg.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/alucfg.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/alunix.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/alwatcom.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/alwin.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/astdbool.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/platform/astdint.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/alcompat.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro5.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro_acodec.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro_audio.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro_color.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro_direct3d.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro_font.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro_image.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro_memfile.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro_native_dialog.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro_opengl.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro_physfs.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro_primitives.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro_ttf.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro_video.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/allegro_windows.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/altime.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/base.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/bitmap.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/bitmap_draw.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/bitmap_io.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/bitmap_lock.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/blender.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/clipboard.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/color.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/config.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/cpu.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/debug.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/display.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/drawing.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/error.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/events.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/file.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/fixed.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/fmaths.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/fshook.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/fullscreen_mode.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/haptic.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/joystick.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/keyboard.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/keycodes.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/memory.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/monitor.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/mouse.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/mouse_cursor.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/path.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/render_state.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/shader.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/system.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/threads.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/timer.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/tls.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/touch_input.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/transformations.h
+    CS454/packages/Allegro.5.2.8/build/native/include/allegro5/utf8.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/FLAC/all.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/FLAC/assert.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/FLAC/callback.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/FLAC/export.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/FLAC/format.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/FLAC/metadata.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/FLAC/ordinals.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/FLAC/stream_decoder.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/FLAC/stream_encoder.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/config/ftconfig.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/config/ftheader.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/config/ftmodule.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/config/ftoption.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/config/ftstdlib.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/freetype.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftadvanc.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftbbox.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftbdf.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftbitmap.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftbzip2.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftcache.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftchapters.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftcid.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftdriver.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/fterrdef.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/fterrors.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftfntfmt.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftgasp.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftglyph.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftgxval.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftgzip.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftimage.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftincrem.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftlcdfil.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftlist.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftlzw.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftmac.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftmm.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftmodapi.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftmoderr.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftotval.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftoutln.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftparams.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftpfr.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftrender.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftsizes.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftsnames.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftstroke.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftsynth.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftsystem.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/fttrigon.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/fttypes.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ftwinfnt.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/t1tables.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/ttnameid.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/tttables.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/freetype/tttags.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/freetype2/ft2build.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/libpng16/png.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/libpng16/pngconf.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/libpng16/pnglibconf.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/ogg/ogg.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/ogg/os_types.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/opus/opus.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/opus/opus_defines.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/opus/opus_multistream.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/opus/opus_types.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/opus/opusfile.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/theora/codec.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/theora/theora.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/theora/theoradec.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/vorbis/codec.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/vorbis/vorbisenc.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/vorbis/vorbisfile.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/webp/decode.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/webp/demux.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/webp/encode.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/webp/mux_types.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/webp/types.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/dumb.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/jconfig.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/jerror.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/jmorecfg.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/jpeglib.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/minimp3.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/minimp3_ex.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/physfs.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/png.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/pngconf.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/pnglibconf.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/zconf.h
+    CS454/packages/AllegroDeps.1.13.0/build/native/include/zlib.h
+    CS454/packages/nlohmann.json.3.11.2/build/native/include/nlohmann/json.hpp
+    CS454/CS454.cpp
+    CS454/CS454.h)
+
+target_include_directories(Games2022 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
