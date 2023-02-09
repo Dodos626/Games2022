@@ -75,7 +75,7 @@ bool Elevator::isPlayerOn(Player& player) {
 	int player_x = player.GetX();
 	int player_y = player.GetY();
 	int player_height = player.GetHeight();
-	if (this->coordinates->GetX() <= player_x && player_x <= this->coordinates->GetX() + this->width && this->coordinates->GetY() - 20 <= player_y && player_y  <= this->coordinates->GetY() + 1) {
+	if (this->coordinates->GetX() <= player_x && player_x <= this->coordinates->GetX() + this->width && this->coordinates->GetY() - 24 <= player_y && player_y  <= this->coordinates->GetY()) {
 		return true;
 	}
 	return false;

@@ -143,9 +143,9 @@
         "Elevator": [
           {
             "spawn_x": 624,
-            "spawn_y": 230,
+            "spawn_y": 234,
             "end_x": 624,
-            "end_y": 196,
+            "end_y": 200,
             "status": "moving_up"
           }
         ]
@@ -171,13 +171,13 @@
           "x": 40,
           "y": 0,
           "spawn_x": 624,
-          "spawn_y": 202
+          "spawn_y": 200
         },
         {
           "x": 41,
           "y": 0,
           "spawn_x": 624,
-          "spawn_y": 202
+          "spawn_y": 200
         }
       ],
       "boss_room": [
@@ -255,7 +255,7 @@
         "Elevator": [
           {
             "spawn_x": 640,
-            "spawn_y": 40,
+            "spawn_y": 46,
             "end_x": 640,
             "end_y": 160,
             "status": "moving_down"
